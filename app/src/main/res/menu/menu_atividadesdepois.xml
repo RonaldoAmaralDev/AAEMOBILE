@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".operacao.Atividade_Depois">
+
+    <item
+        android:id="@+id/action_medicao"
+        android:icon="@drawable/ic_medicao"
+        android:orderInCategory="100"
+        android:title="Medição"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_confirmar"
+        android:icon="@drawable/success"
+        android:orderInCategory="100"
+        android:title="Finalizar"
+        app:showAsAction="always" />
+
+</menu>

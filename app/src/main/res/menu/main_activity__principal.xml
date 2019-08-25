@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_enviarLog"
+        android:icon="@drawable/ic_menu_manage"
+        android:orderInCategory="100"
+        android:title="Enviar LOG"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_deletar"
+        android:icon="@drawable/ic_delete_white_24dp"
+        android:orderInCategory="100"
+        android:title="Deletar Dados"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_trocarusuario"
+        android:icon="@drawable/ic_cliente"
+        android:orderInCategory="100"
+        android:title="Trocar Usuario"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_sair"
+        android:icon="@drawable/ic_exit"
+        android:orderInCategory="100"
+        android:title="Fechar Aplicativo"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_abertas"
+        android:icon="@drawable/ic_pdf"
+        android:checked="true"
+        android:title="ABERTAS" />
+
+    <item
+        android:id="@+id/navigation_encerradas"
+        android:icon="@drawable/ic_pdf"
+        android:title="ENCERRADAS" />
+
+</menu>

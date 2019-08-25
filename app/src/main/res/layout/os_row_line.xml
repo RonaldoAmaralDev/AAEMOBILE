@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:layout_marginTop="5dp"
+    android:background="@color/contact_number"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/recyclerview_ordemservico"
+        android:layout_width="426dp"
+        android:layout_height="153dp"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/os"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OS"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dataplanejamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data Planejamento"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/equipamentoos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Equipamento:"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/localos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Local OS:"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tiposolicitacao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipo Serviço:"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tiposervicoos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipo Solicitação"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/descricaopadraoos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descrição:"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,170 @@
+<resources>
+    <string name="app_name">AAE MOBILE</string>
+    <string name="uploadImages">Insira a foto</string>
+    <string name="msg_loading">Carregando...</string>
+    <string name="title_activity_tela_localizacao">AAE MOBILE</string>
+    <string name="action_settings">Configurações</string>
+    <string name="toolbar_title">Locais</string>
+    <string name="toolbar_titleEquipamento">Equipamentos</string>
+    <string name="toolbar_titleOS">Ordem Serviço</string>
+    <string name="action_search">Pesquisar</string>
+    <string name="search_hint">Buscar...</string>
+    <string name="search_hintEquipamento">Buscar Equipamento…</string>
+
+    <string name="titulo_activity_main__principal">AAE MG MOBILE</string>
+    <string name="navigation_drawer_open">Abrir</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="nav_header_title">Usuario AAE MOBILE</string>
+    <string name="nav_header_subtitle"></string>
+    <string name="nav_header_desc">Navegação</string>
+
+
+    <string name="title_activity_rota">"Rota "</string>
+
+    <string name="pref_title_ringtone">Escolha Tipo</string>
+
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="default_gallery_storage">PicturesHELPER</string>
+
+    <string name="title_auto_upload">Sincronizar Automaticamente</string>
+    <string name="summary_upload_over_wifi">Sincronizar Visitas automaticamente.</string>
+
+    <string name="title_upload_quality">Utilizar qual rede</string>
+    <string name="summary_upload_video_quality">Escolher qual tipo de rede deseja estar conectado.</string>
+
+    <string name="pref_title_notifications">Notificações</string>
+    <string name="summary_choose_ringtone">Escolha qual som notificação</string>
+    <string name="pref_header_about">Sobre</string>
+    <string name="summary_about">Aplicativo desenvolvido pela Araujo Abreu Engenharia Filial MG</string>
+    <string name="app_version">Em Desenvolvimento</string>
+    <string name="summary_support">Está com alguma dúvida ou sugestão ?</string>
+    <string name="title_send_feedback">Entrar em Contato</string>
+    <string name="title_faq">Site</string>
+    <string name="summary_faq">Acessar Sistema WEB </string>
+    <string name="url_faq">http://helper.aplusweb.com.br/</string>
+    <string name="privacy_policy">Politica Privacidade</string>
+    <string name="url_privacy">http://www.helper.aplusweb.com.br/</string>
+    <string name="title_terms">Termos &amp; Condições</string>
+    <string name="url_terms">http://www.helper.aplusweb.com.br/</string>
+    <string name="title_version">Versão</string>
+    <string name="choose_email_client">Escolha forma contato</string>
+    <string name="title_gallery_storage">Pasta Padrão</string>
+    <string name="title_new_notification_sound">Receber notificações do aplicativo</string>
+    <string name="title_vibrate">Vibração</string>
+    <string name="summary_vibrate">Vibrar ao receber uma nova notificação</string>
+    <string name="key_upload_over_wifi">key_upload_over_wifi</string>
+    <string name="key_gallery_name">key_gallery_name</string>
+    <string name="key_upload_quality">key_upload_quality</string>
+    <string name="notifications_new_message">notifications_new_message</string>
+    <string name="key_notifications_new_message_ringtone">key_notifications_new_message_ringtone</string>
+    <string name="key_vibrate">key_vibrate</string>
+    <string name="key_send_feedback">key_send_feedback</string>
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+    <string name="pref_title_sync_frequency">Tempo Sincronização</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_tela_veiculo">Veiculos</string>
+    <string name="title_home">Home</string>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="title_dashboard">Dashboard</string>
+
+    <string name="title_notifications">Notifications</string>
+    <string name="button_place_picker">Place Picker</string>
+    <string name="button_current_place">Current Place</string>
+
+    <string name="button_autocomplete">Autocomplete</string>
+
+    <string name="google_play_services_error">Google Play Services is not available</string>
+
+    <string name="location_permission_error">Location permission required</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="autocomplete">Autocomplete</string>
+    <string name="place_picker">Place Picker</string>
+    <string name="autocomplete_fragment">Autocomplete Fragment</string>
+    <string name="title_activity_main_atividades">Atividades</string>
+    <string-array name="SituacaoSpinner">
+        <item>Conforme</item>
+        <item>Não Conforme</item>
+        <item>Não se Aplica</item>
+    </string-array>
+
+    <string-array name="ContratosSpinner">
+        <item>3061 - Escritorio BH</item>
+        <item>3703 - A e C</item>
+        <item>4604 - Stola do Brasil</item>
+    </string-array>
+
+    <string-array name="TipoEquipamentoSpinner">
+        <item>FAN-COIL</item>
+        <item>SPLIT</item>
+        <item>QUADRO DE FORÇA</item>
+    </string-array>
+    <string-array name="TipoGasSpinner">
+        <item>R-22</item>
+        <item>R-410A</item>
+        <item>R-134</item>
+        <item>R-407C</item>
+        <item>NãO IDENTIFICADO</item>
+        <item>NA</item>
+    </string-array>
+    <string-array name="TipoFabricanteSpinner">
+        <item>SPRINGER</item>
+        <item>CARRIER</item>
+        <item>TOTALINE</item>
+        <item>HITACHI</item>
+        <item>LG</item>
+        <item>ELGIN</item>
+        <item>FUJITSU</item>
+        <item>CONSUL</item>
+        <item>MIDEA</item>
+        <item>RHEEM</item>
+        <item>YORK</item>
+        <item>KOMECO</item>
+        <item>COMFEE</item>
+        <item>COOLIX</item>
+        <item>ROYAL TEMP</item>
+        <item>GREE</item>
+        <item>ELETROLUX</item>
+        <item>BRYANT</item>
+        <item>SAMSUNG</item>
+        <item>SONY</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutos</item>
+        <item>30 minutos</item>
+        <item>1 hora</item>
+        <item>3 horas</item>
+        <item>12 horas</item>
+        <item>24 horas</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="multi_select_list_preference_default_value" />
+    <string-array name="variaveis_rota">
+        <item>Evitar Rodovia</item>
+        <item>Evitar Pedágio</item>
+        <item>Evitar Trânsito</item>
+        <item>Distância em Milhas</item>
+        <item>Distância em Km</item>
+    </string-array>
+
+
+</resources>
