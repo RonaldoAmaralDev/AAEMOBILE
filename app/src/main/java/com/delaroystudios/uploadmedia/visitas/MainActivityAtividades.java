@@ -48,7 +48,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_main_activity_atividades);
+        setContentView(R.layout.activity_main_atividades);
 
         Toolbar toolbar = findViewById(R.id.toolbaratividades);
         setSupportActionBar(toolbar);

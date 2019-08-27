@@ -153,6 +153,8 @@ public class AssinaturaCliente extends AppCompatActivity {
                 myDBGeral.updateStatusAtividadeAberta(
                         checklist);
 
+
+
                 Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AssinaturaCliente.this, MainActivity_Principal.class);
                 Bundle dados = new Bundle();

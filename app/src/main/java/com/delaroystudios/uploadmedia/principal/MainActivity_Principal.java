@@ -353,7 +353,7 @@ public class MainActivity_Principal extends AppCompatActivity
 
         //Trocar titulos
         navigation.getMenu().findItem(R.id.navigation_mapa).setTitle("MAPA");
-        navigation.getMenu().findItem(R.id.navigation_visitas).setTitle("VISITAS("+String.valueOf(myBDGeral.dbCoutaberta(colaborador_id))+")");
+        navigation.getMenu().findItem(R.id.navigation_visitas).setTitle("VISITAS("+String.valueOf(myBDGeral.dbCountAbertas()+")"));
         navigation.getMenu().findItem(R.id.navigation_scanner).setTitle("SCANNER");
         navigation.getMenu().findItem(R.id.navigation_chat).setTitle("CHAT");
         navigation.getMenu().findItem(R.id.navigation_mais).setTitle("MAIS");

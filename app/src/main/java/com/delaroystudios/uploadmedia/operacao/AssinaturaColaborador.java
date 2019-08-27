@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.delaroystudios.uploadmedia.banco.DatabaseHelper;
 import com.delaroystudios.uploadmedia.operacao.os.MainActivityOS;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
+import com.delaroystudios.uploadmedia.visitas.MainActivityAtividades;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -67,10 +68,6 @@ public class AssinaturaColaborador extends AppCompatActivity {
         checklist = dados.getString("checklist");
         tiposervico = dados.getString("tiposervico");
         id_centrolucro = dados.getString("id_centrolucro");
-        name = dados.getString("name");
-        email = dados.getString("email");
-        idColaborador = dados.getString("idColaborador");
-        tipo = dados.getString("tipo");
 
         txtColaborador = (TextView) findViewById(R.id.signature_pad_description);
         txtColaborador.setText(name);
@@ -110,6 +107,12 @@ public class AssinaturaColaborador extends AppCompatActivity {
             Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
             if (addJpgSignatureToGallery(signatureBitmap)) {
 
+                SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
+                String name = pref.getString("name", "");
+                String email = pref.getString("email", "");
+                String colaborador_id = pref.getString("idColaborador", "" );
+                String tipo = pref.getString("tipo", "");
+
                 Intent intent = new Intent(AssinaturaColaborador.this, AssinaturaCliente.class);
                 Bundle dados = new Bundle();
                 dados.putString("equipamento_id", equipamento_id);
@@ -120,9 +123,8 @@ public class AssinaturaColaborador extends AppCompatActivity {
                 dados.putString("dataplanejamento", dataplanejamento);
                 dados.putString("id_centrolucro", id_centrolucro);
                 dados.putString("name", name);
-                dados.putString("name", name);
                 dados.putString("email", email);
-                dados.putString("idColaborador", idColaborador);
+                dados.putString("idColaborador", colaborador_id);
                 dados.putString("tipo", tipo);
                 intent.putExtras(dados);
                 startActivity(intent);
@@ -137,11 +139,25 @@ public class AssinaturaColaborador extends AppCompatActivity {
         //Se clicar em voltar atividade Anterior
         if(id == android.R.id.home) {
 
-            Intent intent = new Intent(this, MainActivity_Principal.class);
+
+            SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
+            String name = pref.getString("name", "");
+            String email = pref.getString("email", "");
+            String colaborador_id = pref.getString("idColaborador", "" );
+            String tipo = pref.getString("tipo", "");
+
+            Intent intent = new Intent(AssinaturaColaborador.this, MainActivityAtividades.class);
             Bundle dados = new Bundle();
+            dados.putString("os_id", os_id);
+            dados.putString("checklist_id", checklist_id);
+            dados.putString("equipamento_id", equipamento_id);
+            dados.putString("local_id", local_id);
+            dados.putString("tiposervico", tiposervico);
+            dados.putString("dataplanejamento", dataplanejamento);
+            dados.putString("centrocusto_id", id_centrolucro);
             dados.putString("name", name);
             dados.putString("email", email);
-            dados.putString("id", idColaborador);
+            dados.putString("colaborador_id", colaborador_id);
             dados.putString("tipo", tipo);
             intent.putExtras(dados);
             startActivity(intent);
