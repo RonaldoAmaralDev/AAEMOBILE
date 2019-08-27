@@ -180,7 +180,7 @@ public class MainActivity_Principal extends AppCompatActivity
                 .setIcon(R.drawable.logo) // Notification icon
                 .setUpdateJSON("http://helper.aplusweb.com.br/aplicativo/versao.json")
                 .setTitleOnUpdateAvailable("Nova Versão Disponivel !")
-                .setContentOnUpdateAvailable("Nova Versão Disponivel na PlayStore, favor atualizar.")
+                .setContentOnUpdateAvailable("Nova Versão Disponivel na PlayStore, favor enviar suas visitas antes de atualizar.")
                 .setTitleOnUpdateNotAvailable("Nova Versão Indisponivel")
                 .setButtonDoNotShowAgain("Atualizar Depois")
                 .setContentOnUpdateNotAvailable("Nova versão está indisponivel, favor tentar novamente mais tarde. ")
@@ -477,13 +477,19 @@ public class MainActivity_Principal extends AppCompatActivity
                             latitude = Double.toString(currentLocation.getLatitude());
                             longitude = Double.toString(currentLocation.getLongitude());
 
+                            if(latitude != null && longitude != null) {
 
-                            SharedPreferences.Editor salvarLocalizacao = getSharedPreferences("salvarLocalizacao", MODE_PRIVATE).edit();
-                            salvarLocalizacao.putString("latitude", latitude);
-                            salvarLocalizacao.putString("longitude", longitude);
+                                SharedPreferences.Editor salvarLocalizacao = getSharedPreferences("salvarLocalizacao", MODE_PRIVATE).edit();
+                                salvarLocalizacao.putString("latitude", latitude);
+                                salvarLocalizacao.putString("longitude", longitude);
 
-                            // Armazena as Preferencias
-                            salvarLocalizacao.commit();
+                                // Armazena as Preferencias
+                                salvarLocalizacao.commit();
+                            } else {
+
+                                Toast.makeText(getApplicationContext(), "Não foi possivel fazer a captura da sua lozalização.", Toast.LENGTH_LONG).show();
+                            }
+
 
 
 
@@ -1420,7 +1426,7 @@ public class MainActivity_Principal extends AppCompatActivity
                     progressBarStatus = doSomeTasksVisitas();
                     // your computer is too fast, sleep 1 second
                     try {
-                        Thread.sleep(27000);
+                        Thread.sleep(25000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -1433,7 +1439,7 @@ public class MainActivity_Principal extends AppCompatActivity
                 }
                 if (progressBarStatus >= 100) {
                     try {
-                        Thread.sleep(27000);
+                        Thread.sleep(25000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -1455,7 +1461,7 @@ public class MainActivity_Principal extends AppCompatActivity
     }
 
     public int doSomeTasksVisitas() {
-        while (progress <= 3000000) {
+        while (progress <= 2500000) {
             progress++;
             if (progress == 100000) {
                 return 10;
@@ -1463,7 +1469,7 @@ public class MainActivity_Principal extends AppCompatActivity
                 return 20;
             } else if (progress == 1600000) {
                 return 50;
-            } else if (progress == 2700000) {
+            } else if (progress == 1900000) {
                 return 80;
             }
         }
