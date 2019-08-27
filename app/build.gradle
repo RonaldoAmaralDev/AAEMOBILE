@@ -5,7 +5,7 @@ android {
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "br.com.araujoabreu.timg"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 29
         multiDexEnabled true
         versionCode 50

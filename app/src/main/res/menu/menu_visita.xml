@@ -6,10 +6,30 @@
 
     <item
         android:id="@+id/action_calendario"
-        android:icon="@drawable/ic_calendar"
-        android:orderInCategory="100"
         android:title="Filtrar Data"
-        app:showAsAction="always" />
+        android:icon="@drawable/ic_data"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/navegation_hoje"
+                android:icon="@drawable/ic_data"
+                android:title="Hoje" />
+            <item
+                android:id="@+id/navegation_amanha"
+                android:icon="@drawable/ic_data"
+                android:title="Amanha" />
+            <item
+                android:id="@+id/navegation_semana"
+                android:icon="@drawable/ic_data"
+                android:title="Esta Semana" />
+            <item
+                android:id="@+id/navegation_mes"
+                android:icon="@drawable/ic_data"
+                android:title="Este Mês" />
+
+        </menu>
+    </item>
+
 
     <item
         android:id="@+id/action_search"

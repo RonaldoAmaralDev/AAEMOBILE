@@ -255,7 +255,7 @@ public class BancoGeral extends SQLiteOpenHelper {
                 "ativo TEXT)");
 
         dbGeral.execSQL("create table " +
-                TABELA_HH+ "" +
+                TABELA_HH + "" +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "ordemservico INT, " +
                 "centrocusto_id TEXT, " +
@@ -264,14 +264,15 @@ public class BancoGeral extends SQLiteOpenHelper {
                 "colaborador_id TEXT)");
 
         dbGeral.execSQL("create table " +
-                TABELA_TIPOSERVICO+ "" +
+                TABELA_TIPOSERVICO + "" +
                 "(id INTEGER PRIMARY KEY , " +
                 "descricao TEXT) ");
 
         dbGeral.execSQL("create table " +
-                TABELA_TIPOSOLICITACAO+ "" +
+                TABELA_TIPOSOLICITACAO + "" +
                 "(id INTEGER PRIMARY KEY , " +
-                "descricao TEXT) ");;
+                "descricao TEXT) ");
+        ;
 
     }
 
@@ -315,7 +316,7 @@ public class BancoGeral extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean gravarHHInicio(String ordemservico, String centrocusto_id, String hhinicio,String colaborador_id) {
+    public boolean gravarHHInicio(String ordemservico, String centrocusto_id, String hhinicio, String colaborador_id) {
         SQLiteDatabase gravarLocalizacao = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_ORDEMSERVICO_HH, ordemservico);
@@ -366,7 +367,7 @@ public class BancoGeral extends SQLiteOpenHelper {
     public Cursor buscaTipoServico(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_TIPOSERVICO +
-                " WHERE " + COL_ID_TIPOSERVICO+ " = '" + id + "'";
+                " WHERE " + COL_ID_TIPOSERVICO + " = '" + id + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
     }
@@ -381,35 +382,35 @@ public class BancoGeral extends SQLiteOpenHelper {
         return data;
     }
 
-    public int dbCountTipoSolicitacaoCriadas(String tiposolicitacao_id){
+    public int dbCountTipoSolicitacaoCriadas(String tiposolicitacao_id) {
         int count = 0;
-        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_TIPOSOLICITACAOID_OS+ " = '" + tiposolicitacao_id + "'";
+        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_TIPOSOLICITACAOID_OS + " = '" + tiposolicitacao_id + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
-        Log.d("query",selectQuery);
+        Log.d("query", selectQuery);
         database.close();
         return count;
     }
 
-    public int dbCountTipoSolicitacaoAbertas(String tiposolicitacao_id){
+    public int dbCountTipoSolicitacaoAbertas(String tiposolicitacao_id) {
         int count = 0;
         String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_TIPOSOLICITACAOID_OS + " = '" + tiposolicitacao_id + "' AND " + COL_STATUS_OS + " = '" + "aberta" + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
-        Log.d("query",selectQuery);
+        Log.d("query", selectQuery);
         database.close();
         return count;
     }
 
-    public int dbCountTipoSolicitacaoEncerradas(String tiposolicitacao_id){
+    public int dbCountTipoSolicitacaoEncerradas(String tiposolicitacao_id) {
         int count = 0;
         String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_TIPOSOLICITACAOID_OS + " = '" + tiposolicitacao_id + "' AND " + COL_STATUS_OS + " = '" + "sincronizada" + "' OR " + COL_STATUS_OS + " = '" + "encerrada" + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
-        Log.d("query",selectQuery);
+        Log.d("query", selectQuery);
         database.close();
         return count;
     }
@@ -433,75 +434,72 @@ public class BancoGeral extends SQLiteOpenHelper {
     }
 
 
-    public int dbCountTipoServicoCriadas(String tiposervico_id){
+    public int dbCountTipoServicoCriadas(String tiposervico_id) {
         int count = 0;
-        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_TIPOSERVICOID_OS+ " = '" + tiposervico_id+ "'";
+        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_TIPOSERVICOID_OS + " = '" + tiposervico_id + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
-        Log.d("query",selectQuery);
+        Log.d("query", selectQuery);
         database.close();
         return count;
     }
 
-    public int dbCountEncerradas(){
+    public int dbCountEncerradas() {
         int count = 0;
         String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "encerrada" + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
-        Log.d("query",selectQuery);
+        Log.d("query", selectQuery);
         database.close();
         return count;
     }
 
-    public int dbCountAbertas(){
+    public int dbCountAbertas() {
         int count = 0;
         String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "aberta" + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
-        Log.d("query",selectQuery);
+        Log.d("query", selectQuery);
         database.close();
         return count;
     }
 
-    public int dbCountEmEspera(){
+    public int dbCountEmEspera() {
         int count = 0;
         String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "em espera" + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
-        Log.d("query",selectQuery);
+        Log.d("query", selectQuery);
         database.close();
         return count;
     }
 
 
-    public int dbCountTipoServicoAbertas(String tiposolicitacao_id){
+    public int dbCountTipoServicoAbertas(String tiposolicitacao_id) {
         int count = 0;
         String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_TIPOSERVICOID_OS + " = '" + tiposolicitacao_id + "' AND " + COL_STATUS_OS + " = '" + "aberta" + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
-        Log.d("query",selectQuery);
+        Log.d("query", selectQuery);
         database.close();
         return count;
     }
 
-    public int dbCountTipoServicoEncerradas(String tiposolicitacao_id){
+    public int dbCountTipoServicoEncerradas(String tiposolicitacao_id) {
         int count = 0;
         String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_TIPOSERVICOID_OS + " = '" + tiposolicitacao_id + "' AND " + COL_STATUS_OS + " = '" + "sincronizada" + "' OR " + COL_STATUS_OS + " = '" + "encerrada" + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
-        Log.d("query",selectQuery);
+        Log.d("query", selectQuery);
         database.close();
         return count;
     }
-
-
-
 
 
     /**
@@ -595,12 +593,12 @@ public class BancoGeral extends SQLiteOpenHelper {
     }
 
 
-    public String[] buscaLocaisMapa(String search){
+    public String[] buscaLocaisMapa(String search) {
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABELA_LOCAL +
-                " WHERE " + " ( " + COL_DESCRICAO_LOCAL  + " LIKE  '%" +search + "%'" + " OR " + COL_CODIGO_LOCAL  +  "  LIKE  '%" +search + "%'" + " OR " + COL_ENDERECO_LOCAL +  "  LIKE  '%" +search + "%'" + " OR " + COL_BAIRRO_LOCAL  +  "  LIKE  '%" +search + "%'" + " OR " + COL_CIDADE_LOCAL +  "  LIKE  '%" +search + "%'" + " ) " , null);
+                " WHERE " + " ( " + COL_DESCRICAO_LOCAL + " LIKE  '%" + search + "%'" + " OR " + COL_CODIGO_LOCAL + "  LIKE  '%" + search + "%'" + " OR " + COL_ENDERECO_LOCAL + "  LIKE  '%" + search + "%'" + " OR " + COL_BAIRRO_LOCAL + "  LIKE  '%" + search + "%'" + " OR " + COL_CIDADE_LOCAL + "  LIKE  '%" + search + "%'" + " ) ", null);
         cursor.moveToFirst();
         ArrayList<String> text = new ArrayList<String>();
-        while(!cursor.isAfterLast()) {
+        while (!cursor.isAfterLast()) {
             text.add(cursor.getString(cursor.getColumnIndex(COL_CODIGO_LOCAL)));
             text.add(cursor.getString(cursor.getColumnIndex(COL_DESCRICAO_LOCAL)));
             text.add(cursor.getString(cursor.getColumnIndex(COL_ENDERECO_LOCAL)));
@@ -614,10 +612,10 @@ public class BancoGeral extends SQLiteOpenHelper {
     }
 
 
-    public Cursor filtroVeiculo(String search){
+    public Cursor filtroVeiculo(String search) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABELA_VEICULOS +
-                " WHERE " + " ( " + COL_PLACA_VEICULO  + " LIKE  '%" +search + "%'" + " OR " + COL_DESCRICAO_VEICULO +  "  LIKE  '%" +search + "%'" + " OR " + COL_MODELO_VEICULO + "  LIKE  '%" +search + "%'" + " ) ";
+                " WHERE " + " ( " + COL_PLACA_VEICULO + " LIKE  '%" + search + "%'" + " OR " + COL_DESCRICAO_VEICULO + "  LIKE  '%" + search + "%'" + " OR " + COL_MODELO_VEICULO + "  LIKE  '%" + search + "%'" + " ) ";
         Cursor cursor = db.rawQuery(query, null);
         // looping through all rows and adding to list
 
@@ -738,7 +736,7 @@ public class BancoGeral extends SQLiteOpenHelper {
 
     public void updateStatusAtividadeAberta(String checklist_id) {
         SQLiteDatabase database = this.getWritableDatabase();
-        String updateQuery = "Update " + TABELA_ATIVIDADES + " set status = '" + "aberta" + "' where " +  COL_CHECKLIST_ITEN + " = '" + checklist_id + "'";
+        String updateQuery = "Update " + TABELA_ATIVIDADES + " set status = '" + "aberta" + "' where " + COL_CHECKLIST_ITEN + " = '" + checklist_id + "'";
         Log.d("query", updateQuery);
         database.execSQL(updateQuery);
     }
@@ -772,8 +770,8 @@ public class BancoGeral extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABELA_OS +
                 " WHERE " + COL_CENTROCUSTO_OS + " = '" + contrato_id + "'";
         Cursor data = db.rawQuery(query, null);
-        Log.d("query",query);
-      //  db.close();
+        Log.d("query", query);
+        //  db.close();
         return data;
     }
 
@@ -798,7 +796,7 @@ public class BancoGeral extends SQLiteOpenHelper {
     public Cursor verificaAtividadesJson(String idAtividade) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_ATIVIDADES +
-                " WHERE " + COL_CHECKLIST_ITEN + " = '" + idAtividade+ "' ORDER BY "+ COL_ID_ITEN + " ASC LIMIT 1" ;
+                " WHERE " + COL_CHECKLIST_ITEN + " = '" + idAtividade + "' ORDER BY " + COL_ID_ITEN + " ASC LIMIT 1";
         Cursor data = db.rawQuery(query, null);
         return data;
 
@@ -807,7 +805,7 @@ public class BancoGeral extends SQLiteOpenHelper {
     public Cursor verificaAtividades(String idAtividade) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_ATIVIDADES +
-                " WHERE " + COL_CHECKLIST_ITEN + " = '" + idAtividade+ "'" ;
+                " WHERE " + COL_CHECKLIST_ITEN + " = '" + idAtividade + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
     }
@@ -840,7 +838,7 @@ public class BancoGeral extends SQLiteOpenHelper {
     public void updateEquipamento(String idEquipamento, String codigoequipamento, String descricaoequipamento, String centrocusto_idEquipamento, String local_idEquipamento, String modelo, String tag, String numeroserie, String btu, String fabricante, String tipoequipamento, String fornecedor) {
         SQLiteDatabase database = this.getWritableDatabase();
         String updateQuery = "Update " + TABELA_EQUIPAMENTO + " set codigoequipamento = '" + codigoequipamento + "', descricaoequipamento = '" + descricaoequipamento + "', centrocusto_idEquipamento = '" + centrocusto_idEquipamento + "', local_idEquipamento = '" + local_idEquipamento +
-                "', modelo = '" + modelo + "', tag = '" + tag + "', numeroserie = '" + numeroserie + "', btu = '" + btu +  "', fabricante = '" + fabricante  +  "', tipoequipamento = '" + tipoequipamento +  "', fornecedor = '" + fornecedor + "' where idEquipamento=" + "'" + idEquipamento + "'";
+                "', modelo = '" + modelo + "', tag = '" + tag + "', numeroserie = '" + numeroserie + "', btu = '" + btu + "', fabricante = '" + fabricante + "', tipoequipamento = '" + tipoequipamento + "', fornecedor = '" + fornecedor + "' where idEquipamento=" + "'" + idEquipamento + "'";
         Log.d("query", updateQuery);
         database.execSQL(updateQuery);
     }
@@ -865,7 +863,7 @@ public class BancoGeral extends SQLiteOpenHelper {
     }
 
 
-    public Cursor getTag(String tag){
+    public Cursor getTag(String tag) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_EQUIPAMENTO +
                 " WHERE " + COL_TAG_EQUIPAMENTO + " = '" + tag + "'";
@@ -873,7 +871,7 @@ public class BancoGeral extends SQLiteOpenHelper {
         return data;
     }
 
-    public Cursor buscaVisita(){
+    public Cursor buscaVisita() {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_OS;
         Cursor data = db.rawQuery(query, null);
@@ -881,10 +879,10 @@ public class BancoGeral extends SQLiteOpenHelper {
     }
 
 
-    public List<String> getLocals(String id){
+    public List<String> getLocals(String id) {
         List<String> labels = new ArrayList<String>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABELA_LOCAL  + " WHERE " + COL_CENTROCUSTO_LOCAL + " = '" + id + "'" + "ORDER BY " + COL_CODIGO_LOCAL;
+        String selectQuery = "SELECT  * FROM " + TABELA_LOCAL + " WHERE " + COL_CENTROCUSTO_LOCAL + " = '" + id + "'" + "ORDER BY " + COL_CODIGO_LOCAL;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
@@ -897,38 +895,38 @@ public class BancoGeral extends SQLiteOpenHelper {
         return labels;
     }
 
-    public Cursor verificaLocalsSpinner(String local){
+    public Cursor verificaLocalsSpinner(String local) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_LOCAL +
-                " WHERE " + COL_DESCRICAO_LOCAL + " = '" + local +  "'";
+                " WHERE " + COL_DESCRICAO_LOCAL + " = '" + local + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
     }
 
-    public Cursor verificaTipoSolicitacao(String id){
+    public Cursor verificaTipoSolicitacao(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_TIPOSOLICITACAO +
-                " WHERE " + COL_ID_TIPOSOLICITACAO + " = '" + id +  "'";
+                " WHERE " + COL_ID_TIPOSOLICITACAO + " = '" + id + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
     }
 
-    public Cursor verificaTipoServico(String id){
+    public Cursor verificaTipoServico(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_TIPOSERVICO +
-                " WHERE " + COL_ID_TIPOSERVICO + " = '" + id +  "'";
+                " WHERE " + COL_ID_TIPOSERVICO + " = '" + id + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
     }
 
-    public Cursor getDataEquipamento(){
+    public Cursor getDataEquipamento() {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_EQUIPAMENTO;
         Cursor data = db.rawQuery(query, null);
         return data;
     }
 
-    public Cursor getDataEquipamentoOrdem(String local_id){
+    public Cursor getDataEquipamentoOrdem(String local_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_EQUIPAMENTO +
                 " WHERE " + COL_LOCAL_EQUIPAMENTO + " = '" + local_id + "'" + "ORDER BY " + COL_CODIGOEQUIPAMENTO_EQUIPAMENTO;
@@ -936,42 +934,43 @@ public class BancoGeral extends SQLiteOpenHelper {
         return data;
     }
 
-    public Cursor buscaAtividadesAbertas(String checklist_id){
+    public Cursor buscaAtividadesAbertas(String checklist_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_ATIVIDADES +
-                " WHERE " + COL_CHECKLIST_ITEN + " = '" + checklist_id + "'" + " AND " + COL_STATUS_ITEN + " = '" + "aberta" +  "' ORDER BY " + COL_ID_ITEN;
+                " WHERE " + COL_CHECKLIST_ITEN + " = '" + checklist_id + "'" + " AND " + COL_STATUS_ITEN + " = '" + "aberta" + "' ORDER BY " + COL_ID_ITEN;
         Cursor data = db.rawQuery(query, null);
         return data;
     }
 
 
-    public Cursor verificaEquipamento(String id){
+    public Cursor verificaEquipamento(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_EQUIPAMENTO +
-                " WHERE " + COL_ID_EQUIPAMENTO + " = '" + id+  "'";
+                " WHERE " + COL_ID_EQUIPAMENTO + " = '" + id + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
     }
-    public Cursor verificaEquipamentoTAG(String tag){
+
+    public Cursor verificaEquipamentoTAG(String tag) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_EQUIPAMENTO +
-                " WHERE " + COL_TAG_EQUIPAMENTO + " = '" + tag+  "'";
+                " WHERE " + COL_TAG_EQUIPAMENTO + " = '" + tag + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
     }
 
 
-    public int dbCountItem(String checklist_id){
+    public int dbCountItem(String checklist_id) {
         int count = 0;
         String selectQuery = "SELECT * FROM " + TABELA_ATIVIDADES +
-                " WHERE " + COL_CHECKLIST_ITEN + " = '" + checklist_id +  "'";
+                " WHERE " + COL_CHECKLIST_ITEN + " = '" + checklist_id + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
         return count;
     }
 
-    public int dbCountLocais(){
+    public int dbCountLocais() {
         int count = 0;
         String selectQuery = "SELECT * FROM " + TABELA_LOCAL;
         SQLiteDatabase database = this.getWritableDatabase();
@@ -980,7 +979,7 @@ public class BancoGeral extends SQLiteOpenHelper {
         return count;
     }
 
-    public int dbCountAtividadesAbertas(String checklist_id){
+    public int dbCountAtividadesAbertas(String checklist_id) {
         int count = 0;
         String selectQuery = "SELECT * FROM " + TABELA_ATIVIDADES + " WHERE " + COL_CHECKLIST_ITEN + " = '" + checklist_id + "' AND " + COL_STATUS_ITEN + " = '" + "aberta" + "'";
         SQLiteDatabase database = this.getWritableDatabase();
@@ -990,8 +989,7 @@ public class BancoGeral extends SQLiteOpenHelper {
     }
 
 
-
-    public int dbCountLocaisCL(String contrato_id){
+    public int dbCountLocaisCL(String contrato_id) {
         int count = 0;
         String selectQuery = "SELECT * FROM " + TABELA_LOCAL + " WHERE " + COL_CENTROCUSTO_LOCAL + " = '" + contrato_id + "'";
         SQLiteDatabase database = this.getWritableDatabase();
@@ -1001,7 +999,7 @@ public class BancoGeral extends SQLiteOpenHelper {
     }
 
 
-    public int dbCountEquipamento(){
+    public int dbCountEquipamento() {
         int count = 0;
         String selectQuery = "SELECT  * FROM " + TABELA_EQUIPAMENTO;
         SQLiteDatabase database = this.getWritableDatabase();
@@ -1010,7 +1008,7 @@ public class BancoGeral extends SQLiteOpenHelper {
         return count;
     }
 
-    public int dbCountEquipamentoCL(String equipamentoID){
+    public int dbCountEquipamentoCL(String equipamentoID) {
         int count = 0;
         String selectQuery = "SELECT  * FROM " + TABELA_EQUIPAMENTO + " WHERE " + COL_CENTROCUSTO_EQUIPAMENTO + " = '" + equipamentoID + "'";
         SQLiteDatabase database = this.getWritableDatabase();
@@ -1019,7 +1017,7 @@ public class BancoGeral extends SQLiteOpenHelper {
         return count;
     }
 
-    public int dbCountPrevCriadas(String equipamentoID){
+    public int dbCountPrevCriadas(String equipamentoID) {
         int count = 0;
         String selectQuery = "SELECT * FROM " + TABELA_OS +
                 " WHERE " + COL_EQUIPAMENTO_OS + " = '" + equipamentoID + "' AND " + COL_TIPOSOLICITACAOID_OS + " = '" + "1" + "'";
@@ -1029,7 +1027,7 @@ public class BancoGeral extends SQLiteOpenHelper {
         return count;
     }
 
-    public int dbCountPrevExecutadas(String equipamentoID){
+    public int dbCountPrevExecutadas(String equipamentoID) {
         int count = 0;
         String selectQuery = "SELECT * FROM " + TABELA_OS +
                 " WHERE " + COL_EQUIPAMENTO_OS + " = '" + equipamentoID + "' AND " + COL_STATUS_OS + " = '" + "encerrada" + "' AND " + COL_TIPOSOLICITACAOID_OS + " = '" + "1" + "'";
@@ -1039,7 +1037,7 @@ public class BancoGeral extends SQLiteOpenHelper {
         return count;
     }
 
-    public int dbCountPrevPendentes(String equipamentoID){
+    public int dbCountPrevPendentes(String equipamentoID) {
         int count = 0;
         String selectQuery = "SELECT * FROM " + TABELA_OS +
                 " WHERE " + COL_EQUIPAMENTO_OS + " = '" + equipamentoID + "' AND " + COL_STATUS_OS + " = '" + "aberta" + "' AND " + COL_TIPOSOLICITACAOID_OS + " = '" + "1" + "'";
@@ -1049,17 +1047,17 @@ public class BancoGeral extends SQLiteOpenHelper {
         return count;
     }
 
-    public int dbCountCorretivaCriadas(String equipamentoID){
+    public int dbCountCorretivaCriadas(String equipamentoID) {
         int count = 0;
         String selectQuery = "SELECT * FROM " + TABELA_OS +
-                " WHERE " + COL_EQUIPAMENTO_OS + " = '" + equipamentoID + "' AND " + COL_TIPOSOLICITACAOID_OS+ " = '" + "2" + "'";
+                " WHERE " + COL_EQUIPAMENTO_OS + " = '" + equipamentoID + "' AND " + COL_TIPOSOLICITACAOID_OS + " = '" + "2" + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
         return count;
     }
 
-    public int dbCountCorretivaExecutadas(String equipamentoID){
+    public int dbCountCorretivaExecutadas(String equipamentoID) {
         int count = 0;
         String selectQuery = "SELECT * FROM " + TABELA_OS +
                 " WHERE " + COL_EQUIPAMENTO_OS + " = '" + equipamentoID + "' AND " + COL_STATUS_OS + " = '" + "encerrada" + "' AND " + COL_TIPOSOLICITACAOID_OS + " = '" + "2" + "'";
@@ -1069,7 +1067,7 @@ public class BancoGeral extends SQLiteOpenHelper {
         return count;
     }
 
-    public int dbCountCorretivaPendentes(String equipamentoID){
+    public int dbCountCorretivaPendentes(String equipamentoID) {
         int count = 0;
         String selectQuery = "SELECT * FROM " + TABELA_OS +
                 " WHERE " + COL_EQUIPAMENTO_OS + " = '" + equipamentoID + "' AND " + COL_STATUS_OS + " = '" + "aberta" + "' AND " + COL_TIPOSOLICITACAOID_OS + " = '" + "2" + "'";
@@ -1082,6 +1080,7 @@ public class BancoGeral extends SQLiteOpenHelper {
 
     /**
      * Update Tabela Local
+     *
      * @param id;
      * @param codigolocal;
      * @param centrocusto_idLocal;
@@ -1109,16 +1108,16 @@ public class BancoGeral extends SQLiteOpenHelper {
                             String latitude, String longitude, String sigla,
                             String estado, String tempogasto, String regiaoID, String regiaoDescricao, String poloatendimentosID,
                             String poloatendimentosDescricao, String contatoID, String contatoCLID, String contatoNome, String contatoEndereco,
-                            String contatoLatitude, String contatoLongitude, String areaconstruida, String areacapina, String enderecolocal){
+                            String contatoLatitude, String contatoLongitude, String areaconstruida, String areacapina, String enderecolocal) {
         SQLiteDatabase database = this.getWritableDatabase();
-        String updateQuery = "Update " + TABELA_LOCAL + " set codigolocal = '"+ codigolocal + "', " +
-                "centrocusto_idLocal = '"+ centrocusto_idLocal + "', descricaolocal = '"+ descricaolocal  + "', bairro = '"+ bairro  +"', cidade = '"+ cidade  +"', latitude = '"+ latitude + "', longitude = '"+ longitude  +"', sigla = '"+ sigla  +"', estado = '"+ estado +"', tempogasto = '"+ tempogasto +"' , regiaoID = '"+ regiaoID +"', regiaoDescricao = '"+ regiaoDescricao+"', poloatendimentosID = '"+ poloatendimentosID +"', poloatendimentosDescricao = '"+ poloatendimentosDescricao +"', contatoID = '"+ contatoID +"' , contatoCLID = '"+ contatoCLID +"' , contatoNome = '"+ contatoNome +"', contatoEndereco = '"+ contatoEndereco +"', contatoLatitude = '"+ contatoLatitude +"', contatoLongitude= '"+ contatoLongitude + "', areaconstruida= '"+ areaconstruida +"', areacapina= '"+ areacapina + "', enderecolocal = '"+ enderecolocal +"' WHERE id="+"'"+ id +"'";
-        Log.d("query",updateQuery);
+        String updateQuery = "Update " + TABELA_LOCAL + " set codigolocal = '" + codigolocal + "', " +
+                "centrocusto_idLocal = '" + centrocusto_idLocal + "', descricaolocal = '" + descricaolocal + "', bairro = '" + bairro + "', cidade = '" + cidade + "', latitude = '" + latitude + "', longitude = '" + longitude + "', sigla = '" + sigla + "', estado = '" + estado + "', tempogasto = '" + tempogasto + "' , regiaoID = '" + regiaoID + "', regiaoDescricao = '" + regiaoDescricao + "', poloatendimentosID = '" + poloatendimentosID + "', poloatendimentosDescricao = '" + poloatendimentosDescricao + "', contatoID = '" + contatoID + "' , contatoCLID = '" + contatoCLID + "' , contatoNome = '" + contatoNome + "', contatoEndereco = '" + contatoEndereco + "', contatoLatitude = '" + contatoLatitude + "', contatoLongitude= '" + contatoLongitude + "', areaconstruida= '" + areaconstruida + "', areacapina= '" + areacapina + "', enderecolocal = '" + enderecolocal + "' WHERE id=" + "'" + id + "'";
+        Log.d("query", updateQuery);
         database.execSQL(updateQuery);
     }
 
 
-    public Cursor buscaLocal(String centrocusto_id){
+    public Cursor buscaLocal(String centrocusto_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_LOCAL +
                 " WHERE " + COL_CENTROCUSTO_LOCAL + " = '" + centrocusto_id + "'";
@@ -1126,14 +1125,14 @@ public class BancoGeral extends SQLiteOpenHelper {
         return data;
     }
 
-    public Cursor buscaLocalFrota(){
+    public Cursor buscaLocalFrota() {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_LOCAL;
         Cursor data = db.rawQuery(query, null);
         return data;
     }
 
-    public Cursor buscaEquipamentos(){
+    public Cursor buscaEquipamentos() {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_EQUIPAMENTO + "";
         Cursor data = db.rawQuery(query, null);
@@ -1143,11 +1142,27 @@ public class BancoGeral extends SQLiteOpenHelper {
     public Cursor buscaOS(String equipamento_id, String colaborador_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_OS +
-                " WHERE " + COL_EQUIPAMENTO_OS + " = '" + equipamento_id  + "' AND " + COL_STATUS_OS + " = '" + "aberta" + "' AND " + COL_EQUIPE1_OS + " = '" + colaborador_id + "'";
+                " WHERE " + COL_EQUIPAMENTO_OS + " = '" + equipamento_id + "' AND " + COL_STATUS_OS + " = '" + "aberta" + "' AND " + COL_EQUIPE1_OS + " = '" + colaborador_id + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
     }
 
+    public Cursor filtroOSData(String dia) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABELA_OS +
+                " WHERE " + COL_DATAPLANEJAMENTO_OS + " = '" + dia  + "' AND " + COL_STATUS_OS + " = '" + "aberta" +  "'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+
+    public Cursor filtroOSPeriodo(String diaInicio, String diaFim) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABELA_OS +
+                " WHERE " + COL_DATAPLANEJAMENTO_OS + " between '" + diaInicio  + "' AND " + COL_DATAPLANEJAMENTO_OS + " = '" + diaFim +  "'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
 
     public Cursor buscaOSColaborador(String colaborador_id) {
         SQLiteDatabase db = this.getWritableDatabase();

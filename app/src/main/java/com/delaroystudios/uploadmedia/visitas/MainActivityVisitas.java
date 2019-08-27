@@ -18,12 +18,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.adapter.VisitaAdapter;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
 import com.delaroystudios.uploadmedia.operacao.local.MyDividerItemDecoration;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
+
+import java.util.Calendar;
 
 public class MainActivityVisitas extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainActivityVisitas.class.getSimpleName();
@@ -85,6 +88,7 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
         whiteNotificationBar(recyclerView);
 
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -151,7 +155,7 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
             }
         });
 
-        return true;
+            return true;
     }
 
     @Override
@@ -161,11 +165,61 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
+        java.util.Date dt = new java.util.Date();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss");
+        java.text.SimpleDateFormat sdfData = new java.text.SimpleDateFormat("yyyy/MM/dd");
+        String currentTime = sdf.format(dt);
+        String data = sdfData.format(dt);
+
+
+        if( id == R.id.navegation_hoje) {
+
+            mAdapter.swapCursor(myDBGeral.filtroOSData(data));
+            mAdapter.notifyDataSetChanged();
+
+            return  true;
+        }
+        if(id == R.id.navegation_amanha) {
+
+            Calendar c = Calendar.getInstance();
+            c.add(Calendar.DATE, 1);
+            String formatted = sdfData.format(c.getTime());
+
+            // Toast.makeText(getApplicationContext(), "Data: " + formatted, Toast.LENGTH_LONG).show();
+
+            mAdapter.swapCursor(myDBGeral.filtroOSData(formatted));
+            mAdapter.notifyDataSetChanged();
+
             return true;
         }
+        if(id == R.id.navegation_semana) {
 
+            Calendar c = Calendar.getInstance();
+            c.add(Calendar.DATE, 7);
+            String formatted = sdfData.format(c.getTime());
+
+
+          //  Toast.makeText(getApplicationContext(), "Data: " + formatted, Toast.LENGTH_LONG).show();
+
+            mAdapter.swapCursor(myDBGeral.filtroOSPeriodo(data, formatted));
+            mAdapter.notifyDataSetChanged();
+
+            return true;
+        }
+        if(id == R.id.navegation_mes) {
+
+            Calendar c = Calendar.getInstance();
+            c.add(Calendar.DATE, 30);
+            String formatted = sdfData.format(c.getTime());
+
+
+          //  Toast.makeText(getApplicationContext(), "Data: " + formatted, Toast.LENGTH_LONG).show();
+
+            mAdapter.swapCursor(myDBGeral.filtroOSPeriodo(data, formatted));
+            mAdapter.notifyDataSetChanged();
+
+            return true;
+        }
 
         if(id == android.R.id.home) {
             SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
