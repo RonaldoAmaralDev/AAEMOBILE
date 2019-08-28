@@ -198,6 +198,11 @@ public class AssinaturaCliente extends AppCompatActivity {
                 new java.text.SimpleDateFormat("HH:mm:ss");
                 String currentTime = sdf.format(dt);
 
+                myDB.updateAssinaturaCliente(
+                        os_id,
+                        "/assets/os/" + os_id + "_assinaturaCliente.jpg"
+                );
+
                 //Finalizar Contagem HH da OS
                 myDBGeral.updateHHFim(
                         os_id,

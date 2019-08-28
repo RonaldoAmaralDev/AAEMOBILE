@@ -255,7 +255,7 @@ public class Atividade_Depois extends AppCompatActivity {
                         txtObservacao.getText().toString(),
                         currentTime,
                         dataencerramento,
-                        "/assets/os/" + os_id + "_assinaturaColaborador",
+                        "/assets/os/" + os_id + "_assinaturaColaborador.jpg",
                         "no");
 
                 //Encerra Atividade
