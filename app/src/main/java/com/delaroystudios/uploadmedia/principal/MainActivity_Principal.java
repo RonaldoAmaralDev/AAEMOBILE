@@ -83,6 +83,7 @@ import com.delaroystudios.uploadmedia.principal.tutorial.TutorialActivity;
 import com.delaroystudios.uploadmedia.relatorio.RelatorioContrato;
 import com.delaroystudios.uploadmedia.relatorio.RelatorioLeitura;
 import com.delaroystudios.uploadmedia.rota.Hoteis;
+import com.delaroystudios.uploadmedia.rota.PostosCombustivel;
 import com.delaroystudios.uploadmedia.rota.Restaurantes;
 import com.delaroystudios.uploadmedia.visitas.MainActivityVisitas;
 import com.github.javiersantos.appupdater.AppUpdater;
@@ -294,8 +295,14 @@ public class MainActivity_Principal extends AppCompatActivity
         mPostos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Em Desenvolvimento. ", Toast.LENGTH_LONG).show();
-            }
+                Intent intent = new Intent(MainActivity_Principal.this, PostosCombustivel.class);
+                Bundle dados = new Bundle();
+                dados.putString("name", name);
+                dados.putString("email", email);
+                dados.putString("colaborador_id", colaborador_id);
+                dados.putString("tipo", tipo);
+                intent.putExtras(dados);
+                startActivity(intent);            }
         });
 
         mRestaurantes.setOnClickListener(new View.OnClickListener() {
