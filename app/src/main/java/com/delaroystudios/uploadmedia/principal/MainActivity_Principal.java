@@ -255,7 +255,7 @@ public class MainActivity_Principal extends AppCompatActivity
 
 
         //Busca Locais
-        String[] srr= myBDGeral.buscaLocaisMapa(autoCompleteTextView.getText().toString());
+        String[] srr = myBDGeral.buscaLocaisMapa(autoCompleteTextView.getText().toString());
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, srr);
         autoCompleteTextView.setThreshold(1);
         autoCompleteTextView.setAdapter(adapter);
@@ -268,8 +268,7 @@ public class MainActivity_Principal extends AppCompatActivity
                         .setIcon(R.drawable.logo)
                         .setTitle(R.string.app_name)
                         .setMessage("Selecione o tipo de mapa: ")
-                        .setPositiveButton("Mapa", new DialogInterface.OnClickListener()
-                        {
+                        .setPositiveButton("Mapa", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
@@ -353,7 +352,7 @@ public class MainActivity_Principal extends AppCompatActivity
 
         //Trocar titulos
         navigation.getMenu().findItem(R.id.navigation_mapa).setTitle("MAPA");
-        navigation.getMenu().findItem(R.id.navigation_visitas).setTitle("VISITAS("+String.valueOf(myBDGeral.dbCountAbertas()+")"));
+        navigation.getMenu().findItem(R.id.navigation_visitas).setTitle("VISITAS(" + String.valueOf(myBDGeral.dbCountAbertas() + ")"));
         navigation.getMenu().findItem(R.id.navigation_scanner).setTitle("SCANNER");
         navigation.getMenu().findItem(R.id.navigation_chat).setTitle("CHAT");
         navigation.getMenu().findItem(R.id.navigation_mais).setTitle("MAIS");
@@ -372,7 +371,7 @@ public class MainActivity_Principal extends AppCompatActivity
 
 
         int categoria = Integer.parseInt(tipo);
-        if(categoria == 2){
+        if (categoria == 2) {
             // Operação Manutenção
             nav_Menu.findItem(R.id.nav_atualizarVeiculo).setVisible(false);
             nav_Menu.findItem(R.id.nav_relatorio_ordemservico).setVisible(false);
@@ -382,25 +381,7 @@ public class MainActivity_Principal extends AppCompatActivity
             nav_Menu.findItem(R.id.nav_reconhecimentofacial).setVisible(false);
             nav_Menu.findItem(R.id.nav_cadastrarequip).setVisible(false);
 
-        } else if(categoria == 3) {
-
-            //Cliente
-            nav_Menu.findItem(R.id.nav_atualizarVeiculo).setVisible(false);
-            nav_Menu.findItem(R.id.nav_localizacao).setVisible(false);
-            nav_Menu.findItem(R.id.nav_cadastrarequip).setVisible(false);
-            nav_Menu.findItem(R.id.nav_programacaotodos).setVisible(false);
-            nav_Menu.findItem(R.id.nav_programacaoequipamento).setVisible(false);
-            nav_Menu.findItem(R.id.nav_syncTabelas).setVisible(false);
-            nav_Menu.findItem(R.id.nav_syncVisita).setVisible(false);
-            nav_Menu.findItem(R.id.nav_veiculos).setVisible(false);
-            nav_Menu.findItem(R.id.nav_veiculomanutencao).setVisible(false);
-            nav_Menu.findItem(R.id.nav_relatorio_ordemservico).setVisible(false);
-            nav_Menu.findItem(R.id.nav_relatorio_leitura).setVisible(false);
-            nav_Menu.findItem(R.id.nav_relatorio_contrato).setVisible(false);
-            nav_Menu.findItem(R.id.nav_reconhecimentofacial).setVisible(false);
-
-
-        } else if(categoria == 10) {
+        } else if (categoria == 10) {
             // Frota
             nav_Menu.findItem(R.id.nav_cadastrarequip).setVisible(false);
             nav_Menu.findItem(R.id.nav_syncTabelas).setVisible(false);
@@ -412,13 +393,11 @@ public class MainActivity_Principal extends AppCompatActivity
 
         }
 
-
-
     }
 
 
 
-    @Override
+        @Override
     public void onMapReady(GoogleMap googleMap) {
         Log.d(TAG, "onMapReady: map is ready");
         mMap = googleMap;

@@ -241,7 +241,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                                     dados.putString("atividade", "Realizar Limpeza");
                                                                     dados.putString("name", name);
                                                                     dados.putString("email", email);
-                                                                    dados.putString("colaborador_id", colaborador_id);
+                                                                    dados.putString("idColaborador", colaborador_id);
                                                                     dados.putString("tipo", tipo);
                                                                     intent.putExtras(dados);
                                                                     mContext.startActivity(intent);
@@ -339,7 +339,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                                                     dados.putString("atividade", "Realizar Inspeção Bombeiro");
                                                                                     dados.putString("name", name);
                                                                                     dados.putString("email", email);
-                                                                                    dados.putString("colaborador_id", colaborador_id);
+                                                                                    dados.putString("idColaborador", colaborador_id);
                                                                                     dados.putString("tipo", tipo);
                                                                                     intent.putExtras(dados);
                                                                                     mContext.startActivity(intent);
@@ -503,7 +503,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                                                                                     dados.putString("atividade", "Realizar Inspeção");
                                                                                                                     dados.putString("name", name);
                                                                                                                     dados.putString("email", email);
-                                                                                                                    dados.putString("colaborador_id", colaborador_id);
+                                                                                                                    dados.putString("idColaborador", colaborador_id);
                                                                                                                     dados.putString("tipo", tipo);
                                                                                                                     intent.putExtras(dados);
                                                                                                                     mContext.startActivity(intent);

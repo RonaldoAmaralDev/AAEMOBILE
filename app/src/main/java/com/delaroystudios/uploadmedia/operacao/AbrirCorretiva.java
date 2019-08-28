@@ -264,7 +264,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
-                                                dados.putString("colaborador_id", colaborador_id);
+                                                dados.putString("idColaborador", colaborador_id);
                                                 dados.putString("tipo", tipo);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
@@ -375,7 +375,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
-                                                dados.putString("colaborador_id", colaborador_id);
+                                                dados.putString("idColaborador", colaborador_id);
                                                 dados.putString("tipo", tipo);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
@@ -486,7 +486,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
-                                                dados.putString("colaborador_id", colaborador_id);
+                                                dados.putString("idColaborador", colaborador_id);
                                                 dados.putString("tipo", tipo);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
@@ -581,7 +581,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
-                                                dados.putString("colaborador_id", colaborador_id);
+                                                dados.putString("idColaborador", colaborador_id);
                                                 dados.putString("tipo", tipo);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
@@ -695,7 +695,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
-                                                dados.putString("colaborador_id", colaborador_id);
+                                                dados.putString("idColaborador", colaborador_id);
                                                 dados.putString("tipo", tipo);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
@@ -809,7 +809,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
-                                                dados.putString("colaborador_id", colaborador_id);
+                                                dados.putString("idColaborador", colaborador_id);
                                                 dados.putString("tipo", tipo);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
@@ -924,7 +924,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
-                                                dados.putString("colaborador_id", colaborador_id);
+                                                dados.putString("idColaborador", colaborador_id);
                                                 dados.putString("tipo", tipo);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
@@ -1036,7 +1036,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
-                                                dados.putString("colaborador_id", colaborador_id);
+                                                dados.putString("idColaborador", colaborador_id);
                                                 dados.putString("tipo", tipo);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
@@ -1148,7 +1148,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                     dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                     dados.putString("name", name);
                                                     dados.putString("email", email);
-                                                    dados.putString("colaborador_id", colaborador_id);
+                                                    dados.putString("idColaborador", colaborador_id);
                                                     dados.putString("tipo", tipo);
                                                     intent.putExtras(dados);
                                                     startActivity(intent);

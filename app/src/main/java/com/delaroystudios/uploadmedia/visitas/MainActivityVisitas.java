@@ -69,10 +69,18 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
 
+        java.util.Date dt = new java.util.Date();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss");
+        java.text.SimpleDateFormat sdfData = new java.text.SimpleDateFormat("yyyy/MM/dd");
+        String currentTime = sdf.format(dt);
+        String data = sdfData.format(dt);
+
+
 
         //getting bottom navigation view and attaching the listener
        BottomNavigationView navigation = findViewById(R.id.nav_viewVisita);
        navigation.setOnNavigationItemSelectedListener(this);
+
 
         //Trocar titulos
         navigation.getMenu().findItem(R.id.navigation_abertas).setTitle("ABERTAS("+String.valueOf(myDBGeral.dbCountAbertas()+")"));
@@ -170,6 +178,9 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
         java.text.SimpleDateFormat sdfData = new java.text.SimpleDateFormat("yyyy/MM/dd");
         String currentTime = sdf.format(dt);
         String data = sdfData.format(dt);
+
+
+
 
 
         if( id == R.id.navegation_hoje) {

@@ -164,7 +164,7 @@ public class OsAdapter extends RecyclerView.Adapter<OsAdapter.GroceryViewHolder>
                                     dados2.putString("os_id", id);
                                     dados2.putString("name", nameColaborador);
                                     dados2.putString("email", emailColaborador);
-                                    dados2.putString("id_colaborador", id_colaborador);
+                                    dados2.putString("idColaborador", id_colaborador);
                                     dados2.putString("tipo", tipoColaborador);
                                     dados2.putString("checklist_id", checklist_id);
                                     dados2.putString("equipamento_id", equipamento_id);

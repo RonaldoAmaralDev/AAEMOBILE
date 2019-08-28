@@ -68,7 +68,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
         centrocusto_id = dados.getString("centrocusto_id");
         name = dados.getString("name");
         email = dados.getString("email");
-        colaborador_id = dados.getString("colaborador_id");
+        colaborador_id = dados.getString("idColaborador");
         tipo = dados.getString("tipo");
 
 

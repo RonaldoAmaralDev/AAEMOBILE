@@ -73,9 +73,9 @@ public class TelaLogin extends AppCompatActivity {
         // Caso ja tenha logado pela 1 vez, assim que abrir o APP dnv ja entra automaticamente
 
         SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
+        String id = pref.getString("id", "" );
         String name = pref.getString("name", "");
         String email= pref.getString("email", "");
-        String id = pref.getString("id", "" );
         String tipo = pref.getString("tipo", "");
         if(!email.isEmpty()) {
 
@@ -149,7 +149,7 @@ public class TelaLogin extends AppCompatActivity {
                 String email = emailLogar.getText().toString();
                 String password = senhaLogar.getText().toString();
 
-                String URL = HOST + "/logar.php";
+                String URL = HOST + "/login.php";
                 // Verifica se tem campo vazio
 
                 if(verificaConexao() == true) {
@@ -187,26 +187,32 @@ public class TelaLogin extends AppCompatActivity {
 
 
                                                 // Armazenar dados no APP
+                                                String id = result.get("ID").getAsString();
+                                                String matricula = result.get("MATRICULA").getAsString();
                                                 String name = result.get("NAME").getAsString();
                                                 String email = result.get("EMAIL").getAsString();
-                                                String id = result.get("ID").getAsString();
-                                                String tipo = result.get("TIPO").getAsString();
+                                                String senha = result.get("PASSWORD").getAsString();
+                                                String setor = result.get("SETOR").getAsString();
+                                                String celular = result.get("CELULAR").getAsString();
 
                                                 SharedPreferences.Editor pref = getSharedPreferences("info", MODE_PRIVATE).edit();
+                                                pref.putString("id", id);
+                                                pref.putString("matricula", matricula);
                                                 pref.putString("name", name);
                                                 pref.putString("email", email);
-                                                pref.putString("id", id);
-                                                pref.putString("tipo", tipo);
+                                                pref.putString("senha", senha);
+                                                pref.putString("tipo", setor);
+                                                pref.putString("celular", celular);
 
                                                 // Armazena as Preferencias
                                                 pref.commit();
 
                                                 Intent intent = new Intent(TelaLogin.this, MainActivity_Principal.class);
                                                 Bundle dados = new Bundle();
+                                                intent.putExtra("id", id);
                                                 intent.putExtra("name", name);
                                                 intent.putExtra("email", email);
-                                                intent.putExtra("id", id);
-                                                intent.putExtra("tipo", tipo);
+                                                intent.putExtra("tipo", setor);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
                                             } else {
