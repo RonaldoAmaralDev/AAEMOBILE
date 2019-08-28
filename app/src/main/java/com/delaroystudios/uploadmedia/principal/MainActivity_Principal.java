@@ -48,6 +48,7 @@ import android.view.WindowManager;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -144,19 +145,18 @@ public class MainActivity_Principal extends AppCompatActivity
     private static final int REQUEST_LOCATION = 1;
     public JsonArrayRequest request, requestAtividades ;
     public RequestQueue requestQueue, requestQueueAtividades;
-    String email, name, colaborador_id, tipo, codigolocal, latitude, longitude;
+    String email, name, colaborador_id, tipo, idLocal, codigolocal, descricaolocal, latitude, longitude;
     ProgressDialog progressBar;
     private int progressBarStatus = 0;
     private Handler progressBarHandler = new Handler();
     private long progress = 0;
-    double currentLatitude, currentLongitude;
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 20f;
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(
             new LatLng(-40, -168), new LatLng(71, 136));
-    private Marker marker, markerColaborador;
+    private Marker marker;
     private ImageView mGps, mCamada, mPostos, mRestaurantes, mHoteis;
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
@@ -450,31 +450,50 @@ public class MainActivity_Principal extends AppCompatActivity
                 }
                 //Se ele clicar em algum local
                 else {
-                    final Dialog dialog = new Dialog(getApplicationContext());
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setCancelable(false);
-                    dialog.setContentView(R.layout.dialog_localmapa);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    LayoutInflater inflater = LayoutInflater.from(MainActivity_Principal.this);
+                    View view = inflater.inflate(R.layout.dialog_localmapa, null);
 
-                    FrameLayout mDialogNo = dialog.findViewById(R.id.frmNo);
-                    mDialogNo.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(getApplicationContext(),"Cancel" ,Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }
-                    });
+                    TextView txtCodigoLocaleDescricao = view.findViewById(R.id.txtCodigoLocaleDescricao);
+                    TextView txtEnderecoLocal = view.findViewById(R.id.txtEnderecoLocal);
+                    TextView txtCidadeeEstado = view.findViewById(R.id.txtCidadeeEstado);
+                    Button acceptButton = view.findViewById(R.id.acceptButton);
+                    Button cancelButton = view.findViewById(R.id.cancelButton);
 
-                    FrameLayout mDialogOk = dialog.findViewById(R.id.frmOk);
-                    mDialogOk.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(getApplicationContext(),"Okay" ,Toast.LENGTH_SHORT).show();
-                            dialog.cancel();
-                        }
-                    });
+                    txtCodigoLocaleDescricao.setText(marker.getTitle());
 
-                    dialog.show();
+                    //Busca dados do marker (posição)
+                    Cursor dataOS = myBDGeral.verificaLocal(marker.getSnippet());
+                    while (dataOS.moveToNext()) {
+
+                        String endereco = dataOS.getString(24);
+                        String cidade = dataOS.getString(5);
+                        String estado = dataOS.getString(9);
+
+                    txtEnderecoLocal.setText(endereco);
+                    txtCidadeeEstado.setText(cidade + " - " +  estado);
+
+
+                        acceptButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Log.e(TAG, "onClick: accept button");
+                            }
+                        });
+
+                        cancelButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Log.e(TAG, "onClick: cancel button");
+                            }
+                        });
+
+                    }
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity_Principal.this)
+                            .setView(view)
+                            .create();
+
+                    alertDialog.show();
                 }
                 return true;
             }
@@ -526,6 +545,7 @@ public class MainActivity_Principal extends AppCompatActivity
                             Cursor dataOS = myBDGeral.getDataLocal();
                             while (dataOS.moveToNext()) {
 
+                                idLocal = dataOS.getString(0);
                                 codigolocal = dataOS.getString(1);
                                 latitude = dataOS.getString(6);
                                 longitude = dataOS.getString(7);
@@ -534,6 +554,7 @@ public class MainActivity_Principal extends AppCompatActivity
                                     marker = mMap.addMarker(new MarkerOptions()
                                             .position(new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude)))
                                             .title(codigolocal)
+                                            .snippet(idLocal)
                                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker))
                                     );
 
