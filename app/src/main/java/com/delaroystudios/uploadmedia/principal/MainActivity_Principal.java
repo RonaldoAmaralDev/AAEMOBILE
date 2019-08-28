@@ -1,6 +1,7 @@
 package com.delaroystudios.uploadmedia.principal;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -13,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.Uri;
@@ -41,10 +43,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -90,27 +94,20 @@ import com.github.javiersantos.appupdater.AppUpdater;
 import com.github.javiersantos.appupdater.enums.UpdateFrom;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import android.support.v4.app.FragmentActivity;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.libraries.places.compat.Place;
-import com.google.android.libraries.places.compat.ui.PlaceAutocompleteFragment;
-import com.google.android.libraries.places.compat.ui.PlaceSelectionListener;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -216,6 +213,10 @@ public class MainActivity_Principal extends AppCompatActivity
         setContentView(R.layout.activity_main__principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //Não abrir o teclado automatico
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
 
         startService(new Intent(getBaseContext(), BootReciever.class));
 
@@ -438,10 +439,47 @@ public class MainActivity_Principal extends AppCompatActivity
                 .build();
 
 
-        //Coloca os pontos das visitas
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
 
+                //Se ele clicar na posição dele não realizar nada
+                if (marker.getTitle().equals("Colaborador")) {
+                    Toast.makeText(getApplicationContext(), "Colaborador: " + marker.getTitle(), Toast.LENGTH_LONG).show();
+                return true;
+                }
+                //Se ele clicar em algum local
+                else {
+                    final Dialog dialog = new Dialog(getApplicationContext());
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setCancelable(false);
+                    dialog.setContentView(R.layout.dialog_localmapa);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-        }
+                    FrameLayout mDialogNo = dialog.findViewById(R.id.frmNo);
+                    mDialogNo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(getApplicationContext(),"Cancel" ,Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    });
+
+                    FrameLayout mDialogOk = dialog.findViewById(R.id.frmOk);
+                    mDialogOk.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(getApplicationContext(),"Okay" ,Toast.LENGTH_SHORT).show();
+                            dialog.cancel();
+                        }
+                    });
+
+                    dialog.show();
+                }
+                return true;
+            }
+        });
+    }
 
     private void getDeviceLocation(){
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
@@ -496,7 +534,7 @@ public class MainActivity_Principal extends AppCompatActivity
                                     marker = mMap.addMarker(new MarkerOptions()
                                             .position(new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude)))
                                             .title(codigolocal)
-                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.house))
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker))
                                     );
 
                                 marker.showInfoWindow();

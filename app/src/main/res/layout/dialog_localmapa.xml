@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:layout_gravity="center"
+    android:layout_marginLeft="55dp"
+    android:layout_marginRight="55dp"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="165dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="60dp"
+            android:layout_marginStart="60dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="14dp"
+                android:id="@+id/txtLocalDescricao"
+                android:gravity="center"
+                android:text="Local Descrição"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:gravity="center"
+                android:text="You are 400pts. away from \n unlocking rewards. quit Earning?"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/frmNo"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="75dp">
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:src="@android:color/transparent"
+            app:backgroundTint="@color/colorShop2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="6dp"
+            android:text="VISITAS"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/frmOk"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="75dp">
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:src="@android:color/transparent"
+            app:backgroundTint="@color/colorAccent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="6dp"
+            android:text="IR"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+    </FrameLayout>
+</FrameLayout>
