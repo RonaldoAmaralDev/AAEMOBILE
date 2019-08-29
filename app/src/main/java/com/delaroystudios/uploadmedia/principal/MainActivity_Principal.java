@@ -466,7 +466,7 @@ public class MainActivity_Principal extends AppCompatActivity
                     Button acceptButton = view.findViewById(R.id.acceptButton);
                     Button cancelButton = view.findViewById(R.id.cancelButton);
 
-                    txtCodigoLocaleDescricao.setText(marker.getTitle());
+                    txtCodigoLocaleDescricao.setText("Local: " + marker.getTitle());
 
                     //Busca dados do marker (posição)
                     Cursor dataOS = myBDGeral.verificaLocal(marker.getSnippet());
@@ -476,8 +476,8 @@ public class MainActivity_Principal extends AppCompatActivity
                         String cidade = dataOS.getString(5);
                         String estado = dataOS.getString(9);
 
-                    txtEnderecoLocal.setText(endereco);
-                    txtCidadeeEstado.setText(cidade + " - " +  estado);
+                    txtEnderecoLocal.setText("Endereço: " + endereco);
+                    txtCidadeeEstado.setText("Cidade: " + cidade + " - " +  estado);
                     txtSLALocal.setText("SLA: " + " Em Desenvolvimento");
 
                     //Busca dados da Visita pelo Local ID
@@ -486,7 +486,7 @@ public class MainActivity_Principal extends AppCompatActivity
 
                             String dataplanejamento = dataVisita.getString(6);
 
-                            txtDataPlanejamento.setText(dataplanejamento);
+                            txtDataPlanejamento.setText("Data Programação: " + dataplanejamento);
 
                             dataVisita.close();
                         }

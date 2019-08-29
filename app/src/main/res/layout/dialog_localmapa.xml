@@ -10,10 +10,9 @@
     >
 
     <ImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@drawable/local_icon"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:src="@drawable/local_icon" />
 
     <TextView
         android:id="@+id/txtCodigoLocaleDescricao"
@@ -56,21 +55,32 @@
         app:textAllCaps="true" />
 
     <Button
-        android:layout_marginTop="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Visitas Abertas"
-        style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/acceptButton"
-        />
-    <Button
-        android:layout_marginTop="16dp"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Traçar Rota"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorShop"
+        android:text="Visitas Abertas" />
+
+    <Button
+        android:id="@+id/btnUltimaVisita"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorShop"
+        android:text="Ultima Visita" />
+
+    <Button
         android:id="@+id/cancelButton"
-        />
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/penRoyalBlue"
+        android:text="Traçar Rota"
+        android:textColor="@color/white" />
 
 
 </LinearLayout>
