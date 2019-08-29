@@ -466,6 +466,7 @@ public class MainActivity_Principal extends AppCompatActivity
                     TextView txtSLALocal = view.findViewById(R.id.txtSLALocal);
 
                     Button acceptButton = view.findViewById(R.id.acceptButton);
+                    Button btnUltimaVisita = view.findViewById(R.id.btnUltimaVisita);
                     Button cancelButton = view.findViewById(R.id.cancelButton);
 
                     txtCodigoLocaleDescricao.setText("Local: " + marker.getTitle());
@@ -481,7 +482,7 @@ public class MainActivity_Principal extends AppCompatActivity
                         longitude = dataOS.getString(7);
 
                     txtEnderecoLocal.setText("Endereço: " + endereco);
-                    txtCidadeeEstado.setText("Cidade: " + cidade + " - " +  estado);
+                    txtCidadeeEstado.setText("Cidade: " + cidade + "," +  estado);
                     txtSLALocal.setText("SLA: " + " Em Desenvolvimento");
 
                     //Busca dados da Visita pelo Local ID
@@ -508,6 +509,15 @@ public class MainActivity_Principal extends AppCompatActivity
                                 startActivity(intent);
                             }
                         });
+
+                        //Se Clicar para vizualizar ultimo relatorio PDF
+
+                       btnUltimaVisita.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View view) {
+                               Toast.makeText(getApplicationContext(), "Em Desenvolvimento", Toast.LENGTH_LONG).show();
+                           }
+                       });
 
                         //Se clicar para Traçar Rota
                         cancelButton.setOnClickListener(new View.OnClickListener() {
