@@ -544,6 +544,14 @@ public class BancoGeral extends SQLiteOpenHelper {
         return data;
     }
 
+    public Cursor buscaVisitaPLocal(String local_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABELA_OS +
+                " WHERE " + COL_LOCAL_OS + " = '" + local_id + "'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
     public Cursor buscaAtividade(String status, String checklist_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_ATIVIDADES +

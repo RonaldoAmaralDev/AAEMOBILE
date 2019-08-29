@@ -37,6 +37,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -122,8 +123,10 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -452,10 +455,14 @@ public class MainActivity_Principal extends AppCompatActivity
                 else {
                     LayoutInflater inflater = LayoutInflater.from(MainActivity_Principal.this);
                     View view = inflater.inflate(R.layout.dialog_localmapa, null);
+                    view.animate();
 
                     TextView txtCodigoLocaleDescricao = view.findViewById(R.id.txtCodigoLocaleDescricao);
                     TextView txtEnderecoLocal = view.findViewById(R.id.txtEnderecoLocal);
                     TextView txtCidadeeEstado = view.findViewById(R.id.txtCidadeeEstado);
+                    TextView txtDataPlanejamento = view.findViewById(R.id.txtDataPlanejamentoLocal);
+                    TextView txtSLALocal = view.findViewById(R.id.txtSLALocal);
+
                     Button acceptButton = view.findViewById(R.id.acceptButton);
                     Button cancelButton = view.findViewById(R.id.cancelButton);
 
@@ -465,13 +472,24 @@ public class MainActivity_Principal extends AppCompatActivity
                     Cursor dataOS = myBDGeral.verificaLocal(marker.getSnippet());
                     while (dataOS.moveToNext()) {
 
-                        String endereco = dataOS.getString(24);
+                        String endereco = dataOS.getString(23);
                         String cidade = dataOS.getString(5);
                         String estado = dataOS.getString(9);
 
                     txtEnderecoLocal.setText(endereco);
                     txtCidadeeEstado.setText(cidade + " - " +  estado);
+                    txtSLALocal.setText("SLA: " + " Em Desenvolvimento");
 
+                    //Busca dados da Visita pelo Local ID
+                        Cursor dataVisita = myBDGeral.buscaVisitaPLocal(marker.getSnippet());
+                        while (dataVisita.moveToNext()) {
+
+                            String dataplanejamento = dataVisita.getString(6);
+
+                            txtDataPlanejamento.setText(dataplanejamento);
+
+                            dataVisita.close();
+                        }
 
                         acceptButton.setOnClickListener(new View.OnClickListener() {
                             @Override
