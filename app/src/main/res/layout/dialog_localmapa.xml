@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="Codigo Local - Descrição"
+        android:textStyle="bold"
         app:textAllCaps="true" />
 
     <TextView

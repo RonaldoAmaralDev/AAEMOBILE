@@ -782,7 +782,14 @@ public class BancoGeral extends SQLiteOpenHelper {
         //  db.close();
         return data;
     }
-
+    public Cursor buscaOSLocal(String local_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABELA_OS +
+                " WHERE " + COL_LOCAL_OS + " = '" + local_id + "'";
+        Cursor data = db.rawQuery(query, null);
+        Log.d("query", query);
+        return data;
+    }
 
     public Cursor verificaOSEquipamento(String equipamento_id) {
         SQLiteDatabase db = this.getWritableDatabase();

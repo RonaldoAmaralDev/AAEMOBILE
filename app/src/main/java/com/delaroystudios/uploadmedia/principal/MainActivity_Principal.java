@@ -82,6 +82,7 @@ import com.delaroystudios.uploadmedia.model.Equipamento;
 import com.delaroystudios.uploadmedia.operacao.equipamento.Equipamentos;
 import com.delaroystudios.uploadmedia.model.Contact;
 import com.delaroystudios.uploadmedia.model.OS;
+import com.delaroystudios.uploadmedia.operacao.os.MainActivityOS;
 import com.delaroystudios.uploadmedia.principal.localizacao.MostrarColaborador;
 import com.delaroystudios.uploadmedia.equipamento.qrcode.LoadingScanner;
 import com.delaroystudios.uploadmedia.principal.sync.BootReciever;
@@ -91,6 +92,7 @@ import com.delaroystudios.uploadmedia.relatorio.RelatorioLeitura;
 import com.delaroystudios.uploadmedia.rota.Hoteis;
 import com.delaroystudios.uploadmedia.rota.PostosCombustivel;
 import com.delaroystudios.uploadmedia.rota.Restaurantes;
+import com.delaroystudios.uploadmedia.rota.TrajetoLocal;
 import com.delaroystudios.uploadmedia.visitas.MainActivityVisitas;
 import com.github.javiersantos.appupdater.AppUpdater;
 import com.github.javiersantos.appupdater.enums.UpdateFrom;
@@ -475,33 +477,52 @@ public class MainActivity_Principal extends AppCompatActivity
                         String endereco = dataOS.getString(23);
                         String cidade = dataOS.getString(5);
                         String estado = dataOS.getString(9);
+                        latitude = dataOS.getString(6);
+                        longitude = dataOS.getString(7);
 
                     txtEnderecoLocal.setText("Endereço: " + endereco);
                     txtCidadeeEstado.setText("Cidade: " + cidade + " - " +  estado);
                     txtSLALocal.setText("SLA: " + " Em Desenvolvimento");
 
                     //Busca dados da Visita pelo Local ID
-                        Cursor dataVisita = myBDGeral.buscaVisitaPLocal(marker.getSnippet());
+                    Cursor dataVisita = myBDGeral.buscaVisitaPLocal(marker.getSnippet());
                         while (dataVisita.moveToNext()) {
 
                             String dataplanejamento = dataVisita.getString(6);
+                            String equipamento_id = dataVisita.getString(3);
+                            String local_id = dataVisita.getString(1);
+                            String centrolucro_id = dataVisita.getString(2);
 
                             txtDataPlanejamento.setText("Data Programação: " + dataplanejamento);
 
-                            dataVisita.close();
-                        }
-
+                        //Se clicar para ir em Visitas Abertas
                         acceptButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Log.e(TAG, "onClick: accept button");
+                                Intent intent = new Intent(MainActivity_Principal.this, MainActivityOS.class);
+                                Bundle dados = new Bundle();
+                                dados.putString("equipamento_id", equipamento_id);
+                                dados.putString("local_id", local_id);
+                                dados.putString("centrolucro_id", centrolucro_id);
+                                intent.putExtras(dados);
+                                startActivity(intent);
                             }
                         });
 
+                        //Se clicar para Traçar Rota
                         cancelButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Log.e(TAG, "onClick: cancel button");
+                                Intent intent = new Intent(MainActivity_Principal.this, TrajetoLocal.class);
+                                Bundle dados = new Bundle();
+                                dados.putString("name", name);
+                                dados.putString("email", email);
+                                dados.putString("colaborador_id", colaborador_id);
+                                dados.putString("tipo", tipo);
+                                dados.putString("latitude_local", latitude);
+                                dados.putString("longitude_local", longitude);
+                                intent.putExtras(dados);
+                                startActivity(intent);
                             }
                         });
 
@@ -515,6 +536,7 @@ public class MainActivity_Principal extends AppCompatActivity
                 }
                 return true;
             }
+        }
         });
     }
 
