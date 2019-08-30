@@ -11,12 +11,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
 import com.delaroystudios.uploadmedia.operacao.Atividade_Antes;
+import com.delaroystudios.uploadmedia.operacao.os.MainActivityOS;
+import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
+import com.delaroystudios.uploadmedia.rota.TrajetoLocal;
 import com.delaroystudios.uploadmedia.visitas.MainActivityAtividades;
+
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -77,108 +87,133 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.GroceryVie
         String local_id = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_LOCAL_OS));
         String id_centrolucro = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_CENTROCUSTO_OS));
         String descricao = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_DESCRICAOPADRAO_OS));
-        String quantItens= String.valueOf(myBDGeral.dbCountItem(checklist_id));
+        String quantItens = String.valueOf(myBDGeral.dbCountItem(checklist_id));
 
         holder.os.setText("OS: " + id);
         holder.dataplanejamento.setText("Data Programação: " + dataplanejamento);
         holder.descricao.setText("Descrição: " + descricao);
 
 
-            Cursor dataLocal = myBDGeral.qrCode(local_id);
-            while (dataLocal.moveToNext()) {
+        Cursor dataLocal = myBDGeral.qrCode(local_id);
+        while (dataLocal.moveToNext()) {
 
-                String localdescricao = dataLocal.getString(3);
-                holder.localos.setText("Local: " + localdescricao);
+            String localdescricao = dataLocal.getString(3);
+            holder.localos.setText("Local: " + localdescricao);
 
-            }
+        Cursor dataColaborador = myBDGeral.verificaEquipamento(equipamento_id);
+        while (dataColaborador.moveToNext()) {
 
-            Cursor dataColaborador = myBDGeral.verificaEquipamento(equipamento_id);
-            while (dataColaborador.moveToNext()) {
-
-                String codigoEquipamento = dataColaborador.getString(1);
-                String equipamento = dataColaborador.getString(2);
-                holder.equipamentoos.setText("Equipamento: " + codigoEquipamento + " - " + equipamento);
-            }
-            String tiposervico_os = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_TIPOSERVICOID_OS));
-            String tiposolicitacao_os = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_TIPOSOLICITACAOID_OS));
-
-            Cursor dataTipoSolicitacao = myBDGeral.buscaTipoSolicitacao(tiposolicitacao_os);
-            while (dataTipoSolicitacao.moveToNext()) {
-                tiposolicitacaoDescricao = dataTipoSolicitacao.getString(1);
-                holder.tiposolicitacao.setText("Tipo Solicitação: " + tiposolicitacaoDescricao);
-            }
-
-            Cursor dataTipoServico = myBDGeral.buscaTipoServico(tiposervico_os);
-            while (dataTipoServico.moveToNext()) {
-                tiposervicoDescricao = dataTipoServico.getString(1);
-                holder.tiposervico.setText("Tipo Serviço: " + tiposervicoDescricao);
-            }
+            String codigoEquipamento = dataColaborador.getString(1);
+            String equipamento = dataColaborador.getString(2);
+            holder.equipamentoos.setText("Equipamento: " + codigoEquipamento + " - " + equipamento);
 
 
+        String tiposervico_os = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_TIPOSERVICOID_OS));
+        String tiposolicitacao_os = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_TIPOSOLICITACAOID_OS));
 
-            java.util.Date dt = new java.util.Date();
-            java.text.SimpleDateFormat sdf =
-                    new java.text.SimpleDateFormat("HH:mm:ss");
-            java.text.SimpleDateFormat sdfData =
-                    new java.text.SimpleDateFormat("dd/MM/yyyy");
-            String currentTime = sdf.format(dt);
-            String data = sdfData.format(dt);
-
-            holder.itemView.setOnClickListener(v -> { // Linguagem Java 8
-
-                new AlertDialog.Builder(mContext)
-                        .setIcon(R.drawable.logo)
-                        .setTitle(R.string.app_name)
-                        .setMessage("Deseja iniciar a OS: " + id +  "\nQuantidade Atividades: " + quantItens + "\nData: " + data + "\nHorario: " + currentTime)
-                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                SharedPreferences pref2 = mContext.getSharedPreferences("info", MODE_PRIVATE);
-                                String nameColaborador = pref2.getString("name", "");
-                                String emailColaborador= pref2.getString("email", "");
-                                String id_colaborador = pref2.getString("id", "" );
-                                String tipoColaborador = pref2.getString("tipo", "");
-
-                                //Começar a contar o HH
-                                myBDGeral.gravarHHInicio(
-                                        id,
-                                        id_centrolucro,
-                                        currentTime,
-                                        id_colaborador);
-
-                                SharedPreferences.Editor dados = mContext.getSharedPreferences("visita", MODE_PRIVATE).edit();
-                                dados.putString("os_id", id);
-                                dados.putString("checklist_id", checklist_id);
-                                dados.putString("equipamento_id", equipamento_id);
-                                dados.putString("local_id", local_id);
-                                dados.putString("dataplanejamento", dataplanejamento);
-                                dados.putString("tiposervico", tiposolicitacao_os);
-                                dados.putString("id_centrolucro", id_centrolucro);
-                                // Armazena as Preferencias
-                                dados.commit();
-
-                                Intent intent = new Intent(mContext, MainActivityAtividades.class);
-                                Bundle dados2 = new Bundle();
-                                dados2.putString("os_id", id);
-                                dados2.putString("name", nameColaborador);
-                                dados2.putString("email", emailColaborador);
-                                dados2.putString("idColaborador", id_colaborador);
-                                dados2.putString("tipo", tipoColaborador);
-                                dados2.putString("tiposervico", tiposolicitacao_os);
-                                dados2.putString("dataplanejamento", dataplanejamento);
-                                dados2.putString("centrocusto_id", id_centrolucro);
-                                dados2.putString("checklist_id", checklist_id);
-                                dados2.putString("equipamento_id", equipamento_id);
-                                dados2.putString("local_id", local_id);
-                                intent.putExtras(dados2);
-                                mContext.startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton("Não", null)
-                        .show();
-            });
+        Cursor dataTipoSolicitacao = myBDGeral.buscaTipoSolicitacao(tiposolicitacao_os);
+        while (dataTipoSolicitacao.moveToNext()) {
+            tiposolicitacaoDescricao = dataTipoSolicitacao.getString(1);
+            holder.tiposolicitacao.setText("Tipo Solicitação: " + tiposolicitacaoDescricao);
         }
 
+        Cursor dataTipoServico = myBDGeral.buscaTipoServico(tiposervico_os);
+        while (dataTipoServico.moveToNext()) {
+            tiposervicoDescricao = dataTipoServico.getString(1);
+            holder.tiposervico.setText("Tipo Serviço: " + tiposervicoDescricao);
+        }
+
+
+        java.util.Date dt = new java.util.Date();
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat("HH:mm:ss");
+        java.text.SimpleDateFormat sdfData =
+                new java.text.SimpleDateFormat("dd/MM/yyyy");
+        String currentTime = sdf.format(dt);
+        String data = sdfData.format(dt);
+        String dataehora = currentTime + " - " + data;
+
+        holder.itemView.setOnClickListener(v -> { // Linguagem Java 8
+            SharedPreferences.Editor dados = mContext.getSharedPreferences("visita", MODE_PRIVATE).edit();
+            dados.putString("os_id", id);
+            dados.putString("checklist_id", checklist_id);
+            dados.putString("equipamento_id", equipamento_id);
+            dados.putString("local_id", local_id);
+            dados.putString("dataplanejamento", dataplanejamento);
+            dados.putString("tiposervico", tiposolicitacao_os);
+            dados.putString("id_centrolucro", id_centrolucro);
+
+            // Armazena as Preferencias
+            dados.commit();
+
+
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            View view = inflater.inflate(R.layout.dialog_iniciaros, null);
+            view.animate();
+
+            //Numero da Visita
+            TextView txtNumeroVisita = view.findViewById(R.id.txtNumerodaVisita);
+            txtNumeroVisita.setText("Visita: " + id);
+
+            //SubLocal - Estação/Loja ou Equipamento
+            TextView txtEquipamentoVisita = view.findViewById(R.id.txtEnderecoLocal);
+            txtEquipamentoVisita.setText("SubLocal: " + codigoEquipamento);
+
+            //Local da Visita
+            TextView txtLocalVisita = view.findViewById(R.id.txtCidadeeEstado);
+            txtLocalVisita.setText("Local: " + localdescricao);
+
+            //Quantidade Atividades
+            TextView txtQuantidadeAtividades = view.findViewById(R.id.txtQuantVisitas);
+            txtQuantidadeAtividades.setText("Quantidade Atividades: " +quantItens);
+
+            //Data de Planejamento
+            TextView txtDataPlanejamento = view.findViewById(R.id.txtDataPlanejamentoLocal);
+            txtDataPlanejamento.setText("Data Programação: " + dataplanejamento);
+
+            //Tempo Estimado Manutenção
+            TextView txtTempoEstimado = view.findViewById(R.id.txtSLALocal);
+            txtTempoEstimado.setText("Tempo Estimado: " + " 1:00 Hora");
+
+            Calendar cal = Calendar.getInstance(); //
+            cal.setTime(new Date()); //
+            cal.add(Calendar.HOUR_OF_DAY, 1); // Adicionar Tempo Estimado
+            cal.getTime(); //
+            SimpleDateFormat datafim = new SimpleDateFormat("hh:mm:ss - dd/MM/yyyy");
+            String horafim = datafim.format(cal.getTime());
+
+
+            //Hora Inicio
+            TextView txtHoraInicio = view.findViewById(R.id.txtHoraInicioVisita);
+            txtHoraInicio.setText("Início: " + dataehora);
+
+            //Hora Fim Estimada
+            TextView txtHoraFim = view.findViewById(R.id.txtHoraFimVisita);
+            txtHoraFim.setText("Fim: " + horafim);
+
+
+            Button acceptButton = view.findViewById(R.id.acceptButton);
+            Button btnUltimaVisita = view.findViewById(R.id.btnUltimaVisita);
+
+
+            //Se clicar para iniciar Visita irá para Tela Atividades
+            acceptButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                }
+            });
+
+            AlertDialog alertDialog = new AlertDialog.Builder(mContext)
+                    .setView(view)
+                    .create();
+
+            alertDialog.show();
+        });
+        }
+        }
+    }
 
     @Override
     public int getItemCount() {

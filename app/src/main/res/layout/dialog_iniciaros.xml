@@ -12,23 +12,15 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:src="@drawable/local_icon" />
+        android:src="@drawable/ic_manutencao" />
 
     <TextView
         android:id="@+id/txtNumerodaVisita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Codigo Local - Descrição"
+        android:text="Nª DA VISITA"
         android:textStyle="bold"
-        app:textAllCaps="true" />
-
-    <TextView
-        android:id="@+id/txtEnderecoLocal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Endereço"
         app:textAllCaps="true" />
 
     <TextView
@@ -36,7 +28,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="Cidade - Estado"
+        android:text="LOCAL DESCRICAO"
+        app:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/txtEnderecoLocal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="SUBLOCAL"
+        app:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/txtQuantVisitas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="QUANTIDADE VISITAS"
         app:textAllCaps="true" />
 
     <TextView
@@ -52,7 +60,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="SLA LOCAL"
+        android:text="TEMPO ESTIMADO"
+        app:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/txtHoraInicioVisita"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="HORA INICIO"
+        android:textColor="@color/green"
+        app:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/txtHoraFimVisita"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="HORA FIM"
+        android:textColor="@color/colorShop"
         app:textAllCaps="true" />
 
     <Button
@@ -62,26 +88,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@color/colorShop"
-        android:text="Visitas Abertas" />
+        android:text="INICIAR VISITA" />
 
     <Button
         android:id="@+id/btnUltimaVisita"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="25dp"
         android:background="@color/colorShop"
-        android:text="Ultima Visita" />
-
-    <Button
-        android:id="@+id/cancelButton"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/penRoyalBlue"
-        android:text="Traçar Rota"
-        android:textColor="@color/white" />
+        android:text="CANCELAR VISITA" />
 
 
 </LinearLayout>

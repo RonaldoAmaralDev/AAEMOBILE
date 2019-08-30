@@ -459,7 +459,7 @@ public class MainActivity_Principal extends AppCompatActivity
                     View view = inflater.inflate(R.layout.dialog_localmapa, null);
                     view.animate();
 
-                    TextView txtCodigoLocaleDescricao = view.findViewById(R.id.txtCodigoLocaleDescricao);
+                    TextView txtCodigoLocaleDescricao = view.findViewById(R.id.txtNumerodaVisita);
                     TextView txtEnderecoLocal = view.findViewById(R.id.txtEnderecoLocal);
                     TextView txtCidadeeEstado = view.findViewById(R.id.txtCidadeeEstado);
                     TextView txtDataPlanejamento = view.findViewById(R.id.txtDataPlanejamentoLocal);
