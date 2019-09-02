@@ -214,6 +214,17 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 String ordemservico = result.get("ID").getAsString();
                                                 String checklist_id = "8";
 
+                                                SharedPreferences.Editor dados2 = getSharedPreferences("visita", MODE_PRIVATE).edit();
+                                                dados2.putString("os_id", ordemservico);
+                                                dados2.putString("checklist_id", checklist_id);
+                                                dados2.putString("equipamento_id", id_equipamento);
+                                                dados2.putString("local_id", local_id);
+                                                dados2.putString("dataplanejamento", data);
+                                                dados2.putString("tiposervico", tiposervico);
+                                                dados2.putString("id_centrolucro", centrocusto_id);
+                                                // Armazena as Preferencias
+                                                dados2.commit();
+
                                                 myBDGeral.insertOS(
                                                         ordemservico,
                                                         local_id,
@@ -227,8 +238,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         "CORRETIVA GERADA PELO CELULAR",
                                                         "aberta",
                                                         "",
-                                                        "A"
-                                                );
+                                                        "A");
 
                                                 SharedPreferences pref2 = getApplication().getSharedPreferences("info", MODE_PRIVATE);
                                                 String nameColaborador = pref2.getString("name", "");
@@ -325,6 +335,17 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 String ordemservico = result.get("ID").getAsString();
                                                 String checklist_id = "8";
 
+                                                SharedPreferences.Editor dados2 = getSharedPreferences("visita", MODE_PRIVATE).edit();
+                                                dados2.putString("os_id", ordemservico);
+                                                dados2.putString("checklist_id", checklist_id);
+                                                dados2.putString("equipamento_id", id_equipamento);
+                                                dados2.putString("local_id", local_id);
+                                                dados2.putString("dataplanejamento", data2);
+                                                dados2.putString("tiposervico", tiposervico);
+                                                dados2.putString("id_centrolucro", centrocusto_id);
+                                                // Armazena as Preferencias
+                                                dados2.commit();
+
                                                 myBDGeral.insertOS(
                                                         ordemservico,
                                                         local_id,
@@ -396,7 +417,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                         prioridade = "1";
                         tiposervico = "3";
                         String data3 = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
-                        String dataPadraoBR3 = new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis());
 
                         String URL3 = "http://helper.aplusweb.com.br/aplicativo/abrirCorretiva.php";
 
@@ -435,6 +455,17 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 // Armazenar dados no APP
                                                 String ordemservico = result.get("ID").getAsString();
                                                 String checklist_id = "8";
+
+                                                SharedPreferences.Editor dados2 = getSharedPreferences("visita", MODE_PRIVATE).edit();
+                                                dados2.putString("os_id", ordemservico);
+                                                dados2.putString("checklist_id", checklist_id);
+                                                dados2.putString("equipamento_id", id_equipamento);
+                                                dados2.putString("local_id", local_id);
+                                                dados2.putString("dataplanejamento", data3);
+                                                dados2.putString("tiposervico", tiposervico);
+                                                dados2.putString("id_centrolucro", centrocusto_id);
+                                                // Armazena as Preferencias
+                                                dados2.commit();
 
                                                 myBDGeral.insertOS(
                                                         ordemservico,
@@ -547,6 +578,17 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 String ordemservico = result.get("ID").getAsString();
                                                 String checklist_id = "8";
 
+                                                SharedPreferences.Editor dados2 = getSharedPreferences("visita", MODE_PRIVATE).edit();
+                                                dados2.putString("os_id", ordemservico);
+                                                dados2.putString("checklist_id", checklist_id);
+                                                dados2.putString("equipamento_id", id_equipamento);
+                                                dados2.putString("local_id", local_id);
+                                                dados2.putString("dataplanejamento", data4);
+                                                dados2.putString("tiposervico", tiposervico);
+                                                dados2.putString("id_centrolucro", centrocusto_id);
+                                                // Armazena as Preferencias
+                                                dados2.commit();
+
                                                 SharedPreferences pref2 = getApplication().getSharedPreferences("info", MODE_PRIVATE);
                                                 String nameColaborador = pref2.getString("name", "");
                                                 String emailColaborador = pref2.getString("email", "");
@@ -644,6 +686,17 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 // Armazenar dados no APP
                                                 String ordemservico = result.get("ID").getAsString();
                                                 String checklist_id = "8";
+
+                                                SharedPreferences.Editor dados2 = getSharedPreferences("visita", MODE_PRIVATE).edit();
+                                                dados2.putString("os_id", ordemservico);
+                                                dados2.putString("checklist_id", checklist_id);
+                                                dados2.putString("equipamento_id", id_equipamento);
+                                                dados2.putString("local_id", local_id);
+                                                dados2.putString("dataplanejamento", data5);
+                                                dados2.putString("tiposervico", tiposervico);
+                                                dados2.putString("id_centrolucro", centrocusto_id);
+                                                // Armazena as Preferencias
+                                                dados2.commit();
 
                                                 myBDGeral.insertOS(
                                                         ordemservico,
@@ -758,6 +811,17 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 // Armazenar dados no APP
                                                 String ordemservico = result.get("ID").getAsString();
                                                 String checklist_id = "8";
+
+                                                SharedPreferences.Editor dados2 = getSharedPreferences("visita", MODE_PRIVATE).edit();
+                                                dados2.putString("os_id", ordemservico);
+                                                dados2.putString("checklist_id", checklist_id);
+                                                dados2.putString("equipamento_id", id_equipamento);
+                                                dados2.putString("local_id", local_id);
+                                                dados2.putString("dataplanejamento", data6);
+                                                dados2.putString("tiposervico", tiposervico);
+                                                dados2.putString("id_centrolucro", centrocusto_id);
+                                                // Armazena as Preferencias
+                                                dados2.commit();
 
                                                 myBDGeral.insertOS(
                                                         ordemservico,
@@ -874,6 +938,17 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 String ordemservico = result.get("ID").getAsString();
                                                 String checklist_id = "8";
 
+                                                SharedPreferences.Editor dados2 = getSharedPreferences("visita", MODE_PRIVATE).edit();
+                                                dados2.putString("os_id", ordemservico);
+                                                dados2.putString("checklist_id", checklist_id);
+                                                dados2.putString("equipamento_id", id_equipamento);
+                                                dados2.putString("local_id", local_id);
+                                                dados2.putString("dataplanejamento", data7);
+                                                dados2.putString("tiposervico", tiposervico);
+                                                dados2.putString("id_centrolucro", centrocusto_id);
+                                                // Armazena as Preferencias
+                                                dados2.commit();
+
                                                 myBDGeral.insertOS(
                                                         ordemservico,
                                                         local_id,
@@ -986,6 +1061,17 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 String ordemservico = result.get("ID").getAsString();
                                                 String checklist_id = "8";
 
+                                                SharedPreferences.Editor dados2 = getSharedPreferences("visita", MODE_PRIVATE).edit();
+                                                dados2.putString("os_id", ordemservico);
+                                                dados2.putString("checklist_id", checklist_id);
+                                                dados2.putString("equipamento_id", id_equipamento);
+                                                dados2.putString("local_id", local_id);
+                                                dados2.putString("dataplanejamento", data8);
+                                                dados2.putString("tiposervico", tiposervico);
+                                                dados2.putString("id_centrolucro", centrocusto_id);
+                                                // Armazena as Preferencias
+                                                dados2.commit();
+
                                                 myBDGeral.insertOS(
                                                         ordemservico,
                                                         local_id,
@@ -1096,6 +1182,17 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 // Armazenar dados no APP
                                                 String ordemservico = result.get("ID").getAsString();
                                                 String checklist_id = "8";
+
+                                                SharedPreferences.Editor dados2 = getSharedPreferences("visita", MODE_PRIVATE).edit();
+                                                dados2.putString("os_id", ordemservico);
+                                                dados2.putString("checklist_id", checklist_id);
+                                                dados2.putString("equipamento_id", id_equipamento);
+                                                dados2.putString("local_id", local_id);
+                                                dados2.putString("dataplanejamento", data9);
+                                                dados2.putString("tiposervico", tiposervico);
+                                                dados2.putString("id_centrolucro", centrocusto_id);
+                                                // Armazena as Preferencias
+                                                dados2.commit();
 
                                                 myBDGeral.insertOS(
                                                         ordemservico,

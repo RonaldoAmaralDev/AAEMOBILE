@@ -78,7 +78,6 @@ public class AssinaturaCliente extends AppCompatActivity {
         idColaborador = dados.getString("idColaborador");
         tipo = dados.getString("tipo");
 
-
         myDBGeral = new BancoGeral(this);
 
         mSignaturePad = (SignaturePad) findViewById(R.id.signature_pad);

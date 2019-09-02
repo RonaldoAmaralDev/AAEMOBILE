@@ -71,7 +71,6 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
         colaborador_id = dados.getString("idColaborador");
         tipo = dados.getString("tipo");
 
-
         // toolbar fancy stuff
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
