@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
+import com.delaroystudios.uploadmedia.operacao.AssinaturaColaborador;
 import com.delaroystudios.uploadmedia.operacao.Atividade_Antes;
 import com.delaroystudios.uploadmedia.operacao.os.MainActivityOS;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
@@ -201,7 +202,27 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.GroceryVie
                 @Override
                 public void onClick(View view) {
 
+                    SharedPreferences pref = mContext.getSharedPreferences("info", MODE_PRIVATE);
+                    String name = pref.getString("name", "");
+                    String email= pref.getString("email", "");
+                    String colaborador_id = pref.getString("id", "" );
+                    String tipo = pref.getString("tipo", "");
 
+                    Intent intent = new Intent(mContext, MainActivityAtividades.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("os_id", id);
+                    dados.putString("equipamento_id", equipamento_id);
+                    dados.putString("local_id", local_id);
+                    dados.putString("checklist_id", checklist_id);
+                    dados.putString("tiposervico", tiposervico);
+                    dados.putString("dataplanejamento", dataplanejamento);
+                    dados.putString("id_centrolucro", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("idColaborador", colaborador_id);
+                    dados.putString("tipo", tipo);
+                    intent.putExtras(dados);
+                    mContext.startActivity(intent);
 
                 }
             });
