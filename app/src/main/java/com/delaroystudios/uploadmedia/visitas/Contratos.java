@@ -1,74 +1,75 @@
-package com.delaroystudios.uploadmedia.operacao.local;
+package com.delaroystudios.uploadmedia.visitas;
 
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
 
 import com.delaroystudios.uploadmedia.R;
-import com.delaroystudios.uploadmedia.adapter.ContactsAdapter;
+import com.delaroystudios.uploadmedia.adapter.CentroLucroAdapter;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
-import com.delaroystudios.uploadmedia.model.Contact;
-import com.delaroystudios.uploadmedia.operacao.contrato.CentroLucro;
+import com.delaroystudios.uploadmedia.model.CL;
+import com.delaroystudios.uploadmedia.model.MyDividerItemDecoration;
+import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 
 import java.util.List;
 
-public class MainActivityLocals extends AppCompatActivity  {
-    private static final String TAG = MainActivityLocals.class.getSimpleName();
+public class Contratos extends AppCompatActivity  {
+    private static final String TAG = Contratos.class.getSimpleName();
 
-    private List<Contact> contactList;
-    private ContactsAdapter mAdapter;
+    private List<CL> contactList;
+    private CentroLucroAdapter mAdapter;
     private SearchView searchView;
-    private String centrocusto_id, name, email, colaborador_id, token;
     private RecyclerView recyclerView;
-    Cursor cursor;
-    BancoGeral myDBGeral;
+    BancoGeral bancoGeral;
+    private ArrayAdapter adapter;
+    private String name, colaborador_id, email, token;
 
     // url to fetch contacts json
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mainlocal);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_centro_lucro);
+        Toolbar toolbar = findViewById(R.id.toolbar_contrato);
         setSupportActionBar(toolbar);
 
-        myDBGeral = new BancoGeral(this);
+        bancoGeral = new BancoGeral(this);
 
         Intent intent = getIntent();
         Bundle dados = intent.getExtras();
-
-        centrocusto_id = dados.getString("centrolucro_id");
-
+        name = dados.getString("name");
+        email = dados.getString("email");
+        colaborador_id = dados.getString("colaborador_id");
+        token = dados.getString("token");
 
         // toolbar fancy stuff
-        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Meus Locais");
+        getSupportActionBar().setTitle("Meus Contratos");
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_contrato);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
 
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
-
-        mAdapter = new ContactsAdapter(this, myDBGeral.buscaLocal(centrocusto_id));
+        mAdapter = new CentroLucroAdapter(this, bancoGeral.getDataCL());
         recyclerView.setAdapter(mAdapter);
+
+
 
         // white background notification bar
         whiteNotificationBar(recyclerView);
@@ -89,24 +90,6 @@ public class MainActivityLocals extends AppCompatActivity  {
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                mAdapter.swapCursor(myDBGeral.filtro(query, centrocusto_id));
-                mAdapter.notifyDataSetChanged();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String query) {
-
-                mAdapter.swapCursor(myDBGeral.filtro(query, centrocusto_id));
-                mAdapter.notifyDataSetChanged();
-                return false;
-            }
-        });
-
         return true;
     }
 
@@ -122,15 +105,9 @@ public class MainActivityLocals extends AppCompatActivity  {
             return true;
         }
 
+
         if(id == android.R.id.home) {
-
-            SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
-            String name = pref.getString("name", "");
-            String email= pref.getString("email", "");
-            String colaborador_id = pref.getString("id", "" );
-            String token = pref.getString("token", "");
-
-            Intent intent = new Intent(MainActivityLocals.this, CentroLucro.class);
+            Intent intent = new Intent(Contratos.this, MainActivity_Principal.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
@@ -146,13 +123,8 @@ public class MainActivityLocals extends AppCompatActivity  {
 
     @Override
     public void onBackPressed() {
-        SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
-        String name = pref.getString("name", "");
-        String email= pref.getString("email", "");
-        String colaborador_id = pref.getString("id", "" );
-        String token = pref.getString("token", "");
 
-        Intent intent = new Intent(MainActivityLocals.this, CentroLucro.class);
+        Intent intent = new Intent(Contratos.this, MainActivity_Principal.class);
         Bundle dados = new Bundle();
         dados.putString("name", name);
         dados.putString("email", email);

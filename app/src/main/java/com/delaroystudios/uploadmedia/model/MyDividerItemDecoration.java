@@ -1,4 +1,4 @@
-package com.delaroystudios.uploadmedia.operacao.local;
+package com.delaroystudios.uploadmedia.model;
 
 import android.content.Context;
 import android.content.res.Resources;

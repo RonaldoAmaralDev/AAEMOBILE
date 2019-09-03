@@ -24,7 +24,7 @@ import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.adapter.VeiculosAdapter;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
 import com.delaroystudios.uploadmedia.operacao.equipamento.MainActivityEquipamentos;
-import com.delaroystudios.uploadmedia.operacao.local.MyDividerItemDecoration;
+import com.delaroystudios.uploadmedia.model.MyDividerItemDecoration;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 
 import java.util.List;

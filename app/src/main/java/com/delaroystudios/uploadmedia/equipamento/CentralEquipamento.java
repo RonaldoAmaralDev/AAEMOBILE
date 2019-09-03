@@ -21,12 +21,12 @@ import android.view.View;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.adapter.CentralEquipamento_Adapter;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
-import com.delaroystudios.uploadmedia.operacao.local.MainActivityLocals;
-import com.delaroystudios.uploadmedia.operacao.local.MyDividerItemDecoration;
+import com.delaroystudios.uploadmedia.visitas.Locais;
+import com.delaroystudios.uploadmedia.model.MyDividerItemDecoration;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 
 public class CentralEquipamento extends AppCompatActivity  {
-    private static final String TAG = MainActivityLocals.class.getSimpleName();
+    private static final String TAG = Locais.class.getSimpleName();
 
     private CentralEquipamento_Adapter mAdapter;
     private SearchView searchView;

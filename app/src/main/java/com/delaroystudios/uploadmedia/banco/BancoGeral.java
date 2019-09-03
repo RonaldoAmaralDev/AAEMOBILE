@@ -136,7 +136,7 @@ public class BancoGeral extends SQLiteOpenHelper {
 
     private SQLiteDatabase databaseGeral;
     private SQLiteOpenHelper openHelper;
-    private static final int DATABASE_VERSION = 35;
+    private static final int DATABASE_VERSION = 36;
 
 
     public BancoGeral(Context context) {

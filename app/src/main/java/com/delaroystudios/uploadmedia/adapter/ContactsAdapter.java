@@ -1,9 +1,11 @@
 package com.delaroystudios.uploadmedia.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
 import com.delaroystudios.uploadmedia.operacao.equipamento.MainActivityEquipamentos;
+import com.delaroystudios.uploadmedia.operacao.os.MainActivityOS;
+import com.delaroystudios.uploadmedia.visitas.Visitas;
 
 /**
  * Created by ravi on 16/11/17.
@@ -76,12 +80,35 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Grocer
         holder.cidade.setText("Cidade: " + cidade);
 
         holder.itemView.setOnClickListener(v -> { // Linguagem Java 8
-            Intent intent = new Intent(mContext, MainActivityEquipamentos.class);
-            Bundle dados = new Bundle();
-            dados.putString("local_id", id);
-            dados.putString("centrolucro_id", centrolucro_id);
-            intent.putExtras(dados);
-            mContext.startActivity(intent);
+
+            //Perguntar se deseja ver os equipamentos desse local ou visitas em aberto
+            AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
+            alertDialog.setTitle(R.string.app_name);
+            alertDialog.setMessage("Você deseja vizualizar:");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "VISITAS ABERTAS",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(mContext, Visitas.class);
+                            Bundle dados = new Bundle();
+                            dados.putString("local_id", id);
+                            dados.putString("centrolucro_id", centrolucro_id);
+                            intent.putExtras(dados);
+                            mContext.startActivity(intent);
+                        }
+                    });
+            alertDialog.setButton(alertDialog.BUTTON_POSITIVE, "EQUIPAMENTOS",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(mContext, MainActivityEquipamentos.class);
+                            Bundle dados = new Bundle();
+                            dados.putString("local_id", id);
+                            dados.putString("centrolucro_id", centrolucro_id);
+                            intent.putExtras(dados);
+                            mContext.startActivity(intent);
+                        }
+                    });
+            alertDialog.show();
         });
     }
 

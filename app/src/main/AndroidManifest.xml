@@ -31,7 +31,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".visitas.MainActivityVisitas"
+            android:name=".visitas.Visitas"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -105,7 +105,7 @@
             android:name=".activity.TelaLogin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".operacao.local.MainActivityLocals"
+            android:name=".visitas.Locais"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -196,7 +196,7 @@
             android:name=".principal.configuracoes.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".operacao.contrato.CentroLucro"
+            android:name=".visitas.Contratos"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">

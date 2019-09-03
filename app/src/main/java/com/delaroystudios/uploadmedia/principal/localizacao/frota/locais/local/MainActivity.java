@@ -21,9 +21,9 @@ import android.view.MenuItem;
 
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
-import com.delaroystudios.uploadmedia.operacao.contrato.CentroLucro;
+import com.delaroystudios.uploadmedia.visitas.Contratos;
 import com.delaroystudios.uploadmedia.model.Contact;
-import com.delaroystudios.uploadmedia.operacao.local.MyDividerItemDecoration;
+import com.delaroystudios.uploadmedia.model.MyDividerItemDecoration;
 
 import java.util.List;
 
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity  {
             String colaborador_id = pref.getString("id", "" );
             String tipo = pref.getString("tipo", "");
 
-            Intent intent = new Intent(MainActivity.this, CentroLucro.class);
+            Intent intent = new Intent(MainActivity.this, Contratos.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);

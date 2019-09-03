@@ -69,7 +69,7 @@ import com.delaroystudios.uploadmedia.model.CL;
 import com.delaroystudios.uploadmedia.banco.DatabaseHelper;
 import com.delaroystudios.uploadmedia.model.TipoServico;
 import com.delaroystudios.uploadmedia.model.TipoSolicitacao;
-import com.delaroystudios.uploadmedia.operacao.contrato.CentroLucro;
+import com.delaroystudios.uploadmedia.visitas.Contratos;
 import com.delaroystudios.uploadmedia.model.Equipamento;
 import com.delaroystudios.uploadmedia.model.Contact;
 import com.delaroystudios.uploadmedia.model.OS;
@@ -85,7 +85,6 @@ import com.delaroystudios.uploadmedia.rota.Hoteis;
 import com.delaroystudios.uploadmedia.rota.PostosCombustivel;
 import com.delaroystudios.uploadmedia.rota.Restaurantes;
 import com.delaroystudios.uploadmedia.rota.TrajetoLocal;
-import com.delaroystudios.uploadmedia.visitas.MainActivityVisitas;
 import com.github.javiersantos.appupdater.AppUpdater;
 import com.github.javiersantos.appupdater.enums.UpdateFrom;
 import com.google.android.gms.common.ConnectionResult;
@@ -234,8 +233,6 @@ public class MainActivity_Principal extends AppCompatActivity
         verificarArmazenamento();
 
         //Busca Endereço AutoComplete
-
-
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(this);
@@ -298,7 +295,8 @@ public class MainActivity_Principal extends AppCompatActivity
                 dados.putString("colaborador_id", colaborador_id);
                 dados.putString("token", token);
                 intent.putExtras(dados);
-                startActivity(intent);            }
+                startActivity(intent);
+            }
         });
 
         mRestaurantes.setOnClickListener(new View.OnClickListener() {
@@ -380,6 +378,11 @@ public class MainActivity_Principal extends AppCompatActivity
             nav_Menu.findItem(R.id.nav_veiculos).setVisible(false);
             nav_Menu.findItem(R.id.nav_reconhecimentofacial).setVisible(false);
             nav_Menu.findItem(R.id.nav_cadastrarequip).setVisible(false);
+            nav_Menu.findItem(R.id.nav_relatorio_contrato).setVisible(false);
+            nav_Menu.findItem(R.id.nav_relatorio_leitura).setVisible(false);
+            nav_Menu.findItem(R.id.nav_gerarqrcode).setVisible(false);
+
+
         }
 
         @Override
@@ -396,7 +399,6 @@ public class MainActivity_Principal extends AppCompatActivity
                 return;
             }
             mMap.setMyLocationEnabled(true);
-          //  mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
             init();
         }
@@ -405,7 +407,6 @@ public class MainActivity_Principal extends AppCompatActivity
 
     private void init(){
         Log.d(TAG, "init: initializing");
-
 
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mGoogleApiClient = new GoogleApiClient
@@ -542,7 +543,7 @@ public class MainActivity_Principal extends AppCompatActivity
                             latitude = Double.toString(currentLocation.getLatitude());
                             longitude = Double.toString(currentLocation.getLongitude());
 
-                            if(latitude != null && longitude != null) {
+                            if(latitude != null || longitude != null) {
 
                                 SharedPreferences.Editor salvarLocalizacao = getSharedPreferences("salvarLocalizacao", MODE_PRIVATE).edit();
                                 salvarLocalizacao.putString("latitude", latitude);
@@ -853,7 +854,7 @@ public class MainActivity_Principal extends AppCompatActivity
         }
         if(id == R.id.navigation_visitas) {
 
-            Intent intent = new Intent(MainActivity_Principal.this, MainActivityVisitas.class);
+            Intent intent = new Intent(MainActivity_Principal.this, Contratos.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
@@ -1058,7 +1059,7 @@ public class MainActivity_Principal extends AppCompatActivity
 
         } else if (id == R.id.nav_programacaotodos) {
 
-            Intent intent = new Intent(MainActivity_Principal.this, CentroLucro.class);
+            Intent intent = new Intent(MainActivity_Principal.this, Contratos.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
@@ -1548,7 +1549,8 @@ public class MainActivity_Principal extends AppCompatActivity
 
         if (verificaConexao() == true) {
 
-            String URL = "http://helper.aplusweb.com.br/aplicativo/atualizarOperacao.php?colaborador_id=" + colaborador_id;
+        //    String URL = "http://helper.aplusweb.com.br/aplicativo/atualizarOperacao.php?colaborador_id=" + colaborador_id;
+            String URL = "http://helper.aplusweb.com.br/aplicativo/atualizarOperacao.php?colaborador_id=10";
             ProgressBarStatus();
 
             request = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
@@ -1583,8 +1585,8 @@ public class MainActivity_Principal extends AppCompatActivity
                             local.setCidade(jsonObject.getString("cidade"));
                             local.setSigla(jsonObject.getString("sigla"));
                             local.setEstado(jsonObject.getString("estado"));
-                         //   local.setLatitude(jsonObject.getString("latitude"));
-                         //   local.setLongitude(jsonObject.getString("longitude"));
+                            //   local.setLatitude(jsonObject.getString("latitude"));
+                            //   local.setLongitude(jsonObject.getString("longitude"));
                             local.setTempogasto(jsonObject.getString("tempogasto"));
                             local.setRegiaoID(jsonObject.getString("regiaoID"));
                             local.setRegiaoDescricao(jsonObject.getString("regiaoDescricao"));

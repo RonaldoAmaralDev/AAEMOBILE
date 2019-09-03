@@ -16,7 +16,7 @@ import android.webkit.WebViewClient;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.equipamento.qrcode.LoadingScanner;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
-import com.delaroystudios.uploadmedia.visitas.MainActivityVisitas;
+import com.delaroystudios.uploadmedia.visitas.Visitas;
 
 public class Restaurantes extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -107,7 +107,7 @@ public class Restaurantes extends AppCompatActivity implements BottomNavigationV
         }
         if (id == R.id.navigation_visitas) {
 
-            Intent intent = new Intent(this, MainActivityVisitas.class);
+            Intent intent = new Intent(this, Visitas.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);

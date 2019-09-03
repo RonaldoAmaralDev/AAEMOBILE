@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -26,9 +25,7 @@ import android.widget.Toast;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
 import com.delaroystudios.uploadmedia.banco.DatabaseHelper;
-import com.delaroystudios.uploadmedia.operacao.os.MainActivityOS;
 import com.delaroystudios.uploadmedia.visitas.MainActivityAtividades;
-import com.delaroystudios.uploadmedia.visitas.MainActivityVisitas;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

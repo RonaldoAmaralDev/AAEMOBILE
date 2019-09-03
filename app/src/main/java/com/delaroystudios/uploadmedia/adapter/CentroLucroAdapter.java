@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
-import com.delaroystudios.uploadmedia.operacao.local.MainActivityLocals;
+import com.delaroystudios.uploadmedia.visitas.Locais;
 
 
 public class CentroLucroAdapter extends RecyclerView.Adapter<CentroLucroAdapter.GroceryViewHolder> {
@@ -73,7 +73,7 @@ public class CentroLucroAdapter extends RecyclerView.Adapter<CentroLucroAdapter.
 
         holder.itemView.setOnClickListener(v -> { // Linguagem Java 8
 
-            Intent intent = new Intent(mContext, MainActivityLocals.class);
+            Intent intent = new Intent(mContext, Locais.class);
             Bundle dados = new Bundle();
             dados.putString("centrolucro_id", id_contrato);
             intent.putExtras(dados);

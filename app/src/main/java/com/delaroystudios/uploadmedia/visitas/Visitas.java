@@ -3,7 +3,6 @@ package com.delaroystudios.uploadmedia.visitas;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.BottomNavigationView;
@@ -18,22 +17,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.adapter.VisitaAdapter;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
-import com.delaroystudios.uploadmedia.operacao.local.MyDividerItemDecoration;
+import com.delaroystudios.uploadmedia.model.MyDividerItemDecoration;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 
 import java.util.Calendar;
 
-public class MainActivityVisitas extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-    private static final String TAG = MainActivityVisitas.class.getSimpleName();
+public class Visitas extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = Visitas.class.getSimpleName();
 
     private VisitaAdapter mAdapter;
     private SearchView searchView;
-    private String name, email, colaborador_id, token;
+    private String name, email, colaborador_id, token, local_id;
     BancoGeral myDBGeral;
 
 
@@ -45,17 +43,13 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
 
         Toolbar toolbar = findViewById(R.id.toolbarvisita);
         setSupportActionBar(toolbar);
-        //Pegar localização atual colaborador
 
         myDBGeral = new BancoGeral(this);
 
         Intent intent = getIntent();
         Bundle dados = intent.getExtras();
 
-        name = dados.getString("name");
-        email = dados.getString("email");
-        colaborador_id = dados.getString("colaborador_id");
-        token = dados.getString("token");
+        local_id = dados.getString("local_id");
 
         // toolbar fancy stuff
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -88,7 +82,7 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
         navigation.getMenu().findItem(R.id.navigation_encerradas).setTitle("ENCERRADAS("+String.valueOf(myDBGeral.dbCountEncerradas()+")"));
 
 
-        mAdapter = new VisitaAdapter(this, myDBGeral.buscaOSColaborador(colaborador_id));
+        mAdapter = new VisitaAdapter(this, myDBGeral.buscaOSLocal(local_id));
         recyclerView.setAdapter(mAdapter);
 
 
@@ -229,7 +223,7 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
         }
 
         if(id == android.R.id.home) {
-            Intent intent = new Intent(MainActivityVisitas.this, MainActivity_Principal.class);
+            Intent intent = new Intent(Visitas.this, MainActivity_Principal.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
@@ -247,7 +241,7 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
     public void onBackPressed() {
 
 
-        Intent intent = new Intent(MainActivityVisitas.this, MainActivity_Principal.class);
+        Intent intent = new Intent(Visitas.this, MainActivity_Principal.class);
         Bundle dados = new Bundle();
         dados.putString("name", name);
         dados.putString("email", email);

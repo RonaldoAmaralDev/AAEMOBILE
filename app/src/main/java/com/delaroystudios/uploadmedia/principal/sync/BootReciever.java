@@ -175,7 +175,7 @@ public class BootReciever extends Service  {
 
 
 
-            String URL = "http://helper.aplusweb.com.br/aplicativo/atualizarOperacao.php?colaborador_id=" + colaborador_id;
+        String URL = "http://helper.aplusweb.com.br/aplicativo/atualizarOperacao.php?colaborador_id=" + colaborador_id;
             request = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {

@@ -9,8 +9,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -26,11 +24,10 @@ import android.widget.Toast;
 
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.adapter.AtividadeAdapter;
-import com.delaroystudios.uploadmedia.adapter.VisitaAdapter;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
 import com.delaroystudios.uploadmedia.banco.DatabaseHelper;
 import com.delaroystudios.uploadmedia.operacao.AssinaturaColaborador;
-import com.delaroystudios.uploadmedia.operacao.local.MyDividerItemDecoration;
+import com.delaroystudios.uploadmedia.model.MyDividerItemDecoration;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 
 
@@ -240,7 +237,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
                                 checklist_id);
 
 
-                        Intent intent = new Intent(MainActivityAtividades.this, MainActivityVisitas.class);
+                        Intent intent = new Intent(MainActivityAtividades.this, Visitas.class);
                         Bundle dados = new Bundle();
                         dados.putString("equipamento_id", equipamento_id);
                         dados.putString("name", name);
@@ -268,7 +265,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
                         myDBGeral.updateStatusAtividadeAberta(
                                 checklist_id);
 
-                        Intent intent = new Intent(MainActivityAtividades.this, MainActivityVisitas.class);
+                        Intent intent = new Intent(MainActivityAtividades.this, Visitas.class);
                         Bundle dados = new Bundle();
                         dados.putString("name", name);
                         dados.putString("email", email);
