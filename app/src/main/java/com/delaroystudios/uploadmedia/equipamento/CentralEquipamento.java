@@ -21,16 +21,16 @@ import android.view.View;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.adapter.CentralEquipamento_Adapter;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
-import com.delaroystudios.uploadmedia.operacao.local.MainActivity;
+import com.delaroystudios.uploadmedia.operacao.local.MainActivityLocals;
 import com.delaroystudios.uploadmedia.operacao.local.MyDividerItemDecoration;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 
 public class CentralEquipamento extends AppCompatActivity  {
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = MainActivityLocals.class.getSimpleName();
 
     private CentralEquipamento_Adapter mAdapter;
     private SearchView searchView;
-    private String email, name, colaborador_id, tipo;
+    private String email, name, colaborador_id, token;
     BancoGeral myDBGeral;
 
 
@@ -48,7 +48,7 @@ public class CentralEquipamento extends AppCompatActivity  {
         email = dados.getString("email").toString();
         name = dados.getString("name").toString();
         colaborador_id = dados.getString("id").toString();
-        tipo = dados.getString("tipo");
+        token = dados.getString("token");
 
 
         // toolbar fancy stuff
@@ -127,7 +127,7 @@ public class CentralEquipamento extends AppCompatActivity  {
             String name = pref.getString("name", "");
             String email= pref.getString("email", "");
             String colaborador_id = pref.getString("id", "" );
-            String tipo = pref.getString("tipo", "");
+            String token = pref.getString("token", "");
 
 
             Intent intent = new Intent(this, MainActivity_Principal.class);
@@ -135,7 +135,7 @@ public class CentralEquipamento extends AppCompatActivity  {
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
             return true;
@@ -152,7 +152,7 @@ public class CentralEquipamento extends AppCompatActivity  {
         dados.putString("name", name);
         dados.putString("email", email);
         dados.putString("id", colaborador_id);
-        dados.putString("tipo", tipo);
+        dados.putString("token", token);
         intent.putExtras(dados);
         startActivity(intent);
     }

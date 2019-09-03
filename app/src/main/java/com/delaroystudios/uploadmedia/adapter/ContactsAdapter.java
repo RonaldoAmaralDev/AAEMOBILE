@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
-import com.delaroystudios.uploadmedia.operacao.equipamento.MainActivity;
+import com.delaroystudios.uploadmedia.operacao.equipamento.MainActivityEquipamentos;
 
 /**
  * Created by ravi on 16/11/17.
@@ -76,7 +76,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Grocer
         holder.cidade.setText("Cidade: " + cidade);
 
         holder.itemView.setOnClickListener(v -> { // Linguagem Java 8
-            Intent intent = new Intent(mContext, MainActivity.class);
+            Intent intent = new Intent(mContext, MainActivityEquipamentos.class);
             Bundle dados = new Bundle();
             dados.putString("local_id", id);
             dados.putString("centrolucro_id", centrolucro_id);

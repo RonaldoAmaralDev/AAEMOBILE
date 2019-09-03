@@ -21,10 +21,11 @@ import android.view.View;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.adapter.EquipamentoAdapter;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
+import com.delaroystudios.uploadmedia.operacao.local.MainActivityLocals;
 import com.delaroystudios.uploadmedia.operacao.local.MyDividerItemDecoration;
 
-public class MainActivity extends AppCompatActivity  {
-    private static final String TAG = com.delaroystudios.uploadmedia.operacao.equipamento.MainActivity.class.getSimpleName();
+public class MainActivityEquipamentos extends AppCompatActivity  {
+    private static final String TAG = MainActivityEquipamentos.class.getSimpleName();
 
     private EquipamentoAdapter mAdapter;
     private SearchView searchView;
@@ -103,17 +104,17 @@ public class MainActivity extends AppCompatActivity  {
             String name = pref.getString("name", "");
             String email= pref.getString("email", "");
             String colaborador_id = pref.getString("id", "" );
-            String tipo = pref.getString("tipo", "");
+            String token = pref.getString("token", "");
 
 
-            Intent intent = new Intent(MainActivity.this, com.delaroystudios.uploadmedia.operacao.local.MainActivity.class);
+            Intent intent = new Intent(MainActivityEquipamentos.this, MainActivityLocals.class);
             Bundle dados = new Bundle();
             dados.putString("local_id", local_id);
             dados.putString("centrolucro_id", centrolucro_id);
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
             return true;
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity  {
         String colaborador_id = pref.getString("id", "" );
         String tipo = pref.getString("tipo", "");
 
-        Intent intent = new Intent(MainActivity.this, com.delaroystudios.uploadmedia.operacao.local.MainActivity.class);
+        Intent intent = new Intent(MainActivityEquipamentos.this, MainActivityLocals.class);
         Bundle dados = new Bundle();
         dados.putString("local_id", local_id);
         dados.putString("centrolucro_id", centrolucro_id);

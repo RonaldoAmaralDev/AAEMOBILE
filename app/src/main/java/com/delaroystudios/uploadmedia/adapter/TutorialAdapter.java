@@ -1,4 +1,4 @@
-package com.delaroystudios.uploadmedia.principal.tutorial;
+package com.delaroystudios.uploadmedia.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

@@ -33,7 +33,7 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
 
     private VisitaAdapter mAdapter;
     private SearchView searchView;
-    private String name, email, colaborador_id, tipo;
+    private String name, email, colaborador_id, token;
     BancoGeral myDBGeral;
 
 
@@ -55,7 +55,7 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
         name = dados.getString("name");
         email = dados.getString("email");
         colaborador_id = dados.getString("colaborador_id");
-        tipo = dados.getString("tipo");
+        token = dados.getString("token");
 
         // toolbar fancy stuff
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -179,10 +179,6 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
         String currentTime = sdf.format(dt);
         String data = sdfData.format(dt);
 
-
-
-
-
         if( id == R.id.navegation_hoje) {
 
             mAdapter.swapCursor(myDBGeral.filtroOSData(data));
@@ -233,18 +229,12 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
         }
 
         if(id == android.R.id.home) {
-            SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
-            String name = pref.getString("name", "");
-            String email= pref.getString("email", "");
-            String colaborador_id = pref.getString("id", "" );
-            String tipo = pref.getString("tipo", "");
-
             Intent intent = new Intent(MainActivityVisitas.this, MainActivity_Principal.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
             return true;
@@ -262,7 +252,7 @@ public class MainActivityVisitas extends AppCompatActivity implements BottomNavi
         dados.putString("name", name);
         dados.putString("email", email);
         dados.putString("id", colaborador_id);
-        dados.putString("tipo", tipo);
+        dados.putString("token", token);
         intent.putExtras(dados);
         startActivity(intent);
     }

@@ -27,7 +27,7 @@ import java.util.List;
 
 public class CadastrarEquipamento extends AppCompatActivity {
 
-    String email, name, colaborador_id, tipo, descricao, centrolucro_id, local_id, tipoequipamento, tipogas, fabricante_id, modelo, numeroSerie, btu;
+    String email, name, colaborador_id, token, descricao, centrolucro_id, local_id, tipoequipamento, tipogas, fabricante_id, modelo, numeroSerie, btu;
     BancoGeral myBDGeral;
 
     @Override
@@ -41,7 +41,7 @@ public class CadastrarEquipamento extends AppCompatActivity {
         email = dados.getString("email");
         name = dados.getString("name");
         colaborador_id = dados.getString("id");
-        tipo = dados.getString("tipo");
+        token = dados.getString("token");
 
         myBDGeral = new BancoGeral(this);
 
@@ -110,7 +110,7 @@ public class CadastrarEquipamento extends AppCompatActivity {
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("id", colaborador_id);
-                dados.putString("tipo", tipo);
+                dados.putString("tipo", token);
                 intent.putExtras(dados);
                 startActivity(intent);
             }
@@ -159,7 +159,7 @@ public class CadastrarEquipamento extends AppCompatActivity {
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("id", colaborador_id);
-                dados.putString("tipo", tipo);
+                dados.putString("tipo", token);
                 intent.putExtras(dados);
                 startActivity(intent);
             }
@@ -216,7 +216,7 @@ public class CadastrarEquipamento extends AppCompatActivity {
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("id", colaborador_id);
-                dados.putString("tipo", tipo);
+                dados.putString("tipo", token);
                 intent.putExtras(dados);
                 startActivity(intent);
             }
@@ -269,7 +269,7 @@ public class CadastrarEquipamento extends AppCompatActivity {
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("id", colaborador_id);
-                dados.putString("tipo", tipo);
+                dados.putString("tipo", token);
                 intent.putExtras(dados);
                 startActivity(intent);
             }
@@ -332,7 +332,7 @@ public class CadastrarEquipamento extends AppCompatActivity {
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("id", colaborador_id);
-                dados.putString("tipo", tipo);
+                dados.putString("tipo", token);
                 intent.putExtras(dados);
                 startActivity(intent);
             }
@@ -421,7 +421,7 @@ public class CadastrarEquipamento extends AppCompatActivity {
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("id", colaborador_id);
-                dados.putString("tipo", tipo);
+                dados.putString("tipo", token);
                 intent.putExtras(dados);
                 startActivity(intent);
             }
@@ -468,7 +468,7 @@ public class CadastrarEquipamento extends AppCompatActivity {
                     dados.putString("name", name);
                     dados.putString("email", email);
                     dados.putString("id", colaborador_id);
-                    dados.putString("tipo", tipo);
+                    dados.putString("tipo", token);
                     intent.putExtras(dados);
                     startActivity(intent);
                 }
@@ -502,7 +502,7 @@ public class CadastrarEquipamento extends AppCompatActivity {
                     dados.putString("name", name);
                     dados.putString("email", email);
                     dados.putString("id", colaborador_id);
-                    dados.putString("tipo", tipo);
+                    dados.putString("tipo", token);
                     intent.putExtras(dados);
                     startActivity(intent);
                 }
@@ -576,7 +576,7 @@ public class CadastrarEquipamento extends AppCompatActivity {
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
                                                 dados.putString("id", colaborador_id);
-                                                dados.putString("tipo", tipo);
+                                                dados.putString("tipo", token);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
                                             } else {
@@ -599,7 +599,7 @@ public class CadastrarEquipamento extends AppCompatActivity {
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("id", colaborador_id);
-                dados.putString("tipo", tipo);
+                dados.putString("tipo", token);
                 intent.putExtras(dados);
                 startActivity(intent);
             }

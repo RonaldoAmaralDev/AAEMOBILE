@@ -268,7 +268,7 @@ public class Atividade_Depois extends AppCompatActivity {
                 String name = pref.getString("name", "");
                 String email = pref.getString("email", "");
                 String colaborador_id = pref.getString("id", "");
-                String tipo = pref.getString("tipo", "");
+                String token = pref.getString("token", "");
 
 
                 Intent intent = new Intent(Atividade_Depois.this, MainActivityAtividades.class);
@@ -283,7 +283,7 @@ public class Atividade_Depois extends AppCompatActivity {
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("colaborador_id", colaborador_id);
-                dados.putString("tipo", tipo);
+                dados.putString("token", token);
                 intent.putExtras(dados);
                 startActivity(intent);
             }
@@ -347,7 +347,7 @@ public class Atividade_Depois extends AppCompatActivity {
         String name = pref.getString("name", "");
         String email= pref.getString("email", "");
         String colaborador_id = pref.getString("id", "" );
-        String tipo = pref.getString("tipo", "");
+        String token = pref.getString("token", "");
 
         Intent intent = new Intent(Atividade_Depois.this, MainActivityAtividades.class);
         Bundle dados = new Bundle();
@@ -361,7 +361,7 @@ public class Atividade_Depois extends AppCompatActivity {
         dados.putString("name", name);
         dados.putString("email", email);
         dados.putString("colaborador_id", colaborador_id);
-        dados.putString("tipo", tipo);
+        dados.putString("token", token);
         intent.putExtras(dados);
         startActivity(intent);
 

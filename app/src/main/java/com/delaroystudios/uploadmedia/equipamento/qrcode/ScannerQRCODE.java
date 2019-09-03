@@ -85,7 +85,7 @@ public class ScannerQRCODE extends AppCompatActivity {
         String name = pref.getString("name", "");
         String email= pref.getString("email", "");
         String colaborador_id = pref.getString("id", "" );
-        String tipo = pref.getString("tipo", "");
+        String token = pref.getString("token", "");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(ScannerQRCODE.this);
         builder.setTitle("O que você deseja: ");
@@ -152,7 +152,7 @@ public class ScannerQRCODE extends AppCompatActivity {
                             dados.putString("name", name);
                             dados.putString("email", email);
                             dados.putString("id", colaborador_id);
-                            dados.putString("tipo", tipo);
+                            dados.putString("token", token);
                             intentVoltar.putExtras(dados);
                             startActivity(intentVoltar);
                         }
@@ -217,7 +217,7 @@ public class ScannerQRCODE extends AppCompatActivity {
                     String name = pref.getString("name", "");
                     String email= pref.getString("email", "");
                     String colaborador_id = pref.getString("id", "" );
-                    String tipo = pref.getString("tipo", "");
+                    String token = pref.getString("token", "");
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -226,7 +226,7 @@ public class ScannerQRCODE extends AppCompatActivity {
                         dados.putString("name", name);
                         dados.putString("email", email);
                         dados.putString("id", colaborador_id);
-                        dados.putString("tipo", tipo);
+                        dados.putString("token", token);
                         intent.putExtras(dados);
                         startActivity(intent);
                     }

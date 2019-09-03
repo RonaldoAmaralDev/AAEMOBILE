@@ -41,7 +41,7 @@ public class AssinaturaColaborador extends AppCompatActivity {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private SignaturePad mSignaturePad;
-    private String name, email, idColaborador, tipo, os_id, equipamento_id, local_id, tiposervico, checklist, dataplanejamento, id_centrolucro, checklist_id;
+    private String name, email, idColaborador, token, os_id, equipamento_id, local_id, tiposervico, checklist, dataplanejamento, id_centrolucro, checklist_id;
     private TextView txtColaborador;
     DatabaseHelper myDB;
 
@@ -71,7 +71,7 @@ public class AssinaturaColaborador extends AppCompatActivity {
         name = dados.getString("name");
         email = dados.getString("email");
         idColaborador = dados.getString("idColaborador");
-        tipo = dados.getString("tipo");
+        token = dados.getString("token");
 
         txtColaborador = (TextView) findViewById(R.id.signature_pad_description);
         txtColaborador.setText(name);
@@ -123,7 +123,7 @@ public class AssinaturaColaborador extends AppCompatActivity {
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("idColaborador", idColaborador);
-                dados.putString("tipo", tipo);
+                dados.putString("token", token);
                 intent.putExtras(dados);
                 startActivity(intent);
             }
@@ -150,7 +150,7 @@ public class AssinaturaColaborador extends AppCompatActivity {
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("colaborador_id", idColaborador);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
             return true;

@@ -21,11 +21,12 @@ import android.view.View;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.adapter.OsAdapter;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
-import com.delaroystudios.uploadmedia.operacao.local.MainActivity;
+import com.delaroystudios.uploadmedia.operacao.equipamento.MainActivityEquipamentos;
+import com.delaroystudios.uploadmedia.operacao.local.MainActivityLocals;
 import com.delaroystudios.uploadmedia.operacao.local.MyDividerItemDecoration;
 
 public class MainActivityOS  extends AppCompatActivity  {
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = MainActivityLocals.class.getSimpleName();
 
     private OsAdapter mAdapter;
     private SearchView searchView;
@@ -65,6 +66,7 @@ public class MainActivityOS  extends AppCompatActivity  {
         String name = pref.getString("name", "");
         String email= pref.getString("email", "");
         String idColaborador = pref.getString("id", "" );
+        String token = pref.getString("token", "");
 
         mAdapter = new OsAdapter(this, myDBGeral.buscaOS(equipamento_id, idColaborador));
         recyclerView.setAdapter(mAdapter);
@@ -133,9 +135,9 @@ public class MainActivityOS  extends AppCompatActivity  {
             String name = pref.getString("name", "");
             String email= pref.getString("email", "");
             String colaborador_id = pref.getString("id", "" );
-            String tipo = pref.getString("tipo", "");
+            String token = pref.getString("token", "");
 
-            Intent intent = new Intent(MainActivityOS.this, com.delaroystudios.uploadmedia.operacao.equipamento.MainActivity.class);
+            Intent intent = new Intent(MainActivityOS.this, MainActivityEquipamentos.class);
             Bundle dados = new Bundle();
             dados.putString("centrolucro_id", centrolucro_id);
             dados.putString("local_id", local_id);
@@ -143,7 +145,7 @@ public class MainActivityOS  extends AppCompatActivity  {
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
             return true;
@@ -159,9 +161,9 @@ public class MainActivityOS  extends AppCompatActivity  {
         String name = pref.getString("name", "");
         String email= pref.getString("email", "");
         String colaborador_id = pref.getString("id", "" );
-        String tipo = pref.getString("tipo", "");
+        String token = pref.getString("token", "");
 
-        Intent intent = new Intent(MainActivityOS.this, com.delaroystudios.uploadmedia.operacao.equipamento.MainActivity.class);
+        Intent intent = new Intent(MainActivityOS.this, MainActivityEquipamentos.class);
         Bundle dados = new Bundle();
         dados.putString("centrolucro_id", centrolucro_id);
         dados.putString("local_id", local_id);
@@ -169,7 +171,7 @@ public class MainActivityOS  extends AppCompatActivity  {
         dados.putString("name", name);
         dados.putString("email", email);
         dados.putString("id", colaborador_id);
-        dados.putString("tipo", tipo);
+        dados.putString("token", token);
         intent.putExtras(dados);
         startActivity(intent);
     }

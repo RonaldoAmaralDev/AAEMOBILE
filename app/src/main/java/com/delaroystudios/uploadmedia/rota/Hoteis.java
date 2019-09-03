@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 
 public class Hoteis extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private String email, name, colaborador_id, tipo, latitude, longitude;
+    private String email, name, colaborador_id, token, latitude, longitude;
     private WebView webView;
 
     @Override
@@ -39,7 +39,7 @@ public class Hoteis extends AppCompatActivity implements BottomNavigationView.On
         email = dados.getString("email");
         name = dados.getString("name");
         colaborador_id = dados.getString("id");
-        tipo = dados.getString("tipo");
+        token = dados.getString("token");
 
         webView = (WebView) findViewById(R.id.mapaHoteis);
 
@@ -108,7 +108,7 @@ public class Hoteis extends AppCompatActivity implements BottomNavigationView.On
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
         }
@@ -119,7 +119,7 @@ public class Hoteis extends AppCompatActivity implements BottomNavigationView.On
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("colaborador_id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
 
@@ -132,7 +132,7 @@ public class Hoteis extends AppCompatActivity implements BottomNavigationView.On
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
         }

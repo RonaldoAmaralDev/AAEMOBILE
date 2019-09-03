@@ -1,4 +1,4 @@
-package com.delaroystudios.uploadmedia.principal.tutorial;
+package com.delaroystudios.uploadmedia.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.WindowManager;
 
 import com.delaroystudios.uploadmedia.R;
+import com.delaroystudios.uploadmedia.adapter.TutorialAdapter;
 import com.delaroystudios.uploadmedia.model.TutorialVideos;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 
@@ -19,7 +20,7 @@ public class TutorialActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     Vector<TutorialVideos> youtubeVideos = new Vector<TutorialVideos>();
-    String name, email, colaborador_id, tipo;
+    String name, email, colaborador_id, token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class TutorialActivity extends AppCompatActivity {
         email = dados.getString("email");
         name = dados.getString("name");
         colaborador_id = dados.getString("id");
-        tipo = dados.getString("tipo");
+        token = dados.getString("token");
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -64,7 +65,7 @@ public class TutorialActivity extends AppCompatActivity {
                         dados.putString("name", name);
                         dados.putString("email", email);
                         dados.putString("id", colaborador_id);
-                        dados.putString("tipo", tipo);
+                        dados.putString("token", token);
                         intent.putExtras(dados);
                         startActivity(intent);
                     }

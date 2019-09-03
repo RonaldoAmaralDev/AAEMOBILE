@@ -107,14 +107,14 @@ public class CentroLucro extends AppCompatActivity  {
             String name = pref.getString("name", "");
             String email= pref.getString("email", "");
             String colaborador_id = pref.getString("id", "" );
-            String tipo = pref.getString("tipo", "");
+            String token = pref.getString("token", "");
 
             Intent intent = new Intent(CentroLucro.this, MainActivity_Principal.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
             return true;

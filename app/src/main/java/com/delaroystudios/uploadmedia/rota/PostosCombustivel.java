@@ -20,7 +20,7 @@ import com.delaroystudios.uploadmedia.visitas.MainActivityVisitas;
 
 public class PostosCombustivel extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private String email, name, colaborador_id, tipo, latitude, longitude;
+    private String email, name, colaborador_id, token, latitude, longitude;
     private WebView webView;
 
     @Override
@@ -37,7 +37,7 @@ public class PostosCombustivel extends AppCompatActivity implements BottomNaviga
         email = dados.getString("email");
         name = dados.getString("name");
         colaborador_id = dados.getString("id");
-        tipo = dados.getString("tipo");
+        token = dados.getString("token");
 
         webView = (WebView) findViewById(R.id.mapaPostosCombustivel);
 
@@ -101,7 +101,7 @@ public class PostosCombustivel extends AppCompatActivity implements BottomNaviga
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
         }
@@ -112,7 +112,7 @@ public class PostosCombustivel extends AppCompatActivity implements BottomNaviga
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("colaborador_id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
 
@@ -125,7 +125,7 @@ public class PostosCombustivel extends AppCompatActivity implements BottomNaviga
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
         }

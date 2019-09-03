@@ -39,7 +39,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
 
     private AtividadeAdapter mAdapter;
     private SearchView searchView;
-    private String os_id, checklist_id, equipamento_id, local_id, name, email, colaborador_id, tipo, tiposervico, dataplanejamento, centrocusto_id;
+    private String os_id, checklist_id, equipamento_id, local_id, name, email, colaborador_id, token, tiposervico, dataplanejamento, centrocusto_id;
     BancoGeral myDBGeral;
     DatabaseHelper myDb;
 
@@ -69,7 +69,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
         name = dados.getString("name");
         email = dados.getString("email");
         colaborador_id = dados.getString("idColaborador");
-        tipo = dados.getString("tipo");
+        token = dados.getString("token");
 
         // toolbar fancy stuff
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -190,7 +190,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
                 dadosVisita.putString("name", name);
                 dadosVisita.putString("email", email);
                 dadosVisita.putString("idColaborador", colaborador_id);
-                dadosVisita.putString("tipo", tipo);
+                dadosVisita.putString("token", token);
                 intentFinalizarVisita.putExtras(dadosVisita);
                 startActivity(intentFinalizarVisita);
             } else {
@@ -208,7 +208,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
             return true;
@@ -224,7 +224,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
         String name = pref.getString("name", "");
         String email= pref.getString("email", "");
         String colaborador_id = pref.getString("id", "" );
-        String tipo = pref.getString("tipo", "");
+        String token = pref.getString("token", "");
 
         new AlertDialog.Builder(MainActivityAtividades.this)
                 .setIcon(R.drawable.logo)
@@ -246,7 +246,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
                         dados.putString("name", name);
                         dados.putString("email", email);
                         dados.putString("colaborador_id", colaborador_id);
-                        dados.putString("tipo", tipo);
+                        dados.putString("token", token);
                         intent.putExtras(dados);
                         startActivity(intent);
                     }
@@ -261,7 +261,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
                         String name = pref.getString("name", "");
                         String email= pref.getString("email", "");
                         String idColaborador = pref.getString("id", "" );
-                        String tipo = pref.getString("tipo", "");
+                        String token = pref.getString("token", "");
 
                         myDBGeral.updateModoEspera(os_id);
 
@@ -273,7 +273,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
                         dados.putString("name", name);
                         dados.putString("email", email);
                         dados.putString("colaborador_id", idColaborador);
-                        dados.putString("tipo", tipo);
+                        dados.putString("token", token);
                         intent.putExtras(dados);
                         startActivity(intent);
                     }

@@ -21,10 +21,15 @@ import android.widget.Toast;
 
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 import com.delaroystudios.uploadmedia.principal.Permissões;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.delaroystudios.uploadmedia.R;
+import com.google.gson.JsonParser;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class TelaLogin extends AppCompatActivity {
 
@@ -46,7 +51,6 @@ public class TelaLogin extends AppCompatActivity {
             Manifest.permission.ACCESS_COARSE_LOCATION};
 
     private String HOST = "http://helper.aplusweb.com.br/aplicativo";
-   // private String HOST = "http://192.168.1.181/aplicativo";
 
     @Override
     public void onBackPressed() {
@@ -76,7 +80,7 @@ public class TelaLogin extends AppCompatActivity {
         String id = pref.getString("id", "" );
         String name = pref.getString("name", "");
         String email= pref.getString("email", "");
-        String tipo = pref.getString("tipo", "");
+        String token = pref.getString("token", "");
         if(!email.isEmpty()) {
 
             Intent intent = new Intent(TelaLogin.this, MainActivity_Principal.class);
@@ -84,7 +88,7 @@ public class TelaLogin extends AppCompatActivity {
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
         }
@@ -149,78 +153,50 @@ public class TelaLogin extends AppCompatActivity {
                 String email = emailLogar.getText().toString();
                 String password = senhaLogar.getText().toString();
 
-                String URL = HOST + "/login.php";
+                String URL = "http://helper.aplusweb.com.br/api/auth";
                 // Verifica se tem campo vazio
 
                 if(verificaConexao() == true) {
-
-
-                    if (email.isEmpty() || password.isEmpty()) {
-                        Toast.makeText(TelaLogin.this, "Todos os campos devem estar preenchidos !", Toast.LENGTH_LONG).show();
-
-
+                    if (email.isEmpty()) {
+                        Toast.makeText(TelaLogin.this, "Campo email está em branco.", Toast.LENGTH_LONG).show();
+                    } else if (password.isEmpty()) {
+                        Toast.makeText(TelaLogin.this, "Campo senha está em branco.", Toast.LENGTH_LONG).show();
                     } else {
-
                         Ion.with(TelaLogin.this)
                                 .load(URL)
-                                .setBodyParameter("email_app", email)
-                                .setBodyParameter("password_app", password)
+                                .setBodyParameter("email", email)
+                                .setBodyParameter("password", password)
                                 .asJsonObject()
                                 .setCallback(new FutureCallback<JsonObject>() {
                                     @Override
                                     public void onCompleted(Exception e, JsonObject result) {
-
-
                                         try {
-                                            String RETORNO = result.get("LOGIN").getAsString();
+                                                  // Armazenar dados no APP
+                                                  String token = result.get("token").getAsString();
+                                                  JsonObject rates = (JsonObject) result.get("user");
+                                                  String id = rates.get("id").getAsString();
+                                                  String name = rates.get("name").getAsString();
+                                                  String email = rates.get("email").getAsString();
 
+                                                  SharedPreferences.Editor pref = getSharedPreferences("info", MODE_PRIVATE).edit();
+                                                  pref.putString("id", id);
+                                                  pref.putString("name", name);
+                                                  pref.putString("email", email);
+                                                  pref.putString("token", token);
 
-                                            if (RETORNO.equals("ERRO")) {
+                                                  // Armazena as Preferencias
+                                                  pref.commit();
 
-                                                Toast.makeText(TelaLogin.this, "Email ou senha incorretos! ", Toast.LENGTH_LONG).show();
-
-                                            }
-                                            // Vai abrir caso dados corretos Main PRINCIPAL
-
-                                            //"SUCESSO" --> Dados corretos
-                                            else if (RETORNO.equals("SUCESSO")) {
-
-
-                                                // Armazenar dados no APP
-                                                String id = result.get("ID").getAsString();
-                                                String matricula = result.get("MATRICULA").getAsString();
-                                                String name = result.get("NAME").getAsString();
-                                                String email = result.get("EMAIL").getAsString();
-                                                String senha = result.get("PASSWORD").getAsString();
-                                                String setor = result.get("SETOR").getAsString();
-                                                String celular = result.get("CELULAR").getAsString();
-
-                                                SharedPreferences.Editor pref = getSharedPreferences("info", MODE_PRIVATE).edit();
-                                                pref.putString("id", id);
-                                                pref.putString("matricula", matricula);
-                                                pref.putString("name", name);
-                                                pref.putString("email", email);
-                                                pref.putString("senha", senha);
-                                                pref.putString("tipo", setor);
-                                                pref.putString("celular", celular);
-
-                                                // Armazena as Preferencias
-                                                pref.commit();
-
-                                                Intent intent = new Intent(TelaLogin.this, MainActivity_Principal.class);
-                                                Bundle dados = new Bundle();
-                                                intent.putExtra("id", id);
-                                                intent.putExtra("name", name);
-                                                intent.putExtra("email", email);
-                                                intent.putExtra("tipo", setor);
-                                                intent.putExtras(dados);
-                                                startActivity(intent);
-                                            } else {
-                                                Toast.makeText(TelaLogin.this, "Ocorreu um erro!", Toast.LENGTH_LONG).show();
-
-                                            }
+                                                  Intent intent = new Intent(TelaLogin.this, MainActivity_Principal.class);
+                                                  Bundle dados = new Bundle();
+                                                  intent.putExtra("id", id);
+                                                  intent.putExtra("name", name);
+                                                  intent.putExtra("email", email);
+                                                  intent.putExtra("token", token);
+                                                  intent.putExtras(dados);
+                                                  startActivity(intent);
                                         } catch (Exception erro) {
-                                            Toast.makeText(TelaLogin.this, "Erro: " + erro, Toast.LENGTH_LONG).show();
+                                            Toast.makeText(TelaLogin.this, "Email ou senha estão incorretos."  , Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 });

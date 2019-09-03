@@ -173,7 +173,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                             String name = pref.getString("name", "");
                                             String email= pref.getString("email", "");
                                             String colaborador_id = pref.getString("id", "" );
-                                            String tipo = pref.getString("tipo", "");
+                                            String token = pref.getString("token", "");
 
                                             String URL = "http://helper.aplusweb.com.br/aplicativo/abrirCorretiva.php";
                                             Ion.with(mContext)
@@ -242,7 +242,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                                     dados.putString("name", name);
                                                                     dados.putString("email", email);
                                                                     dados.putString("idColaborador", colaborador_id);
-                                                                    dados.putString("tipo", tipo);
+                                                                    dados.putString("token", token);
                                                                     intent.putExtras(dados);
                                                                     mContext.startActivity(intent);
                                                                 } else {
@@ -272,7 +272,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                             String name = pref.getString("name", "");
                                                             String email= pref.getString("email", "");
                                                             String colaborador_id = pref.getString("id", "" );
-                                                            String tipo = pref.getString("tipo", "");
+                                                            String token = pref.getString("token", "");
 
                                                             String URL = "http://helper.aplusweb.com.br/aplicativo/abrirCorretiva.php";
                                                             Ion.with(mContext)
@@ -340,7 +340,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                                                     dados.putString("name", name);
                                                                                     dados.putString("email", email);
                                                                                     dados.putString("idColaborador", colaborador_id);
-                                                                                    dados.putString("tipo", tipo);
+                                                                                    dados.putString("token", token);
                                                                                     intent.putExtras(dados);
                                                                                     mContext.startActivity(intent);
                                                                                 } else {
@@ -360,7 +360,6 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                             String nameColaborador = pref2.getString("name", "");
                                                             String emailColaborador= pref2.getString("email", "");
                                                             String id_colaborador = pref2.getString("id", "" );
-                                                            String tipoColaborador = pref2.getString("tipo", "");
                                                             String dataVisita = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
 
 
@@ -488,7 +487,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                                                                                     String name = pref.getString("name", "");
                                                                                                                     String email= pref.getString("email", "");
                                                                                                                     String colaborador_id = pref.getString("id", "" );
-                                                                                                                    String tipo = pref.getString("tipo", "");
+                                                                                                                    String token = pref.getString("token", "");
 
                                                                                                                     Toast.makeText(mContext, "Chamado corretivo Nª " + ordemservico + ", aberto com sucesso. ", Toast.LENGTH_LONG).show();
                                                                                                                     Intent intent = new Intent(mContext, MainActivityAtividades.class);
@@ -504,7 +503,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                                                                                     dados.putString("name", name);
                                                                                                                     dados.putString("email", email);
                                                                                                                     dados.putString("idColaborador", colaborador_id);
-                                                                                                                    dados.putString("tipo", tipo);
+                                                                                                                    dados.putString("token", token);
                                                                                                                     intent.putExtras(dados);
                                                                                                                     mContext.startActivity(intent);
                                                                                                                 }

@@ -23,13 +23,14 @@ import android.widget.EditText;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.adapter.VeiculosAdapter;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
+import com.delaroystudios.uploadmedia.operacao.equipamento.MainActivityEquipamentos;
 import com.delaroystudios.uploadmedia.operacao.local.MyDividerItemDecoration;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 
 import java.util.List;
 
 public class MainActivityVeiculos  extends AppCompatActivity  {
-    private static final String TAG = com.delaroystudios.uploadmedia.operacao.equipamento.MainActivity.class.getSimpleName();
+    private static final String TAG = MainActivityEquipamentos.class.getSimpleName();
 
     private List<Veiculos> contactList;
     private VeiculosAdapter mAdapter;
@@ -52,7 +53,7 @@ public class MainActivityVeiculos  extends AppCompatActivity  {
         String name = pref.getString("name", "");
         String email= pref.getString("email", "");
         String colaborador_id = pref.getString("id", "" );
-        String tipo = pref.getString("tipo", "");
+        String token = pref.getString("token", "");
 
         MyBDGeral = new BancoGeral(this);
 
@@ -133,7 +134,7 @@ public class MainActivityVeiculos  extends AppCompatActivity  {
             String name = pref.getString("name", "");
             String email= pref.getString("email", "");
             String colaborador_id = pref.getString("id", "" );
-            String tipo = pref.getString("tipo", "");
+            String token = pref.getString("token", "");
 
 
             Intent intent = new Intent(MainActivityVeiculos.this, MainActivity_Principal.class);
@@ -141,7 +142,7 @@ public class MainActivityVeiculos  extends AppCompatActivity  {
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
             return true;
@@ -157,14 +158,14 @@ public class MainActivityVeiculos  extends AppCompatActivity  {
         String name = pref.getString("name", "");
         String email= pref.getString("email", "");
         String colaborador_id = pref.getString("id", "" );
-        String tipo = pref.getString("tipo", "");
+        String token = pref.getString("token", "");
 
         Intent intent = new Intent(MainActivityVeiculos.this, MainActivity_Principal.class);
         Bundle dados = new Bundle();
         dados.putString("name", name);
         dados.putString("email", email);
         dados.putString("id", colaborador_id);
-        dados.putString("tipo", tipo);
+        dados.putString("token", token);
         intent.putExtras(dados);
         startActivity(intent);
     }

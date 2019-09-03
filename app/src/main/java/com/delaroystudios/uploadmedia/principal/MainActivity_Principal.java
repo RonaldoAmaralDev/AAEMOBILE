@@ -1,7 +1,6 @@
 package com.delaroystudios.uploadmedia.principal;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,9 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.Uri;
@@ -37,20 +33,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -79,14 +71,14 @@ import com.delaroystudios.uploadmedia.model.TipoServico;
 import com.delaroystudios.uploadmedia.model.TipoSolicitacao;
 import com.delaroystudios.uploadmedia.operacao.contrato.CentroLucro;
 import com.delaroystudios.uploadmedia.model.Equipamento;
-import com.delaroystudios.uploadmedia.operacao.equipamento.Equipamentos;
 import com.delaroystudios.uploadmedia.model.Contact;
 import com.delaroystudios.uploadmedia.model.OS;
+import com.delaroystudios.uploadmedia.operacao.equipamento.MainActivityEquipamentos;
 import com.delaroystudios.uploadmedia.operacao.os.MainActivityOS;
 import com.delaroystudios.uploadmedia.principal.localizacao.MostrarColaborador;
 import com.delaroystudios.uploadmedia.equipamento.qrcode.LoadingScanner;
 import com.delaroystudios.uploadmedia.principal.sync.BootReciever;
-import com.delaroystudios.uploadmedia.principal.tutorial.TutorialActivity;
+import com.delaroystudios.uploadmedia.activity.TutorialActivity;
 import com.delaroystudios.uploadmedia.relatorio.RelatorioContrato;
 import com.delaroystudios.uploadmedia.relatorio.RelatorioLeitura;
 import com.delaroystudios.uploadmedia.rota.Hoteis;
@@ -125,10 +117,8 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -150,7 +140,7 @@ public class MainActivity_Principal extends AppCompatActivity
     private static final int REQUEST_LOCATION = 1;
     public JsonArrayRequest request, requestAtividades ;
     public RequestQueue requestQueue, requestQueueAtividades;
-    String email, name, colaborador_id, tipo, idLocal, codigolocal, descricaolocal, latitude, longitude;
+    String email, name, colaborador_id, token, idLocal, codigolocal, descricaolocal, latitude, longitude;
     ProgressDialog progressBar;
     private int progressBarStatus = 0;
     private Handler progressBarHandler = new Handler();
@@ -238,7 +228,7 @@ public class MainActivity_Principal extends AppCompatActivity
         email = dados.getString("email");
         name = dados.getString("name");
         colaborador_id = dados.getString("id");
-        tipo = dados.getString("tipo");
+        token = dados.getString("token");
 
         //Verifica quantidade Imagens enviadas
         verificarArmazenamento();
@@ -306,7 +296,7 @@ public class MainActivity_Principal extends AppCompatActivity
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("colaborador_id", colaborador_id);
-                dados.putString("tipo", tipo);
+                dados.putString("token", token);
                 intent.putExtras(dados);
                 startActivity(intent);            }
         });
@@ -320,7 +310,7 @@ public class MainActivity_Principal extends AppCompatActivity
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("colaborador_id", colaborador_id);
-                dados.putString("tipo", tipo);
+                dados.putString("token", token);
                 intent.putExtras(dados);
                 startActivity(intent);
             }
@@ -334,7 +324,7 @@ public class MainActivity_Principal extends AppCompatActivity
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("colaborador_id", colaborador_id);
-                dados.putString("tipo", tipo);
+                dados.putString("token", token);
                 intent.putExtras(dados);
                 startActivity(intent);
             }
@@ -382,10 +372,7 @@ public class MainActivity_Principal extends AppCompatActivity
         NavigationView navegationView2 = (NavigationView) findViewById(R.id.nav_view);
         Menu nav_Menu = navegationView2.getMenu();
 
-
-        int categoria = Integer.parseInt(tipo);
-        if (categoria == 2) {
-            // Operação Manutenção
+        // Operação Manutenção
             nav_Menu.findItem(R.id.nav_atualizarVeiculo).setVisible(false);
             nav_Menu.findItem(R.id.nav_relatorio_ordemservico).setVisible(false);
             nav_Menu.findItem(R.id.nav_localizacao).setVisible(false);
@@ -393,25 +380,10 @@ public class MainActivity_Principal extends AppCompatActivity
             nav_Menu.findItem(R.id.nav_veiculos).setVisible(false);
             nav_Menu.findItem(R.id.nav_reconhecimentofacial).setVisible(false);
             nav_Menu.findItem(R.id.nav_cadastrarequip).setVisible(false);
-
-        } else if (categoria == 10) {
-            // Frota
-            nav_Menu.findItem(R.id.nav_cadastrarequip).setVisible(false);
-            nav_Menu.findItem(R.id.nav_syncTabelas).setVisible(false);
-            nav_Menu.findItem(R.id.nav_syncVisita).setVisible(false);
-            nav_Menu.findItem(R.id.nav_programacaoequipamento).setVisible(false);
-            nav_Menu.findItem(R.id.nav_programacaotodos).setVisible(false);
-            nav_Menu.findItem(R.id.nav_relatorio_leitura).setVisible(false);
-            nav_Menu.findItem(R.id.nav_relatorio_contrato).setVisible(false);
-
         }
 
-    }
-
-
-
         @Override
-    public void onMapReady(GoogleMap googleMap) {
+        public void onMapReady(GoogleMap googleMap) {
         Log.d(TAG, "onMapReady: map is ready");
         mMap = googleMap;
 
@@ -528,7 +500,7 @@ public class MainActivity_Principal extends AppCompatActivity
                                 dados.putString("name", name);
                                 dados.putString("email", email);
                                 dados.putString("colaborador_id", colaborador_id);
-                                dados.putString("tipo", tipo);
+                                dados.putString("token", token);
                                 dados.putString("latitude_local", latitude);
                                 dados.putString("longitude_local", longitude);
                                 intent.putExtras(dados);
@@ -835,7 +807,7 @@ public class MainActivity_Principal extends AppCompatActivity
                             dados.putString("name", name);
                             dados.putString("email", email);
                             dados.putString("id", colaborador_id);
-                            dados.putString("tipo", tipo);
+                            dados.putString("token", token);
                             intent.putExtras(dados);
                             startActivity(intent);
                             finish();                        }
@@ -874,7 +846,7 @@ public class MainActivity_Principal extends AppCompatActivity
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
             finish();
@@ -886,7 +858,7 @@ public class MainActivity_Principal extends AppCompatActivity
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("colaborador_id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
 
@@ -899,7 +871,7 @@ public class MainActivity_Principal extends AppCompatActivity
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
         }
@@ -911,7 +883,7 @@ public class MainActivity_Principal extends AppCompatActivity
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
         }
@@ -923,7 +895,7 @@ public class MainActivity_Principal extends AppCompatActivity
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
 
@@ -942,7 +914,7 @@ public class MainActivity_Principal extends AppCompatActivity
                             dados.putString("name", name);
                             dados.putString("email", email);
                             dados.putString("id", colaborador_id);
-                            dados.putString("tipo", tipo);
+                            dados.putString("token", token);
                             intent.putExtras(dados);
                             startActivity(intent);
                         }
@@ -955,7 +927,7 @@ public class MainActivity_Principal extends AppCompatActivity
                             dados.putString("name", name);
                             dados.putString("email", email);
                             dados.putString("id", colaborador_id);
-                            dados.putString("tipo", tipo);
+                            dados.putString("token", token);
                             intent.putExtras(dados);
                             startActivity(intent);
                         }
@@ -969,7 +941,7 @@ public class MainActivity_Principal extends AppCompatActivity
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
 
@@ -980,7 +952,7 @@ public class MainActivity_Principal extends AppCompatActivity
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
 
@@ -1067,7 +1039,7 @@ public class MainActivity_Principal extends AppCompatActivity
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
 
@@ -1078,7 +1050,7 @@ public class MainActivity_Principal extends AppCompatActivity
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
 
@@ -1091,19 +1063,19 @@ public class MainActivity_Principal extends AppCompatActivity
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
 
 
         } else if(id == R.id.nav_programacaoequipamento) {
 
-            Intent intent = new Intent(MainActivity_Principal.this, Equipamentos.class);
+            Intent intent = new Intent(MainActivity_Principal.this, MainActivityEquipamentos.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);
-            dados.putString("tipo", tipo);
+            dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
         }
@@ -1191,7 +1163,7 @@ public class MainActivity_Principal extends AppCompatActivity
                     dados.putString("name", name);
                     dados.putString("email", email);
                     dados.putString("id", colaborador_id);
-                    dados.putString("tipo", tipo);
+                    dados.putString("token", token);
                     dados.putString("centrolucro_descricao", selecionado);
                     intent.putExtras(dados);
                     startActivity(intent);
@@ -1227,7 +1199,7 @@ public class MainActivity_Principal extends AppCompatActivity
                     dados.putString("name", name);
                     dados.putString("email", email);
                     dados.putString("id", colaborador_id);
-                    dados.putString("tipo", tipo);
+                    dados.putString("token", token);
                     dados.putString("centrolucro_descricao", selecionado);
                     intent.putExtras(dados);
                     startActivity(intent);
@@ -1476,7 +1448,7 @@ public class MainActivity_Principal extends AppCompatActivity
                     dados.putString("name", name);
                     dados.putString("email", email);
                     dados.putString("id", colaborador_id);
-                    dados.putString("tipo", tipo);
+                    dados.putString("token", token);
                     intent.putExtras(dados);
                     startActivity(intent);
                     finish();
@@ -1546,7 +1518,7 @@ public class MainActivity_Principal extends AppCompatActivity
                     dados.putString("name", name);
                     dados.putString("email", email);
                     dados.putString("id", colaborador_id);
-                    dados.putString("tipo", tipo);
+                    dados.putString("token", token);
                     intent.putExtras(dados);
                     startActivity(intent);
                     finish();

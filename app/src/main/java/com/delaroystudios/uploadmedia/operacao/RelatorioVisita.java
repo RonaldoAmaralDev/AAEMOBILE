@@ -34,7 +34,7 @@ import java.io.OutputStream;
 
 public class RelatorioVisita extends AppCompatActivity {
 
-    String os_id, equipamento_id, local_id, dataplanejamento, executante, email, colaborador_id, tipo, id_centrolucro, localdescricao, numerocl, centrolucro_descricao, codigolocal, codigoequipamento, bairro, cidade, tiposervico_descricao, tag, latitude, longitude, dataexecucao, checklist, observacaoantes, observacaodepois, situacao, medicao1, medicao2, id_Atividade;
+    String os_id, equipamento_id, local_id, dataplanejamento, executante, email, colaborador_id, token, id_centrolucro, localdescricao, numerocl, centrolucro_descricao, codigolocal, codigoequipamento, bairro, cidade, tiposervico_descricao, tag, latitude, longitude, dataexecucao, checklist, observacaoantes, observacaodepois, situacao, medicao1, medicao2, id_Atividade;
     BancoGeral myBDGeral;
     DatabaseHelper myBDOperacao;
     private File pdfFile;
@@ -60,7 +60,7 @@ public class RelatorioVisita extends AppCompatActivity {
         executante = dados.getString("name");
         email = dados.getString("email");
         colaborador_id = dados.getString("id");
-        tipo = dados.getString("tipo");
+        token = dados.getString("token");
         id_centrolucro = dados.getString("id_centrolucro");
 
         int tiposervico_int = Integer.parseInt(tiposervico);
@@ -366,7 +366,7 @@ public class RelatorioVisita extends AppCompatActivity {
         dados.putString("name", executante);
         dados.putString("email", email);
         dados.putString("id", colaborador_id);
-        dados.putString("tipo", tipo);
+        dados.putString("token", token);
         intent.putExtras(dados);
         startActivity(intent);
     }

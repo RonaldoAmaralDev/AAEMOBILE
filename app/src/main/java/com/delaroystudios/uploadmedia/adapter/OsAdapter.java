@@ -139,7 +139,7 @@ public class OsAdapter extends RecyclerView.Adapter<OsAdapter.GroceryViewHolder>
                                         String nameColaborador = pref2.getString("name", "");
                                         String emailColaborador= pref2.getString("email", "");
                                         String id_colaborador = pref2.getString("id", "" );
-                                        String tipoColaborador = pref2.getString("tipo", "");
+                                        String token = pref2.getString("token", "");
 
                                         //Começar a contar o HH
                                         myBDGeral.gravarHHInicio(
@@ -165,7 +165,7 @@ public class OsAdapter extends RecyclerView.Adapter<OsAdapter.GroceryViewHolder>
                                     dados2.putString("name", nameColaborador);
                                     dados2.putString("email", emailColaborador);
                                     dados2.putString("idColaborador", id_colaborador);
-                                    dados2.putString("tipo", tipoColaborador);
+                                    dados2.putString("token", token);
                                     dados2.putString("checklist_id", checklist_id);
                                     dados2.putString("equipamento_id", equipamento_id);
                                     dados2.putString("local_id", local_id);

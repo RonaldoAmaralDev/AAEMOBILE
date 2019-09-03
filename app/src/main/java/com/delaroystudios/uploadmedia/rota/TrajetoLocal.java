@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class TrajetoLocal extends AppCompatActivity {
 
-    public String email, name, colaborador_id, tipo, latitude, longitude, latitude_local, longitude_local;
+    public String email, name, colaborador_id, token, latitude, longitude, latitude_local, longitude_local;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class TrajetoLocal extends AppCompatActivity {
         email = dados.getString("email");
         name = dados.getString("name");
         colaborador_id = dados.getString("colaborador_id");
-        tipo = dados.getString("tipo");
+        token = dados.getString("token");
         latitude_local = dados.getString("latitude_local");
         longitude_local = dados.getString("longitude_local");
 
@@ -95,7 +95,7 @@ public class TrajetoLocal extends AppCompatActivity {
                         dados.putString("name", name);
                         dados.putString("email", email);
                         dados.putString("id", colaborador_id);
-                        dados.putString("tipo", tipo);
+                        dados.putString("token", token);
                         intent.putExtras(dados);
                         startActivity(intent);
                     }

@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat;
 public class AbrirCorretiva extends AppCompatActivity {
 
     BancoGeral myBDGeral;
-    String tipo, id_Atividade, id_1Atividade, preventiva, corretiva, btu, codigo, equipe, email, name, colaborador_id, prioridade, tiposervico, local_id, id_equipamento, equipamento, modelo, centrocusto_id, localdescricao;
+    String token, id_Atividade, id_1Atividade, preventiva, corretiva, btu, codigo, equipe, email, name, colaborador_id, prioridade, tiposervico, local_id, id_equipamento, equipamento, modelo, centrocusto_id, localdescricao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +51,15 @@ public class AbrirCorretiva extends AppCompatActivity {
         name = pref.getString("name", "");
         email = pref.getString("email", "");
         colaborador_id = pref.getString("id", "");
-        tipo = pref.getString("tipo", "");
+        token = pref.getString("token", "");
 
+        java.util.Date dt = new java.util.Date();
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat("HH:mm:ss");
+        java.text.SimpleDateFormat sdfData =
+                new java.text.SimpleDateFormat("dd/MM/yyyy");
+        String currentTime = sdf.format(dt);
+        String data = sdfData.format(dt);
 
         iniciarAberturaCorretiva();
     }
@@ -73,7 +80,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                         dados.putString("name", name);
                         dados.putString("email", email);
                         dados.putString("id", colaborador_id);
-                        dados.putString("tipo", tipo);
+                        dados.putString("token", token);
                         intent.putExtras(dados);
                         startActivity(intent);
                     }
@@ -135,7 +142,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("id", colaborador_id);
-                dados.putString("tipo", tipo);
+                dados.putString("token", token);
                 intent.putExtras(dados);
                 startActivity(intent);
             }
@@ -152,13 +159,6 @@ public class AbrirCorretiva extends AppCompatActivity {
 
     public void abrirCorretiva(String codigocliente) {
 
-        SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
-        String name = pref.getString("name", "");
-        String email = pref.getString("email", "");
-        String colaborador_id = pref.getString("id", "");
-        String tipo = pref.getString("tipo", "");
-
-
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AbrirCorretiva.this);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -174,7 +174,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                         prioridade = "1";
                         tiposervico = "1";
                         String data = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
-                        String dataPadraoBR = new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis());
 
                         String URL = "http://helper.aplusweb.com.br/aplicativo/abrirCorretiva.php";
 
@@ -240,12 +239,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         "",
                                                         "A");
 
-                                                SharedPreferences pref2 = getApplication().getSharedPreferences("info", MODE_PRIVATE);
-                                                String nameColaborador = pref2.getString("name", "");
-                                                String emailColaborador = pref2.getString("email", "");
-                                                String id_colaborador = pref2.getString("id", "");
-                                                String tipoColaborador = pref2.getString("tipo", "");
-
                                                 java.util.Date dt = new java.util.Date();
                                                 java.text.SimpleDateFormat sdf =
                                                         new java.text.SimpleDateFormat("HH:mm:ss");
@@ -259,7 +252,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         ordemservico,
                                                         centrocusto_id,
                                                         currentTime,
-                                                        id_colaborador);
+                                                        colaborador_id);
 
                                                 Toast.makeText(getApplicationContext(), "Chamado corretivo Nª " + ordemservico + ", aberto com sucesso. ", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(AbrirCorretiva.this, MainActivityAtividades.class);
@@ -275,7 +268,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
                                                 dados.putString("idColaborador", colaborador_id);
-                                                dados.putString("tipo", tipo);
+                                                dados.putString("token", token);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -295,7 +288,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                         prioridade = "1";
                         tiposervico = "2";
                         String data2 = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
-                        String dataPadraoBR2 = new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis());
 
                         String URL2 = "http://helper.aplusweb.com.br/aplicativo/abrirCorretiva.php";
 
@@ -362,12 +354,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         "A"
                                                 );
 
-                                                SharedPreferences pref2 = getApplication().getSharedPreferences("info", MODE_PRIVATE);
-                                                String nameColaborador = pref2.getString("name", "");
-                                                String emailColaborador = pref2.getString("email", "");
-                                                String id_colaborador = pref2.getString("id", "");
-                                                String tipoColaborador = pref2.getString("tipo", "");
-
                                                 java.util.Date dt = new java.util.Date();
                                                 java.text.SimpleDateFormat sdf =
                                                         new java.text.SimpleDateFormat("HH:mm:ss");
@@ -381,7 +367,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         ordemservico,
                                                         centrocusto_id,
                                                         currentTime,
-                                                        id_colaborador);
+                                                        colaborador_id);
 
                                                 Toast.makeText(getApplicationContext(), "Chamado corretivo Nª " + ordemservico + ", aberto com sucesso. ", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(AbrirCorretiva.this, MainActivityAtividades.class);
@@ -397,7 +383,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
                                                 dados.putString("idColaborador", colaborador_id);
-                                                dados.putString("tipo", tipo);
+                                                dados.putString("token", token);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -483,12 +469,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         "A"
                                                 );
 
-                                                SharedPreferences pref2 = getApplication().getSharedPreferences("info", MODE_PRIVATE);
-                                                String nameColaborador = pref2.getString("name", "");
-                                                String emailColaborador = pref2.getString("email", "");
-                                                String id_colaborador = pref2.getString("id", "");
-                                                String tipoColaborador = pref2.getString("tipo", "");
-
                                                 java.util.Date dt = new java.util.Date();
                                                 java.text.SimpleDateFormat sdf =
                                                         new java.text.SimpleDateFormat("HH:mm:ss");
@@ -502,7 +482,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         ordemservico,
                                                         centrocusto_id,
                                                         currentTime,
-                                                        id_colaborador);
+                                                        colaborador_id);
 
                                                 Toast.makeText(getApplicationContext(), "Chamado corretivo Nª " + ordemservico + ", aberto com sucesso. ", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(AbrirCorretiva.this, MainActivityAtividades.class);
@@ -518,7 +498,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
                                                 dados.putString("idColaborador", colaborador_id);
-                                                dados.putString("tipo", tipo);
+                                                dados.putString("token", token);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -538,7 +518,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                         prioridade = "1";
                         tiposervico = "4";
                         String data4 = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
-                        String dataPadraoBR4 = new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis());
 
                         String URL4 = "http://helper.aplusweb.com.br/aplicativo/abrirCorretiva.php";
 
@@ -589,12 +568,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 // Armazena as Preferencias
                                                 dados2.commit();
 
-                                                SharedPreferences pref2 = getApplication().getSharedPreferences("info", MODE_PRIVATE);
-                                                String nameColaborador = pref2.getString("name", "");
-                                                String emailColaborador = pref2.getString("email", "");
-                                                String id_colaborador = pref2.getString("id", "");
-                                                String tipoColaborador = pref2.getString("tipo", "");
-
                                                 java.util.Date dt = new java.util.Date();
                                                 java.text.SimpleDateFormat sdf =
                                                         new java.text.SimpleDateFormat("HH:mm:ss");
@@ -608,7 +581,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         ordemservico,
                                                         centrocusto_id,
                                                         currentTime,
-                                                        id_colaborador);
+                                                        colaborador_id);
 
                                                 Toast.makeText(getApplicationContext(), "Chamado corretivo Nª " + ordemservico + ", aberto com sucesso. ", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(AbrirCorretiva.this, MainActivityAtividades.class);
@@ -624,7 +597,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
                                                 dados.putString("idColaborador", colaborador_id);
-                                                dados.putString("tipo", tipo);
+                                                dados.putString("token", token);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -647,7 +620,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                         prioridade = "1";
                         tiposervico = "5";
                         String data5 = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
-                        String dataPadraoBR5 = new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis());
 
                         String URL5 = "http://helper.aplusweb.com.br/aplicativo/abrirCorretiva.php";
 
@@ -714,12 +686,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         "A"
                                                 );
 
-                                                SharedPreferences pref2 = getApplication().getSharedPreferences("info", MODE_PRIVATE);
-                                                String nameColaborador = pref2.getString("name", "");
-                                                String emailColaborador = pref2.getString("email", "");
-                                                String id_colaborador = pref2.getString("id", "");
-                                                String tipoColaborador = pref2.getString("tipo", "");
-
                                                 java.util.Date dt = new java.util.Date();
                                                 java.text.SimpleDateFormat sdf =
                                                         new java.text.SimpleDateFormat("HH:mm:ss");
@@ -733,7 +699,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         ordemservico,
                                                         centrocusto_id,
                                                         currentTime,
-                                                        id_colaborador);
+                                                        colaborador_id);
 
                                                 Toast.makeText(getApplicationContext(), "Chamado corretivo Nª " + ordemservico + ", aberto com sucesso. ", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(AbrirCorretiva.this, MainActivityAtividades.class);
@@ -749,7 +715,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
                                                 dados.putString("idColaborador", colaborador_id);
-                                                dados.putString("tipo", tipo);
+                                                dados.putString("token", token);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -838,13 +804,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         "",
                                                         "A"
                                                 );
-
-                                                SharedPreferences pref2 = getApplication().getSharedPreferences("info", MODE_PRIVATE);
-                                                String nameColaborador = pref2.getString("name", "");
-                                                String emailColaborador = pref2.getString("email", "");
-                                                String id_colaborador = pref2.getString("id", "");
-                                                String tipoColaborador = pref2.getString("tipo", "");
-
                                                 java.util.Date dt = new java.util.Date();
                                                 java.text.SimpleDateFormat sdf =
                                                         new java.text.SimpleDateFormat("HH:mm:ss");
@@ -858,7 +817,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         ordemservico,
                                                         centrocusto_id,
                                                         currentTime,
-                                                        id_colaborador);
+                                                        colaborador_id);
 
                                                 Toast.makeText(getApplicationContext(), "Chamado corretivo Nª " + ordemservico + ", aberto com sucesso. ", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(AbrirCorretiva.this, MainActivityAtividades.class);
@@ -874,7 +833,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
                                                 dados.putString("idColaborador", colaborador_id);
-                                                dados.putString("tipo", tipo);
+                                                dados.putString("token", token);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -897,7 +856,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                         prioridade = "1";
                         tiposervico = "8";
                         String data7 = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
-                        String dataPadraoBR7 = new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis());
 
                         String URL7 = "http://helper.aplusweb.com.br/aplicativo/abrirCorretiva.php";
 
@@ -965,12 +923,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         "A"
                                                 );
 
-                                                SharedPreferences pref2 = getApplication().getSharedPreferences("info", MODE_PRIVATE);
-                                                String nameColaborador = pref2.getString("name", "");
-                                                String emailColaborador = pref2.getString("email", "");
-                                                String id_colaborador = pref2.getString("id", "");
-                                                String tipoColaborador = pref2.getString("tipo", "");
-
                                                 java.util.Date dt = new java.util.Date();
                                                 java.text.SimpleDateFormat sdf =
                                                         new java.text.SimpleDateFormat("HH:mm:ss");
@@ -984,7 +936,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         ordemservico,
                                                         centrocusto_id,
                                                         currentTime,
-                                                        id_colaborador);
+                                                        colaborador_id);
 
                                                 Toast.makeText(getApplicationContext(), "Chamado corretivo Nª " + ordemservico + ", aberto com sucesso. ", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(AbrirCorretiva.this, MainActivityAtividades.class);
@@ -1000,7 +952,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
                                                 dados.putString("idColaborador", colaborador_id);
-                                                dados.putString("tipo", tipo);
+                                                dados.putString("token", token);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -1021,7 +973,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                         prioridade = "1";
                         tiposervico = "9";
                         String data8 = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
-                        String dataPadraoBR8 = new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis());
 
                         String URL8 = "http://helper.aplusweb.com.br/aplicativo/abrirCorretiva.php";
 
@@ -1088,12 +1039,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         "A"
                                                 );
 
-                                                SharedPreferences pref2 = getApplication().getSharedPreferences("info", MODE_PRIVATE);
-                                                String nameColaborador = pref2.getString("name", "");
-                                                String emailColaborador = pref2.getString("email", "");
-                                                String id_colaborador = pref2.getString("id", "");
-                                                String tipoColaborador = pref2.getString("tipo", "");
-
                                                 java.util.Date dt = new java.util.Date();
                                                 java.text.SimpleDateFormat sdf =
                                                         new java.text.SimpleDateFormat("HH:mm:ss");
@@ -1107,7 +1052,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         ordemservico,
                                                         centrocusto_id,
                                                         currentTime,
-                                                        id_colaborador);
+                                                        colaborador_id);
 
                                                 Toast.makeText(getApplicationContext(), "Chamado corretivo Nª " + ordemservico + ", aberto com sucesso. ", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(AbrirCorretiva.this, MainActivityAtividades.class);
@@ -1123,7 +1068,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("name", name);
                                                 dados.putString("email", email);
                                                 dados.putString("idColaborador", colaborador_id);
-                                                dados.putString("tipo", tipo);
+                                                dados.putString("token", token);
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -1143,7 +1088,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                         prioridade = "1";
                         tiposervico = "10";
                         String data9 = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
-                        String dataPadraoBR9 = new SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis());
+
 
                         String URL9 = "http://helper.aplusweb.com.br/aplicativo/abrirCorretiva.php";
 
@@ -1194,6 +1139,14 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 // Armazena as Preferencias
                                                 dados2.commit();
 
+                                                java.util.Date dt = new java.util.Date();
+                                                java.text.SimpleDateFormat sdf =
+                                                        new java.text.SimpleDateFormat("HH:mm:ss");
+                                                java.text.SimpleDateFormat sdfData =
+                                                        new java.text.SimpleDateFormat("dd/MM/yyyy");
+                                                String currentTime = sdf.format(dt);
+                                                String data = sdfData.format(dt);
+
                                                 myBDGeral.insertOS(
                                                         ordemservico,
                                                         local_id,
@@ -1210,26 +1163,12 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                         "A"
                                                 );
 
-                                                SharedPreferences pref2 = getApplication().getSharedPreferences("info", MODE_PRIVATE);
-                                                String nameColaborador = pref2.getString("name", "");
-                                                String emailColaborador = pref2.getString("email", "");
-                                                String id_colaborador = pref2.getString("id", "");
-                                                String tipoColaborador = pref2.getString("tipo", "");
-
-                                                java.util.Date dt = new java.util.Date();
-                                                java.text.SimpleDateFormat sdf =
-                                                        new java.text.SimpleDateFormat("HH:mm:ss");
-                                                java.text.SimpleDateFormat sdfData =
-                                                        new java.text.SimpleDateFormat("dd/MM/yyyy");
-                                                String currentTime = sdf.format(dt);
-                                                String data = sdfData.format(dt);
-
                                                 //Começar a contar o HH
                                                 myBDGeral.gravarHHInicio(
                                                         ordemservico,
                                                         centrocusto_id,
                                                         currentTime,
-                                                        id_colaborador);
+                                                        colaborador_id);
 
 
                                                     Toast.makeText(getApplicationContext(), "Chamado corretivo Nª " + ordemservico + ", aberto com sucesso. ", Toast.LENGTH_LONG).show();
@@ -1246,7 +1185,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                     dados.putString("name", name);
                                                     dados.putString("email", email);
                                                     dados.putString("idColaborador", colaborador_id);
-                                                    dados.putString("tipo", tipo);
+                                                    dados.putString("token", token);
                                                     intent.putExtras(dados);
                                                     startActivity(intent);
 
@@ -1258,8 +1197,6 @@ public class AbrirCorretiva extends AppCompatActivity {
                                         }
                                     }
                                 });
-
-
                         // FIM INFORMATICA
                         break;
                 }

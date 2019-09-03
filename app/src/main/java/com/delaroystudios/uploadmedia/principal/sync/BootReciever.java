@@ -127,7 +127,7 @@ public class BootReciever extends Service  {
             String name = pref.getString("name", "");
             String email = pref.getString("email", "");
             String colaborador_id = pref.getString("id", "");
-            String tipo = pref.getString("tipo", "");
+            String token = pref.getString("token", "");
 
             String quantidadeOS = String.valueOf(myBDGeral.dbCoutaberta(colaborador_id));
             int quantOS = Integer.parseInt(quantidadeOS);
@@ -158,18 +158,20 @@ public class BootReciever extends Service  {
        JsonArrayRequest request ;
        RequestQueue requestQueue;
         TextView txtQuantImagens, txtHHTotal, txtHorarioInicial, txtVersionAtual, txtLocalizaçãoAtual, txtNameUsuario, txtQuantOSAberta, txtQuantOSSync, txtQuantLocais, txtQuantEquipamentos, txtQuantOSProgramadas, txtQuantOSEncerradas;
-        String email, name, colaborador_id, tipo;
+        String email, name, colaborador_id, token;
         String[] permissoes = new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.CAMERA};
         myBDGeral = new BancoGeral(this);
+
+
         SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
         name = pref.getString("name", "");
         email= pref.getString("email", "");
         colaborador_id = pref.getString("id", "" );
-        tipo = pref.getString("tipo", "");
+        token = pref.getString("token", "");
 
 
 

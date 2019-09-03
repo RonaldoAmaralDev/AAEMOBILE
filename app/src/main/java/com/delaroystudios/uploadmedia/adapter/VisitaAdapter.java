@@ -206,7 +206,7 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.GroceryVie
                     String name = pref.getString("name", "");
                     String email= pref.getString("email", "");
                     String colaborador_id = pref.getString("id", "" );
-                    String tipo = pref.getString("tipo", "");
+                    String token = pref.getString("token", "");
 
                     Intent intent = new Intent(mContext, MainActivityAtividades.class);
                     Bundle dados = new Bundle();
@@ -220,7 +220,7 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.GroceryVie
                     dados.putString("name", name);
                     dados.putString("email", email);
                     dados.putString("idColaborador", colaborador_id);
-                    dados.putString("tipo", tipo);
+                    dados.putString("token", token);
                     intent.putExtras(dados);
                     mContext.startActivity(intent);
 
