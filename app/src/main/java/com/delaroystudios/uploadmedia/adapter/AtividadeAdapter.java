@@ -28,12 +28,19 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.Groc
     BancoGeral myBDGeral;
 
 
-
     public AtividadeAdapter(Context context, Cursor cursor) {
         mContext = context;
         mCursor = cursor;
 
         myBDGeral = new BancoGeral(mContext);
+
+        SharedPreferences pref = mContext.getSharedPreferences("visita", MODE_PRIVATE);
+        os_id = pref.getString("os_id", "");
+        equipamento_id = pref.getString("equipamento_id", "" );
+        local_id = pref.getString("local_id", "");
+        dataplanejamento = pref.getString("dataplanejamento", "");
+        tiposervico = pref.getString("tiposervico", "");
+        id_centrolucro = pref.getString("id_centrolucro", "");
 
 
     }
@@ -62,26 +69,17 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.Groc
             return;
         }
 
+        String idAtividades = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_ID_ITEN));
 
-
-        SharedPreferences pref = mContext.getSharedPreferences("visita", MODE_PRIVATE);
-        os_id = pref.getString("os_id", "");
-        equipamento_id = pref.getString("equipamento_id", "" );
-        local_id = pref.getString("local_id", "");
-        dataplanejamento = pref.getString("dataplanejamento", "");
-        tiposervico = pref.getString("tiposervico", "");
-        id_centrolucro = pref.getString("id_centrolucro", "");
-
-        idAtividade = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_ID_ITEN));
         checklist_id = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_CHECKLIST_ITEN));
         atividade = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_DESCRICAO_ITEN));
 
-        holder.descricao.setText(id_Atividade + "-" + atividade);
+        holder.descricao.setText(idAtividades + "-" + atividade);
 
 
         holder.itemView.setOnClickListener(v -> { // Linguagem Java 8
 
-            Toast.makeText(mContext, "ID ATIVIDADE: " + id_Atividade, Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, "ID ATIVIDADE: " + idAtividades, Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(mContext, Atividade_Antes.class);
             Bundle dados = new Bundle();
@@ -92,7 +90,7 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.Groc
             dados.putString("dataplanejamento", dataplanejamento);
             dados.putString("tiposervico", tiposervico);
             dados.putString("id_centrolucro", id_centrolucro);
-            dados.putString("id_Atividade", idAtividade);
+            dados.putString("id_Atividade", idAtividades);
             dados.putString("atividade", atividade);
             intent.putExtras(dados);
             mContext.startActivity(intent);

@@ -138,7 +138,7 @@ public class BancoGeral extends SQLiteOpenHelper {
 
     private SQLiteDatabase databaseGeral;
     private SQLiteOpenHelper openHelper;
-    private static final int DATABASE_VERSION = 37;
+    private static final int DATABASE_VERSION = 38;
 
 
     public BancoGeral(Context context) {
@@ -229,7 +229,7 @@ public class BancoGeral extends SQLiteOpenHelper {
 
         dbGeral.execSQL("create table " +
                 TABELA_ATIVIDADES + "" +
-                "(itenID INT PRIMARY KEY , " +
+                "(itenID PRIMARY KEY , " +
                 "itenchecklist TEXT, " +
                 "itenDescricao TEXT, " +
                 "status TEXT)");
