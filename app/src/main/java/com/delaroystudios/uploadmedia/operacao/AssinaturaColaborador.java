@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -19,15 +18,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.delaroystudios.uploadmedia.banco.DatabaseHelper;
-import com.delaroystudios.uploadmedia.operacao.os.MainActivityOS;
-import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 import com.delaroystudios.uploadmedia.visitas.MainActivityAtividades;
+import com.delaroystudios.uploadmedia.visitas.VisitasEquipamento;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -247,7 +243,7 @@ public class AssinaturaColaborador extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         myDB.deleteOS(os_id);
-                        Intent intent = new Intent(AssinaturaColaborador.this, MainActivityOS.class);
+                        Intent intent = new Intent(AssinaturaColaborador.this, VisitasEquipamento.class);
                         Bundle dados = new Bundle();
                         dados.putString("equipamento_id", equipamento_id);
                         intent.putExtras(dados);

@@ -50,39 +50,6 @@
         </menu>
     </item>
 
-    <item android:title="Filtros"
-        android:textStyle="bold"
-        app:titleTextColor="@color/white">
-        <menu>
-            <item
-                android:id="@+id/nav_programacaotodos"
-                android:icon="@drawable/agendamp"
-                app:actionLayout="@layout/nav_drawer_counter"
-                android:title="Buscar P/ Locais" />
-            <item
-                android:id="@+id/nav_programacaoequipamento"
-                android:icon="@drawable/agendamp"
-                app:actionLayout="@layout/nav_drawer_counter"
-                android:title="Buscar P/ Equipamentos" />
-        </menu>
-    </item>
-
-    <item android:title="Sincronização"
-        android:textStyle="bold">
-    <menu>
-        <item
-            android:id="@+id/nav_syncVisita"
-            android:icon="@drawable/ic_sync"
-            app:actionLayout="@layout/nav_drawer_counter"
-            android:title="Enviar Visitas"/>
-        <item
-            android:id="@+id/nav_syncTabelas"
-            android:icon="@drawable/ic_sync"
-            android:title="Atualizar Dados" />
-
-    </menu>
-    </item>
-
     <item android:title="Equipamento"
         android:textStyle="bold">
         <menu>

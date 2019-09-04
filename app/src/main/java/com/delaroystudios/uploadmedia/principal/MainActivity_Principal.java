@@ -56,7 +56,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.activity.TelaLogin;
-import com.delaroystudios.uploadmedia.chat.MainActivityChat;
 import com.delaroystudios.uploadmedia.equipamento.CadastrarEquipamento;
 import com.delaroystudios.uploadmedia.equipamento.CentralEquipamento;
 import com.delaroystudios.uploadmedia.facial.FaceDetectRGBActivity;
@@ -73,8 +72,7 @@ import com.delaroystudios.uploadmedia.visitas.Contratos;
 import com.delaroystudios.uploadmedia.model.Equipamento;
 import com.delaroystudios.uploadmedia.model.Contact;
 import com.delaroystudios.uploadmedia.model.OS;
-import com.delaroystudios.uploadmedia.operacao.equipamento.MainActivityEquipamentos;
-import com.delaroystudios.uploadmedia.operacao.os.MainActivityOS;
+import com.delaroystudios.uploadmedia.visitas.Equipamentos;
 import com.delaroystudios.uploadmedia.principal.localizacao.MostrarColaborador;
 import com.delaroystudios.uploadmedia.equipamento.qrcode.LoadingScanner;
 import com.delaroystudios.uploadmedia.principal.sync.BootReciever;
@@ -85,6 +83,7 @@ import com.delaroystudios.uploadmedia.rota.Hoteis;
 import com.delaroystudios.uploadmedia.rota.PostosCombustivel;
 import com.delaroystudios.uploadmedia.rota.Restaurantes;
 import com.delaroystudios.uploadmedia.rota.TrajetoLocal;
+import com.delaroystudios.uploadmedia.visitas.VisitasLocal;
 import com.github.javiersantos.appupdater.AppUpdater;
 import com.github.javiersantos.appupdater.enums.UpdateFrom;
 import com.google.android.gms.common.ConnectionResult;
@@ -328,18 +327,10 @@ public class MainActivity_Principal extends AppCompatActivity
             }
         });
 
-
-        //Colocar quantidado ao lado menu navegação
-        setNavItemCount(R.id.nav_programacaotodos, myBDGeral.dbCountLocais());
-        setNavItemCount(R.id.nav_programacaoequipamento, myBDGeral.dbCountEquipamento());
-        setNavItemCount(R.id.nav_syncVisita, myBDGeral.dbCountEncerradas());
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
-
-
         try {
             toggle.syncState();
 
@@ -351,15 +342,15 @@ public class MainActivity_Principal extends AppCompatActivity
         BottomNavigationView navigation = findViewById(R.id.nav_viewTelaPrincipal);
         navigation.setOnNavigationItemSelectedListener(this);
 
+        //Aparecer todos os Icones e Titulos
+        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+
         //Trocar titulos
         navigation.getMenu().findItem(R.id.navigation_mapa).setTitle("MAPA");
         navigation.getMenu().findItem(R.id.navigation_visitas).setTitle("VISITAS(" + String.valueOf(myBDGeral.dbCountAbertas() + ")"));
         navigation.getMenu().findItem(R.id.navigation_scanner).setTitle("SCANNER");
         navigation.getMenu().findItem(R.id.navigation_chat).setTitle("CHAT");
-        navigation.getMenu().findItem(R.id.navigation_mais).setTitle("MAIS");
-
-        //Aparecer todos os Icones e Titulos
-        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+        navigation.getMenu().findItem(R.id.navigation_syncVisita).setTitle("ENVIAR(" + String.valueOf(myBDGeral.dbCountEncerradas() + ")"));
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -469,11 +460,11 @@ public class MainActivity_Principal extends AppCompatActivity
 
                             txtDataPlanejamento.setText("Data Programação: " + dataplanejamento);
 
-                        //Se clicar para ir em Visitas Abertas
+                        //Se clicar para ir em VisitasLocal Abertas
                         acceptButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent intent = new Intent(MainActivity_Principal.this, MainActivityOS.class);
+                                Intent intent = new Intent(MainActivity_Principal.this, VisitasLocal.class);
                                 Bundle dados = new Bundle();
                                 dados.putString("equipamento_id", equipamento_id);
                                 dados.putString("local_id", local_id);
@@ -672,17 +663,6 @@ public class MainActivity_Principal extends AppCompatActivity
         }
     }
 
-   private void setNavItemCount(@IdRes int itemId, int count) {
-        NavigationView navegationView2 = (NavigationView) findViewById(R.id.nav_view);
-        Menu nav_Menu = navegationView2.getMenu();
-
-        TextView view = (TextView) navegationView2.getMenu().findItem(itemId).getActionView();
-        view.setText(count > 0 ? String.valueOf(count) : null);
-
-    }
-
-
-
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
@@ -717,7 +697,7 @@ public class MainActivity_Principal extends AppCompatActivity
             Notification notification = new Notification.Builder(getApplicationContext(), id)
                     .setSmallIcon(R.drawable.logo)
                     .setContentTitle("Você possui novas visitas para realizar.")
-                    .setContentText("Visitas em aberto: " + quantOS)
+                    .setContentText("VisitasLocal em aberto: " + quantOS)
                     .setSubText("Ultima sync: " + data )
                     .build();
 
@@ -757,38 +737,10 @@ public class MainActivity_Principal extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        //Enviar LOG
-        if (id == R.id.action_enviarLog) {
-
-            Log.w("before","Arquivo LOG salvo !");
-            // File logFile = new File( + "/log.txt" );
-            try {
-                Process process = Runtime.getRuntime().exec("logcat -d");
-                process = Runtime.getRuntime().exec( "logcat -f " + "/storage/emulated/0/PicturesHelper/log.txt");
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    File file = new File("/storage/emulated/0/PicturesHelper/log.txt");
-                    Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                    sharingIntent.setType("text/*");
-                    sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + file.getAbsolutePath()));
-                    startActivity(Intent.createChooser(sharingIntent, "Como deseja enviar"));
-                    Toast.makeText(getApplicationContext(), "Enviado com sucesso, arquivo de LOG. ", Toast.LENGTH_LONG).show();
-
-                } else {
-                    File file = new File("/storage/emulated/0/PicturesHelper/log.txt");
-                    Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                    sharingIntent.setType("text/*");
-                    sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + file.getAbsolutePath()));
-                    startActivity(Intent.createChooser(sharingIntent, "Como deseja enviar"));
-                    Toast.makeText(getApplicationContext(), "Enviado com sucesso, arquivo de LOG. ", Toast.LENGTH_LONG).show();
-                }
-            }catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-
+        //Atualizar os Dados
+        if (id == R.id.action_atualizarDados) {
+            syncDados();
         }
-
         //Deletar Todos os Dados
         if (id == R.id.action_deletar) {
             new AlertDialog.Builder(this)
@@ -826,9 +778,35 @@ public class MainActivity_Principal extends AppCompatActivity
             editor.commit();
             startActivity(voltarLogin);
         }
+        //Enviar LOG
+        if (id == R.id.action_enviarLog) {
+            Log.w("before","Arquivo LOG salvo !");
+            // File logFile = new File( + "/log.txt" );
+            try {
+                Process process = Runtime.getRuntime().exec("logcat -d");
+                process = Runtime.getRuntime().exec( "logcat -f " + "/storage/emulated/0/PicturesHelper/log.txt");
 
-        if(id == R.id.action_sair) {
-            finishAffinity();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    File file = new File("/storage/emulated/0/PicturesHelper/log.txt");
+                    Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                    sharingIntent.setType("text/*");
+                    sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + file.getAbsolutePath()));
+                    startActivity(Intent.createChooser(sharingIntent, "Como deseja enviar"));
+                    Toast.makeText(getApplicationContext(), "Enviado com sucesso, arquivo de LOG. ", Toast.LENGTH_LONG).show();
+
+                } else {
+                    File file = new File("/storage/emulated/0/PicturesHelper/log.txt");
+                    Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                    sharingIntent.setType("text/*");
+                    sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + file.getAbsolutePath()));
+                    startActivity(Intent.createChooser(sharingIntent, "Como deseja enviar"));
+                    Toast.makeText(getApplicationContext(), "Enviado com sucesso, arquivo de LOG. ", Toast.LENGTH_LONG).show();
+                }
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -878,15 +856,60 @@ public class MainActivity_Principal extends AppCompatActivity
         }
 
         if (id == R.id.navigation_chat) {
-
-            Intent intent = new Intent(MainActivity_Principal.this, MainActivityChat.class);
-            Bundle dados = new Bundle();
-            dados.putString("name", name);
-            dados.putString("email", email);
-            dados.putString("id", colaborador_id);
-            dados.putString("token", token);
-            intent.putExtras(dados);
-            startActivity(intent);
+        Toast.makeText(getApplicationContext(), "Em desenvolvimento.", Toast.LENGTH_LONG).show();
+        }
+        if (id == R.id.navigation_syncVisita) {
+            if (verificaConexao() == true) {
+                AsyncHttpClient client = new AsyncHttpClient();
+                RequestParams params = new RequestParams();
+                ArrayList<HashMap<String, String>> userList = controller.getAllUsers();
+                if (userList.size() != 0) {
+                    if (controller.dbSyncNO() != 0) {
+                        ProgressBarStatusVisitas();
+                        params.put("userJson", controller.composeJSONfromSQLite());
+                        client.post("http://helper.aplusweb.com.br/aplicativo/sync2/gravarvisita.php", params, new AsyncHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(String response) {
+                                System.out.println(response);
+                                try {
+                                    JSONArray arr = new JSONArray(response);
+                                    System.out.println(arr.length());
+                                    for (int i = 0; i < arr.length(); i++) {
+                                        JSONObject obj = (JSONObject) arr.get(i);
+                                        System.out.println(obj.get("ordemservico_id"));
+                                        System.out.println(obj.get("status"));
+                                        controller.updateSyncStatus(obj.get("ordemservico_id").toString(), obj.get("status").toString());
+                                        myBDGeral.updateSyncStatus(obj.get("ordemservico_id").toString());
+                                    }
+                                    verificarSePossuiMedicao();
+                                } catch (JSONException e) {
+                                    // TODO Auto-generated catch block
+                                    Toast.makeText(getApplicationContext(), "Erro, favor alguardar alguns miinutos. ", Toast.LENGTH_LONG).show();
+                                    e.printStackTrace();
+                                }
+                            }
+                            @Override
+                            public void onFailure(int statusCode, Throwable error,
+                                                  String content) {
+                                // TODO Auto-generated method stub
+                                if (statusCode == 404) {
+                                    Toast.makeText(getApplicationContext(), "Erro: 404, favor comunir ao TIMG!", Toast.LENGTH_LONG).show();
+                                } else if (statusCode == 500) {
+                                    Toast.makeText(getApplicationContext(), "Erro: 500, favor comunicar TIMG.", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Ocorreu algum erro.", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Você não possui nenhuma visita para enviar. ", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Você não possui nenhuma visita para enviar. ", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "Sem conexão com a Internet !", Toast.LENGTH_LONG).show();
+            }
         }
 
         if (id == R.id.nav_tutorial) {
@@ -1054,89 +1077,8 @@ public class MainActivity_Principal extends AppCompatActivity
             dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
-
-
-
-        } else if (id == R.id.nav_programacaotodos) {
-
-            Intent intent = new Intent(MainActivity_Principal.this, Contratos.class);
-            Bundle dados = new Bundle();
-            dados.putString("name", name);
-            dados.putString("email", email);
-            dados.putString("id", colaborador_id);
-            dados.putString("token", token);
-            intent.putExtras(dados);
-            startActivity(intent);
-
-
-        } else if(id == R.id.nav_programacaoequipamento) {
-
-            Intent intent = new Intent(MainActivity_Principal.this, MainActivityEquipamentos.class);
-            Bundle dados = new Bundle();
-            dados.putString("name", name);
-            dados.putString("email", email);
-            dados.putString("id", colaborador_id);
-            dados.putString("token", token);
-            intent.putExtras(dados);
-            startActivity(intent);
         }
-        else if (id == R.id.nav_syncVisita) {
-            if (verificaConexao() == true) {
-
-                AsyncHttpClient client = new AsyncHttpClient();
-                RequestParams params = new RequestParams();
-                ArrayList<HashMap<String, String>> userList = controller.getAllUsers();
-                if (userList.size() != 0) {
-                    if (controller.dbSyncNO() != 0) {
-                        ProgressBarStatusVisitas();
-                        params.put("userJson", controller.composeJSONfromSQLite());
-                        client.post("http://helper.aplusweb.com.br/aplicativo/sync2/gravarvisita.php", params, new AsyncHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(String response) {
-                                System.out.println(response);
-                                try {
-                                    JSONArray arr = new JSONArray(response);
-                                    System.out.println(arr.length());
-                                    for (int i = 0; i < arr.length(); i++) {
-                                        JSONObject obj = (JSONObject) arr.get(i);
-                                        System.out.println(obj.get("ordemservico_id"));
-                                        System.out.println(obj.get("status"));
-                                        controller.updateSyncStatus(obj.get("ordemservico_id").toString(), obj.get("status").toString());
-                                        myBDGeral.updateSyncStatus(obj.get("ordemservico_id").toString());
-                                    }
-                                    verificarSePossuiMedicao();
-                                } catch (JSONException e) {
-                                    // TODO Auto-generated catch block
-                                    Toast.makeText(getApplicationContext(), "Erro, favor alguardar alguns miinutos. ", Toast.LENGTH_LONG).show();
-                                    e.printStackTrace();
-                                }
-                            }
-                            @Override
-                            public void onFailure(int statusCode, Throwable error,
-                                                  String content) {
-                                // TODO Auto-generated method stub
-                                if (statusCode == 404) {
-                                    Toast.makeText(getApplicationContext(), "Erro: 404, favor comunir ao TIMG!", Toast.LENGTH_LONG).show();
-                                } else if (statusCode == 500) {
-                                    Toast.makeText(getApplicationContext(), "Erro: 500, favor comunicar TIMG.", Toast.LENGTH_LONG).show();
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Ocorreu algum erro.", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        });
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Você não possui nenhuma visita para enviar. ", Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "Você não possui nenhuma visita para enviar. ", Toast.LENGTH_LONG).show();
-                }
-            } else {
-                Toast.makeText(getApplicationContext(), "Sem conexão com a Internet !", Toast.LENGTH_LONG).show();
-            }
-
-        } else if (id == R.id.nav_syncTabelas) {
-            syncDados();
-        } else if (id == R.id.nav_relatorio_contrato) {
+         else if (id == R.id.nav_relatorio_contrato) {
 
             //Perguntar qual contrato ela deseja ver
 
@@ -1549,8 +1491,7 @@ public class MainActivity_Principal extends AppCompatActivity
 
         if (verificaConexao() == true) {
 
-        //    String URL = "http://helper.aplusweb.com.br/aplicativo/atualizarOperacao.php?colaborador_id=" + colaborador_id;
-            String URL = "http://helper.aplusweb.com.br/aplicativo/atualizarOperacao.php?colaborador_id=10";
+            String URL = "http://helper.aplusweb.com.br/aplicativo/atualizarOperacao.php?colaborador_id=" + colaborador_id;
             ProgressBarStatus();
 
             request = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {

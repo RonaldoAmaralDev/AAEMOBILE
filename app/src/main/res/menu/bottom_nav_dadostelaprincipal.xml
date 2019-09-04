@@ -27,9 +27,9 @@
         android:title="Chat" />
 
     <item
-        android:id="@+id/navigation_mais"
-        android:icon="@drawable/ic_mais"
+        android:id="@+id/navigation_syncVisita"
+        android:icon="@drawable/ic_sync_black_24dp"
         android:enabled="true"
-        android:title="Mais" />
+        android:title="Sincronizar" />
 
 </menu>

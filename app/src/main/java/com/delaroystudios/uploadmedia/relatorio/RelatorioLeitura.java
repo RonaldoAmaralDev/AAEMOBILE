@@ -1,25 +1,21 @@
 package com.delaroystudios.uploadmedia.relatorio;
 
 import android.Manifest;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
 import com.delaroystudios.uploadmedia.banco.DatabaseHelper;
-import com.delaroystudios.uploadmedia.operacao.RelatorioVisita;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
@@ -75,10 +76,12 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.Groc
         checklist_id = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_CHECKLIST_ITEN));
         atividade = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_DESCRICAO_ITEN));
 
-        holder.descricao.setText(atividade);
+        holder.descricao.setText(id_Atividade + "-" + atividade);
 
 
         holder.itemView.setOnClickListener(v -> { // Linguagem Java 8
+
+            Toast.makeText(mContext, "ID ATIVIDADE: " + id_Atividade, Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(mContext, Atividade_Antes.class);
             Bundle dados = new Bundle();

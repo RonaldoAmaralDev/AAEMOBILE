@@ -68,7 +68,9 @@ public class BancoGeral extends SQLiteOpenHelper {
     public static final String COL_DESCRICAOPADRAO_OS = "descricaopadrao";
     public static final String COL_STATUS_OS = "status";
     public static final String COL_TIPOSOLICITACAOID_OS = "tiposolicitacao_id";
+    public static final String COL_TIPOSOLICITACAO_DESCRICAO = "tiposolicitacao_descricao";
     public static final String COL_TIPOSERVICOID_OS = "tiposervico_id";
+    public static final String COL_TIPOSERVICO_OS = "tiposervico_descricao";
     public static final String COL_DATAEXECUCAO_OS = "datexecucao";
     public static final String COL_CODIGOCHAMADO_OS = "codigochamado";
     public static final String COL_FLAG_OS = "flag_os";
@@ -136,7 +138,7 @@ public class BancoGeral extends SQLiteOpenHelper {
 
     private SQLiteDatabase databaseGeral;
     private SQLiteOpenHelper openHelper;
-    private static final int DATABASE_VERSION = 36;
+    private static final int DATABASE_VERSION = 37;
 
 
     public BancoGeral(Context context) {
@@ -191,7 +193,9 @@ public class BancoGeral extends SQLiteOpenHelper {
                 "descricaopadrao TEXT," +
                 "status TEXT, " +
                 "tiposolicitacao_id TEXT, " +
+                "tiposolicitacao_descricao TEXT, " +
                 "tiposervico_id TEXT, " +
+                "tiposervico_descricao TEXT, " +
                 "dataexecucao TEXT, " +
                 "codigochamado TEXT, " +
                 "flag_os TEXT, " +
@@ -952,7 +956,7 @@ public class BancoGeral extends SQLiteOpenHelper {
     public Cursor buscaAtividadesAbertas(String checklist_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABELA_ATIVIDADES +
-                " WHERE " + COL_CHECKLIST_ITEN + " = '" + checklist_id + "'" + " AND " + COL_STATUS_ITEN + " = '" + "aberta" + "' ORDER BY " + COL_ID_ITEN;
+                " WHERE " + COL_CHECKLIST_ITEN + " = '" + checklist_id + "'" + " AND " + COL_STATUS_ITEN + " = '" + "aberta" + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
     }

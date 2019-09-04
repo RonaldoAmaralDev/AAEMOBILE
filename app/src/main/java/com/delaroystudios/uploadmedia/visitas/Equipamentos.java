@@ -1,4 +1,4 @@
-package com.delaroystudios.uploadmedia.operacao.equipamento;
+package com.delaroystudios.uploadmedia.visitas;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -21,11 +21,10 @@ import android.view.View;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.adapter.EquipamentoAdapter;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
-import com.delaroystudios.uploadmedia.visitas.Locais;
 import com.delaroystudios.uploadmedia.model.MyDividerItemDecoration;
 
-public class MainActivityEquipamentos extends AppCompatActivity  {
-    private static final String TAG = MainActivityEquipamentos.class.getSimpleName();
+public class Equipamentos extends AppCompatActivity  {
+    private static final String TAG = Equipamentos.class.getSimpleName();
 
     private EquipamentoAdapter mAdapter;
     private SearchView searchView;
@@ -107,7 +106,7 @@ public class MainActivityEquipamentos extends AppCompatActivity  {
             String token = pref.getString("token", "");
 
 
-            Intent intent = new Intent(MainActivityEquipamentos.this, Locais.class);
+            Intent intent = new Intent(Equipamentos.this, Locais.class);
             Bundle dados = new Bundle();
             dados.putString("local_id", local_id);
             dados.putString("centrolucro_id", centrolucro_id);
@@ -132,7 +131,7 @@ public class MainActivityEquipamentos extends AppCompatActivity  {
         String colaborador_id = pref.getString("id", "" );
         String tipo = pref.getString("tipo", "");
 
-        Intent intent = new Intent(MainActivityEquipamentos.this, Locais.class);
+        Intent intent = new Intent(Equipamentos.this, Locais.class);
         Bundle dados = new Bundle();
         dados.putString("local_id", local_id);
         dados.putString("centrolucro_id", centrolucro_id);

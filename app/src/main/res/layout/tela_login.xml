@@ -13,14 +13,14 @@
 
     <ImageView
         android:id="@+id/btnSite"
-        android:layout_width="285dp"
-        android:layout_height="211dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="43dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginLeft="83dp"
+        android:layout_marginTop="62dp"
         android:background="#900028"
         app:srcCompat="@drawable/logo" />
 
@@ -31,8 +31,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="62dp"
-        android:layout_marginLeft="62dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="289dp"
         android:text="Email:"
         android:textColor="@color/white"
@@ -40,7 +41,7 @@
 
     <EditText
         android:id="@+id/emailLogar"
-        android:layout_width="253dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView2"
         android:layout_marginStart="16dp"
@@ -66,7 +67,7 @@
 
     <EditText
         android:id="@+id/senhaLogar"
-        android:layout_width="253dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/emailLogar"
         android:layout_alignTop="@+id/textView3"

@@ -331,10 +331,10 @@ public class CentralEquipamento_Adapter extends RecyclerView.Adapter<CentralEqui
             htmlString.append(new String("</table>"));
 
 
-            //Historico Visitas
+            //Historico VisitasLocal
             htmlString.append(new String("<table width='100%' border='1' cellpadding='2' cellspacing='7'> "));
             htmlString.append(new String("<thbody>"));
-            htmlString.append(new String("<caption><h3 class='arial'><span style='text-align: center;'>Historico Visitas</span></h3></caption>"));
+            htmlString.append(new String("<caption><h3 class='arial'><span style='text-align: center;'>Historico VisitasLocal</span></h3></caption>"));
             htmlString.append(new String("<tr>"));
             htmlString.append(new String("<th align='center' valign='middle'>OS</th>"));
             htmlString.append(new String("<th align='center' valign='middle'>Tipo</th>"));

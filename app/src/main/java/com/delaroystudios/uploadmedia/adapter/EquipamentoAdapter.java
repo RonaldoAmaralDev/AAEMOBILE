@@ -20,10 +20,9 @@ import android.widget.Toast;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
 import com.delaroystudios.uploadmedia.banco.DatabaseHelper;
-import com.delaroystudios.uploadmedia.operacao.Atividade_Antes;
-import com.delaroystudios.uploadmedia.operacao.AbrirCorretiva;
-import com.delaroystudios.uploadmedia.operacao.os.MainActivityOS;
+import com.delaroystudios.uploadmedia.visitas.AbrirCorretiva;
 import com.delaroystudios.uploadmedia.visitas.MainActivityAtividades;
+import com.delaroystudios.uploadmedia.visitas.VisitasEquipamento;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -116,7 +115,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            Intent intent = new Intent(mContext, MainActivityOS.class);
+                            Intent intent = new Intent(mContext, VisitasEquipamento.class);
                             Bundle dados = new Bundle();
                             dados.putString("equipamento_id", id);
                             dados.putString("local_id", local_id);

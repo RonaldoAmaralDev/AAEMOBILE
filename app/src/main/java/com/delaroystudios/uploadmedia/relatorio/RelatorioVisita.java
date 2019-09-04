@@ -1,4 +1,4 @@
-package com.delaroystudios.uploadmedia.operacao;
+package com.delaroystudios.uploadmedia.relatorio;
 
 import android.Manifest;
 import android.app.AlertDialog;

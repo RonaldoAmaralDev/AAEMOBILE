@@ -12,7 +12,6 @@
         android:id="@+id/nav_viewTelaPrincipal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:background="@color/colorShop"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"

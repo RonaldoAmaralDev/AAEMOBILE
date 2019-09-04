@@ -1,7 +1,6 @@
 package com.delaroystudios.uploadmedia.adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -13,19 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
-import com.delaroystudios.uploadmedia.operacao.AssinaturaColaborador;
-import com.delaroystudios.uploadmedia.operacao.Atividade_Antes;
-import com.delaroystudios.uploadmedia.operacao.os.MainActivityOS;
-import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
-import com.delaroystudios.uploadmedia.rota.TrajetoLocal;
 import com.delaroystudios.uploadmedia.visitas.MainActivityAtividades;
 
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 

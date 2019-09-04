@@ -23,14 +23,14 @@ import android.widget.EditText;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.adapter.VeiculosAdapter;
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
-import com.delaroystudios.uploadmedia.operacao.equipamento.MainActivityEquipamentos;
+import com.delaroystudios.uploadmedia.visitas.Equipamentos;
 import com.delaroystudios.uploadmedia.model.MyDividerItemDecoration;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 
 import java.util.List;
 
 public class MainActivityVeiculos  extends AppCompatActivity  {
-    private static final String TAG = MainActivityEquipamentos.class.getSimpleName();
+    private static final String TAG = Equipamentos.class.getSimpleName();
 
     private List<Veiculos> contactList;
     private VeiculosAdapter mAdapter;

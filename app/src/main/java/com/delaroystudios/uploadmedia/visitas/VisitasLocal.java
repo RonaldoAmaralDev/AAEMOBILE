@@ -26,8 +26,8 @@ import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 
 import java.util.Calendar;
 
-public class Visitas extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-    private static final String TAG = Visitas.class.getSimpleName();
+public class VisitasLocal extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = VisitasLocal.class.getSimpleName();
 
     private VisitaAdapter mAdapter;
     private SearchView searchView;
@@ -223,7 +223,7 @@ public class Visitas extends AppCompatActivity implements BottomNavigationView.O
         }
 
         if(id == android.R.id.home) {
-            Intent intent = new Intent(Visitas.this, MainActivity_Principal.class);
+            Intent intent = new Intent(VisitasLocal.this, MainActivity_Principal.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
@@ -241,7 +241,7 @@ public class Visitas extends AppCompatActivity implements BottomNavigationView.O
     public void onBackPressed() {
 
 
-        Intent intent = new Intent(Visitas.this, MainActivity_Principal.class);
+        Intent intent = new Intent(VisitasLocal.this, MainActivity_Principal.class);
         Bundle dados = new Bundle();
         dados.putString("name", name);
         dados.putString("email", email);

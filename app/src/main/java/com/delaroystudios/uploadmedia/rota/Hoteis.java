@@ -16,7 +16,7 @@ import android.webkit.WebViewClient;
 import com.delaroystudios.uploadmedia.R;
 import com.delaroystudios.uploadmedia.equipamento.qrcode.LoadingScanner;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
-import com.delaroystudios.uploadmedia.visitas.Visitas;
+import com.delaroystudios.uploadmedia.visitas.VisitasLocal;
 
 import java.text.SimpleDateFormat;
 
@@ -114,7 +114,7 @@ public class Hoteis extends AppCompatActivity implements BottomNavigationView.On
         }
         if (id == R.id.navigation_visitas) {
 
-            Intent intent = new Intent(this, Visitas.class);
+            Intent intent = new Intent(this, VisitasLocal.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);

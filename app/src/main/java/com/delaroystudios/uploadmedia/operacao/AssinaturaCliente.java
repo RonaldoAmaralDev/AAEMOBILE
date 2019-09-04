@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -21,15 +20,12 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.delaroystudios.uploadmedia.banco.BancoGeral;
 import com.delaroystudios.uploadmedia.banco.DatabaseHelper;
-import com.delaroystudios.uploadmedia.operacao.os.MainActivityOS;
 import com.delaroystudios.uploadmedia.principal.MainActivity_Principal;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import java.io.File;
@@ -338,7 +334,7 @@ public class AssinaturaCliente extends AppCompatActivity {
                         myDBGeral.updateStatusAtividadeAberta(
                                 checklist);
 
-                        Intent intent = new Intent(AssinaturaCliente.this, MainActivityOS.class);
+                        Intent intent = new Intent(AssinaturaCliente.this, MainActivity_Principal.class);
                         Bundle dados = new Bundle();
                         dados.putString("equipamento_id", equipamento_id);
                         intent.putExtras(dados);

@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_enviarLog"
-        android:icon="@drawable/ic_menu_manage"
+        android:id="@+id/action_atualizarDados"
+        android:icon="@drawable/ic_sync_black_24dp"
         android:orderInCategory="100"
-        android:title="Enviar LOG"
+        android:title="Atualizar Dados"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_deletar"
@@ -21,9 +21,9 @@
         android:title="Trocar Usuario"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_sair"
-        android:icon="@drawable/ic_exit"
+        android:id="@+id/action_enviarLog"
+        android:icon="@drawable/ic_menu_manage"
         android:orderInCategory="100"
-        android:title="Fechar Aplicativo"
+        android:title="Enviar LOG"
         app:showAsAction="never" />
 </menu>

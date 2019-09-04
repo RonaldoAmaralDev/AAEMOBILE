@@ -140,7 +140,7 @@ public class BootReciever extends Service  {
             Notification notification = new Notification.Builder(getApplicationContext(), id)
                     .setSmallIcon(R.drawable.logo)
                     .setContentTitle("Você possui novas visitas para realizar.")
-                    .setContentText("Visitas em aberto: " + quantOS)
+                    .setContentText("VisitasLocal em aberto: " + quantOS)
                     .setSubText("Ultima sync: " + dataSync)
                     .build();
 

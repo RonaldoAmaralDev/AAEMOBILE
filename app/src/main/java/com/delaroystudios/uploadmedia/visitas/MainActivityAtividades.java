@@ -237,7 +237,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
                                 checklist_id);
 
 
-                        Intent intent = new Intent(MainActivityAtividades.this, Visitas.class);
+                        Intent intent = new Intent(MainActivityAtividades.this, VisitasLocal.class);
                         Bundle dados = new Bundle();
                         dados.putString("equipamento_id", equipamento_id);
                         dados.putString("name", name);
@@ -265,7 +265,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
                         myDBGeral.updateStatusAtividadeAberta(
                                 checklist_id);
 
-                        Intent intent = new Intent(MainActivityAtividades.this, Visitas.class);
+                        Intent intent = new Intent(MainActivityAtividades.this, VisitasLocal.class);
                         Bundle dados = new Bundle();
                         dados.putString("name", name);
                         dados.putString("email", email);

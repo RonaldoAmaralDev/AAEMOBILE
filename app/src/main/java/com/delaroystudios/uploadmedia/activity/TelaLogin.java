@@ -173,16 +173,24 @@ public class TelaLogin extends AppCompatActivity {
                                         try {
                                                   // Armazenar dados no APP
                                                   String token = result.get("token").getAsString();
+                                                  //Pega dados na tabela users
                                                   JsonObject rates = (JsonObject) result.get("user");
-                                                  String id = rates.get("id").getAsString();
                                                   String name = rates.get("name").getAsString();
                                                   String email = rates.get("email").getAsString();
+
+                                                  //Pega dados na tabela colaboradors
+                                                  JsonObject colaboradors = (JsonObject) result.get("colaborador");
+                                                  String id = colaboradors.get("id").getAsString();
+                                                  String matricula = colaboradors.get("matricula").getAsString();
+                                                  String celular = colaboradors.get("celular_corp").getAsString();
 
                                                   SharedPreferences.Editor pref = getSharedPreferences("info", MODE_PRIVATE).edit();
                                                   pref.putString("id", id);
                                                   pref.putString("name", name);
                                                   pref.putString("email", email);
                                                   pref.putString("token", token);
+                                                  pref.putString("matricula", matricula);
+                                                  pref.putString("celular", celular);
 
                                                   // Armazena as Preferencias
                                                   pref.commit();

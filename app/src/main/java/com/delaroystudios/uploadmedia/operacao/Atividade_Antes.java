@@ -124,6 +124,9 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
         dataplanejamento = dados.getString("dataplanejamento");
         atividade = dados.getString("atividade");
 
+        Toast.makeText(getApplicationContext(), "ID ATIVIDADE ANTES: " + id_Atividade, Toast.LENGTH_LONG).show();
+
+
         //Coloca a atividade
         txtAtividade.setText(atividade);
 
@@ -309,7 +312,7 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
             //Verifica se é Corretiva, se for não pode por NA
             int tiposervicoINT = Integer.parseInt(tiposervico);
             if(tiposervicoINT == 2) {
-                Toast.makeText(getApplicationContext(), "Visitas corretivas não são possiveis de marcar Não se Aplica !", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "VisitasLocal corretivas não são possiveis de marcar Não se Aplica !", Toast.LENGTH_LONG).show();
             } else {
                 boolean isInserted = myDb.insertNA(
                         os_id,
