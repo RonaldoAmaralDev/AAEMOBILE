@@ -70,16 +70,12 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.Groc
         }
 
         String idAtividades = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_ID_ITEN));
-
+        String descricaoAtividade = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_DESCRICAO_ITEN));
         checklist_id = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_CHECKLIST_ITEN));
-        atividade = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_DESCRICAO_ITEN));
 
-        holder.descricao.setText(idAtividades + "-" + atividade);
-
+        holder.descricao.setText(descricaoAtividade);
 
         holder.itemView.setOnClickListener(v -> { // Linguagem Java 8
-
-            Toast.makeText(mContext, "ID ATIVIDADE: " + idAtividades, Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(mContext, Atividade_Antes.class);
             Bundle dados = new Bundle();
@@ -91,7 +87,7 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.Groc
             dados.putString("tiposervico", tiposervico);
             dados.putString("id_centrolucro", id_centrolucro);
             dados.putString("id_Atividade", idAtividades);
-            dados.putString("atividade", atividade);
+            dados.putString("atividade", descricaoAtividade);
             intent.putExtras(dados);
             mContext.startActivity(intent);
 

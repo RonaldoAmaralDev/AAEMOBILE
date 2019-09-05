@@ -124,9 +124,6 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
         dataplanejamento = dados.getString("dataplanejamento");
         atividade = dados.getString("atividade");
 
-        Toast.makeText(getApplicationContext(), "ID ATIVIDADE ANTES: " + id_Atividade, Toast.LENGTH_LONG).show();
-
-
         //Coloca a atividade
         txtAtividade.setText(atividade);
 
