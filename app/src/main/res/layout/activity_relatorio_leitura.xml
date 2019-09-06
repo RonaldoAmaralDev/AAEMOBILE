@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorShop"
-    tools:context="com.delaroystudios.uploadmedia.relatorio.RelatorioLeitura">
+    tools:context=".relatorio.RelatorioLeitura">
 
 </android.support.constraint.ConstraintLayout>

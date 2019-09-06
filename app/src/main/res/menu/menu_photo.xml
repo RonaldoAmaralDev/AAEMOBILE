@@ -10,6 +10,7 @@
         android:icon="@drawable/ic_switch"
         android:orderInCategory="0"
         android:title="Select Image"
+        app:itemIconTint="@color/white"
         app:showAsAction="always" />
 
 </menu>

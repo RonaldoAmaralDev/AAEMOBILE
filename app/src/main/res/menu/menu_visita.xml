@@ -7,25 +7,30 @@
     <item
         android:id="@+id/action_calendario"
         android:title="Filtrar Data"
+        app:itemIconTint="@color/white"
         android:icon="@drawable/ic_data"
         app:showAsAction="always">
         <menu>
             <item
                 android:id="@+id/navegation_hoje"
+                app:itemIconTint="@color/white"
                 android:icon="@drawable/ic_data"
                 android:title="Hoje" />
             <item
                 android:id="@+id/navegation_amanha"
                 android:icon="@drawable/ic_data"
+                app:itemIconTint="@color/white"
                 android:title="Amanha" />
-            <item
-                android:id="@+id/navegation_semana"
-                android:icon="@drawable/ic_data"
-                android:title="Esta Semana" />
             <item
                 android:id="@+id/navegation_mes"
                 android:icon="@drawable/ic_data"
+                app:itemIconTint="@color/white"
                 android:title="Este Mês" />
+            <item
+                android:id="@+id/navegation_ano"
+                android:icon="@drawable/ic_data"
+                app:itemIconTint="@color/white"
+                android:title="Este Ano" />
 
         </menu>
     </item>
@@ -36,6 +41,7 @@
         android:icon="@drawable/ic_search_black_24dp"
         android:orderInCategory="100"
         android:title="@string/action_search"
+        app:itemIconTint="@color/white"
         app:showAsAction="always"
         app:actionViewClass="android.support.v7.widget.SearchView" />
 </menu>

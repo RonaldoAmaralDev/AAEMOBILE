@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "928059075721",
+    "firebase_url": "https://aae-mobile-d83a0.firebaseio.com",
+    "project_id": "aae-mobile-d83a0",
+    "storage_bucket": "aae-mobile-d83a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928059075721:android:d5c39994cf0879fff9ea58",
+        "android_client_info": {
+          "package_name": "br.com.araujoabreu.timg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "928059075721-pkg3367vl7t2ddbqakri5js1krnl54b9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.araujoabreu.timg",
+            "certificate_hash": "2ed68b4bde0d2f65ecbc956bb5d89e61900ffd4e"
+          }
+        },
+        {
+          "client_id": "928059075721-chnbl65makjdo8ee9ba98nglm8c438lr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiJd34eYzcwq1OoZE0iO_9UL1utqD2hq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "928059075721-chnbl65makjdo8ee9ba98nglm8c438lr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

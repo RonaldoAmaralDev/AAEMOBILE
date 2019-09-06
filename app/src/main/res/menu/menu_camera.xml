@@ -11,6 +11,7 @@
         android:icon="@drawable/ic_switch"
         android:orderInCategory="0"
         android:title="Switch Camera"
+        app:itemIconTint="@color/white"
         app:showAsAction="always" />
 
 

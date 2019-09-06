@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.delaroystudios.uploadmedia">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="br.com.araujoabreu.timg">
 
     <application
         android:allowBackup="false"
@@ -12,6 +13,8 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".chat.Conversa"></activity>
+        <activity android:name=".chat.PrincipalChat" />
         <activity
             android:name=".visitas.VisitasEquipamento"
             android:screenOrientation="portrait"
@@ -166,16 +169,16 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".operacao.Atividade_Antes"
+            android:name=".visitas.Atividade_Antes"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".operacao.Atividade_Depois"
+            android:name=".visitas.Atividade_Depois"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".operacao.AssinaturaCliente"
+            android:name=".visitas.AssinaturaCliente"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".operacao.AssinaturaColaborador"
+            android:name=".visitas.AssinaturaColaborador"
             android:screenOrientation="portrait" />
         <activity
             android:name=".equipamento.CadastrarEquipamento"
@@ -209,7 +212,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDsD6mwftKItUvWTIQX4x6p8QPhQgZp0Gk" />
+            android:value="AIzaSyB5DHkL5RHr5KFfJI73G6QYVqqTnE77zgc" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -231,6 +234,9 @@
         </receiver>
 
         <service android:name=".principal.sync.BootReciever" />
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
     </application>
 
     <supports-screens
