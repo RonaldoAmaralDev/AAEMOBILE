@@ -57,6 +57,7 @@ import com.android.volley.toolbox.Volley;
 import br.com.araujoabreu.timg.BuildConfig;
 import br.com.araujoabreu.timg.R;
 import br.com.araujoabreu.timg.activity.TelaLogin;
+import br.com.araujoabreu.timg.chat.PrincipalChat;
 import br.com.araujoabreu.timg.equipamento.CadastrarEquipamento;
 import br.com.araujoabreu.timg.equipamento.CentralEquipamento;
 import br.com.araujoabreu.timg.facial.FaceDetectRGBActivity;
@@ -856,15 +857,15 @@ public class MainActivity_Principal extends AppCompatActivity
         }
 
         if (id == R.id.navigation_chat) {
-          //  Intent intent = new Intent(MainActivity_Principal.this, PrincipalChat.class);
-         //   Bundle dados = new Bundle();
-         //   dados.putString("name", name);
-         //   dados.putString("email", email);
-         //   dados.putString("id", colaborador_id);
-        //    dados.putString("token", token);
-        //    intent.putExtras(dados);
-        //    startActivity(intent);
-            Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(MainActivity_Principal.this, PrincipalChat.class);
+            Bundle dados = new Bundle();
+            dados.putString("name", name);
+            dados.putString("email", email);
+            dados.putString("id", colaborador_id);
+            dados.putString("token", token);
+            intent.putExtras(dados);
+            startActivity(intent);
+          //  Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
         }
         if (id == R.id.navigation_syncVisita) {
             if (verificaConexao() == true) {
