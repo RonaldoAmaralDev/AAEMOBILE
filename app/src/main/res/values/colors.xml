@@ -69,4 +69,8 @@
 
     <color name="colorRouteLine">#212121</color>
 
+    <color name="colorPrimaryChat">#3eaeae</color>
+    <color name="colorPrimaryDarkChat">#226e6e</color>
+    <color name="colorAccentChat">#226e6e</color>
+
 </resources>

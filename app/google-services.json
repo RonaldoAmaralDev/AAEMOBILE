@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "928059075721-rq9qi8k0j3kcl9ss6jgb6fbctpmglkg0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.araujoabreu.timg",
+            "certificate_hash": "2ed68b4bde0d2f65ecbc956bb5d89e61900ffd4e"
+          }
+        },
+        {
+          "client_id": "928059075721-14uni1porb756apnb9imoos32j8g8adh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.araujoabreu.timg",
+            "certificate_hash": "7f98481348d0dbb213c6025f259bfc571ec2c9f0"
+          }
+        },
+        {
           "client_id": "928059075721-5r1o90unlt30pdupj1tpjq6qk5pocirp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

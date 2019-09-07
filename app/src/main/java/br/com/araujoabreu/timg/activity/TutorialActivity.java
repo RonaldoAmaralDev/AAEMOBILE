@@ -12,7 +12,6 @@ import android.view.WindowManager;
 import br.com.araujoabreu.timg.R;
 import br.com.araujoabreu.timg.adapter.TutorialAdapter;
 import br.com.araujoabreu.timg.model.TutorialVideos;
-import br.com.araujoabreu.timg.principal.MainActivity_Principal;
 
 import java.util.Vector;
 

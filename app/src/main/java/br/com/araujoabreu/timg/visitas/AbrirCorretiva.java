@@ -13,10 +13,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-import br.com.araujoabreu.timg.BuildConfig;
 import br.com.araujoabreu.timg.R;
 import br.com.araujoabreu.timg.banco.BancoGeral;
-import br.com.araujoabreu.timg.principal.MainActivity_Principal;
+import br.com.araujoabreu.timg.activity.MainActivity_Principal;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;

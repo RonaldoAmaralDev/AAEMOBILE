@@ -24,7 +24,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="25dp"
-        tools:context=".principal.localizacao.MostrarColaborador" />
+        tools:context=".dev.localizacao.MostrarColaborador" />
 
     <ImageView
         android:id="@+id/ic_gps"

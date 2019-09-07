@@ -19,8 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import br.com.araujoabreu.timg.principal.MainActivity_Principal;
-import br.com.araujoabreu.timg.principal.Permissões;
+import br.com.araujoabreu.timg.helper.Permissões;
 import com.google.gson.JsonObject;
 import br.com.araujoabreu.timg.R;
 import com.koushikdutta.async.future.FutureCallback;

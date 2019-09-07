@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".principal.MainActivity_Principal">
+        tools:context=".activity.MainActivity_Principal">
 
         <AutoCompleteTextView
             android:id="@+id/autoCompleteTextView"

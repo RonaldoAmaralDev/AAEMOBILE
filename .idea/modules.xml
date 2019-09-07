@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AAEMOBILE.iml" filepath="$PROJECT_DIR$/AAEMOBILE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/AAEMOBILE-app.iml" filepath="$PROJECT_DIR$/app/AAEMOBILE-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/HELPER.iml" filepath="$PROJECT_DIR$/HELPER.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

@@ -14,11 +14,10 @@ import android.os.Bundle;
 import android.util.Log;
 
 
-import br.com.araujoabreu.timg.BuildConfig;
 import br.com.araujoabreu.timg.R;
 import br.com.araujoabreu.timg.banco.BancoGeral;
 import br.com.araujoabreu.timg.banco.DatabaseHelper;
-import br.com.araujoabreu.timg.principal.MainActivity_Principal;
+import br.com.araujoabreu.timg.activity.MainActivity_Principal;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;

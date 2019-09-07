@@ -23,13 +23,12 @@ import android.view.View;
 import android.widget.Toast;
 
 
-import br.com.araujoabreu.timg.BuildConfig;
 import br.com.araujoabreu.timg.R;
 import br.com.araujoabreu.timg.adapter.AtividadeAdapter;
 import br.com.araujoabreu.timg.banco.BancoGeral;
 import br.com.araujoabreu.timg.banco.DatabaseHelper;
 import br.com.araujoabreu.timg.model.MyDividerItemDecoration;
-import br.com.araujoabreu.timg.principal.MainActivity_Principal;
+import br.com.araujoabreu.timg.activity.MainActivity_Principal;
 
 
 public class MainActivityAtividades extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {

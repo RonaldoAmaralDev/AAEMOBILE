@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 import br.com.araujoabreu.timg.banco.BancoGeral;
 import br.com.araujoabreu.timg.banco.DatabaseHelper;
-import br.com.araujoabreu.timg.principal.MainActivity_Principal;
+import br.com.araujoabreu.timg.activity.MainActivity_Principal;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,7 +34,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 
-import br.com.araujoabreu.timg.BuildConfig;
 import br.com.araujoabreu.timg.R;
 
 

@@ -25,7 +25,7 @@ import br.com.araujoabreu.timg.R;
 import br.com.araujoabreu.timg.equipamento.GerarQRCODE;
 import br.com.araujoabreu.timg.banco.BancoGeral;
 import br.com.araujoabreu.timg.visitas.AbrirCorretiva;
-import br.com.araujoabreu.timg.principal.MainActivity_Principal;
+import br.com.araujoabreu.timg.activity.MainActivity_Principal;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.itextpdf.text.Document;
