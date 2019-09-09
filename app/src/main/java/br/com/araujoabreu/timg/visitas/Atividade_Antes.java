@@ -273,6 +273,12 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String currentTime = sdf.format(dt);
 
+        SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
+        String name = pref.getString("name", "");
+        String email = pref.getString("email", "");
+        String colaborador_id = pref.getString("id", "" );
+        String token = pref.getString("token", "");
+
         //Se clicar em continuar visita
         if (id == R.id.action_confirmar) {
             if (imageView.getDrawable() == null) {
@@ -340,13 +346,6 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
                             checklist_id
                     );
 
-                    SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
-                    String name = pref.getString("name", "");
-                    String email = pref.getString("email", "");
-                    String colaborador_id = pref.getString("id", "" );
-                    String token = pref.getString("token", "");
-
-
                     Intent intent = new Intent(Atividade_Antes.this, MainActivityAtividades.class);
                     Bundle dados = new Bundle();
                     dados.putString("os_id", os_id);
@@ -397,12 +396,6 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
         //Se pressionar para voltar atividade
         if(id == android.R.id.home) {
             //Volta para MainActivityAtividades
-
-            SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
-            String name = pref.getString("name", "");
-            String email= pref.getString("email", "");
-            String colaborador_id = pref.getString("id", "" );
-            String token = pref.getString("token", "");
 
             Intent intent = new Intent(Atividade_Antes.this, MainActivityAtividades.class);
             Bundle dados = new Bundle();

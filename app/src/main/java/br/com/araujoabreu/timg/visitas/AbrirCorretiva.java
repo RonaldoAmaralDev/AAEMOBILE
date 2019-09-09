@@ -255,6 +255,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("tiposervico", "2");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
+                                                dados.putString("id_Atividade", "94");
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -356,6 +357,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("tiposervico", "2");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
+                                                dados.putString("id_Atividade", "94");
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -458,8 +460,9 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("tiposervico", "2");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
+                                                dados.putString("id_Atividade", "94");
                                                 intent.putExtras(dados);
-                                                startActivity(intent);
+                                                startActivity(intent);;
 
                                             } else {
                                                 Toast.makeText(AbrirCorretiva.this, "Ocorreu um erro, aguarde alguns instantes !", Toast.LENGTH_LONG).show();
@@ -540,9 +543,10 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("equipamento_id", id_equipamento);
                                                 dados.putString("local_id", local_id);
                                                 dados.putString("dataplanejamento", data);
-                                                dados.putString("tiposervico", tiposervico);
+                                                dados.putString("tiposervico", "2");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
+                                                dados.putString("id_Atividade", "94");
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -647,6 +651,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("tiposervico", "2");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
+                                                dados.putString("id_Atividade", "94");
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -752,6 +757,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("tiposervico", "2");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
+                                                dados.putString("id_Atividade", "94");
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -857,6 +863,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("tiposervico", "2");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
+                                                dados.putString("id_Atividade", "94");
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -959,6 +966,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("tiposervico", "2");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
+                                                dados.putString("id_Atividade", "94");
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
@@ -1063,6 +1071,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("tiposervico", "2");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
+                                                dados.putString("id_Atividade", "94");
                                                 intent.putExtras(dados);
                                                 startActivity(intent);
 
