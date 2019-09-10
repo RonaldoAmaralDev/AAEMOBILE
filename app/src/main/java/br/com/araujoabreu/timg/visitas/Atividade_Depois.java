@@ -46,7 +46,7 @@ public class Atividade_Depois extends AppCompatActivity {
     private static final int CAMERA_PIC_REQUEST2 = 1111;
     private static final int CAMERA_PIC_REQUEST3 = 1111;
     public static final int MEDIA_TYPE_IMAGE = 1;
-    private String os_id, foto1a, foto2a, foto3a, foto1d, foto2d, foto3d, checklist_id, id_Atividade;
+    private String os_id, foto1a, foto2a, foto3a, foto1d, foto2d, foto3d, checklist_id, id_Atividade, email, idColaborador, name, token;
     private String caminho1a, caminho2a, caminho3a, caminho1d, caminho2d, caminho3d, update_Status, data, inicio, fim;
     private String medicao2, dataplanejamento, tiposervico, local_id, id_centrolucro, latitude, longitude, equipamento_id, sigla, observacaoantes, situacao, atividade, medida1;
     private int index;
@@ -100,6 +100,10 @@ public class Atividade_Depois extends AppCompatActivity {
         local_id = dados.getString("local_id");
         id_centrolucro = dados.getString("id_centrolucro");
         dataplanejamento = dados.getString("dataplanejamento");
+        name = dados.getString("name");
+        email = dados.getString("email");
+        idColaborador = dados.getString("idColaborador");
+        token = dados.getString("token");
 
         txtAtividade.setText(atividade);
         txtLatitude.setText(latitude);
@@ -242,11 +246,46 @@ public class Atividade_Depois extends AppCompatActivity {
         java.text.SimpleDateFormat sdfDataEncerramento =
                 new java.text.SimpleDateFormat("yyyy/MM/dd");
         String dataencerramento = sdfDataEncerramento.format(dt);
+        int int_tiposervico = Integer.parseInt(tiposervico);
 
         //Se clicar em continuar visita
         if (id == R.id.action_confirmar) {
             if (imageView.getDrawable() == null) {
                 Toast.makeText(getApplicationContext(), "Você deve tirar pelo menos a 1ª Foto !", Toast.LENGTH_LONG).show();
+            }
+            //Se for uma visita corretiva ele irá direto para Assinatura
+            else if(int_tiposervico == 2) {
+
+                myDb.updateOS(
+                        os_id,
+                        txtObservacao.getText().toString(),
+                        currentTime,
+                        dataencerramento,
+                        "/assets/os/" + os_id + "_assinaturaColaborador.jpg",
+                        "no");
+
+                //Encerra Atividade
+                myDBGeral.updateStatusAtividade(
+                        id_Atividade,
+                        checklist_id
+                );
+
+                Intent intent = new Intent(Atividade_Depois.this, AssinaturaColaborador.class);
+                Bundle dados = new Bundle();
+                dados.putString("os_id", os_id);
+                dados.putString("checklist", checklist_id);
+                dados.putString("equipamento_id", equipamento_id);
+                dados.putString("local_id", local_id);
+                dados.putString("idAtividade", id_Atividade);
+                dados.putString("tiposervico", tiposervico);
+                dados.putString("dataplanejamento", dataplanejamento);
+                dados.putString("id_centrolucro", id_centrolucro);
+                dados.putString("name", name);
+                dados.putString("email", email);
+                dados.putString("colaborador_id", idColaborador);
+                dados.putString("token", token);
+                intent.putExtras(dados);
+                startActivity(intent);
             } else {
                 myDb.updateOS(
                         os_id,
@@ -262,13 +301,6 @@ public class Atividade_Depois extends AppCompatActivity {
                         checklist_id
                 );
 
-                SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
-                String name = pref.getString("name", "");
-                String email = pref.getString("email", "");
-                String colaborador_id = pref.getString("id", "");
-                String token = pref.getString("token", "");
-
-
                 Intent intent = new Intent(Atividade_Depois.this, MainActivityAtividades.class);
                 Bundle dados = new Bundle();
                 dados.putString("os_id", os_id);
@@ -280,7 +312,7 @@ public class Atividade_Depois extends AppCompatActivity {
                 dados.putString("centrocusto_id", id_centrolucro);
                 dados.putString("name", name);
                 dados.putString("email", email);
-                dados.putString("colaborador_id", colaborador_id);
+                dados.putString("colaborador_id", idColaborador);
                 dados.putString("token", token);
                 intent.putExtras(dados);
                 startActivity(intent);

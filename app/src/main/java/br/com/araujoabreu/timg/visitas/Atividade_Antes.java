@@ -307,6 +307,10 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
                 dados.putString("local_id", local_id);
                 dados.putString("tiposervico", tiposervico);
                 dados.putString("dataplanejamento", dataplanejamento);
+                dados.putString("name", name);
+                dados.putString("email", email);
+                dados.putString("idColaborador", colaborador_id);
+                dados.putString("token", token);
                 intent.putExtras(dados);
                 startActivity(intent);
             }
