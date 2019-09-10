@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".visitas.MainActivityAtividades">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:itemIconTint="@color/white"
+        android:orderInCategory="100"
+        android:title="@string/action_search"
+        app:showAsAction="always"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+
+    <item
+        android:id="@+id/action_anexo"
+        android:icon="@drawable/ic_chat_anexo"
+        app:itemIconTint="@color/white"
+        android:orderInCategory="100"
+        android:title="Anexar"
+        app:showAsAction="always" />
+
+</menu>
