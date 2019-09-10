@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <br.com.araujoabreu.timg.facial.ui.FaceView
+    <br.com.araujoabreu.timg.dev.facial.ui.FaceView
         android:id="@+id/faceView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

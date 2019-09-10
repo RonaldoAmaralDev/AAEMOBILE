@@ -20,13 +20,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
-import br.com.araujoabreu.timg.BuildConfig;
 import br.com.araujoabreu.timg.R;
 import br.com.araujoabreu.timg.adapter.VeiculosAdapter;
 import br.com.araujoabreu.timg.banco.BancoGeral;
 import br.com.araujoabreu.timg.visitas.Equipamentos;
 import br.com.araujoabreu.timg.model.MyDividerItemDecoration;
-import br.com.araujoabreu.timg.principal.MainActivity_Principal;
+import br.com.araujoabreu.timg.activity.MainActivity_Principal;
 
 import java.util.List;
 

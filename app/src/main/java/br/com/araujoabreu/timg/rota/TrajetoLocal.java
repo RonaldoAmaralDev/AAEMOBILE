@@ -13,10 +13,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 
-import br.com.araujoabreu.timg.BuildConfig;
 import br.com.araujoabreu.timg.R;
 
-import br.com.araujoabreu.timg.principal.MainActivity_Principal;
+import br.com.araujoabreu.timg.activity.MainActivity_Principal;
 
 public class TrajetoLocal extends AppCompatActivity {
 

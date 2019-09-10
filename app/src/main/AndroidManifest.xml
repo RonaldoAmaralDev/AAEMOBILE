@@ -13,8 +13,44 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".chat.Conversa"></activity>
-        <activity android:name=".chat.PrincipalChat" />
+        <activity
+            android:name=".activity.TelaOpcaoChatActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+           android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activity.TelaOpcaoChatActivity" />
+        <activity android:name=".activity.MainActivityChat"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".activity.ChatLoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activity.TelaOpcaoChatActivity"/>
+
+        <activity android:name=".activity.MessageActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.ResetPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activity.ChatLoginActivity" />
+
+
+        <service android:name=".notificacao.MyFirebaseIdService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service android:name="notificacao.MyFirebaseMessaging"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
         <activity
             android:name=".visitas.VisitasEquipamento"
             android:screenOrientation="portrait"
@@ -57,10 +93,10 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".facial.PhotoDetectActivity"
+            android:name=".dev.facial.PhotoDetectActivity"
             android:screenOrientation="fullSensor" />
         <activity
-            android:name=".facial.FaceDetectRGBActivity"
+            android:name=".dev.facial.FaceDetectRGBActivity"
             android:screenOrientation="fullSensor" />
         <activity android:name=".relatorio.RelatorioContrato" />
         <activity android:name=".relatorio.RelatorioLeitura" />
@@ -145,7 +181,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".principal.MainActivity_Principal"
+            android:name=".activity.MainActivity_Principal"
             android:label="Menu Principal"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -153,10 +189,10 @@
             android:name=".equipamento.qrcode.ScannerQRCODE"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".principal.localizacao.MostrarColaborador"
+            android:name=".dev.localizacao.MostrarColaborador"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".principal.localizacao.frota.locais.local.MainActivity"
+            android:name=".dev.localizacao.frota.locais.local.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -190,11 +226,11 @@
             android:name=".activity.tutorial.IntroActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".principal.localizacao.frota.locais.local.HomeActivity"
+            android:name=".dev.localizacao.frota.locais.local.HomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".principal.configuracoes.SettingsActivity"
+            android:name=".dev.configuracoes.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".visitas.Contratos"
@@ -227,13 +263,13 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <receiver android:name=".principal.sync.BootCompletedIntentReceiver">
+        <receiver android:name=".helper.sync.BootCompletedIntentReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".principal.sync.BootReciever" />
+        <service android:name=".helper.sync.BootReciever" />
 
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
