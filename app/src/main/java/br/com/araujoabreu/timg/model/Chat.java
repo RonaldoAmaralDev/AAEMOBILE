@@ -6,13 +6,17 @@ public class Chat {
     private String receiver;
     private String message;
     private String data;
+    private String tipo;
+    private String caminho;
     private boolean isseen;
 
-    public Chat(String sender, String receiver, String message, String data, boolean isseen) {
+    public Chat(String sender, String receiver, String message, String data, String tipo, String caminho, boolean isseen) {
         this.sender = sender;
         this.receiver = receiver;
         this.message = message;
         this.data = data;
+        this.tipo = tipo;
+        this.caminho = caminho;
         this.isseen = isseen;
     }
 
@@ -47,6 +51,22 @@ public class Chat {
 
     public String getData() {
         return data;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setCaminho(String caminho) {
+        this.caminho = caminho;
+    }
+
+    public String getCaminho() {
+        return caminho;
     }
 
     public boolean isIsseen() {

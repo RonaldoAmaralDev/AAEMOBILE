@@ -176,7 +176,7 @@ public class TelaLogin extends AppCompatActivity {
                                                   JsonObject colaboradors = (JsonObject) result.get("colaborador");
                                                   String id = colaboradors.get("id").getAsString();
                                                   String matricula = colaboradors.get("matricula").getAsString();
-                                                  String celular = colaboradors.get("celular_corp").getAsString();
+                                                  String celular = colaboradors.get("celular").getAsString();
 
                                                   SharedPreferences.Editor pref = getSharedPreferences("info", MODE_PRIVATE).edit();
                                                   pref.putString("id", id);

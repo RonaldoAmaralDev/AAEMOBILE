@@ -33,7 +33,7 @@ public class VisitasLocal extends AppCompatActivity implements BottomNavigationV
 
     private VisitaAdapter mAdapter;
     private SearchView searchView;
-    private String name, email, colaborador_id, token, local_id;
+    private String name, email, colaborador_id, token, local_id, centrolucro_id;
     BancoGeral myDBGeral;
 
 
@@ -58,6 +58,7 @@ public class VisitasLocal extends AppCompatActivity implements BottomNavigationV
         Bundle dados = intent.getExtras();
 
         local_id = dados.getString("local_id");
+        centrolucro_id = dados.getString("centrolucro_id");
 
         // toolbar fancy stuff
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -222,8 +223,9 @@ public class VisitasLocal extends AppCompatActivity implements BottomNavigationV
         }
 
         if(id == android.R.id.home) {
-            Intent intent = new Intent(VisitasLocal.this, MainActivity_Principal.class);
+            Intent intent = new Intent(VisitasLocal.this, Locais.class);
             Bundle dados = new Bundle();
+            dados.putString("centrolucro_id", centrolucro_id);
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);

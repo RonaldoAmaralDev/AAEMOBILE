@@ -344,7 +344,7 @@ public class MainActivity_Principal extends AppCompatActivity
 
         //Trocar titulos
         navigation.getMenu().findItem(R.id.navigation_mapa).setTitle("MAPA");
-        navigation.getMenu().findItem(R.id.navigation_visitas).setTitle("VISITAS(" + String.valueOf(myBDGeral.dbCountAbertas() + ")"));
+        navigation.getMenu().findItem(R.id.navigation_visitas).setTitle("VISITA(" + String.valueOf(myBDGeral.dbCountAbertas() + ")"));
         navigation.getMenu().findItem(R.id.navigation_scanner).setTitle("SCANNER");
         navigation.getMenu().findItem(R.id.navigation_chat).setTitle("CHAT");
         navigation.getMenu().findItem(R.id.navigation_syncVisita).setTitle("ENVIAR(" + String.valueOf(myBDGeral.dbCountEncerradas() + ")"));
@@ -853,15 +853,15 @@ public class MainActivity_Principal extends AppCompatActivity
         }
 
         if (id == R.id.navigation_chat) {
-           // Intent intent = new Intent(MainActivity_Principal.this, TelaOpcaoChatActivity.class);
-          //  Bundle dados = new Bundle();
-          //  dados.putString("name", name);
-          //  dados.putString("email", email);
-          //  dados.putString("id", colaborador_id);
-          //  dados.putString("token", token);
-          //  intent.putExtras(dados);
-          //  startActivity(intent);
-            Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
+           //Intent intent = new Intent(MainActivity_Principal.this, TelaOpcaoChatActivity.class);
+          // Bundle dados = new Bundle();
+          // dados.putString("name", name);
+          // dados.putString("email", email);
+          // dados.putString("id", colaborador_id);
+          // dados.putString("token", token);
+          // intent.putExtras(dados);
+         //  startActivity(intent);
+           Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
         }
         if (id == R.id.navigation_syncVisita) {
             if (verificaConexao() == true) {

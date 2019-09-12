@@ -14,10 +14,24 @@
 
     <item
         android:id="@+id/action_anexo"
-        android:icon="@drawable/ic_chat_anexo"
+        android:title="Enviar Anexo"
         app:itemIconTint="@color/white"
-        android:orderInCategory="100"
-        android:title="Anexar"
-        app:showAsAction="always" />
+        android:icon="@drawable/ic_chat_anexo"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/navegation_fotoevideo"
+                android:icon="@drawable/ic_chat_fotoevideo"
+                android:title="Fotos e vídeos" />
+            <item
+                android:id="@+id/navegation_camera"
+                android:icon="@drawable/ic_chat_camera"
+                android:title="Câmera" />
+            <item
+                android:id="@+id/navegation_documento"
+                android:icon="@drawable/ic_chat_documento"
+                android:title="Documento" />
+        </menu>
+    </item>
 
 </menu>

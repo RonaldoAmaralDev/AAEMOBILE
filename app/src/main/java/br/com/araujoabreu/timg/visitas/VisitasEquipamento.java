@@ -52,6 +52,8 @@ public class VisitasEquipamento extends AppCompatActivity implements BottomNavig
         Bundle dados = intent.getExtras();
 
         equipamento_id = dados.getString("equipamento_id");
+        centrolucro_id = dados.getString("centrolucro_id");
+        local_id = dados.getString("local_id");
 
         SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
         name = pref.getString("name", "");
@@ -222,8 +224,11 @@ public class VisitasEquipamento extends AppCompatActivity implements BottomNavig
         }
 
         if(id == android.R.id.home) {
-            Intent intent = new Intent(VisitasEquipamento.this, MainActivity_Principal.class);
+            Intent intent = new Intent(VisitasEquipamento.this, Equipamentos.class);
             Bundle dados = new Bundle();
+            dados.putString("centrolucro_id", centrolucro_id);
+            dados.putString("local_id", local_id);
+            dados.putString("equipamento_id", equipamento_id);
             dados.putString("name", name);
             dados.putString("email", email);
             dados.putString("id", colaborador_id);

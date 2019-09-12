@@ -1,60 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:padding="8dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="8dp">
 
-    <RelativeLayout
-        android:layout_width="317dp"
+    <TextView
+        android:id="@+id/show_message"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp">
+        android:layout_marginTop="0dp"
+        android:layout_toRightOf="@id/profile_image"
+        android:padding="8dp"
+        android:text="Display Mensagem"
+        android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/show_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="147dp"
-            android:layout_marginRight="147dp"
-            android:background="#ADD8E6	"
-            android:padding="8dp"
-            android:text="hello"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
+    <TextView
+        android:id="@+id/show_data"
+        android:layout_width="181dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/show_message"
+        android:padding="8dp"
+        android:text="Data e Hora"
+        android:textSize="12sp" />
 
-        <TextView
-            android:id="@+id/show_data"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="-139dp"
-            android:layout_marginTop="12dp"
-            android:layout_toRightOf="@id/show_message"
-            android:background="@drawable/background_left"
-            android:padding="8dp"
-            android:text="Data e Hora"
-            android:textSize="8sp" />
+    <TextView
+        android:id="@+id/txt_seen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_chat"
+        android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/txt_seen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/show_message"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="0dp" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="0dp"
+        android:src="@drawable/ic_user_icon" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
+    <ImageView
+        android:id="@+id/img_chat"
+        android:layout_width="363dp"
+        android:layout_height="184dp"
+        android:layout_below="@id/show_message"
+        android:layout_marginTop="-1dp"
+        android:layout_toRightOf="@id/profile_image"
+        app:srcCompat="@drawable/addfoto" />
 
-    </RelativeLayout>
 
 </RelativeLayout>

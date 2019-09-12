@@ -32,7 +32,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginLeft="25dp"
                 android:textColor="#fff"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </android.support.v7.widget.Toolbar>
 
