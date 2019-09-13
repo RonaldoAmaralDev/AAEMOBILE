@@ -197,8 +197,10 @@ public class TelaLogin extends AppCompatActivity {
                                                   intent.putExtra("token", token);
                                                   intent.putExtras(dados);
                                                   startActivity(intent);
+
                                         } catch (Exception erro) {
-                                            Toast.makeText(TelaLogin.this, "Email ou senha estão incorretos."  , Toast.LENGTH_LONG).show();
+                                            senhaLogar.setText("");
+                                            Toast.makeText(TelaLogin.this, "Verifique sua matricula, email ou senha."  , Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 });
