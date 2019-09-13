@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,7 +20,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import br.com.araujoabreu.timg.chat.activity.CadastroActivity;
+import br.com.araujoabreu.timg.chat.config.ConfiguracaoFirebase;
+import br.com.araujoabreu.timg.chat.helper.Base64Custom;
+import br.com.araujoabreu.timg.chat.helper.UsuarioFirebase;
+import br.com.araujoabreu.timg.chat.model.Usuario;
 import br.com.araujoabreu.timg.helper.Permissões;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.gson.JsonObject;
 import br.com.araujoabreu.timg.R;
 import com.koushikdutta.async.future.FutureCallback;
@@ -27,13 +41,13 @@ import com.koushikdutta.ion.Ion;
 
 public class TelaLogin extends AppCompatActivity {
 
-
-
     private EditText emailLogar, senhaLogar;
     private Button btnLogar;
     private ImageView btnSite;
     private TextView txtRecuperarSenha;
     public String email, id, name, tipo;
+    private FirebaseAuth autenticacao;
+
 
     private static final int REQUEST_PERMISSIONS_CODE = 1;
     private static final String TAG = "PermissaoTAG";
@@ -189,16 +203,17 @@ public class TelaLogin extends AppCompatActivity {
                                                   // Armazena as Preferencias
                                                   pref.commit();
 
-                                                  Intent intent = new Intent(TelaLogin.this, MainActivity_Principal.class);
-                                                  Bundle dados = new Bundle();
-                                                  intent.putExtra("id", id);
-                                                  intent.putExtra("name", name);
-                                                  intent.putExtra("email", email);
-                                                  intent.putExtra("token", token);
-                                                  intent.putExtras(dados);
-                                                  startActivity(intent);
+                                                  Usuario usuario = new Usuario();
+                                                  usuario.setNome( name );
+                                                  usuario.setEmail( email );
+                                                  usuario.setSenha( password );
+
+                                                  //Cadastra Usuario Firebase
+                                                  cadastrarUsuario( usuario, token);
+
                                         } catch (Exception erro) {
-                                            Toast.makeText(TelaLogin.this, "Email ou senha estão incorretos."  , Toast.LENGTH_LONG).show();
+                                            senhaLogar.setText("");
+                                            Toast.makeText(TelaLogin.this, "Verifique sua matricula, email ou senha."  , Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 });
@@ -224,4 +239,63 @@ public class TelaLogin extends AppCompatActivity {
         }
         return conectado;
     }
+
+    public void cadastrarUsuario(final Usuario usuario, String token){
+
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        autenticacao.createUserWithEmailAndPassword(
+                usuario.getEmail(), usuario.getSenha()
+        ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if ( task.isSuccessful() ){
+                   // Toast.makeText(TelaLogin.this, "Sucesso ao cadastrar usuário!", Toast.LENGTH_SHORT).show();
+                    UsuarioFirebase.atualizarNomeUsuario( usuario.getNome() );
+                    Intent intent = new Intent(TelaLogin.this, MainActivity_Principal.class);
+                    Bundle dados = new Bundle();
+                    intent.putExtra("id", id);
+                    intent.putExtra("name", name);
+                    intent.putExtra("email", email);
+                    intent.putExtra("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                    finish();
+                    try {
+                        String identificadorUsuario = Base64Custom.codificarBase64( usuario.getEmail() );
+                        usuario.setId( identificadorUsuario );
+                        usuario.salvar();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }else {
+
+                    String excecao = "";
+                    try {
+                        throw task.getException();
+                    }catch ( FirebaseAuthWeakPasswordException e){
+                         excecao = "Digite uma senha mais forte!";
+                    }catch ( FirebaseAuthInvalidCredentialsException e){
+                         excecao= "Por favor, digite um e-mail válido";
+                    }catch ( FirebaseAuthUserCollisionException e){
+                         excecao = "Este conta já foi cadastrada";
+                         Intent intent = new Intent(TelaLogin.this, MainActivity_Principal.class);
+                         Bundle dados = new Bundle();
+                         intent.putExtra("id", id);
+                         intent.putExtra("name", name);
+                         intent.putExtra("email", email);
+                         intent.putExtra("token", token);
+                         intent.putExtras(dados);
+                         startActivity(intent);
+                    }catch (Exception e){
+                        excecao = "Erro ao cadastrar usuário: "  + e.getMessage();
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(TelaLogin.this, excecao, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 }

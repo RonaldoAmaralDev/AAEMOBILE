@@ -47,7 +47,7 @@ public class IntroActivity  extends AppCompatActivity {
 
         if (restorePrefData()) {
 
-            Intent mainActivity = new Intent(getApplicationContext(),TelaLogin.class );
+            Intent mainActivity = new Intent(getApplicationContext(), TelaLogin.class );
             startActivity(mainActivity);
             finish();
 

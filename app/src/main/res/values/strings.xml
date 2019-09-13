@@ -167,4 +167,15 @@
     </string-array>
 
 
+    <string name="digite_email">Digite seu e-mail</string>
+    <string name="digite_senha">Digite sua senha</string>
+    <string name="botao_logar">Logar</string>
+    <string name="nao_tem_conta">Não tem conta? Cadastre-se</string>
+    <string name="digite_nome">Digite o seu nome</string>
+    <string name="botao_cadastrar">Cadastrar</string>
+
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_grupo">GrupoActivity</string>
+    <string name="title_activity_cadastro_grupo">CadastroGrupoActivity</string>
+
 </resources>

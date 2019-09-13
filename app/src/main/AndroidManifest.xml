@@ -13,44 +13,43 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".activity.TelaOpcaoChatActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-           android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".activity.TelaOpcaoChatActivity" />
-        <activity android:name=".activity.MainActivityChat"
-            android:theme="@style/AppTheme.NoActionBar"/>
 
-        <activity android:name=".activity.ChatLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".activity.TelaOpcaoChatActivity"/>
 
-        <activity android:name=".activity.MessageActivity"
+        <activity android:name=".chat.activity.LoginActivity" />
+        <activity android:name=".chat.activity.CadastroActivity" />
+        <activity
+            android:name=".chat.activity.ConfiguracoesChat"
+            android:parentActivityName=".chat.activity.TelaPrincipalChat"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".activity.ResetPasswordActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".activity.ChatLoginActivity" />
+            android:name=".chat.activity.ConversaChat"
+            android:label="@string/title_activity_chat"
+            android:parentActivityName=".chat.activity.TelaPrincipalChat"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".chat.activity.TelaPrincipalChat" />
+        </activity>
+        <activity
+            android:name=".chat.activity.GrupoChat"
+            android:label="@string/title_activity_grupo"
+            android:parentActivityName=".chat.activity.TelaPrincipalChat"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".chat.activity.TelaPrincipalChat" />
+        </activity>
+        <activity
+            android:name=".chat.activity.GrupoChatCadastro"
+            android:label="@string/title_activity_cadastro_grupo"
+            android:parentActivityName=".chat.activity.GrupoChat"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".chat.activity.GrupoChat" />
+        </activity>
 
 
-        <service android:name=".notificacao.MyFirebaseIdService"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-            </intent-filter>
-        </service>
-
-        <service android:name="notificacao.MyFirebaseMessaging"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
         <activity
             android:name=".visitas.VisitasEquipamento"
             android:screenOrientation="portrait"
@@ -92,12 +91,11 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity
-            android:name=".dev.facial.PhotoDetectActivity"
-            android:screenOrientation="fullSensor" />
-        <activity
-            android:name=".dev.facial.FaceDetectRGBActivity"
-            android:screenOrientation="fullSensor" />
+        <activity android:name=".chat.activity.TelaPrincipalChat"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+
         <activity android:name=".relatorio.RelatorioContrato" />
         <activity android:name=".relatorio.RelatorioLeitura" />
         <activity
@@ -294,7 +292,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 </manifest>

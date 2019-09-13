@@ -55,10 +55,9 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
 import br.com.araujoabreu.timg.R;
+import br.com.araujoabreu.timg.chat.activity.LoginActivity;
 import br.com.araujoabreu.timg.equipamento.CadastrarEquipamento;
 import br.com.araujoabreu.timg.equipamento.CentralEquipamento;
-import br.com.araujoabreu.timg.dev.facial.FaceDetectRGBActivity;
-import br.com.araujoabreu.timg.dev.facial.PhotoDetectActivity;
 import br.com.araujoabreu.timg.frota.MainActivityVeiculos;
 import br.com.araujoabreu.timg.frota.Veiculos;
 import br.com.araujoabreu.timg.model.Atividades;
@@ -853,15 +852,15 @@ public class MainActivity_Principal extends AppCompatActivity
         }
 
         if (id == R.id.navigation_chat) {
-           //Intent intent = new Intent(MainActivity_Principal.this, TelaOpcaoChatActivity.class);
-          // Bundle dados = new Bundle();
-          // dados.putString("name", name);
-          // dados.putString("email", email);
-          // dados.putString("id", colaborador_id);
-          // dados.putString("token", token);
-          // intent.putExtras(dados);
-         //  startActivity(intent);
-           Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
+           Intent intent = new Intent(MainActivity_Principal.this, LoginActivity.class);
+           Bundle dados = new Bundle();
+           dados.putString("name", name);
+           dados.putString("email", email);
+           dados.putString("id", colaborador_id);
+           dados.putString("token", token);
+           intent.putExtras(dados);
+           startActivity(intent);
+          // Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
         }
         if (id == R.id.navigation_syncVisita) {
             if (verificaConexao() == true) {
@@ -927,41 +926,6 @@ public class MainActivity_Principal extends AppCompatActivity
             dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
-
-        }else if (id == R.id.nav_reconhecimentofacial) {
-
-            new AlertDialog.Builder(this)
-                    .setIcon(R.drawable.logo)
-                    .setTitle(R.string.app_name)
-                    .setMessage("Como deseja testar reconhecimento facial:")
-                    .setPositiveButton("Camera", new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(MainActivity_Principal.this, FaceDetectRGBActivity.class);
-                            Bundle dados = new Bundle();
-                            dados.putString("name", name);
-                            dados.putString("email", email);
-                            dados.putString("id", colaborador_id);
-                            dados.putString("token", token);
-                            intent.putExtras(dados);
-                            startActivity(intent);
-                        }
-                    })
-                    .setNegativeButton("Foto Galeria", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent = new Intent(MainActivity_Principal.this, PhotoDetectActivity.class);
-                            Bundle dados = new Bundle();
-                            dados.putString("name", name);
-                            dados.putString("email", email);
-                            dados.putString("id", colaborador_id);
-                            dados.putString("token", token);
-                            intent.putExtras(dados);
-                            startActivity(intent);
-                        }
-                    })
-                    .show();
 
         }else if (id == R.id.nav_localizacao) {
 

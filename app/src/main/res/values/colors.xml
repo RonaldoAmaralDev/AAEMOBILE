@@ -67,11 +67,12 @@
 
     <color name="black_overlay">#66000000</color>
 
-    <color name="colorRouteLine">#212121</color>
 
 
-    <color name="colorPrimaryChat">#3eaeae</color>
-    <color name="colorPrimaryDarkChat">#226e6e</color>
-    <color name="colorAccentChat">#226e6e</color>
+    <color name="colorPrimaryChat">#8F152A</color>
+    <color name="colorPrimaryDarkChat">#054d44</color>
+    <color name="colorAccentChat">#25d366</color>
+    <color name="cinza_claro">#eeeeee</color>
+    <color name="balaoRemetente">#dbf9c4</color>
 
 </resources>
