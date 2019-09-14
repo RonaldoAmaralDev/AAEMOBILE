@@ -14,9 +14,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import br.com.araujoabreu.timg.chat.config.ConfiguracaoFirebase;
 import br.com.araujoabreu.timg.chat.model.Usuario;
 
-/**
- * Created by jamiltondamasceno
- */
+
 
 public class UsuarioFirebase {
 

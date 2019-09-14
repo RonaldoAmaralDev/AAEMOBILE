@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import br.com.araujoabreu.timg.chat.activity.CadastroActivity;
 import br.com.araujoabreu.timg.chat.config.ConfiguracaoFirebase;
 import br.com.araujoabreu.timg.chat.helper.Base64Custom;
 import br.com.araujoabreu.timg.chat.helper.UsuarioFirebase;
@@ -262,7 +261,7 @@ public class TelaLogin extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                     try {
-                        String identificadorUsuario = Base64Custom.codificarBase64( usuario.getEmail() );
+                        String identificadorUsuario = Base64Custom.codificarBase64( emailLogar.getText().toString() );
                         usuario.setId( identificadorUsuario );
                         usuario.salvar();
                     }catch (Exception e){
@@ -292,7 +291,7 @@ public class TelaLogin extends AppCompatActivity {
                         excecao = "Erro ao cadastrar usuário: "  + e.getMessage();
                         e.printStackTrace();
                     }
-                    Toast.makeText(TelaLogin.this, excecao, Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(TelaLogin.this, excecao, Toast.LENGTH_SHORT).show();
                 }
             }
         });

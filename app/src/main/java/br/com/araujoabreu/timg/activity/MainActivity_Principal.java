@@ -55,7 +55,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
 import br.com.araujoabreu.timg.R;
-import br.com.araujoabreu.timg.chat.activity.LoginActivity;
+import br.com.araujoabreu.timg.chat.activity.TelaPrincipalChat;
 import br.com.araujoabreu.timg.equipamento.CadastrarEquipamento;
 import br.com.araujoabreu.timg.equipamento.CentralEquipamento;
 import br.com.araujoabreu.timg.frota.MainActivityVeiculos;
@@ -852,7 +852,7 @@ public class MainActivity_Principal extends AppCompatActivity
         }
 
         if (id == R.id.navigation_chat) {
-           Intent intent = new Intent(MainActivity_Principal.this, LoginActivity.class);
+           Intent intent = new Intent(MainActivity_Principal.this, TelaPrincipalChat.class);
            Bundle dados = new Bundle();
            dados.putString("name", name);
            dados.putString("email", email);
