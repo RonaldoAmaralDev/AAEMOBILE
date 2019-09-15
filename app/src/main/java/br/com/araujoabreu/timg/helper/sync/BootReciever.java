@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
@@ -42,6 +43,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 import static com.android.volley.VolleyLog.TAG;
@@ -347,6 +350,8 @@ public class BootReciever extends Service  {
                             os.setId(jsonObject.getString("idOS"));
                             os.setTiposolicitacao(jsonObject.getString("tiposolicitacao_os"));
                             os.setTiposervico(jsonObject.getString("tiposervico_os"));
+                            os.setFrequencia_id(jsonObject.getString("frequencia_id"));
+                            os.setFrequencia_descricao(jsonObject.getString("frequencia_descricao"));
                             os.setChecklist_id(jsonObject.getString("checklist_id"));
                             os.setCentrocusto_id(jsonObject.getString("centrocusto_id"));
                             os.setLocal_id(jsonObject.getString("local_id"));
@@ -365,16 +370,30 @@ public class BootReciever extends Service  {
                                         os.getCentrocusto_id(),
                                         os.getTiposolicitacao(),
                                         os.getTiposervico(),
+                                        os.getFrequencia_id(),
+                                        os.getFrequencia_descricao(),
                                         os.getEquipamento_id(),
                                         os.getChecklist_id(),
                                         os.getEquipe1(),
                                         os.getDataplanejamento(),
                                         os.getDescricaopadrao(),
-                                        os.getFlag_os());
+                                        os.getFlag_os()
+                                );
+
+
+                                Calendar cal = Calendar.getInstance(); //
+                                cal.setTime(new Date()); //
+                                cal.add(Calendar.DAY_OF_MONTH, 30); // Adicionar Tempo Estimado
+                                cal.getTime(); //
+                                SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                                String horafim = datafim.format(cal.getTime());
 
                                 myBDGeral.updateSituacaoOSSistematica(
-                                        os.getId(),
-                                        "A");
+                                            os.getId(),
+                                            horafim,
+                                            "A");
+
+
 
                             } else {
                                 myBDGeral.insertOS(
@@ -383,21 +402,29 @@ public class BootReciever extends Service  {
                                         os.getCentrocusto_id(),
                                         os.getTiposolicitacao(),
                                         os.getTiposervico(),
+                                        os.getFrequencia_id(),
+                                        os.getFrequencia_descricao(),
                                         os.getEquipamento_id(),
                                         os.getChecklist_id(),
                                         os.getEquipe1(),
                                         os.getDataplanejamento(),
                                         os.getDescricaopadrao(),
                                         "aberta",
-                                      //  os.getCodigochamado()
-                                          "",
+                                        //os.getCodigochamado());
+                                        "",
                                         os.getFlag_os());
 
+                                Calendar cal = Calendar.getInstance(); //
+                                cal.setTime(new Date()); //
+                                cal.add(Calendar.DAY_OF_MONTH, 30); // Adicionar Tempo Estimado
+                                cal.getTime(); //
+                                SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                                String horafim = datafim.format(cal.getTime());
 
-                                // Ao inserir OS irá verificar se ela é preventiva para inserir situacao "A" assim depois criando nova
-                                myBDGeral.updateSituacaoOSSistematica(
-                                        os.getId(),
-                                        "A");
+                                    myBDGeral.updateSituacaoOSSistematica(
+                                            os.getId(),
+                                            horafim,
+                                            "A");
 
                             }
 
@@ -423,7 +450,7 @@ public class BootReciever extends Service  {
                             tipoServico.setDescricao(jsonObject.getString("tiposervico_descricao"));
 
                             Cursor dataTipoServico = myBDGeral.verificaTipoServico(jsonObject.getString("tiposervico_id"));
-                            if (dataTipoSolicitacao.moveToNext()) {
+                            if (dataTipoServico.moveToNext()) {
                                 myBDGeral.updateTipoServico(
                                         tipoServico.getId(),
                                         tipoServico.getDescricao()
@@ -435,10 +462,9 @@ public class BootReciever extends Service  {
                             }
 
 
-                           emitirNotificacao();
-
                         } catch (JSONException e) {
                             e.printStackTrace();
+
                         }
                     }
                 }

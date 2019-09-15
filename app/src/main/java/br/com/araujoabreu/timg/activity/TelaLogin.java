@@ -249,6 +249,13 @@ public class TelaLogin extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if ( task.isSuccessful() ){
+
+                    SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
+                    String id = pref.getString("id", "" );
+                    String name = pref.getString("name", "");
+                    String email= pref.getString("email", "");
+                    String token = pref.getString("token", "");
+
                    // Toast.makeText(TelaLogin.this, "Sucesso ao cadastrar usuário!", Toast.LENGTH_SHORT).show();
                     UsuarioFirebase.atualizarNomeUsuario( usuario.getNome() );
                     Intent intent = new Intent(TelaLogin.this, MainActivity_Principal.class);
@@ -279,6 +286,13 @@ public class TelaLogin extends AppCompatActivity {
                          excecao= "Por favor, digite um e-mail válido";
                     }catch ( FirebaseAuthUserCollisionException e){
                          excecao = "Este conta já foi cadastrada";
+
+                         SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
+                         String id = pref.getString("id", "" );
+                         String name = pref.getString("name", "");
+                         String email= pref.getString("email", "");
+                         String token = pref.getString("token", "");
+
                          Intent intent = new Intent(TelaLogin.this, MainActivity_Principal.class);
                          Bundle dados = new Bundle();
                          intent.putExtra("id", id);

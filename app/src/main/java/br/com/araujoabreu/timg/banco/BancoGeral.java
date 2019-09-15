@@ -71,6 +71,8 @@ public class BancoGeral extends SQLiteOpenHelper {
     public static final String COL_TIPOSOLICITACAO_DESCRICAO = "tiposolicitacao_descricao";
     public static final String COL_TIPOSERVICOID_OS = "tiposervico_id";
     public static final String COL_TIPOSERVICO_OS = "tiposervico_descricao";
+    public static final String COL_FREQUENCIA_ID = "frequencia_id";
+    public static final String COL_FREQUENCIA_DESCRICAO = "frequencia_descricao";
     public static final String COL_DATAEXECUCAO_OS = "datexecucao";
     public static final String COL_CODIGOCHAMADO_OS = "codigochamado";
     public static final String COL_FLAG_OS = "flag_os";
@@ -138,7 +140,7 @@ public class BancoGeral extends SQLiteOpenHelper {
 
     private SQLiteDatabase databaseGeral;
     private SQLiteOpenHelper openHelper;
-    private static final int DATABASE_VERSION = 38;
+    private static final int DATABASE_VERSION = 39;
 
 
     public BancoGeral(Context context) {
@@ -196,6 +198,8 @@ public class BancoGeral extends SQLiteOpenHelper {
                 "tiposolicitacao_descricao TEXT, " +
                 "tiposervico_id TEXT, " +
                 "tiposervico_descricao TEXT, " +
+                "frequencia_id TEXT, " +
+                "frequencia_descricao TEXT, " +
                 "dataexecucao TEXT, " +
                 "codigochamado TEXT, " +
                 "flag_os TEXT, " +
@@ -1436,7 +1440,7 @@ public class BancoGeral extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertOS(String id, String local_id, String centrocusto_idOS, String tiposolicitacao_id, String tiposervico_id, String equipamento_id,  String checklist_id, String equipe1, String dataplanejamento, String descricaopadrao, String status, String codigochamado, String flag_os) {
+    public boolean insertOS(String id, String local_id, String centrocusto_idOS, String tiposolicitacao_id, String tiposervico_id, String frequencia_id, String frequencia_descricao, String equipamento_id,  String checklist_id, String equipe1, String dataplanejamento, String descricaopadrao, String status, String codigochamado, String flag_os) {
         SQLiteDatabase dbLocal = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_ID_OS, id);
@@ -1444,6 +1448,8 @@ public class BancoGeral extends SQLiteOpenHelper {
         contentValues.put(COL_CENTROCUSTO_OS, centrocusto_idOS);
         contentValues.put(COL_TIPOSOLICITACAOID_OS, tiposolicitacao_id);
         contentValues.put(COL_TIPOSERVICOID_OS, tiposervico_id);
+        contentValues.put(COL_FREQUENCIA_ID, frequencia_id);
+        contentValues.put(COL_FREQUENCIA_DESCRICAO, frequencia_descricao);
         contentValues.put(COL_EQUIPAMENTO_OS, equipamento_id);
         contentValues.put(COL_CHECKLIST_OS, checklist_id);
         contentValues.put(COL_EQUIPE1_OS, equipe1);
@@ -1472,12 +1478,14 @@ public class BancoGeral extends SQLiteOpenHelper {
      * @param descricaopadrao;
      * @param tiposervico_id;
      * @param tiposervico_descricao;
+     * @param frequencia_id;
+     * @param frequencia_descricao;
      * @param flag_os;
      */
 
-    public void updateOS(String id, String local_id, String centrocusto_idOS, String tiposervico_id, String tiposervico_descricao, String equipamento_id, String checklist_id, String equipe1, String dataplanejamento, String descricaopadrao, String flag_os){
+    public void updateOS(String id, String local_id, String centrocusto_idOS, String tiposervico_id, String tiposervico_descricao, String frequencia_id, String frequencia_descricao, String equipamento_id, String checklist_id, String equipe1, String dataplanejamento, String descricaopadrao, String flag_os){
         SQLiteDatabase database = this.getWritableDatabase();
-        String updateQuery = "Update " + TABELA_OS + " set local_id= '" + local_id + "', centrocusto_idOS= '" + centrocusto_idOS + "',    equipamento_id = '"+ equipamento_id + "', checklist_id = '" + checklist_id + "', equipe1= '"+ equipe1  +"', dataplanejamento = '" + dataplanejamento + "', descricaopadrao = '"+ descricaopadrao  + "', tiposervico_id = '"+ tiposervico_id  + "', tiposervico_descricao = '"+ tiposervico_descricao +  "', flag_os = '"+ flag_os +"' where id="+"'"+ id +"'";
+        String updateQuery = "Update " + TABELA_OS + " set local_id= '" + local_id + "', centrocusto_idOS= '" + centrocusto_idOS + "',    equipamento_id = '"+ equipamento_id + "', checklist_id = '" + checklist_id + "', equipe1= '"+ equipe1  +"', dataplanejamento = '" + dataplanejamento + "', descricaopadrao = '"+ descricaopadrao  + "', tiposervico_id = '"+ tiposervico_id  + "', tiposervico_descricao = '"+ tiposervico_descricao +  "',  frequencia_id = '"+ frequencia_id  + "', frequencia_descricao = '"+ frequencia_descricao +  "',flag_os = '"+ flag_os +"' where id="+"'"+ id +"'";
         Log.d("query",updateQuery);
         database.execSQL(updateQuery);
     }
@@ -1506,6 +1514,7 @@ public class BancoGeral extends SQLiteOpenHelper {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
                 map.put("ordemservico", cursor.getString(0));
+                map.put("proximavisita", cursor.getString(7));
                 wordList.add(map);
             } while (cursor.moveToNext());
         }
@@ -1524,6 +1533,7 @@ public class BancoGeral extends SQLiteOpenHelper {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
                 map.put("id", cursor.getString(0));
+                map.put("proximavisita", cursor.getString(7));
                 wordList.add(map);
             } while (cursor.moveToNext());
         }
@@ -1533,9 +1543,9 @@ public class BancoGeral extends SQLiteOpenHelper {
     }
 
 
-    public void updateSituacaoOSSistematica(String id, String situacao){
+    public void updateSituacaoOSSistematica(String id, String proximavisita, String situacao){
         SQLiteDatabase database = this.getWritableDatabase();
-        String updateQuery = "Update " + TABELA_OS + " set situacao= '" + situacao  +"' WHERE id="+"'"+ id + "' AND " + COL_TIPOSOLICITACAOID_OS + " = '" + "1" + "' AND " + COL_SITUACAO_OS + " != '" + "OK" +"'";
+        String updateQuery = "Update " + TABELA_OS + " set situacao= '" + situacao + "', dataprogramacao = '" + proximavisita + "' WHERE id="+"'"+ id + "' AND " + COL_TIPOSOLICITACAOID_OS + " = '" + "1" + "' AND " + COL_SITUACAO_OS + " != '" + "OK" +"'";
         Log.d("query",updateQuery);
         database.execSQL(updateQuery);
     }
@@ -1548,6 +1558,7 @@ public class BancoGeral extends SQLiteOpenHelper {
         Log.d("query",updateQuery);
         database.execSQL(updateQuery);
     }
+
 
     public int dbCountNovasVisitas(){
         int count = 0;

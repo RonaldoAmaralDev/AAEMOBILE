@@ -108,6 +108,12 @@ public class AssinaturaColaborador extends AppCompatActivity {
             Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
             if (addJpgSignatureToGallery(signatureBitmap)) {
 
+
+                myDB.updateAssinaturaColaborador(
+                        os_id,
+                        "/assets/os/" + os_id + "_assinaturaColaborador.jpg"
+                );
+
                 Intent intent = new Intent(AssinaturaColaborador.this, AssinaturaCliente.class);
                 Bundle dados = new Bundle();
                 dados.putString("equipamento_id", equipamento_id);

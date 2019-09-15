@@ -11,6 +11,8 @@ public class OS implements Serializable {
     private String centrocusto_id;
     private String tiposolicitacao;
     private String tiposervico;
+    private String frequencia_id;
+    private String frequencia_descricao;
     private String equipamento_id;
     private String checklist_id;
     private String equipe1;
@@ -26,12 +28,14 @@ public class OS implements Serializable {
     }
 
 
-    public OS(String id, String local_id, String centrocusto_id, String tiposolicitacao, String tiposervico, String equipamento_id, String checklist_id, String equipe1, String dataplanejamento, String dataprogramacao, String descricaopadrao, String codigochamado, String flag_os) {
+    public OS(String id, String local_id, String centrocusto_id, String tiposolicitacao, String tiposervico, String frequencia_id, String frequencia_descricao, String equipamento_id, String checklist_id, String equipe1, String dataplanejamento, String dataprogramacao, String descricaopadrao, String codigochamado, String flag_os) {
         this.id = id;
         this.local_id = local_id;
         this.centrocusto_id = centrocusto_id;
         this.tiposolicitacao= tiposolicitacao;
         this.tiposervico = tiposervico;
+        this.frequencia_id = frequencia_id;
+        this.frequencia_descricao = frequencia_descricao;
         this.equipamento_id = equipamento_id;;
         this.checklist_id = checklist_id;
         this.equipe1 =  equipe1;
@@ -55,6 +59,22 @@ public class OS implements Serializable {
 
     public String getTiposervico() {
         return tiposervico;
+    }
+
+    public String getFrequencia_id() {
+        return frequencia_id;
+    }
+
+    public String getFrequencia_descricao() {
+        return frequencia_descricao;
+    }
+
+    public void setFrequencia_id(String frequencia_id) {
+        this.frequencia_id = frequencia_id;
+    }
+
+    public void setFrequencia_descricao(String frequencia_descricao) {
+        this.frequencia_descricao = frequencia_descricao;
     }
 
     public String getEquipamento_id() {

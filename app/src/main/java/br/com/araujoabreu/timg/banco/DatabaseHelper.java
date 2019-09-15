@@ -351,6 +351,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Update Sync status against each User ID
      * @param ordemservico;
+     * @param assinaturaColaborador;
+     */
+    public void updateAssinaturaColaborador(String ordemservico, String assinaturaColaborador){
+        SQLiteDatabase database = this.getWritableDatabase();
+        String updateQuery = "Update " + TABLE_NAME + " set assinaturaColaborador = '" + assinaturaColaborador +"' where ordemservico_id ="+"'"+ ordemservico +"'";
+        Log.d("query",updateQuery);
+        database.execSQL(updateQuery);
+        database.close();
+    }
+
+    /**
+     * Update Sync status against each User ID
+     * @param ordemservico;
      * @param checklist_id;
      * @param checklistitens_id;
      * @param medicao1;

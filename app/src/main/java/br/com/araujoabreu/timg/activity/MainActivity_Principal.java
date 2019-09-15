@@ -113,6 +113,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -1187,7 +1189,7 @@ public class MainActivity_Principal extends AppCompatActivity
         if (osList.size() != 0) {
             //Toast.makeText(getApplicationContext(), "Você possui: " + myBDGeral.gravarNovaOS2(), Toast.LENGTH_LONG).show();
                 params.put("userJson", myBDGeral.gravarNovaOS2());
-                client.post("http://helper.aplusweb.com.br/aplicativo/sync2/gerarnovavisita.php", params, new AsyncHttpResponseHandler() {
+                client.post("http://helper.aplusweb.com.br/aplicativo/sync/gerarnovavisita.php", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(String response) {
                         System.out.println(response);
@@ -1405,7 +1407,7 @@ public class MainActivity_Principal extends AppCompatActivity
                     progressBarStatus = doSomeTasksVisitas();
                     // your computer is too fast, sleep 1 second
                     try {
-                        Thread.sleep(25000);
+                        Thread.sleep(20000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -1418,7 +1420,7 @@ public class MainActivity_Principal extends AppCompatActivity
                 }
                 if (progressBarStatus >= 100) {
                     try {
-                        Thread.sleep(25000);
+                        Thread.sleep(20000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -1440,15 +1442,15 @@ public class MainActivity_Principal extends AppCompatActivity
     }
 
     public int doSomeTasksVisitas() {
-        while (progress <= 2500000) {
+        while (progress <= 2000000) {
             progress++;
             if (progress == 100000) {
                 return 10;
-            } else if (progress == 600000) {
+            } else if (progress == 400000) {
                 return 20;
-            } else if (progress == 1600000) {
+            } else if (progress == 1400000) {
                 return 50;
-            } else if (progress == 1900000) {
+            } else if (progress == 1700000) {
                 return 80;
             }
         }
@@ -1626,6 +1628,8 @@ public class MainActivity_Principal extends AppCompatActivity
                             os.setId(jsonObject.getString("idOS"));
                             os.setTiposolicitacao(jsonObject.getString("tiposolicitacao_os"));
                             os.setTiposervico(jsonObject.getString("tiposervico_os"));
+                            os.setFrequencia_id(jsonObject.getString("frequencia_id"));
+                            os.setFrequencia_descricao(jsonObject.getString("frequencia_descricao"));
                             os.setChecklist_id(jsonObject.getString("checklist_id"));
                             os.setCentrocusto_id(jsonObject.getString("centrocusto_id"));
                             os.setLocal_id(jsonObject.getString("local_id"));
@@ -1644,6 +1648,8 @@ public class MainActivity_Principal extends AppCompatActivity
                                         os.getCentrocusto_id(),
                                         os.getTiposolicitacao(),
                                         os.getTiposervico(),
+                                        os.getFrequencia_id(),
+                                        os.getFrequencia_descricao(),
                                         os.getEquipamento_id(),
                                         os.getChecklist_id(),
                                         os.getEquipe1(),
@@ -1652,9 +1658,20 @@ public class MainActivity_Principal extends AppCompatActivity
                                         os.getFlag_os()
                                 );
 
+
+                                Calendar cal = Calendar.getInstance(); //
+                                cal.setTime(new Date()); //
+                                cal.add(Calendar.DAY_OF_MONTH, 30); // Adicionar Tempo Estimado
+                                cal.getTime(); //
+                                SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                                String horafim = datafim.format(cal.getTime());
+
                                 myBDGeral.updateSituacaoOSSistematica(
                                         os.getId(),
+                                        horafim,
                                         "A");
+
+
 
                             } else {
                                 myBDGeral.insertOS(
@@ -1663,6 +1680,8 @@ public class MainActivity_Principal extends AppCompatActivity
                                         os.getCentrocusto_id(),
                                         os.getTiposolicitacao(),
                                         os.getTiposervico(),
+                                        os.getFrequencia_id(),
+                                        os.getFrequencia_descricao(),
                                         os.getEquipamento_id(),
                                         os.getChecklist_id(),
                                         os.getEquipe1(),
@@ -1672,11 +1691,19 @@ public class MainActivity_Principal extends AppCompatActivity
                                         //os.getCodigochamado());
                                         "",
                                         os.getFlag_os());
-                                // Ao inserir OS irá verificar se ela é preventiva para inserir situacao "A" assim depois criando nova
+
+                                Calendar cal = Calendar.getInstance(); //
+                                cal.setTime(new Date()); //
+                                cal.add(Calendar.DAY_OF_MONTH, 30); // Adicionar Tempo Estimado
+                                cal.getTime(); //
+                                SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                                String horafim = datafim.format(cal.getTime());
+
                                 myBDGeral.updateSituacaoOSSistematica(
                                         os.getId(),
+                                        horafim,
                                         "A");
-                                dataOS.close();
+
                             }
 
                             TipoSolicitacao tipoSolicitacao = new TipoSolicitacao();
@@ -1701,7 +1728,7 @@ public class MainActivity_Principal extends AppCompatActivity
                             tipoServico.setDescricao(jsonObject.getString("tiposervico_descricao"));
 
                             Cursor dataTipoServico = myBDGeral.verificaTipoServico(jsonObject.getString("tiposervico_id"));
-                            if (dataTipoSolicitacao.moveToNext()) {
+                            if (dataTipoServico.moveToNext()) {
                                 myBDGeral.updateTipoServico(
                                         tipoServico.getId(),
                                         tipoServico.getDescricao()

@@ -47,6 +47,7 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.GroceryVie
         public TextView localos;
         public TextView tiposervico;
         public TextView tiposolicitacao;
+        public TextView frequencia;
         public TextView descricao;
 
         public GroceryViewHolder(View itemView) {
@@ -58,6 +59,7 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.GroceryVie
             localos = itemView.findViewById(R.id.localos);
             tiposolicitacao = itemView.findViewById(R.id.tiposolicitacao);
             tiposervico = itemView.findViewById(R.id.tiposervicoos);
+            frequencia = itemView.findViewById(R.id.frequenciaos);
             descricao = itemView.findViewById(R.id.descricaopadraoos);
         }
     }
@@ -83,10 +85,12 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.GroceryVie
         String id_centrolucro = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_CENTROCUSTO_OS));
         String descricao = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_DESCRICAOPADRAO_OS));
         String quantItens = String.valueOf(myBDGeral.dbCountItem(checklist_id));
+        String frequencia = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_FREQUENCIA_DESCRICAO));
 
         holder.os.setText("OS: " + id);
         holder.dataplanejamento.setText("Data Programação: " + dataplanejamento);
         holder.descricao.setText("Descrição: " + descricao);
+        holder.frequencia.setText("Frequencia: " + frequencia);
 
 
         Cursor dataLocal = myBDGeral.qrCode(local_id);
