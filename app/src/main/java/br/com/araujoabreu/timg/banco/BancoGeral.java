@@ -453,6 +453,7 @@ public class BancoGeral extends SQLiteOpenHelper {
         return count;
     }
 
+
     public int dbCountEncerradas() {
         int count = 0;
         String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "encerrada" + "'";
@@ -463,6 +464,20 @@ public class BancoGeral extends SQLiteOpenHelper {
         database.close();
         return count;
     }
+
+
+    public int dbCountEncerradasLocalID(String local_id) {
+        int count = 0;
+        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "encerrada" + "' AND " + COL_LOCAL_OS + " = '" + local_id + "'";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        count = cursor.getCount();
+        Log.d("query", selectQuery);
+        database.close();
+        return count;
+    }
+
+
 
     public int dbCountAbertas() {
         int count = 0;
@@ -475,9 +490,53 @@ public class BancoGeral extends SQLiteOpenHelper {
         return count;
     }
 
-    public int dbCountEmEspera() {
+    public int dbCountAbertasLocalID(String local_id) {
         int count = 0;
-        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "em espera" + "'";
+        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "aberta" + "' AND " + COL_LOCAL_OS + " = '" + local_id + "'";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        count = cursor.getCount();
+        Log.d("query", selectQuery);
+        database.close();
+        return count;
+    }
+
+    public int dbCountAbertasLocaleEquipamento(String local_id, String equipamento_id) {
+        int count = 0;
+        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "aberta" + "' AND " + COL_LOCAL_OS + " = '" + local_id + "' +  AND " + COL_EQUIPAMENTO_OS + " = '" + equipamento_id + "'";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        count = cursor.getCount();
+        Log.d("query", selectQuery);
+        database.close();
+        return count;
+    }
+
+    public int dbCountEmEsperaLocalID(String local_id) {
+        int count = 0;
+        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "em espera" + "' AND " + COL_LOCAL_OS + " = '" + local_id + "'";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        count = cursor.getCount();
+        Log.d("query", selectQuery);
+        database.close();
+        return count;
+    }
+
+    public int dbCountEmEsperaeEquipamento(String local_id, String equipamento_id) {
+        int count = 0;
+        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "em espera" + "' AND " + COL_LOCAL_OS + " = '" + local_id + "' +  AND " + COL_EQUIPAMENTO_OS + " = '" + equipamento_id + "'";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        count = cursor.getCount();
+        Log.d("query", selectQuery);
+        database.close();
+        return count;
+    }
+
+    public int dbCountEncerradasEquipamento(String local_id, String equipamento_id) {
+        int count = 0;
+        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "encerradas" + "' AND " + COL_LOCAL_OS + " = '" + local_id + "' +  AND " + COL_EQUIPAMENTO_OS + " = '" + equipamento_id + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
@@ -1243,7 +1302,6 @@ public class BancoGeral extends SQLiteOpenHelper {
                 " WHERE "  + COL_STATUS_OS + " = '" + search +  "'";
         Cursor cursor = db.rawQuery(query, null);
         // looping through all rows and adding to list
-
         if (cursor == null) {
             return null;
         } else if (!cursor.moveToFirst()) {
@@ -1252,6 +1310,84 @@ public class BancoGeral extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    public Cursor buscaVisitasAbertasLocal(String search, String local_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABELA_OS +
+                " WHERE "  + COL_STATUS_OS + " = '" + search + "' AND " + COL_LOCAL_OS + " = '" + local_id + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        // looping through all rows and adding to list
+        if (cursor == null) {
+            return null;
+        } else if (!cursor.moveToFirst()) {
+            cursor.close();
+            return null;
+        }
+        return cursor;
+    }
+
+    public Cursor buscaVisitasAbertasEquipamento(String search, String equipamento_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABELA_OS +
+                " WHERE "  + COL_STATUS_OS + " = '" + search + "' AND " + COL_EQUIPAMENTO_OS + " = '" + equipamento_id + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        // looping through all rows and adding to list
+        if (cursor == null) {
+            return null;
+        } else if (!cursor.moveToFirst()) {
+            cursor.close();
+            return null;
+        }
+        return cursor;
+    }
+
+
+    public Cursor buscaVisitasEmEsperaLocal(String search, String local_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABELA_OS +
+                " WHERE "  + COL_STATUS_OS + " = '" + search + "' AND " + COL_LOCAL_OS + " = '" + local_id + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        // looping through all rows and adding to list
+        if (cursor == null) {
+            return null;
+        } else if (!cursor.moveToFirst()) {
+            cursor.close();
+            return null;
+        }
+        return cursor;
+    }
+
+    public Cursor buscaVisitasEmEsperaEquipamento(String search, String equipamento_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABELA_OS +
+                " WHERE "  + COL_STATUS_OS + " = '" + search + "' AND " + COL_EQUIPAMENTO_OS + " = '" + equipamento_id + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        // looping through all rows and adding to list
+        if (cursor == null) {
+            return null;
+        } else if (!cursor.moveToFirst()) {
+            cursor.close();
+            return null;
+        }
+        return cursor;
+    }
+
+    public Cursor buscaVisitasEncerradasLocal(String search, String local_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABELA_OS +
+                " WHERE "  + COL_STATUS_OS + " = '" + search + "' AND " + COL_LOCAL_OS + " = '" + local_id + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        // looping through all rows and adding to list
+        if (cursor == null) {
+            return null;
+        } else if (!cursor.moveToFirst()) {
+            cursor.close();
+            return null;
+        }
+        return cursor;
+    }
+
+
 
     public Cursor buscaVisitasEmEspera(String search){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1273,7 +1409,7 @@ public class BancoGeral extends SQLiteOpenHelper {
     public Cursor filtroOS(String search, String colaborador_id){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABELA_OS +
-                " WHERE " + " ( " + COL_ID_OS  + " LIKE  '%" +search + "%'" + " OR " + COL_DATAPLANEJAMENTO_OS  +  "  LIKE  '%" +search + "%'"  + " ) " +  " AND " + COL_EQUIPE1_OS + " = '" + colaborador_id +  "'";
+                " WHERE " + " ( " + COL_ID_OS  + " LIKE  '%" +search + "%'" + " OR " + COL_DATAPLANEJAMENTO_OS  +  "  LIKE  '%" +search + "%'"  + " OR " + COL_FREQUENCIA_DESCRICAO  + "  LIKE  '%" +search + "%'"  + " OR " + COL_TIPOSERVICO_OS  + "  LIKE  '%" +search + "%'"  + ") " +  " AND " + COL_EQUIPE1_OS + " = '" + colaborador_id +  "'";
         Cursor cursor = db.rawQuery(query, null);
         // looping through all rows and adding to list
 

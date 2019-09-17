@@ -87,9 +87,9 @@ public class VisitasEquipamento extends AppCompatActivity implements BottomNavig
 
 
         //Trocar titulos
-        navigation.getMenu().findItem(R.id.navigation_abertas).setTitle("ABERTAS("+String.valueOf(myDBGeral.dbCountAbertas()+")"));
-        navigation.getMenu().findItem(R.id.navigation_pendentes).setTitle("PENDENTES("+String.valueOf(myDBGeral.dbCountEmEspera()+")"));
-        navigation.getMenu().findItem(R.id.navigation_encerradas).setTitle("ENCERRADAS("+String.valueOf(myDBGeral.dbCountEncerradas()+")"));
+        navigation.getMenu().findItem(R.id.navigation_abertas).setTitle("ABERTAS("+String.valueOf(myDBGeral.dbCountAbertasLocaleEquipamento(local_id, equipamento_id)+")"));
+        navigation.getMenu().findItem(R.id.navigation_pendentes).setTitle("PENDENTES("+String.valueOf(myDBGeral.dbCountEmEsperaeEquipamento(local_id, equipamento_id)+")"));
+        navigation.getMenu().findItem(R.id.navigation_encerradas).setTitle("ENCERRADAS("+String.valueOf(myDBGeral.dbCountEncerradasEquipamento(local_id, equipamento_id)+")"));
 
 
         mAdapter = new VisitaAdapter(this, myDBGeral.buscaOS(equipamento_id, colaborador_id));
@@ -111,14 +111,14 @@ public class VisitasEquipamento extends AppCompatActivity implements BottomNavig
         //Os 3 primeiros são o navegation bottom (De baixo)
         if(id == R.id.navigation_abertas) {
 
-            mAdapter.swapCursor(myDBGeral.buscaVisitasAbertas("aberta"));
+            mAdapter.swapCursor(myDBGeral.buscaVisitasAbertasEquipamento("aberta", equipamento_id));
             mAdapter.notifyDataSetChanged();
             return false;
 
         }
         if(id == R.id.navigation_pendentes) {
 
-            mAdapter.swapCursor(myDBGeral.buscaVisitasEmEspera("em espera"));
+            mAdapter.swapCursor(myDBGeral.buscaVisitasEmEsperaEquipamento("em espera", equipamento_id));
             mAdapter.notifyDataSetChanged();
             return false;
 
@@ -126,7 +126,7 @@ public class VisitasEquipamento extends AppCompatActivity implements BottomNavig
 
         if (id == R.id.navigation_encerradas) {
 
-            //    mAdapter.swapCursor(myDBGeral.buscaVisitasSincronizadas("sincronizadas"));
+            //    mAdapter.swapCursor(myDBGeral.buscaVisitasEncerradasEquipamento("sincronizadas"));
             //    mAdapter.notifyDataSetChanged();
             return false;
 

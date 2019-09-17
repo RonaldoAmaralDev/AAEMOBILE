@@ -86,9 +86,9 @@ public class VisitasLocal extends AppCompatActivity implements BottomNavigationV
 
 
         //Trocar titulos
-        navigation.getMenu().findItem(R.id.navigation_abertas).setTitle("ABERTAS("+String.valueOf(myDBGeral.dbCountAbertas()+")"));
-        navigation.getMenu().findItem(R.id.navigation_pendentes).setTitle("PENDENTES("+String.valueOf(myDBGeral.dbCountEmEspera()+")"));
-        navigation.getMenu().findItem(R.id.navigation_encerradas).setTitle("ENCERRADAS("+String.valueOf(myDBGeral.dbCountEncerradas()+")"));
+        navigation.getMenu().findItem(R.id.navigation_abertas).setTitle("ABERTAS("+String.valueOf(myDBGeral.dbCountAbertasLocalID(local_id)+")"));
+        navigation.getMenu().findItem(R.id.navigation_pendentes).setTitle("PENDENTES("+String.valueOf(myDBGeral.dbCountEmEsperaLocalID(local_id)+")"));
+        navigation.getMenu().findItem(R.id.navigation_encerradas).setTitle("ENCERRADAS("+String.valueOf(myDBGeral.dbCountEncerradasLocalID(local_id)+")"));
 
 
         mAdapter = new VisitaAdapter(this, myDBGeral.buscaOSLocal(local_id, colaborador_id));
@@ -110,14 +110,14 @@ public class VisitasLocal extends AppCompatActivity implements BottomNavigationV
         //Os 3 primeiros são o navegation bottom (De baixo)
         if(id == R.id.navigation_abertas) {
 
-            mAdapter.swapCursor(myDBGeral.buscaVisitasAbertas("aberta"));
+            mAdapter.swapCursor(myDBGeral.buscaVisitasAbertasLocal("aberta", local_id));
             mAdapter.notifyDataSetChanged();
             return false;
 
         }
         if(id == R.id.navigation_pendentes) {
 
-            mAdapter.swapCursor(myDBGeral.buscaVisitasEmEspera("em espera"));
+            mAdapter.swapCursor(myDBGeral.buscaVisitasEmEsperaLocal("em espera", local_id));
             mAdapter.notifyDataSetChanged();
             return false;
 
@@ -125,7 +125,7 @@ public class VisitasLocal extends AppCompatActivity implements BottomNavigationV
 
         if (id == R.id.navigation_encerradas) {
 
-        //    mAdapter.swapCursor(myDBGeral.buscaVisitasSincronizadas("sincronizadas"));
+        //    mAdapter.swapCursor(myDBGeral.buscaVisitasEncerradasLocal("sincronizadas", local_id));
         //    mAdapter.notifyDataSetChanged();
             return false;
 
