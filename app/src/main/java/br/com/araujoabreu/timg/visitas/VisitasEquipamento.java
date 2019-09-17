@@ -87,8 +87,8 @@ public class VisitasEquipamento extends AppCompatActivity implements BottomNavig
 
 
         //Trocar titulos
-        navigation.getMenu().findItem(R.id.navigation_abertas).setTitle("ABERTAS("+String.valueOf(myDBGeral.dbCountAbertasLocaleEquipamento(local_id, equipamento_id)+")"));
-        navigation.getMenu().findItem(R.id.navigation_pendentes).setTitle("PENDENTES("+String.valueOf(myDBGeral.dbCountEmEsperaeEquipamento(local_id, equipamento_id)+")"));
+        navigation.getMenu().findItem(R.id.navigation_abertas).setTitle("ABERTAS("+String.valueOf(myDBGeral.dbCountAbertasLocaleEquipamento(equipamento_id)+")"));
+        navigation.getMenu().findItem(R.id.navigation_pendentes).setTitle("PENDENTES("+String.valueOf(myDBGeral.dbCountEmEsperaeEquipamento(equipamento_id)+")"));
         navigation.getMenu().findItem(R.id.navigation_encerradas).setTitle("ENCERRADAS("+String.valueOf(myDBGeral.dbCountEncerradasEquipamento(local_id, equipamento_id)+")"));
 
 

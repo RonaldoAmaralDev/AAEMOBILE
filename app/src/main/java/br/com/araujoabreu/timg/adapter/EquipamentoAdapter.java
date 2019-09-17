@@ -231,7 +231,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                                             "A");
 
 
-                                                                    Toast.makeText(mContext, "Chamado corretivo Nª " + ordemservico + ", aberto com sucesso. ", Toast.LENGTH_LONG).show();
+                                                                    Toast.makeText(mContext, "Chamado limpeza Nª " + ordemservico + ", aberto com sucesso. ", Toast.LENGTH_LONG).show();
                                                                     Intent intent = new Intent(mContext, MainActivityAtividades.class);
                                                                     Bundle dados = new Bundle();
                                                                     dados.putString("os_id", ordemservico);

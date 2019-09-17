@@ -501,9 +501,9 @@ public class BancoGeral extends SQLiteOpenHelper {
         return count;
     }
 
-    public int dbCountAbertasLocaleEquipamento(String local_id, String equipamento_id) {
+    public int dbCountAbertasLocaleEquipamento(String equipamento_id) {
         int count = 0;
-        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "aberta" + "' AND " + COL_LOCAL_OS + " = '" + local_id + "' +  AND " + COL_EQUIPAMENTO_OS + " = '" + equipamento_id + "'";
+        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "aberta" + "' AND " + COL_EQUIPAMENTO_OS + " = '" + equipamento_id + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
@@ -523,9 +523,9 @@ public class BancoGeral extends SQLiteOpenHelper {
         return count;
     }
 
-    public int dbCountEmEsperaeEquipamento(String local_id, String equipamento_id) {
+    public int dbCountEmEsperaeEquipamento(String equipamento_id) {
         int count = 0;
-        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "em espera" + "' AND " + COL_LOCAL_OS + " = '" + local_id + "' +  AND " + COL_EQUIPAMENTO_OS + " = '" + equipamento_id + "'";
+        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "em espera" + "' AND " + COL_EQUIPAMENTO_OS + " = '" + equipamento_id + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
@@ -536,7 +536,7 @@ public class BancoGeral extends SQLiteOpenHelper {
 
     public int dbCountEncerradasEquipamento(String local_id, String equipamento_id) {
         int count = 0;
-        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "encerradas" + "' AND " + COL_LOCAL_OS + " = '" + local_id + "' +  AND " + COL_EQUIPAMENTO_OS + " = '" + equipamento_id + "'";
+        String selectQuery = "SELECT  * FROM " + TABELA_OS + " WHERE " + COL_STATUS_OS + " = '" + "encerradas" + "' AND " + COL_EQUIPAMENTO_OS + " = '" + equipamento_id + "'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
