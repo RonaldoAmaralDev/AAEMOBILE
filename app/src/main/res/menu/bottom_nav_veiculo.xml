@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home"
-        android:title="Dados" />
+        android:id="@+id/navigation_ticketlog"
+        android:icon="@drawable/ic_cartao"
+        android:checked="true"
+        app:itemIconTint="@color/white"
+        android:title="TICKET LOG" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Dashboard" />
-
-    <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_mapa"
         android:icon="@drawable/ic_mapa"
-        android:title="Rastreamento" />
+        app:itemIconTint="@color/white"
+        android:title="MAPA" />
+
+    <item
+        android:id="@+id/navigation_historico"
+        app:itemIconTint="@color/white"
+        android:icon="@drawable/ic_pdf"
+        android:title="HISTORICO" />
+
+    <item
+        android:id="@+id/navigation_hidrometro"
+        app:itemIconTint="@color/white"
+        android:icon="@drawable/ic_hidrometro"
+        android:title="HIDROMETRO" />
 
 </menu>

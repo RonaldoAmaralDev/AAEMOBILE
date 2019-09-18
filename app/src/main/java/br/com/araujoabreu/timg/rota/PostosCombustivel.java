@@ -17,6 +17,7 @@ import android.webkit.WebViewClient;
 import br.com.araujoabreu.timg.R;
 import br.com.araujoabreu.timg.equipamento.qrcode.LoadingScanner;
 import br.com.araujoabreu.timg.activity.MainActivity_Principal;
+import br.com.araujoabreu.timg.rastreador.TelaPrincipalRastreador;
 import br.com.araujoabreu.timg.visitas.VisitasLocal;
 
 public class PostosCombustivel extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -119,9 +120,9 @@ public class PostosCombustivel extends AppCompatActivity implements BottomNaviga
 
         }
 
-        if (id == R.id.navigation_scanner) {
+        if (id == R.id.navigation_frota) {
 
-            Intent intent = new Intent(this, LoadingScanner.class);
+            Intent intent = new Intent(this, TelaPrincipalRastreador.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);

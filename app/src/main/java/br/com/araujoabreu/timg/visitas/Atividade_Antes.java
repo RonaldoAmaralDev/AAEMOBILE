@@ -532,7 +532,7 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
                     // Se salvar a 1ª Foto e gravar na tabela
                     if(isInserted == true) {
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                    thumbnail.compress(Bitmap.CompressFormat.JPEG, 55, bytes);
+                    thumbnail.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
                     String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "HELPER") + File.separator;
                     File myDir = new File(root);
                     myDir.mkdirs();
@@ -559,7 +559,7 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
                             os_id,
                             "/assets/os/" + os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "2A" + ".jpg");
                     ByteArrayOutputStream bytes2 = new ByteArrayOutputStream();
-                    thumbnail2.compress(Bitmap.CompressFormat.JPEG, 55, bytes2);
+                    thumbnail2.compress(Bitmap.CompressFormat.JPEG, 30, bytes2);
                     String imageFileName2 = os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "2A" + ".jpg";
                     File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "HELPER") + File.separator + imageFileName2);
                     try {
@@ -581,7 +581,7 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
                             os_id,
                             "/assets/os/" + os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "3A" + ".jpg");
                     ByteArrayOutputStream bytes3 = new ByteArrayOutputStream();
-                    thumbnail3.compress(Bitmap.CompressFormat.JPEG, 55, bytes3);
+                    thumbnail3.compress(Bitmap.CompressFormat.JPEG, 30, bytes3);
                     String imageFileName3 = os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "3A" + ".jpg";
                     File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "HELPER") + File.separator + imageFileName3);
                     try {

@@ -84,17 +84,28 @@
     <string name="place_picker">Place Picker</string>
     <string name="autocomplete_fragment">Autocomplete Fragment</string>
     <string name="title_activity_main_atividades">Atividades</string>
+    <string name="digite_email">Digite seu e-mail</string>
+
+    <string name="digite_senha">Digite sua senha</string>
+
+    <string name="botao_logar">Logar</string>
+    <string name="nao_tem_conta">Não tem conta? Cadastre-se</string>
+    <string name="digite_nome">Digite o seu nome</string>
+    <string name="botao_cadastrar">Cadastrar</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_grupo">GrupoActivity</string>
+    <string name="title_activity_cadastro_grupo">CadastroGrupoActivity</string>
     <string-array name="SituacaoSpinner">
         <item>Conforme</item>
         <item>Não Conforme</item>
         <item>Não se Aplica</item>
     </string-array>
-
     <string-array name="ContratosSpinner">
         <item>3061 - Escritorio BH</item>
         <item>3703 - A e C</item>
         <item>4604 - Stola do Brasil</item>
     </string-array>
+
 
     <string-array name="TipoEquipamentoSpinner">
         <item>FAN-COIL</item>
@@ -152,6 +163,7 @@
         <item>Entry 2</item>
         <item>Entry 3</item>
     </string-array>
+
     <string-array name="list_preference_entry_values">
         <item>1</item>
         <item>2</item>
@@ -165,17 +177,5 @@
         <item>Distância em Milhas</item>
         <item>Distância em Km</item>
     </string-array>
-
-
-    <string name="digite_email">Digite seu e-mail</string>
-    <string name="digite_senha">Digite sua senha</string>
-    <string name="botao_logar">Logar</string>
-    <string name="nao_tem_conta">Não tem conta? Cadastre-se</string>
-    <string name="digite_nome">Digite o seu nome</string>
-    <string name="botao_cadastrar">Cadastrar</string>
-
-    <string name="title_activity_chat">ChatActivity</string>
-    <string name="title_activity_grupo">GrupoActivity</string>
-    <string name="title_activity_cadastro_grupo">CadastroGrupoActivity</string>
 
 </resources>

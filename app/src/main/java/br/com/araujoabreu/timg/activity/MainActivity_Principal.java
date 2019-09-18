@@ -55,17 +55,17 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
 import br.com.araujoabreu.timg.R;
-import br.com.araujoabreu.timg.chat.activity.TelaPrincipalChat;
 import br.com.araujoabreu.timg.equipamento.CadastrarEquipamento;
 import br.com.araujoabreu.timg.equipamento.CentralEquipamento;
-import br.com.araujoabreu.timg.frota.MainActivityVeiculos;
-import br.com.araujoabreu.timg.frota.Veiculos;
+import br.com.araujoabreu.timg.dev.frota.MainActivityVeiculos;
+import br.com.araujoabreu.timg.dev.frota.Veiculos;
 import br.com.araujoabreu.timg.model.Atividades;
 import br.com.araujoabreu.timg.banco.BancoGeral;
 import br.com.araujoabreu.timg.model.CL;
 import br.com.araujoabreu.timg.banco.DatabaseHelper;
 import br.com.araujoabreu.timg.model.TipoServico;
 import br.com.araujoabreu.timg.model.TipoSolicitacao;
+import br.com.araujoabreu.timg.rastreador.TelaPrincipalRastreador;
 import br.com.araujoabreu.timg.visitas.Contratos;
 import br.com.araujoabreu.timg.model.Equipamento;
 import br.com.araujoabreu.timg.model.Contact;
@@ -346,7 +346,7 @@ public class MainActivity_Principal extends AppCompatActivity
         //Trocar titulos
         navigation.getMenu().findItem(R.id.navigation_mapa).setTitle("MAPA");
         navigation.getMenu().findItem(R.id.navigation_visitas).setTitle("VISITA(" + String.valueOf(myBDGeral.dbCountAbertas() + ")"));
-        navigation.getMenu().findItem(R.id.navigation_scanner).setTitle("SCANNER");
+        navigation.getMenu().findItem(R.id.navigation_frota).setTitle("FROTA");
         navigation.getMenu().findItem(R.id.navigation_chat).setTitle("CHAT");
         navigation.getMenu().findItem(R.id.navigation_syncVisita).setTitle("ENVIAR(" + String.valueOf(myBDGeral.dbCountEncerradas() + ")"));
 
@@ -843,9 +843,9 @@ public class MainActivity_Principal extends AppCompatActivity
 
         }
 
-        if (id == R.id.navigation_scanner) {
+        if (id == R.id.navigation_frota) {
 
-            Intent intent = new Intent(MainActivity_Principal.this, LoadingScanner.class);
+            Intent intent = new Intent(MainActivity_Principal.this, TelaPrincipalRastreador.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);

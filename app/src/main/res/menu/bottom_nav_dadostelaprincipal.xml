@@ -15,10 +15,10 @@
         android:title="Visitas" />
 
     <item
-        android:id="@+id/navigation_scanner"
-        android:icon="@drawable/ic_scanner"
+        android:id="@+id/navigation_frota"
+        android:icon="@drawable/ic_car"
         android:enabled="true"
-        android:title="Scanner" />
+        android:title="Frota" />
 
     <item
         android:id="@+id/navigation_chat"

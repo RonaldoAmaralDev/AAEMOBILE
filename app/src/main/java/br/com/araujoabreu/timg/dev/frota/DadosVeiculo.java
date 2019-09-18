@@ -1,4 +1,4 @@
-package br.com.araujoabreu.timg.frota;
+package br.com.araujoabreu.timg.dev.frota;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import br.com.araujoabreu.timg.BuildConfig;
 import br.com.araujoabreu.timg.R;
 /**
  * Created by Belal on 1/23/2018.

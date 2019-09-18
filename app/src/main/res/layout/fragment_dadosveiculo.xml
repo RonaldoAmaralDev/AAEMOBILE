@@ -14,7 +14,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".frota.TelaVeiculo">
+            tools:context=".dev.frota.TelaVeiculo">
 
             <RelativeLayout
                 android:id="@+id/rellay1"

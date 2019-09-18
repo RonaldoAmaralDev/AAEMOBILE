@@ -1,4 +1,4 @@
-package br.com.araujoabreu.timg.frota;
+package br.com.araujoabreu.timg.dev.frota;
 
 import java.io.Serializable;
 

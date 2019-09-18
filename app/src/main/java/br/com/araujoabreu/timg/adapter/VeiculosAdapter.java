@@ -12,9 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import br.com.araujoabreu.timg.BuildConfig;
 import br.com.araujoabreu.timg.R;
-import br.com.araujoabreu.timg.frota.TelaVeiculo;
+import br.com.araujoabreu.timg.dev.frota.TelaVeiculo;
 import br.com.araujoabreu.timg.banco.BancoGeral;
 
 public class VeiculosAdapter extends RecyclerView.Adapter<VeiculosAdapter.GroceryViewHolder> {

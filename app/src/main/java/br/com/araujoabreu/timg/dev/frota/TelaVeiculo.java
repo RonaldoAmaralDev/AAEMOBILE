@@ -1,4 +1,4 @@
-package br.com.araujoabreu.timg.frota;
+package br.com.araujoabreu.timg.dev.frota;
 
 
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import br.com.araujoabreu.timg.BuildConfig;
 import br.com.araujoabreu.timg.R;
 
 //implement the interface OnNavigationItemSelectedListener in your activity class
@@ -54,17 +53,17 @@ public class TelaVeiculo extends AppCompatActivity implements BottomNavigationVi
         Fragment fragment = null;
 
         switch (item.getItemId()) {
-            case R.id.navigation_home:
-                fragment = new DadosVeiculo();
-                break;
+        //    case R.id.navigation_home:
+        //        fragment = new DadosVeiculo();
+        //        break;
 
-            case R.id.navigation_dashboard:
-           //     fragment = new DashboardFragment();
-                break;
+         //   case R.id.navigation_dashboard:
+        //   //     fragment = new DashboardFragment();
+        //        break;
 
-            case R.id.navigation_notifications:
-               fragment = new MapFragment();
-                break;
+        //    case R.id.navigation_notifications:
+        //       fragment = new MapFragment();
+        //        break;
 
         }
 

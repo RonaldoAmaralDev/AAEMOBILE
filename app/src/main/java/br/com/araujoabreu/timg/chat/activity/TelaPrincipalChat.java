@@ -99,7 +99,7 @@ public class TelaPrincipalChat extends AppCompatActivity implements BottomNaviga
         //Trocar titulos
         navigation.getMenu().findItem(R.id.navigation_mapa).setTitle("MAPA");
         navigation.getMenu().findItem(R.id.navigation_visitas).setTitle("VISITA(" + String.valueOf(myBDGeral.dbCountAbertas() + ")"));
-        navigation.getMenu().findItem(R.id.navigation_scanner).setTitle("SCANNER");
+        navigation.getMenu().findItem(R.id.navigation_frota).setTitle("FROTA");
         navigation.getMenu().findItem(R.id.navigation_chat).setTitle("CHAT");
         navigation.getMenu().findItem(R.id.navigation_syncVisita).setTitle("ENVIAR(" + String.valueOf(myBDGeral.dbCountEncerradas() + ")"));
 
@@ -225,9 +225,9 @@ public class TelaPrincipalChat extends AppCompatActivity implements BottomNaviga
 
         }
 
-        if (id == R.id.navigation_scanner) {
+        if (id == R.id.navigation_frota) {
 
-            Intent intent = new Intent(TelaPrincipalChat.this, LoadingScanner.class);
+            Intent intent = new Intent(TelaPrincipalChat.this, TelaPrincipalChat.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
