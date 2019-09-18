@@ -115,7 +115,7 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_veiculo, menu);
 
         return true;
     }
@@ -128,11 +128,6 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
-            return true;
-        }
-
         if(id == android.R.id.home) {
             Intent intent = new Intent(TelaPrincipalRastreador.this, MainActivity_Principal.class);
             Bundle dados = new Bundle();
@@ -143,6 +138,10 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
             intent.putExtras(dados);
             startActivity(intent);
             return true;
+        }
+        if(id == R.id.action_syncVeiculo) {
+
+            Toast.makeText(getApplicationContext(), "Desenvolvimento.", Toast.LENGTH_LONG).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -167,7 +166,16 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
         }
         if (id == R.id.navigation_mapa) {
 
-            Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(TelaPrincipalRastreador.this, TelaMapaRastreador.class);
+            Bundle dados = new Bundle();
+            dados.putString("name", name);
+            dados.putString("email", email);
+            dados.putString("id", colaborador_id);
+            dados.putString("token", token);
+            intent.putExtras(dados);
+            startActivity(intent);
+
+         //   Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
 
         }
 

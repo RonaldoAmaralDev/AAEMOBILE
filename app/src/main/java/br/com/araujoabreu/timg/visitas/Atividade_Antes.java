@@ -557,6 +557,8 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
                     //Se tirar foto fazer update Tabela
                     myDb.updateFotoCaminho2a(
                             os_id,
+                            checklist_id,
+                            id_Atividade,
                             "/assets/os/" + os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "2A" + ".jpg");
                     ByteArrayOutputStream bytes2 = new ByteArrayOutputStream();
                     thumbnail2.compress(Bitmap.CompressFormat.JPEG, 30, bytes2);
@@ -579,6 +581,8 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
                     //Se tirar foto fazer update Tabela
                     myDb.updateFotoCaminho3a(
                             os_id,
+                            checklist_id,
+                            id_Atividade,
                             "/assets/os/" + os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "3A" + ".jpg");
                     ByteArrayOutputStream bytes3 = new ByteArrayOutputStream();
                     thumbnail3.compress(Bitmap.CompressFormat.JPEG, 30, bytes3);

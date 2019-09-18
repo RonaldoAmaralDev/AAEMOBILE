@@ -409,9 +409,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * @param foto;
      */
-    public void updateFotoCaminho2a(String os, String foto){
+    public void updateFotoCaminho2a(String os, String checklist_id, String checklistitens_id, String foto){
         SQLiteDatabase database = this.getWritableDatabase();
-        String updateQuery = "Update " + TABLE_NAME + " set foto2a = '" + foto  +"' where ordemservico_id ="+"'"+ os +"'";
+        String updateQuery = "Update " + TABLE_NAME + " set foto2a = '" + foto  +"' where " + COL_1 + " = "+"'"+ os + "'" + " AND "+ COL_2 +"='"+ checklist_id + "'" + " AND "+ COL_3 +"='"+ checklistitens_id + "'";
         Log.d("query",updateQuery);
         database.execSQL(updateQuery);
         database.close();
@@ -419,9 +419,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * @param foto;
      */
-    public void updateFotoCaminho3a(String os, String foto){
+    public void updateFotoCaminho3a(String os, String checklist_id, String checklistitens_id, String foto){
         SQLiteDatabase database = this.getWritableDatabase();
-        String updateQuery = "Update " + TABLE_NAME + " set foto3a = '" + foto  +"' where ordemservico_id ="+"'"+ os +"'";
+        String updateQuery = "Update " + TABLE_NAME + " set foto3a = '" + foto  +"' where  ="+"'"+ os +"'";
         Log.d("query",updateQuery);
         database.execSQL(updateQuery);
         database.close();
@@ -429,7 +429,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * @param foto;
      */
-    public void updateFotoCaminho1d(String os, String foto){
+    public void updateFotoCaminho1d(String os, String checklist_id, String checklistitens_id, String foto){
         SQLiteDatabase database = this.getWritableDatabase();
         String updateQuery = "Update " + TABLE_NAME + " set foto1d = '" + foto  +"' where ordemservico_id ="+"'"+ os +"'";
         Log.d("query",updateQuery);
@@ -439,7 +439,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * @param foto;
      */
-    public void updateFotoCaminho2d(String os, String foto){
+    public void updateFotoCaminho2d(String os, String checklist_id, String checklistitens_id, String foto){
         SQLiteDatabase database = this.getWritableDatabase();
         String updateQuery = "Update " + TABLE_NAME + " set foto2d = '" + foto  +"' where ordemservico_id ="+"'"+ os +"'";
         Log.d("query",updateQuery);
@@ -449,7 +449,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * @param foto;
      */
-    public void updateFotoCaminho3d(String os, String foto){
+    public void updateFotoCaminho3d(String os, String checklist_id, String checklistitens_id, String foto){
         SQLiteDatabase database = this.getWritableDatabase();
         String updateQuery = "Update " + TABLE_NAME + " set foto3d = '" + foto  +"' where ordemservico_id ="+"'"+ os +"'";
         Log.d("query",updateQuery);

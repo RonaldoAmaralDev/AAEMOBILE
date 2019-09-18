@@ -440,6 +440,8 @@ public class Atividade_Depois extends AppCompatActivity {
                     //Se tirar foto fazer update Tabela
                     myDb.updateFotoCaminho1d(
                             os_id,
+                            checklist_id,
+                            id_Atividade,
                             "/assets/os/" + os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "1D" + ".jpg");
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                     thumbnail.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
@@ -466,6 +468,8 @@ public class Atividade_Depois extends AppCompatActivity {
                     //Se tirar foto fazer update Tabela
                     myDb.updateFotoCaminho2d(
                             os_id,
+                            checklist_id,
+                            id_Atividade,
                             "/assets/os/" + os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "2D" + ".jpg");
                     ByteArrayOutputStream bytes2 = new ByteArrayOutputStream();
                     thumbnail2.compress(Bitmap.CompressFormat.JPEG, 30, bytes2);
@@ -488,6 +492,8 @@ public class Atividade_Depois extends AppCompatActivity {
                     //Se tirar foto fazer update Tabela
                     myDb.updateFotoCaminho3d(
                             os_id,
+                            checklist_id,
+                            id_Atividade,
                             "/assets/os/" + os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "3D" + ".jpg");
                     ByteArrayOutputStream bytes3 = new ByteArrayOutputStream();
                     thumbnail3.compress(Bitmap.CompressFormat.JPEG, 30, bytes3);

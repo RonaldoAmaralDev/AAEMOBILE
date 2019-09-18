@@ -20,7 +20,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.GroceryViewHolder> {
     private Context mContext;
     private Cursor mCursor;
-    private String tiposervico, id_Atividade, tiposervico_id, tiposolicitacaoDescricao, tiposervicoDescricao, checklist_id, local_id, dataplanejamento, equipamento_id, os_id, id_centrolucro, atividade, idAtividade;
+    private String tiposervico,  tiposervico_id, tiposolicitacaoDescricao, tiposervicoDescricao, checklist_id, local_id, dataplanejamento, equipamento_id, os_id, id_centrolucro, atividade;
 
     BancoGeral myBDGeral;
 
