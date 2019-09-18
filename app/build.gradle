@@ -9,8 +9,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         multiDexEnabled true
-        versionCode 58
-        versionName "1.2.9.3"
+        versionCode 59
+        versionName "1.2.9.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         useLibrary 'org.apache.http.legacy'
 

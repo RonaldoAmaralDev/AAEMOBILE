@@ -150,11 +150,11 @@ public class AssinaturaCliente extends AppCompatActivity {
                 myDBGeral.updateStatusAtividadeAberta(
                         checklist);
 
-
-
                 Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AssinaturaCliente.this, MainActivity_Principal.class);
+                Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
                 Bundle dados = new Bundle();
+                dados.putString("local_id", local_id);
+                dados.putString("centrolucro_id", id_centrolucro);
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("id", idColaborador);
@@ -209,14 +209,17 @@ public class AssinaturaCliente extends AppCompatActivity {
                         checklist);
 
                 Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AssinaturaCliente.this, MainActivity_Principal.class);
+                Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
                 Bundle dados = new Bundle();
+                dados.putString("local_id", local_id);
+                dados.putString("centrolucro_id", id_centrolucro);
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("id", idColaborador);
                 dados.putString("token", token);
                 intent.putExtras(dados);
                 startActivity(intent);
+
                 } else {
                     Toast.makeText(AssinaturaCliente.this,  "Não foi possivel salvar assinatura !", Toast.LENGTH_SHORT).show();
                 }

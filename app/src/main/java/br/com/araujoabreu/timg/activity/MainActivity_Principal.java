@@ -493,6 +493,8 @@ public class MainActivity_Principal extends AppCompatActivity
                                 dados.putString("token", token);
                                 dados.putString("latitude_local", latitude);
                                 dados.putString("longitude_local", longitude);
+                                dados.putString("centrolucro_id", centrolucro_id);
+                                dados.putString("local_id", local_id);
                                 intent.putExtras(dados);
                                 startActivity(intent);
                             }
@@ -856,12 +858,12 @@ public class MainActivity_Principal extends AppCompatActivity
         if (id == R.id.navigation_chat) {
          //  Intent intent = new Intent(MainActivity_Principal.this, TelaPrincipalChat.class);
          //  Bundle dados = new Bundle();
-         //  dados.putString("name", name);
+         ////  dados.putString("name", name);
          //  dados.putString("email", email);
          //  dados.putString("id", colaborador_id);
-         //  dados.putString("token", token);
-         //  intent.putExtras(dados);
-         //  startActivity(intent);
+        //   dados.putString("token", token);
+        //   intent.putExtras(dados);
+       //    startActivity(intent);
            Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
         }
         if (id == R.id.navigation_syncVisita) {
@@ -1189,7 +1191,7 @@ public class MainActivity_Principal extends AppCompatActivity
         if (osList.size() != 0) {
             //Toast.makeText(getApplicationContext(), "Você possui: " + myBDGeral.gravarNovaOS2(), Toast.LENGTH_LONG).show();
                 params.put("userJson", myBDGeral.gravarNovaOS2());
-                client.post("http://helper.aplusweb.com.br/aplicativo/sync/gerarnovavisita.php", params, new AsyncHttpResponseHandler() {
+                client.post("http://helper.aplusweb.com.br/aplicativo/sync2/gerarnovavisita.php", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(String response) {
                         System.out.println(response);
@@ -1496,8 +1498,8 @@ public class MainActivity_Principal extends AppCompatActivity
                             local.setCidade(jsonObject.getString("cidade"));
                             local.setSigla(jsonObject.getString("sigla"));
                             local.setEstado(jsonObject.getString("estado"));
-                            //   local.setLatitude(jsonObject.getString("latitude"));
-                            //   local.setLongitude(jsonObject.getString("longitude"));
+                            local.setLatitude(jsonObject.getString("latitude"));
+                            local.setLongitude(jsonObject.getString("longitude"));
                             local.setTempogasto(jsonObject.getString("tempogasto"));
                             local.setRegiaoID(jsonObject.getString("regiaoID"));
                             local.setRegiaoDescricao(jsonObject.getString("regiaoDescricao"));
@@ -1523,8 +1525,8 @@ public class MainActivity_Principal extends AppCompatActivity
                                         local.getDescricaolocal(),
                                         local.getBairro(),
                                         local.getCidade(),
-                                        "-19.860786",
-                                        "-44.0052989",
+                                        local.getLatitude(),
+                                        local.getLongitude(),
                                         local.getSigla(),
                                         local.getEstado(),
                                         local.getTempogasto(),
@@ -1552,8 +1554,8 @@ public class MainActivity_Principal extends AppCompatActivity
                                     local.getDescricaolocal(),
                                     local.getBairro(),
                                     local.getCidade(),
-                                    "-19.860786",
-                                    "-44.0052989",
+                                    local.getLatitude(),
+                                    local.getLongitude(),
                                     local.getSigla(),
                                     local.getEstado(),
                                     local.getTempogasto(),
@@ -1570,6 +1572,8 @@ public class MainActivity_Principal extends AppCompatActivity
                                     local.getAreaconstruida(),
                                     local.getAreacapina(),
                                     local.getEnderecolocal());
+
+                            dataLocal.close();
 
                             Equipamento equipamento = new Equipamento();
                             equipamento.setId(jsonObject.getString("idEquipamento"));
@@ -1623,6 +1627,7 @@ public class MainActivity_Principal extends AppCompatActivity
                                     equipamento.getFabricante(),
                                     equipamento.getTipoequipamento(),
                                     equipamento.getFornecedor());
+                            dataEquipamento.close();
 
                             OS os = new OS();
                             os.setId(jsonObject.getString("idOS"));
@@ -1657,8 +1662,6 @@ public class MainActivity_Principal extends AppCompatActivity
                                         os.getDescricaopadrao(),
                                         os.getFlag_os()
                                 );
-
-
                                 Calendar cal = Calendar.getInstance(); //
                                 cal.setTime(new Date()); //
                                 cal.add(Calendar.DAY_OF_MONTH, 30); // Adicionar Tempo Estimado
@@ -1670,8 +1673,6 @@ public class MainActivity_Principal extends AppCompatActivity
                                         os.getId(),
                                         horafim,
                                         "A");
-
-
 
                             } else {
                                 myBDGeral.insertOS(
@@ -1705,6 +1706,7 @@ public class MainActivity_Principal extends AppCompatActivity
                                         "A");
 
                             }
+                            dataOS.close();
 
                             TipoSolicitacao tipoSolicitacao = new TipoSolicitacao();
                             tipoSolicitacao.setId(jsonObject.getString("tiposolicitacao_id"));
@@ -1720,8 +1722,8 @@ public class MainActivity_Principal extends AppCompatActivity
                                 myBDGeral.insertTipoSolicitacao(
                                         tipoSolicitacao.getId(),
                                         tipoSolicitacao.getDescricao());
-
                             }
+                            dataTipoSolicitacao.close();
 
                             TipoServico tipoServico = new TipoServico();
                             tipoServico.setId(jsonObject.getString("tiposervico_id"));
@@ -1738,6 +1740,7 @@ public class MainActivity_Principal extends AppCompatActivity
                                         tipoServico.getId(),
                                         tipoServico.getDescricao());
                             }
+                            dataTipoServico.close();
 
 
                         } catch (JSONException e) {

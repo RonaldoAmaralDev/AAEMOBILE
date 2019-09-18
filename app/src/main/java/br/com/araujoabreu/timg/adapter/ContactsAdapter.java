@@ -16,6 +16,7 @@ import android.widget.TextView;
 import br.com.araujoabreu.timg.BuildConfig;
 import br.com.araujoabreu.timg.R;
 import br.com.araujoabreu.timg.banco.BancoGeral;
+import br.com.araujoabreu.timg.rota.TrajetoLocal;
 import br.com.araujoabreu.timg.visitas.Equipamentos;
 import br.com.araujoabreu.timg.visitas.VisitasLocal;
 
@@ -73,6 +74,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Grocer
         String cidade = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_CIDADE_LOCAL));
         String centrolucro_id = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_CENTROCUSTO_LOCAL));
         String enderecolocal = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_ENDERECO_LOCAL));
+        String latitude_local = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_LATITUDE_LOCAL));
+        String longitude_local = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_LONGITUDE_LOCAL));
 
         holder.nameText.setText("Codigo: " + name);
         holder.descricao.setText("Descrição: " + descricao);
@@ -103,6 +106,20 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Grocer
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Intent intent = new Intent(mContext, Equipamentos.class);
                             Bundle dados = new Bundle();
+                            dados.putString("local_id", id);
+                            dados.putString("centrolucro_id", centrolucro_id);
+                            intent.putExtras(dados);
+                            mContext.startActivity(intent);
+                        }
+                    });
+            alertDialog.setButton(alertDialog.BUTTON_NEGATIVE, "TRAJETO",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(mContext, TrajetoLocal.class);
+                            Bundle dados = new Bundle();
+                            dados.putString("latitude_local", latitude_local);
+                            dados.putString("longitude_local", longitude_local);
                             dados.putString("local_id", id);
                             dados.putString("centrolucro_id", centrolucro_id);
                             intent.putExtras(dados);

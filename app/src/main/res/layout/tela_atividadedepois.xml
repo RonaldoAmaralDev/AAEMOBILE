@@ -12,7 +12,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="-5dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="205dp"
         android:background="@color/white" />
 
     <ImageButton
@@ -55,8 +55,8 @@
 
     <TextView
         android:id="@+id/txtAtividadeDepois"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="308dp"
+        android:layout_height="66dp"
         android:layout_alignTop="@+id/textView6"
         android:layout_marginStart="-4dp"
         android:layout_marginTop="0dp"
@@ -72,7 +72,7 @@
         android:layout_alignStart="@+id/textView6"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="73dp"
+        android:layout_marginTop="99dp"
         android:text="Localização:"
         android:textColor="@color/white"
         android:textSize="14sp" />
@@ -111,7 +111,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="-10dp"
-        android:layout_marginTop="103dp"
+        android:layout_marginTop="132dp"
         android:background="@color/white" />
 
     <ImageButton
@@ -132,8 +132,8 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/txtLongitude"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="117dp"
-        android:layout_marginEnd="-246dp"
+        android:layout_marginTop="153dp"
+        android:layout_marginEnd="-238dp"
         android:ems="10"
         android:hint="Inserir Observação"
         android:inputType="textMultiLine"

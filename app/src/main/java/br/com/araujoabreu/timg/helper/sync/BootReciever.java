@@ -214,8 +214,8 @@ public class BootReciever extends Service  {
                             local.setCidade(jsonObject.getString("cidade"));
                             local.setSigla(jsonObject.getString("sigla"));
                             local.setEstado(jsonObject.getString("estado"));
-                            //local.setLatitude(jsonObject.getString("latitude"));
-                           // local.setLongitude(jsonObject.getString("longitude"));
+                            local.setLatitude(jsonObject.getString("latitude"));
+                            local.setLongitude(jsonObject.getString("longitude"));
                             local.setTempogasto(jsonObject.getString("tempogasto"));
                             local.setRegiaoID(jsonObject.getString("regiaoID"));
                             local.setRegiaoDescricao(jsonObject.getString("regiaoDescricao"));
@@ -241,8 +241,8 @@ public class BootReciever extends Service  {
                                         local.getDescricaolocal(),
                                         local.getBairro(),
                                         local.getCidade(),
-                                        "-19.860786",
-                                        "-44.0052989",
+                                        local.getLatitude(),
+                                        local.getLongitude(),
                                         local.getSigla(),
                                         local.getEstado(),
                                         local.getTempogasto(),
@@ -270,8 +270,8 @@ public class BootReciever extends Service  {
                                     local.getDescricaolocal(),
                                     local.getBairro(),
                                     local.getCidade(),
-                                    "-19.860786",
-                                    "-44.0052989",
+                                    local.getLatitude(),
+                                    local.getLongitude(),
                                     local.getSigla(),
                                     local.getEstado(),
                                     local.getTempogasto(),

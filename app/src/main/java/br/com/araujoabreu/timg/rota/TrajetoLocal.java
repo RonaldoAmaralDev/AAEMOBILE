@@ -13,13 +13,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 
+import java.text.SimpleDateFormat;
+
 import br.com.araujoabreu.timg.R;
 
 import br.com.araujoabreu.timg.activity.MainActivity_Principal;
 
 public class TrajetoLocal extends AppCompatActivity {
 
-    public String email, name, colaborador_id, token, latitude, longitude, latitude_local, longitude_local;
+    public String email, name, colaborador_id, token, latitude, longitude, latitude_local, longitude_local, centrolucro_id, local_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +32,18 @@ public class TrajetoLocal extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
+        name = pref.getString("name", "");
+        email = pref.getString("email", "");
+        colaborador_id = pref.getString("id", "" );
+        token = pref.getString("token", "" );
+
         Intent intent = getIntent();
         Bundle dados = intent.getExtras();
-        email = dados.getString("email");
-        name = dados.getString("name");
-        colaborador_id = dados.getString("colaborador_id");
-        token = dados.getString("token");
         latitude_local = dados.getString("latitude_local");
         longitude_local = dados.getString("longitude_local");
+        local_id = dados.getString("local_id");
+        centrolucro_id = dados.getString("centrolucro_id");
 
         SharedPreferences salvarLocalizacao = getSharedPreferences("salvarLocalizacao", MODE_PRIVATE);
         latitude = salvarLocalizacao.getString("latitude", "");

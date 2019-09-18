@@ -9,7 +9,6 @@ import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,19 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import br.com.araujoabreu.timg.chat.config.ConfiguracaoFirebase;
-import br.com.araujoabreu.timg.chat.helper.Base64Custom;
-import br.com.araujoabreu.timg.chat.helper.UsuarioFirebase;
-import br.com.araujoabreu.timg.chat.model.Usuario;
 import br.com.araujoabreu.timg.helper.Permissões;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.gson.JsonObject;
 import br.com.araujoabreu.timg.R;
 import com.koushikdutta.async.future.FutureCallback;
@@ -40,13 +27,13 @@ import com.koushikdutta.ion.Ion;
 
 public class TelaLogin extends AppCompatActivity {
 
+
+
     private EditText emailLogar, senhaLogar;
     private Button btnLogar;
     private ImageView btnSite;
     private TextView txtRecuperarSenha;
     public String email, id, name, tipo;
-    private FirebaseAuth autenticacao;
-
 
     private static final int REQUEST_PERMISSIONS_CODE = 1;
     private static final String TAG = "PermissaoTAG";
@@ -178,37 +165,38 @@ public class TelaLogin extends AppCompatActivity {
                                     @Override
                                     public void onCompleted(Exception e, JsonObject result) {
                                         try {
-                                                  // Armazenar dados no APP
-                                                  String token = result.get("token").getAsString();
-                                                  //Pega dados na tabela users
-                                                  JsonObject rates = (JsonObject) result.get("user");
-                                                  String name = rates.get("name").getAsString();
-                                                  String email = rates.get("email").getAsString();
+                                            // Armazenar dados no APP
+                                            String token = result.get("token").getAsString();
+                                            //Pega dados na tabela users
+                                            JsonObject rates = (JsonObject) result.get("user");
+                                            String name = rates.get("name").getAsString();
+                                            String email = rates.get("email").getAsString();
 
-                                                  //Pega dados na tabela colaboradors
-                                                  JsonObject colaboradors = (JsonObject) result.get("colaborador");
-                                                  String id = colaboradors.get("id").getAsString();
-                                                  String matricula = colaboradors.get("matricula").getAsString();
-                                                  String celular = colaboradors.get("celular").getAsString();
+                                            //Pega dados na tabela colaboradors
+                                            JsonObject colaboradors = (JsonObject) result.get("colaborador");
+                                            String id = colaboradors.get("id").getAsString();
+                                            String matricula = colaboradors.get("matricula").getAsString();
+                                            String celular = colaboradors.get("celular").getAsString();
 
-                                                  SharedPreferences.Editor pref = getSharedPreferences("info", MODE_PRIVATE).edit();
-                                                  pref.putString("id", id);
-                                                  pref.putString("name", name);
-                                                  pref.putString("email", email);
-                                                  pref.putString("token", token);
-                                                  pref.putString("matricula", matricula);
-                                                  pref.putString("celular", celular);
+                                            SharedPreferences.Editor pref = getSharedPreferences("info", MODE_PRIVATE).edit();
+                                            pref.putString("id", id);
+                                            pref.putString("name", name);
+                                            pref.putString("email", email);
+                                            pref.putString("token", token);
+                                            pref.putString("matricula", matricula);
+                                            pref.putString("celular", celular);
 
-                                                  // Armazena as Preferencias
-                                                  pref.commit();
+                                            // Armazena as Preferencias
+                                            pref.commit();
 
-                                                  Usuario usuario = new Usuario();
-                                                  usuario.setNome( name );
-                                                  usuario.setEmail( email );
-                                                  usuario.setSenha( password );
-
-                                                  //Cadastra Usuario Firebase
-                                                  cadastrarUsuario( usuario, token);
+                                            Intent intent = new Intent(TelaLogin.this, MainActivity_Principal.class);
+                                            Bundle dados = new Bundle();
+                                            intent.putExtra("id", id);
+                                            intent.putExtra("name", name);
+                                            intent.putExtra("email", email);
+                                            intent.putExtra("token", token);
+                                            intent.putExtras(dados);
+                                            startActivity(intent);
 
                                         } catch (Exception erro) {
                                             senhaLogar.setText("");
@@ -238,77 +226,4 @@ public class TelaLogin extends AppCompatActivity {
         }
         return conectado;
     }
-
-    public void cadastrarUsuario(final Usuario usuario, String token){
-
-        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        autenticacao.createUserWithEmailAndPassword(
-                usuario.getEmail(), usuario.getSenha()
-        ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                if ( task.isSuccessful() ){
-
-                    SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
-                    String id = pref.getString("id", "" );
-                    String name = pref.getString("name", "");
-                    String email= pref.getString("email", "");
-                    String token = pref.getString("token", "");
-
-                   // Toast.makeText(TelaLogin.this, "Sucesso ao cadastrar usuário!", Toast.LENGTH_SHORT).show();
-                    UsuarioFirebase.atualizarNomeUsuario( usuario.getNome() );
-                    Intent intent = new Intent(TelaLogin.this, MainActivity_Principal.class);
-                    Bundle dados = new Bundle();
-                    intent.putExtra("id", id);
-                    intent.putExtra("name", name);
-                    intent.putExtra("email", email);
-                    intent.putExtra("token", token);
-                    intent.putExtras(dados);
-                    startActivity(intent);
-                    finish();
-                    try {
-                        String identificadorUsuario = Base64Custom.codificarBase64( emailLogar.getText().toString() );
-                        usuario.setId( identificadorUsuario );
-                        usuario.salvar();
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-
-                }else {
-
-                    String excecao = "";
-                    try {
-                        throw task.getException();
-                    }catch ( FirebaseAuthWeakPasswordException e){
-                         excecao = "Digite uma senha mais forte!";
-                    }catch ( FirebaseAuthInvalidCredentialsException e){
-                         excecao= "Por favor, digite um e-mail válido";
-                    }catch ( FirebaseAuthUserCollisionException e){
-                         excecao = "Este conta já foi cadastrada";
-
-                         SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
-                         String id = pref.getString("id", "" );
-                         String name = pref.getString("name", "");
-                         String email= pref.getString("email", "");
-                         String token = pref.getString("token", "");
-
-                         Intent intent = new Intent(TelaLogin.this, MainActivity_Principal.class);
-                         Bundle dados = new Bundle();
-                         intent.putExtra("id", id);
-                         intent.putExtra("name", name);
-                         intent.putExtra("email", email);
-                         intent.putExtra("token", token);
-                         intent.putExtras(dados);
-                         startActivity(intent);
-                    }catch (Exception e){
-                        excecao = "Erro ao cadastrar usuário: "  + e.getMessage();
-                        e.printStackTrace();
-                    }
-                  //  Toast.makeText(TelaLogin.this, excecao, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
 }
