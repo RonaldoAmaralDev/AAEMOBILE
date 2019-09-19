@@ -97,6 +97,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
         String btu = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_BTU_EQUIPAMENTO));
         fabricante = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_FABRICANTE_EQUIPAMENTO));
 
+
         holder.codigoequipamento.setText("Codigo: " + name);
         holder.descricao.setText("Descrição: " + descricao);
         holder.modeloequipamento.setText("Modelo: " + modelo);
@@ -186,7 +187,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                     .setBodyParameter("tiposervico_id", "9")
                                                     .setBodyParameter("prioridade_id", "1")
                                                     .setBodyParameter("equipamento_id", id)
-                                                    .setBodyParameter("frequencia_id", "1")
+                                                    .setBodyParameter("frequencia_id", "7")
                                                     .setBodyParameter("impedimento_id", "1")
                                                     .setBodyParameter("checklist_id", "8")
                                                     .setBodyParameter("equipe1", colaborador_id)
@@ -242,6 +243,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                                     dados.putString("tiposervico", "2");
                                                                     dados.putString("centrocusto_id", centrolucro_id);
                                                                     dados.putString("atividade", "Realizar Limpeza");
+                                                                    dados.putString("frequencia_id", "7");
                                                                     dados.putString("name", name);
                                                                     dados.putString("email", email);
                                                                     dados.putString("idColaborador", colaborador_id);
@@ -287,7 +289,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                                     .setBodyParameter("tiposervico_id", "11")
                                                                     .setBodyParameter("prioridade_id", "1")
                                                                     .setBodyParameter("equipamento_id", id)
-                                                                    .setBodyParameter("frequencia_id", "1")
+                                                                    .setBodyParameter("frequencia_id", "7")
                                                                     .setBodyParameter("impedimento_id", "1")
                                                                     .setBodyParameter("checklist_id", "19")
                                                                     .setBodyParameter("equipe1", colaborador_id)
@@ -340,6 +342,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                                                     dados.putString("local_id", local_id);
                                                                                     dados.putString("dataplanejamento", data);
                                                                                     dados.putString("tiposervico", "11");
+                                                                                    dados.putString("frequencia_id", "7");
                                                                                     dados.putString("centrocusto_id", centrolucro_id);
                                                                                     dados.putString("atividade", "Realizar Inspeção Bombeiro");
                                                                                     dados.putString("name", name);
@@ -378,7 +381,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                                     .setBodyParameter("tiposervico_id", "11")
                                                                     .setBodyParameter("prioridade_id", "1")
                                                                     .setBodyParameter("equipamento_id", id)
-                                                                    .setBodyParameter("frequencia_id", "1")
+                                                                    .setBodyParameter("frequencia_id", "7")
                                                                     .setBodyParameter("impedimento_id", "1")
                                                                     .setBodyParameter("checklist_id", "20")
                                                                     .setBodyParameter("equipe1", id_colaborador)
@@ -505,6 +508,7 @@ public class EquipamentoAdapter extends RecyclerView.Adapter<EquipamentoAdapter.
                                                                                                                     dados.putString("local_id", local_id);
                                                                                                                     dados.putString("dataplanejamento", dataVisita);
                                                                                                                     dados.putString("tiposervico", "11");
+                                                                                                                    dados.putString("frequencia_id", "7");
                                                                                                                     dados.putString("centrocusto_id", centrolucro_id);
                                                                                                                     dados.putString("atividade", "Realizar Inspeção");
                                                                                                                     dados.putString("name", name);

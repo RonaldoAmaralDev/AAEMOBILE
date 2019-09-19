@@ -36,7 +36,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
 
     private AtividadeAdapter mAdapter;
     private SearchView searchView;
-    private String os_id, checklist_id, equipamento_id, local_id, name, email, colaborador_id, token, tiposervico, dataplanejamento, centrocusto_id;
+    private String os_id, checklist_id, equipamento_id, frequencia_id, local_id, name, email, colaborador_id, token, tiposervico, dataplanejamento, centrocusto_id;
     BancoGeral myDBGeral;
     DatabaseHelper myDb;
 
@@ -63,6 +63,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
         tiposervico = dados.getString("tiposervico");
         dataplanejamento = dados.getString("dataplanejamento");
         centrocusto_id = dados.getString("centrocusto_id");
+        frequencia_id = dados.getString("frequencia_id");
         name = dados.getString("name");
         email = dados.getString("email");
         colaborador_id = dados.getString("idColaborador");
@@ -180,6 +181,7 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
                 dadosVisita.putString("os_id", os_id);
                 dadosVisita.putString("equipamento_id", equipamento_id);
                 dadosVisita.putString("local_id", local_id);
+                dadosVisita.putString("frequencia_id", frequencia_id);
                 dadosVisita.putString("checklist", checklist_id);
                 dadosVisita.putString("tiposervico", tiposervico);
                 dadosVisita.putString("dataplanejamento", dataplanejamento);

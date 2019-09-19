@@ -117,6 +117,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 
 public class MainActivity_Principal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback,
@@ -131,12 +134,19 @@ public class MainActivity_Principal extends AppCompatActivity
     private static final String TAG = "MainActivity_Principal";
 
     DatabaseHelper controller;
+    protected LocationManager locationManager;
+    protected LocationListener locationListener;
+    protected Context context;
+    String lat;
+    String provider;
+    protected String latitude,longitude;
+    protected boolean gps_enabled,network_enabled;
     BancoGeral myBDGeral;
     private GoogleApiClient mGoogleApiClient;
     private static final int REQUEST_LOCATION = 1;
     public JsonArrayRequest request, requestAtividades ;
     public RequestQueue requestQueue, requestQueueAtividades;
-    String email, name, colaborador_id, token, idLocal, codigolocal, descricaolocal, latitude, longitude;
+    String email, name, colaborador_id, token, idLocal, codigolocal, descricaolocal;
     ProgressDialog progressBar;
     private int progressBarStatus = 0;
     private Handler progressBarHandler = new Handler();
@@ -153,7 +163,6 @@ public class MainActivity_Principal extends AppCompatActivity
     private GoogleMap mMap;
     private MapFragment mapFragment;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    final Context context = this;
     private AutoCompleteTextView autoCompleteTextView;
     ArrayAdapter<String> adapter ;
 
@@ -213,7 +222,6 @@ public class MainActivity_Principal extends AppCompatActivity
 
         controller = new DatabaseHelper(this);
         myBDGeral = new BancoGeral(this);
-
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -547,9 +555,6 @@ public class MainActivity_Principal extends AppCompatActivity
                                 Toast.makeText(getApplicationContext(), "Não foi possivel fazer a captura da sua lozalização.", Toast.LENGTH_LONG).show();
                             }
 
-
-
-
                             //Emulador:
                             moveCamera(new LatLng(
                                             currentLocation.getLatitude(), currentLocation.getLongitude()),
@@ -849,11 +854,11 @@ public class MainActivity_Principal extends AppCompatActivity
           //  Bundle dados = new Bundle();
          //   dados.putString("name", name);
          //   dados.putString("email", email);
-         //   dados.putString("id", colaborador_id);
+          //  dados.putString("id", colaborador_id);
          //   dados.putString("token", token);
-          //  intent.putExtras(dados);
-          //  startActivity(intent);
-            Toast.makeText(getApplicationContext(), "Em Desenvolvimento", Toast.LENGTH_LONG).show();
+         //   intent.putExtras(dados);
+        //    startActivity(intent);
+           Toast.makeText(getApplicationContext(), "Em Desenvolvimento", Toast.LENGTH_LONG).show();
         }
 
         if (id == R.id.navigation_chat) {
@@ -876,7 +881,7 @@ public class MainActivity_Principal extends AppCompatActivity
                     if (controller.dbSyncNO() != 0) {
                         ProgressBarStatusVisitas();
                         params.put("userJson", controller.composeJSONfromSQLite());
-                        client.post("http://helper.aplusweb.com.br/aplicativo/sync2/gravarvisita.php", params, new AsyncHttpResponseHandler() {
+                        client.post("http://helper.aplusweb.com.br/aplicativo/sync/gravarvisita.php", params, new AsyncHttpResponseHandler() {
                             @Override
                             public void onSuccess(String response) {
                                 System.out.println(response);
@@ -1132,10 +1137,6 @@ public class MainActivity_Principal extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-
-
     public void verificarSePossuiMedicao() {
 
         AsyncHttpClient client = new AsyncHttpClient();
@@ -1144,7 +1145,7 @@ public class MainActivity_Principal extends AppCompatActivity
         if (medicoesList.size() != 0) {
             if (controller.dbSyncMedicao() != 0) {
                 params.put("userJson", controller.gravarMedicao());
-                client.post("http://helper.aplusweb.com.br/aplicativo/sync2/gravarmedicao.php", params, new AsyncHttpResponseHandler() {
+                client.post("http://helper.aplusweb.com.br/aplicativo/sync/gravarmedicao.php", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(String response) {
                         System.out.println(response);
@@ -1181,9 +1182,6 @@ public class MainActivity_Principal extends AppCompatActivity
         }
         criarNovaVisita();
     }
-
-
-
     public void criarNovaVisita() {
 
         AsyncHttpClient client = new AsyncHttpClient();
@@ -1192,7 +1190,7 @@ public class MainActivity_Principal extends AppCompatActivity
         if (osList.size() != 0) {
             //Toast.makeText(getApplicationContext(), "Você possui: " + myBDGeral.gravarNovaOS2(), Toast.LENGTH_LONG).show();
                 params.put("userJson", myBDGeral.gravarNovaOS2());
-                client.post("http://helper.aplusweb.com.br/aplicativo/sync2/gerarnovavisita.php", params, new AsyncHttpResponseHandler() {
+                client.post("http://helper.aplusweb.com.br/aplicativo/sync/gerarnovavisita.php", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(String response) {
                         System.out.println(response);
@@ -1229,9 +1227,6 @@ public class MainActivity_Principal extends AppCompatActivity
         }
        mandarFotos();
     }
-
-
-
     public void mandarFotos() {
         //FTP
         FTPClient ftpClient = new FTPClient();
@@ -1273,7 +1268,6 @@ public class MainActivity_Principal extends AppCompatActivity
             e.printStackTrace();
         }
     }
-
     public void verificarArmazenamento() {
 
 
@@ -1313,7 +1307,6 @@ public class MainActivity_Principal extends AppCompatActivity
             f.mkdirs();
         }
     }
-
     public void ProgressBarStatus() {
 
         progressBar = new ProgressDialog(MainActivity_Principal.this);
@@ -1672,7 +1665,6 @@ public class MainActivity_Principal extends AppCompatActivity
 
                                 myBDGeral.updateSituacaoOSSistematica(
                                         os.getId(),
-                                        horafim,
                                         "A");
 
                             } else {
@@ -1694,16 +1686,8 @@ public class MainActivity_Principal extends AppCompatActivity
                                         "",
                                         os.getFlag_os());
 
-                                Calendar cal = Calendar.getInstance(); //
-                                cal.setTime(new Date()); //
-                                cal.add(Calendar.DAY_OF_MONTH, 30); // Adicionar Tempo Estimado
-                                cal.getTime(); //
-                                SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
-                                String horafim = datafim.format(cal.getTime());
-
                                 myBDGeral.updateSituacaoOSSistematica(
                                         os.getId(),
-                                        horafim,
                                         "A");
 
                             }

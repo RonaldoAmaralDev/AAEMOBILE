@@ -32,6 +32,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 import br.com.araujoabreu.timg.R;
@@ -42,7 +45,7 @@ public class AssinaturaCliente extends AppCompatActivity {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private SignaturePad mSignaturePad;
-    private String name, email, idColaborador, token, os_id, equipamento_id, local_id, tiposervico, checklist, dataplanejamento, id_centrolucro;
+    private String name, email, idColaborador, token, os_id, frequencia_id, equipamento_id, local_id, tiposervico, checklist, dataplanejamento, id_centrolucro;
     private TextView txtCliente;
     BancoGeral myDBGeral;
     DatabaseHelper myDB;
@@ -71,6 +74,7 @@ public class AssinaturaCliente extends AppCompatActivity {
         checklist = dados.getString("checklist");
         tiposervico = dados.getString("tiposervico");
         id_centrolucro = dados.getString("id_centrolucro");
+        frequencia_id = dados.getString("frequencia_id");
         name = dados.getString("name");
         email = dados.getString("email");
         idColaborador = dados.getString("idColaborador");
@@ -139,7 +143,7 @@ public class AssinaturaCliente extends AppCompatActivity {
 
                 myDB.updateAssinaturaCliente(
                         os_id,
-                        "http://helper.aplusweb.com.br/assets/imgs/semfoto.jpg"
+                        "/assets/imgs/semfoto.jpg"
                 );
 
                 //Finalizar Contagem HH da OS
@@ -150,19 +154,232 @@ public class AssinaturaCliente extends AppCompatActivity {
                 myDBGeral.updateStatusAtividadeAberta(
                         checklist);
 
-                Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
-                Bundle dados = new Bundle();
-                dados.putString("local_id", local_id);
-                dados.putString("centrolucro_id", id_centrolucro);
-                dados.putString("name", name);
-                dados.putString("email", email);
-                dados.putString("id", idColaborador);
-                dados.putString("token", token);
-                intent.putExtras(dados);
-                startActivity(intent);
+                //Fazer verificação se for uma visita preventiva, ele irá gerar para o mes de frequencia
+
+                int frequencia_idINT = Integer.parseInt(frequencia_id);
+
+                //Se for mensal (30 dias)
+                if (frequencia_idINT == 1) {
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_MONTH, 30); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se for Diario (1 Dia)
+                else if(frequencia_idINT == 2) {
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_MONTH, 1); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se for Anual
+                else if(frequencia_idINT == 3) {
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_YEAR, 365); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                else if(frequencia_idINT == 4) {
+                    //Se for bimestral (60 dias)
+
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_YEAR, 60); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se for Semestral (6 Meses = 182 Dias)
+                else if(frequencia_idINT == 5) {
+
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_YEAR, 182); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se for Trimestral (90 dias)
+                else if(frequencia_idINT == 6) {
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_YEAR, 90); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se for NA (Provavelmente sem periodicidade)
+                else if(frequencia_idINT == 7 ) {
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se for SEMANAL (7 Dias)
+                else if(frequencia_idINT == 8) {
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_WEEK, 7); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se não for nenhum desses
+                else {
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_YEAR, 30); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Fim IF
+
             }
         });
+
 
         alert.show();
 
@@ -208,17 +425,228 @@ public class AssinaturaCliente extends AppCompatActivity {
                 myDBGeral.updateStatusAtividadeAberta(
                         checklist);
 
-                Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
-                Bundle dados = new Bundle();
-                dados.putString("local_id", local_id);
-                dados.putString("centrolucro_id", id_centrolucro);
-                dados.putString("name", name);
-                dados.putString("email", email);
-                dados.putString("id", idColaborador);
-                dados.putString("token", token);
-                intent.putExtras(dados);
-                startActivity(intent);
+                //Fazer verificação se for uma visita preventiva, ele irá gerar para o mes de frequencia
+
+                int frequencia_idINT = Integer.parseInt(frequencia_id);
+
+                //Se for mensal (30 dias)
+                if (frequencia_idINT == 1) {
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_MONTH, 30); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se for Diario (1 Dia)
+                else if(frequencia_idINT == 2) {
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_MONTH, 1); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se for Anual
+                else if(frequencia_idINT == 3) {
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_YEAR, 365); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                else if(frequencia_idINT == 4) {
+                    //Se for bimestral (60 dias)
+
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_YEAR, 60); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se for Semestral (6 Meses = 182 Dias)
+                else if(frequencia_idINT == 5) {
+
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_YEAR, 182); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se for Trimestral (90 dias)
+                else if(frequencia_idINT == 6) {
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_YEAR, 90); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se for NA (Provavelmente sem periodicidade)
+                else if(frequencia_idINT == 7 ) {
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se for SEMANAL (7 Dias)
+                else if(frequencia_idINT == 8) {
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_WEEK, 7); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Se não for nenhum desses
+                else {
+                    Calendar cal = Calendar.getInstance(); //
+                    cal.setTime(new Date()); //
+                    cal.add(Calendar.DAY_OF_YEAR, 30); // Adicionar Tempo Estimado
+                    cal.getTime(); //
+                    SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
+                    String proximaData = datafim.format(cal.getTime());
+
+                    myDBGeral.updateDataProximaVisita(
+                            os_id,
+                            proximaData);
+
+                    Toast.makeText(getApplicationContext(), "Visita: " + os_id + " , finalizada com sucesso !", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AssinaturaCliente.this, VisitasLocal.class);
+                    Bundle dados = new Bundle();
+                    dados.putString("local_id", local_id);
+                    dados.putString("centrolucro_id", id_centrolucro);
+                    dados.putString("name", name);
+                    dados.putString("email", email);
+                    dados.putString("id", idColaborador);
+                    dados.putString("token", token);
+                    intent.putExtras(dados);
+                    startActivity(intent);
+                }
+                //Fim IF
 
                 } else {
                     Toast.makeText(AssinaturaCliente.this,  "Não foi possivel salvar assinatura !", Toast.LENGTH_SHORT).show();

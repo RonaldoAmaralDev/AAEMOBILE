@@ -1679,13 +1679,19 @@ public class BancoGeral extends SQLiteOpenHelper {
     }
 
 
-    public void updateSituacaoOSSistematica(String id, String proximavisita, String situacao){
+    public void updateSituacaoOSSistematica(String id, String situacao){
         SQLiteDatabase database = this.getWritableDatabase();
-        String updateQuery = "Update " + TABELA_OS + " set situacao= '" + situacao + "', dataprogramacao = '" + proximavisita + "' WHERE id="+"'"+ id + "' AND " + COL_TIPOSOLICITACAOID_OS + " = '" + "1" + "' AND " + COL_SITUACAO_OS + " != '" + "OK" +"'";
+        String updateQuery = "Update " + TABELA_OS + " set situacao= '" + situacao + "' WHERE id="+"'"+ id + "' AND " + COL_TIPOSOLICITACAOID_OS + " = '" + "1" + "' AND " + COL_SITUACAO_OS + " != '" + "OK" +"'";
         Log.d("query",updateQuery);
         database.execSQL(updateQuery);
     }
 
+    public void updateDataProximaVisita(String id, String proximavisita){
+        SQLiteDatabase database = this.getWritableDatabase();
+        String updateQuery = "Update " + TABELA_OS + " set dataprogramacao= '" + proximavisita + "' WHERE id="+"'"+ id + "'";
+        Log.d("query",updateQuery);
+        database.execSQL(updateQuery);
+    }
 
     //Apos Gerar Nova OS ele ira mudar status para não ter duplicidade
     public void updateSituacaoOrdemServico(String os_id, String status){

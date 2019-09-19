@@ -47,7 +47,7 @@ public class Atividade_Depois extends AppCompatActivity {
     private static final int CAMERA_PIC_REQUEST3 = 1111;
     public static final int MEDIA_TYPE_IMAGE = 1;
     private String os_id, foto1a, foto2a, foto3a, foto1d, foto2d, foto3d, checklist_id, id_Atividade, email, idColaborador, name, token;
-    private String caminho1a, caminho2a, caminho3a, caminho1d, caminho2d, caminho3d, update_Status, data, inicio, fim;
+    private String update_Status, data, inicio, fim, frequencia_id;
     private String medicao2, dataplanejamento, tiposervico, local_id, id_centrolucro, latitude, longitude, equipamento_id, sigla, observacaoantes, situacao, atividade, medida1;
     private int index;
     public static final int REQ_CODE_SPEAK = 100;
@@ -96,6 +96,7 @@ public class Atividade_Depois extends AppCompatActivity {
         latitude = dados.getString("latitude");
         longitude = dados.getString("longitude");
         id_Atividade = dados.getString("id_Atividade");
+        frequencia_id = dados.getString("frequencia_id");
         tiposervico = dados.getString("tiposervico");
         local_id = dados.getString("local_id");
         id_centrolucro = dados.getString("id_centrolucro");
@@ -278,6 +279,7 @@ public class Atividade_Depois extends AppCompatActivity {
                 dados.putString("local_id", local_id);
                 dados.putString("idAtividade", id_Atividade);
                 dados.putString("tiposervico", tiposervico);
+                dados.putString("frequencia_id", frequencia_id);
                 dados.putString("dataplanejamento", dataplanejamento);
                 dados.putString("id_centrolucro", id_centrolucro);
                 dados.putString("name", name);
@@ -307,6 +309,7 @@ public class Atividade_Depois extends AppCompatActivity {
                 dados.putString("checklist_id", checklist_id);
                 dados.putString("equipamento_id", equipamento_id);
                 dados.putString("local_id", local_id);
+                dados.putString("frequencia_id", frequencia_id);
                 dados.putString("tiposervico", tiposervico);
                 dados.putString("dataplanejamento", dataplanejamento);
                 dados.putString("centrocusto_id", id_centrolucro);
@@ -357,6 +360,7 @@ public class Atividade_Depois extends AppCompatActivity {
             dados.putString("checklist_id", checklist_id);
             dados.putString("equipamento_id", equipamento_id);
             dados.putString("id_Atividade", id_Atividade);
+            dados.putString("frequencia_id", frequencia_id);
             dados.putString("id_centrolucro", id_centrolucro);
             dados.putString("local_id", local_id);
             dados.putString("tiposervico", tiposervico);
@@ -385,6 +389,7 @@ public class Atividade_Depois extends AppCompatActivity {
         dados.putString("checklist_id", checklist_id);
         dados.putString("equipamento_id", equipamento_id);
         dados.putString("local_id", local_id);
+        dados.putString("frequencia_id", frequencia_id);
         dados.putString("tiposervico", tiposervico);
         dados.putString("dataplanejamento", dataplanejamento);
         dados.putString("centrocusto_id", id_centrolucro);

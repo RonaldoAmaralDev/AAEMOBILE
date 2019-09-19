@@ -22,6 +22,11 @@
                 app:itemIconTint="@color/white"
                 android:title="Amanha" />
             <item
+                android:id="@+id/navegation_semana"
+                android:icon="@drawable/ic_data"
+                app:itemIconTint="@color/white"
+                android:title="Esta Semana" />
+            <item
                 android:id="@+id/navegation_mes"
                 android:icon="@drawable/ic_data"
                 app:itemIconTint="@color/white"

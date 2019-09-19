@@ -67,8 +67,8 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
             Manifest.permission.CAMERA};
     public static final int MEDIA_TYPE_IMAGE = 1;
     private String  os_id, foto1a, foto2a, foto3a, foto1d, foto2d, foto3d, checklist_id;
-    private String medicao1, caminho1a, caminho2a, caminho3a, caminho1d, caminho2d, caminho3d, update_Status, data, inicio, fim;
-    private String id_centrolucro, latitude, longitude, leitura_agua1, leitura_agua2, leitura_energia1, leitura_energia2, equipamento_id, quantItens, itemAtual, sigla, atividade, id_Atividade, tiposervico, local_id, dataplanejamento;
+    private String medicao1, update_Status, data, inicio, fim;
+    private String id_centrolucro, latitude, frequencia_id, longitude, equipamento_id, atividade, id_Atividade, tiposervico, local_id, dataplanejamento;
     private int index;
     public static final int REQ_CODE_SPEAK = 100;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -122,6 +122,7 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
         id_Atividade = dados.getString("id_Atividade");
         id_centrolucro = dados.getString("id_centrolucro");
         local_id = dados.getString("local_id");
+        frequencia_id = dados.getString("frequencia_id");
         tiposervico = dados.getString("tiposervico");
         dataplanejamento = dados.getString("dataplanejamento");
         atividade = dados.getString("atividade");
@@ -305,6 +306,7 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
                 dados.putString("id_Atividade", id_Atividade);
                 dados.putString("id_centrolucro", id_centrolucro);
                 dados.putString("local_id", local_id);
+                dados.putString("frequencia_id", frequencia_id);
                 dados.putString("tiposervico", tiposervico);
                 dados.putString("dataplanejamento", dataplanejamento);
                 dados.putString("name", name);
@@ -356,6 +358,7 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
                     dados.putString("checklist_id", checklist_id);
                     dados.putString("equipamento_id", equipamento_id);
                     dados.putString("local_id", local_id);
+                    dados.putString("frequencia_id", frequencia_id);
                     dados.putString("tiposervico", tiposervico);
                     dados.putString("dataplanejamento", dataplanejamento);
                     dados.putString("centrocusto_id", id_centrolucro);
@@ -408,6 +411,7 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
             dados.putString("equipamento_id", equipamento_id);
             dados.putString("local_id", local_id);
             dados.putString("tiposervico", tiposervico);
+            dados.putString("frequencia_id", frequencia_id);
             dados.putString("dataplanejamento", dataplanejamento);
             dados.putString("centrocusto_id", id_centrolucro);
             dados.putString("name", name);
@@ -471,6 +475,7 @@ public class Atividade_Antes extends AppCompatActivity implements  GoogleApiClie
         dados.putString("equipamento_id", equipamento_id);
         dados.putString("local_id", local_id);
         dados.putString("tiposervico", tiposervico);
+        dados.putString("frequencia_id", frequencia_id);
         dados.putString("dataplanejamento", dataplanejamento);
         dados.putString("centrocusto_id", id_centrolucro);
         dados.putString("name", name);

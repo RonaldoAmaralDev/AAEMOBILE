@@ -86,6 +86,7 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.GroceryVie
         String descricao = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_DESCRICAOPADRAO_OS));
         String quantItens = String.valueOf(myBDGeral.dbCountItem(checklist_id));
         String frequencia = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_FREQUENCIA_DESCRICAO));
+        String frequencia_id = mCursor.getString(mCursor.getColumnIndex(BancoGeral.COL_FREQUENCIA_ID));
 
         holder.os.setText("OS: " + id);
         holder.dataplanejamento.setText("Data Programação: " + dataplanejamento);
@@ -141,6 +142,7 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.GroceryVie
             dados.putString("dataplanejamento", dataplanejamento);
             dados.putString("tiposervico", tiposolicitacao_os);
             dados.putString("id_centrolucro", id_centrolucro);
+            dados.putString("frequencia_id", frequencia_id);
 
             // Armazena as Preferencias
             dados.commit();
@@ -215,6 +217,7 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.GroceryVie
                     dados.putString("tiposervico", tiposervico);
                     dados.putString("dataplanejamento", dataplanejamento);
                     dados.putString("id_centrolucro", id_centrolucro);
+                    dados.putString("frequencia_id", frequencia_id);
                     dados.putString("name", name);
                     dados.putString("email", email);
                     dados.putString("idColaborador", colaborador_id);

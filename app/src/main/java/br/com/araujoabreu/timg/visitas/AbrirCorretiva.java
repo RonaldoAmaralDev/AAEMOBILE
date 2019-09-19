@@ -217,6 +217,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados2.putString("checklist_id", checklist_id);
                                                 dados2.putString("equipamento_id", id_equipamento);
                                                 dados2.putString("local_id", local_id);
+                                                dados2.putString("frequencia_id", "7");
                                                 dados2.putString("dataplanejamento", data);
                                                 dados2.putString("tiposervico", tiposervico);
                                                 dados2.putString("id_centrolucro", centrocusto_id);
@@ -254,6 +255,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("local_id", local_id);
                                                 dados.putString("dataplanejamento", data);
                                                 dados.putString("tiposervico", "2");
+                                                dados.putString("frequencia_id", "7");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("id_Atividade", "94");
@@ -320,6 +322,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados2.putString("checklist_id", checklist_id);
                                                 dados2.putString("equipamento_id", id_equipamento);
                                                 dados2.putString("local_id", local_id);
+                                                dados2.putString("frequencia_id", "7");
                                                 dados2.putString("dataplanejamento", data2);
                                                 dados2.putString("tiposervico", tiposervico);
                                                 dados2.putString("id_centrolucro", centrocusto_id);
@@ -358,6 +361,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("local_id", local_id);
                                                 dados.putString("dataplanejamento", data);
                                                 dados.putString("tiposervico", "2");
+                                                dados.putString("frequencia_id", "7");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("id_Atividade", "94");
@@ -424,6 +428,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados2.putString("checklist_id", checklist_id);
                                                 dados2.putString("equipamento_id", id_equipamento);
                                                 dados2.putString("local_id", local_id);
+                                                dados2.putString("frequencia_id", "7");
                                                 dados2.putString("dataplanejamento", data3);
                                                 dados2.putString("tiposervico", tiposervico);
                                                 dados2.putString("id_centrolucro", centrocusto_id);
@@ -462,6 +467,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("equipamento_id", id_equipamento);
                                                 dados.putString("local_id", local_id);
                                                 dados.putString("dataplanejamento", data);
+                                                dados.putString("frequencia_id", "7");
                                                 dados.putString("tiposervico", "2");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
@@ -529,6 +535,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados2.putString("checklist_id", checklist_id);
                                                 dados2.putString("equipamento_id", id_equipamento);
                                                 dados2.putString("local_id", local_id);
+                                                dados2.putString("frequencia_id", "7");
                                                 dados2.putString("dataplanejamento", data4);
                                                 dados2.putString("tiposervico", tiposervico);
                                                 dados2.putString("id_centrolucro", centrocusto_id);
@@ -548,6 +555,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("equipamento_id", id_equipamento);
                                                 dados.putString("local_id", local_id);
                                                 dados.putString("dataplanejamento", data);
+                                                dados.putString("frequencia_id", "7");
                                                 dados.putString("tiposervico", "2");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
@@ -618,6 +626,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados2.putString("checklist_id", checklist_id);
                                                 dados2.putString("equipamento_id", id_equipamento);
                                                 dados2.putString("local_id", local_id);
+                                                dados2.putString("frequencia_id", "7");
                                                 dados2.putString("dataplanejamento", data5);
                                                 dados2.putString("tiposervico", tiposervico);
                                                 dados2.putString("id_centrolucro", centrocusto_id);
@@ -656,6 +665,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("local_id", local_id);
                                                 dados.putString("dataplanejamento", data);
                                                 dados.putString("tiposervico", "2");
+                                                dados.putString("frequencia_id", "7");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("id_Atividade", "94");
@@ -726,6 +736,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados2.putString("checklist_id", checklist_id);
                                                 dados2.putString("equipamento_id", id_equipamento);
                                                 dados2.putString("local_id", local_id);
+                                                dados2.putString("frequencia_id", "7");
                                                 dados2.putString("dataplanejamento", data6);
                                                 dados2.putString("tiposervico", tiposervico);
                                                 dados2.putString("id_centrolucro", centrocusto_id);
@@ -764,6 +775,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("local_id", local_id);
                                                 dados.putString("dataplanejamento", data);
                                                 dados.putString("tiposervico", "2");
+                                                dados.putString("frequencia_id", "7");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("id_Atividade", "94");
@@ -834,6 +846,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados2.putString("checklist_id", checklist_id);
                                                 dados2.putString("equipamento_id", id_equipamento);
                                                 dados2.putString("local_id", local_id);
+                                                dados2.putString("frequencia_id", "7");
                                                 dados2.putString("dataplanejamento", data7);
                                                 dados2.putString("tiposervico", tiposervico);
                                                 dados2.putString("id_centrolucro", centrocusto_id);
@@ -872,6 +885,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("local_id", local_id);
                                                 dados.putString("dataplanejamento", data);
                                                 dados.putString("tiposervico", "2");
+                                                dados.putString("frequencia_id", "7");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("id_Atividade", "94");
@@ -939,6 +953,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados2.putString("checklist_id", checklist_id);
                                                 dados2.putString("equipamento_id", id_equipamento);
                                                 dados2.putString("local_id", local_id);
+                                                dados2.putString("frequencia_id", "7");
                                                 dados2.putString("dataplanejamento", data8);
                                                 dados2.putString("tiposervico", tiposervico);
                                                 dados2.putString("id_centrolucro", centrocusto_id);
@@ -977,6 +992,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("local_id", local_id);
                                                 dados.putString("dataplanejamento", data);
                                                 dados.putString("tiposervico", "2");
+                                                dados.putString("frequencia_id", "7");
                                                 dados.putString("id_centrolucro", centrocusto_id);
                                                 dados.putString("atividade", "Realizar Manutenção Corretiva");
                                                 dados.putString("id_Atividade", "94");
@@ -1044,6 +1060,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados2.putString("checklist_id", checklist_id);
                                                 dados2.putString("equipamento_id", id_equipamento);
                                                 dados2.putString("local_id", local_id);
+                                                dados2.putString("frequencia_id", "7");
                                                 dados2.putString("dataplanejamento", data9);
                                                 dados2.putString("tiposervico", tiposervico);
                                                 dados2.putString("id_centrolucro", centrocusto_id);
@@ -1082,6 +1099,7 @@ public class AbrirCorretiva extends AppCompatActivity {
                                                 dados.putString("checklist_id", checklist_id);
                                                 dados.putString("equipamento_id", id_equipamento);
                                                 dados.putString("local_id", local_id);
+                                                dados.putString("frequencia_id", "7");
                                                 dados.putString("dataplanejamento", data);
                                                 dados.putString("tiposervico", "2");
                                                 dados.putString("id_centrolucro", centrocusto_id);

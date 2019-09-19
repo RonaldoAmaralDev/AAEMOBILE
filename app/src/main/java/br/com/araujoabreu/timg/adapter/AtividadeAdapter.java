@@ -20,7 +20,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.GroceryViewHolder> {
     private Context mContext;
     private Cursor mCursor;
-    private String tiposervico,  tiposervico_id, tiposolicitacaoDescricao, tiposervicoDescricao, checklist_id, local_id, dataplanejamento, equipamento_id, os_id, id_centrolucro, atividade;
+    private String tiposervico,  frequencia_id, tiposervico_id, tiposolicitacaoDescricao, tiposervicoDescricao, checklist_id, local_id, dataplanejamento, equipamento_id, os_id, id_centrolucro, atividade;
 
     BancoGeral myBDGeral;
 
@@ -38,6 +38,7 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.Groc
         dataplanejamento = pref.getString("dataplanejamento", "");
         tiposervico = pref.getString("tiposervico", "");
         id_centrolucro = pref.getString("id_centrolucro", "");
+        frequencia_id = pref.getString("frequencia_id", "");
 
 
     }
@@ -84,6 +85,7 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.Groc
             dados.putString("tiposervico", tiposervico);
             dados.putString("id_centrolucro", id_centrolucro);
             dados.putString("id_Atividade", idAtividades);
+            dados.putString("frequencia_id", frequencia_id);
             dados.putString("atividade", descricaoAtividade);
             intent.putExtras(dados);
             mContext.startActivity(intent);

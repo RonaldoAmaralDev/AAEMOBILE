@@ -38,7 +38,7 @@ public class AssinaturaColaborador extends AppCompatActivity {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private SignaturePad mSignaturePad;
-    private String name, email, idColaborador, token, os_id, equipamento_id, local_id, tiposervico, checklist, dataplanejamento, id_centrolucro, checklist_id;
+    private String name, email, idColaborador, token, os_id, frequencia_id, equipamento_id, local_id, tiposervico, checklist, dataplanejamento, id_centrolucro, checklist_id;
     private TextView txtColaborador;
     DatabaseHelper myDB;
 
@@ -63,6 +63,7 @@ public class AssinaturaColaborador extends AppCompatActivity {
         local_id = dados.getString("local_id");
         dataplanejamento = dados.getString("dataplanejamento");
         checklist = dados.getString("checklist");
+        frequencia_id = dados.getString("frequencia_id");
         tiposervico = dados.getString("tiposervico");
         id_centrolucro = dados.getString("id_centrolucro");
         name = dados.getString("name");
@@ -123,6 +124,7 @@ public class AssinaturaColaborador extends AppCompatActivity {
                 dados.putString("checklist", checklist);
                 dados.putString("dataplanejamento", dataplanejamento);
                 dados.putString("id_centrolucro", id_centrolucro);
+                dados.putString("frequencia_id", frequencia_id);
                 dados.putString("name", name);
                 dados.putString("email", email);
                 dados.putString("idColaborador", idColaborador);
@@ -148,6 +150,7 @@ public class AssinaturaColaborador extends AppCompatActivity {
             dados.putString("equipamento_id", equipamento_id);
             dados.putString("local_id", local_id);
             dados.putString("tiposervico", tiposervico);
+            dados.putString("frequencia_id", frequencia_id);
             dados.putString("dataplanejamento", dataplanejamento);
             dados.putString("centrocusto_id", id_centrolucro);
             dados.putString("name", name);

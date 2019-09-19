@@ -177,7 +177,7 @@ public class VisitasLocal extends AppCompatActivity implements BottomNavigationV
         int id = item.getItemId();
 
         java.util.Date dt = new java.util.Date();
-        java.text.SimpleDateFormat sdfData = new java.text.SimpleDateFormat("dd");
+        java.text.SimpleDateFormat sdfData = new java.text.SimpleDateFormat("-dd");
         String data = sdfData.format(dt);
 
         if( id == R.id.navegation_hoje) {
@@ -199,6 +199,18 @@ public class VisitasLocal extends AppCompatActivity implements BottomNavigationV
             mAdapter.notifyDataSetChanged();
 
             return true;
+        }
+        if(id == R.id.navegation_semana) {
+
+            Calendar c = Calendar.getInstance();
+            c.add(Calendar.DATE, 7);
+            String formatted = sdfData.format(c.getTime());
+
+            mAdapter.swapCursor(myDBGeral.filtroOSData(formatted, local_id));
+            mAdapter.notifyDataSetChanged();
+
+            return true;
+
         }
         if(id == R.id.navegation_mes) {
 

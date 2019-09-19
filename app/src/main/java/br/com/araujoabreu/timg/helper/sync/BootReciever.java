@@ -344,6 +344,7 @@ public class BootReciever extends Service  {
                                     equipamento.getFabricante(),
                                     equipamento.getTipoequipamento(),
                                     equipamento.getFornecedor());
+
                             dataEquipamento.close();
 
                             OS os = new OS();
@@ -379,22 +380,9 @@ public class BootReciever extends Service  {
                                         os.getDescricaopadrao(),
                                         os.getFlag_os()
                                 );
-
-
-                                Calendar cal = Calendar.getInstance(); //
-                                cal.setTime(new Date()); //
-                                cal.add(Calendar.DAY_OF_MONTH, 30); // Adicionar Tempo Estimado
-                                cal.getTime(); //
-                                SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
-                                String horafim = datafim.format(cal.getTime());
-
                                 myBDGeral.updateSituacaoOSSistematica(
                                             os.getId(),
-                                            horafim,
                                             "A");
-
-
-
                             } else {
                                 myBDGeral.insertOS(
                                         os.getId(),
@@ -414,19 +402,11 @@ public class BootReciever extends Service  {
                                         "",
                                         os.getFlag_os());
 
-                                Calendar cal = Calendar.getInstance(); //
-                                cal.setTime(new Date()); //
-                                cal.add(Calendar.DAY_OF_MONTH, 30); // Adicionar Tempo Estimado
-                                cal.getTime(); //
-                                SimpleDateFormat datafim = new SimpleDateFormat("yyyy-MM-dd");
-                                String horafim = datafim.format(cal.getTime());
-
                                     myBDGeral.updateSituacaoOSSistematica(
                                             os.getId(),
-                                            horafim,
                                             "A");
-
                             }
+                            dataOS.close();
 
                             TipoSolicitacao tipoSolicitacao = new TipoSolicitacao();
                             tipoSolicitacao.setId(jsonObject.getString("tiposolicitacao_id"));
@@ -442,8 +422,8 @@ public class BootReciever extends Service  {
                                 myBDGeral.insertTipoSolicitacao(
                                         tipoSolicitacao.getId(),
                                         tipoSolicitacao.getDescricao());
-
                             }
+                            dataTipoSolicitacao.close();
 
                             TipoServico tipoServico = new TipoServico();
                             tipoServico.setId(jsonObject.getString("tiposervico_id"));
@@ -460,6 +440,7 @@ public class BootReciever extends Service  {
                                         tipoServico.getId(),
                                         tipoServico.getDescricao());
                             }
+                            dataTipoServico.close();
 
 
                         } catch (JSONException e) {
