@@ -449,7 +449,7 @@ public class Atividade_Depois extends AppCompatActivity {
                             id_Atividade,
                             "/assets/os/" + os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "1D" + ".jpg");
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                    thumbnail.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                    thumbnail.compress(Bitmap.CompressFormat.JPEG, 85, bytes);
                     String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "HELPER") + File.separator;
                     File myDir = new File(root);
                     myDir.mkdirs();
@@ -477,7 +477,7 @@ public class Atividade_Depois extends AppCompatActivity {
                             id_Atividade,
                             "/assets/os/" + os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "2D" + ".jpg");
                     ByteArrayOutputStream bytes2 = new ByteArrayOutputStream();
-                    thumbnail2.compress(Bitmap.CompressFormat.JPEG, 30, bytes2);
+                    thumbnail2.compress(Bitmap.CompressFormat.JPEG, 85, bytes2);
                     String imageFileName2 = os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "2D" + ".jpg";
                     File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "HELPER") + File.separator + imageFileName2);
                     try {
@@ -501,7 +501,7 @@ public class Atividade_Depois extends AppCompatActivity {
                             id_Atividade,
                             "/assets/os/" + os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "3D" + ".jpg");
                     ByteArrayOutputStream bytes3 = new ByteArrayOutputStream();
-                    thumbnail3.compress(Bitmap.CompressFormat.JPEG, 30, bytes3);
+                    thumbnail3.compress(Bitmap.CompressFormat.JPEG, 85, bytes3);
                     String imageFileName3 = os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "3D" + ".jpg";
                     File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "HELPER") + File.separator + imageFileName3);
                     try {
