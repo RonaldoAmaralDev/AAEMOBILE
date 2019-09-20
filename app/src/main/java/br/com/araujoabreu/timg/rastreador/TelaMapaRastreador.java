@@ -1,18 +1,24 @@
 package br.com.araujoabreu.timg.rastreador;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.bottomnavigation.LabelVisibilityMode;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -53,13 +59,141 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.com.araujoabreu.timg.R;
+import br.com.araujoabreu.timg.activity.MainActivity_Principal;
 import br.com.araujoabreu.timg.banco.BancoGeral;
 import br.com.araujoabreu.timg.dev.localizacao.MostrarColaborador;
 
 public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyCallback,
-        GoogleApiClient.OnConnectionFailedListener{
-    BancoGeral myDBGeral;
+        GoogleApiClient.OnConnectionFailedListener, BottomNavigationView.OnNavigationItemSelectedListener{
 
+    BancoGeral myDBGeral;
+    private static final String TAG = "MapActivity";
+    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private static final float DEFAULT_ZOOM = 15f;
+    private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71, 136));
+    private ImageView mGps;
+    private Boolean mLocationPermissionsGranted = false;
+    private GoogleMap mMap;
+    private String email, name, token,colaborador_id;
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private GoogleApiClient mGoogleApiClient;
+    public static final String URL="http://helper.aplusweb.com.br/aplicativo/localizacaoVeiculo.php";
+    public JsonArrayRequest request, requestAtividades ;
+    public RequestQueue requestQueue, requestQueueAtividades;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tela_mapa_rastreador);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        mGps = (ImageView) findViewById(R.id.ic_gps);
+
+        Intent intent = getIntent();
+        Bundle dados = intent.getExtras();
+        email = dados.getString("email");
+        name = dados.getString("name");
+        colaborador_id = dados.getString("id");
+        token = dados.getString("token");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("MAPA RASTREAMENTO");
+
+        //Não abrir o teclado automatico
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+        myDBGeral = new BancoGeral(this);
+        getLocationPermission();
+
+        //getting bottom navigation view and attaching the listener
+        BottomNavigationView navigation = findViewById(R.id.nav_viewTelaRastreamento);
+        navigation.setOnNavigationItemSelectedListener(this);
+
+        //Aparecer todos os Icones e Titulos
+        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_veiculo, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if(id == android.R.id.home) {
+            Intent intent = new Intent(TelaMapaRastreador.this, TelaPrincipalRastreador.class);
+            Bundle dados = new Bundle();
+            dados.putString("name", name);
+            dados.putString("email", email);
+            dados.putString("id", colaborador_id);
+            dados.putString("token", token);
+            intent.putExtras(dados);
+            startActivity(intent);
+            return true;
+        }
+        if(id == R.id.action_syncVeiculo) {
+
+            Toast.makeText(getApplicationContext(), "Desenvolvimento.", Toast.LENGTH_LONG).show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+      @SuppressWarnings("StatementWithEmptyBody")
+      @Override
+      public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        if (id == R.id.navigation_ticketlog) {
+            Intent intent = new Intent(TelaMapaRastreador.this, TelaPrincipalRastreador.class);
+            Bundle dados = new Bundle();
+            dados.putString("name", name);
+            dados.putString("email", email);
+            dados.putString("id", colaborador_id);
+            dados.putString("token", token);
+            intent.putExtras(dados);
+            startActivity(intent);
+            finish();
+        }
+        if (id == R.id.navigation_mapa) {
+
+            TelaMapaRastreador.super.onRestart();
+            Intent intent = new Intent(TelaMapaRastreador.this, TelaMapaRastreador.class);
+            Bundle dados = new Bundle();
+            dados.putString("name", name);
+            dados.putString("email", email);
+            dados.putString("id", colaborador_id);
+            dados.putString("token", token);
+            intent.putExtras(dados);
+            startActivity(intent);
+
+        }
+        if (id == R.id.navigation_historico) {
+
+            Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
+
+        }
+
+        if (id == R.id.navigation_hidrometro) {
+
+            Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
+
+        }
+        return true;
+    }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -88,45 +222,6 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
 
             init();
         }
-    }
-
-    private static final String TAG = "MapActivity";
-
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final float DEFAULT_ZOOM = 15f;
-    private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(
-            new LatLng(-40, -168), new LatLng(71, 136));
-
-
-    //widgets
-    private ImageView mGps;
-    private Button btnBuscar;
-    Spinner spinnerBuscarColaborador;
-
-
-    //vars
-    private Boolean mLocationPermissionsGranted = false;
-    private GoogleMap mMap;
-    private FusedLocationProviderClient mFusedLocationProviderClient;
-    private GoogleApiClient mGoogleApiClient;
-    public static final String URL="http://helper.aplusweb.com.br/aplicativo/buscarLocalizacao.php";
-    public JsonArrayRequest request, requestAtividades ;
-    public RequestQueue requestQueue, requestQueueAtividades;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_mapa_rastreador);
-        spinnerBuscarColaborador = (Spinner) findViewById(R.id.spinnerBuscarColaborador);
-
-        mGps = (ImageView) findViewById(R.id.ic_gps);
-
-        myDBGeral = new BancoGeral(this);
-
-        getLocationPermission();
-
     }
 
     private void init(){
@@ -174,23 +269,18 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
                                     for (int i = 0; i < response.length(); i++) {
                                         try {
                                             jsonObject = response.getJSONObject(i);
-                                            String id = jsonObject.getString("idColaborador");
+                                            String veiculo_id = jsonObject.getString("veiculo_id");
+                                            String colaborador_id = jsonObject.getString("colaborador_id");
                                             String latitude = jsonObject.getString("latitude");
                                             String longitude = jsonObject.getString("longitude");
-                                            String datahora = jsonObject.getString("datahora");
-                                            String nome = jsonObject.getString("nome");
-
-                                            String[] test =new String[]{nome};
-
-                                            ArrayAdapter<String> gameKindArray= new ArrayAdapter<String>(TelaMapaRastreador.this,android.R.layout.simple_spinner_item, test);
-                                            gameKindArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                            spinnerBuscarColaborador.setAdapter(gameKindArray);
+                                            String velocidade = jsonObject.getString("velocidade");
+                                            String dataehora = jsonObject.getString("dataehora");
 
                                             mMap.addMarker(new MarkerOptions()
                                                     .position(new LatLng(Double.parseDouble(latitude) , Double.parseDouble(longitude)))
-                                                    .title("Colaborador: " + nome)
-                                                    .snippet("Data e Hora: " + datahora)
-                                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.people))
+                                                    .title("Veiculo: " + veiculo_id)
+                                                    .snippet("Data e Hora: " + dataehora)
+                                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_rastreamento_car))
                                             );
 
                                             //Fazer um arrayList pra armazenar as variaveis
@@ -200,10 +290,6 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
                                                     .width(9f)
                                                     .color(Color.RED)
                                             );
-
-
-
-
 
                                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                                     DEFAULT_ZOOM,

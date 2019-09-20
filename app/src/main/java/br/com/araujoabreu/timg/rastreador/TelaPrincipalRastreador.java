@@ -184,6 +184,12 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
             Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
 
         }
+
+        if (id == R.id.navigation_hidrometro) {
+
+            Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
+
+        }
         return true;
     }
 

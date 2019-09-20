@@ -71,7 +71,6 @@ import br.com.araujoabreu.timg.model.Equipamento;
 import br.com.araujoabreu.timg.model.Contact;
 import br.com.araujoabreu.timg.model.OS;
 import br.com.araujoabreu.timg.dev.localizacao.MostrarColaborador;
-import br.com.araujoabreu.timg.equipamento.qrcode.LoadingScanner;
 import br.com.araujoabreu.timg.helper.sync.BootReciever;
 import br.com.araujoabreu.timg.relatorio.RelatorioContrato;
 import br.com.araujoabreu.timg.relatorio.RelatorioLeitura;
@@ -117,7 +116,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import android.location.Location;
+
 import android.location.LocationListener;
 import android.location.LocationManager;
 
@@ -248,7 +247,7 @@ public class MainActivity_Principal extends AppCompatActivity
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
 
         mCamada = (ImageView) findViewById(R.id.ic_camada);
-        mPostos = (ImageView) findViewById(R.id.ic_postos);
+        mPostos = (ImageView) findViewById(R.id.ic_gps);
         mRestaurantes = (ImageView) findViewById(R.id.ic_restaurantes);
         mHoteis = (ImageView) findViewById(R.id.ic_hoteis);
 
@@ -850,15 +849,15 @@ public class MainActivity_Principal extends AppCompatActivity
 
         if (id == R.id.navigation_frota) {
 
-          //  Intent intent = new Intent(MainActivity_Principal.this, TelaPrincipalRastreador.class);
-          //  Bundle dados = new Bundle();
-         //   dados.putString("name", name);
-         //   dados.putString("email", email);
-          //  dados.putString("id", colaborador_id);
-         //   dados.putString("token", token);
-         //   intent.putExtras(dados);
-        //    startActivity(intent);
-           Toast.makeText(getApplicationContext(), "Em Desenvolvimento", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(MainActivity_Principal.this, TelaPrincipalRastreador.class);
+            Bundle dados = new Bundle();
+            dados.putString("name", name);
+            dados.putString("email", email);
+            dados.putString("id", colaborador_id);
+            dados.putString("token", token);
+            intent.putExtras(dados);
+            startActivity(intent);
+         //  Toast.makeText(getApplicationContext(), "Em Desenvolvimento", Toast.LENGTH_LONG).show();
         }
 
         if (id == R.id.navigation_chat) {
