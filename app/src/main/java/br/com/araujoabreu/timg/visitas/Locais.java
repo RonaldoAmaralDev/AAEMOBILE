@@ -136,7 +136,7 @@ public class Locais extends AppCompatActivity  {
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
-            dados.putString("id", colaborador_id);
+            dados.putString("colaborador_id", colaborador_id);
             dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
@@ -158,7 +158,7 @@ public class Locais extends AppCompatActivity  {
         Bundle dados = new Bundle();
         dados.putString("name", name);
         dados.putString("email", email);
-        dados.putString("id", colaborador_id);
+        dados.putString("colaborador_id", colaborador_id);
         dados.putString("token", token);
         intent.putExtras(dados);
         startActivity(intent);

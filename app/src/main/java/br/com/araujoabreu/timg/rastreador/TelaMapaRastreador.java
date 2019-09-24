@@ -1,10 +1,15 @@
 package br.com.araujoabreu.timg.rastreador;
 
 import android.Manifest;
+import android.app.ActionBar;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
@@ -13,9 +18,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -62,6 +69,7 @@ import br.com.araujoabreu.timg.R;
 import br.com.araujoabreu.timg.activity.MainActivity_Principal;
 import br.com.araujoabreu.timg.banco.BancoGeral;
 import br.com.araujoabreu.timg.dev.localizacao.MostrarColaborador;
+import br.com.araujoabreu.timg.helper.PermissoesSMS;
 
 public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener, BottomNavigationView.OnNavigationItemSelectedListener{
@@ -73,7 +81,7 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15f;
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71, 136));
-    private ImageView mGps;
+    private ImageView mGps, ic_tipoMapa;
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private String email, name, token,colaborador_id;
@@ -82,16 +90,28 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
     public static final String URL="http://helper.aplusweb.com.br/aplicativo/localizacaoVeiculo.php";
     public JsonArrayRequest request, requestAtividades ;
     public RequestQueue requestQueue, requestQueueAtividades;
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;
+    private String[] permissoes = new String[]{
+            Manifest.permission.SEND_SMS,
+            Manifest.permission.READ_SMS};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_mapa_rastreador);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("MAPA RASTREAMENTO");
+
+        PermissoesSMS.validarPermissoes(permissoes, this, 1);
+
+        getSupportActionBar().setBackgroundDrawable(
+                new ColorDrawable(Color.parseColor("#8F152A")));
+
 
         mGps = (ImageView) findViewById(R.id.ic_gps);
+        ic_tipoMapa = (ImageView) findViewById(R.id.ic_camada);
+
 
         Intent intent = getIntent();
         Bundle dados = intent.getExtras();
@@ -99,9 +119,6 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
         name = dados.getString("name");
         colaborador_id = dados.getString("id");
         token = dados.getString("token");
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("MAPA RASTREAMENTO");
 
         //Não abrir o teclado automatico
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
@@ -115,6 +132,37 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
 
         //Aparecer todos os Icones e Titulos
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+
+        ic_tipoMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                new AlertDialog.Builder(TelaMapaRastreador.this)
+                        .setIcon(R.drawable.logo)
+                        .setTitle(R.string.app_name)
+                        .setMessage("Selecione o tipo de mapa: ")
+                        .setPositiveButton("Mapa", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                            }
+                        })
+                        .setNegativeButton("Satelite", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
+                            }
+                        })
+                        .setNeutralButton("Hibrido", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                            }
+                        })
+                        .show();
+            }
+        });
 
     }
 
@@ -146,10 +194,54 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
         }
         if(id == R.id.action_syncVeiculo) {
 
-            Toast.makeText(getApplicationContext(), "Desenvolvimento.", Toast.LENGTH_LONG).show();
+            //Enviar SMS
+            try{
+             //   sendSMS();
+                //Como enviou o SMS com sucesso, ele irá ler o SMS de resposta
+                lerSMS();
+            }
+            catch (Exception e){
+                Toast.makeText(TelaMapaRastreador.this, "SMS Falhou ao ser enviado, tente novamente.", Toast.LENGTH_SHORT).show();
+            }
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void sendSMS() {
+        //Numero Teste: 31989882253 (RASTREADOR 001)
+        //Mensagem Para enviar localização = smslink123456
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage("(31)989882253", null, "OI", null, null);
+        Toast.makeText(getApplicationContext(), "SMS Enviado com sucesso !", Toast.LENGTH_LONG).show();
+        return;
+    }
+
+    public void lerSMS() {
+
+        Cursor cursor = getContentResolver().query(Uri.parse("content://sms"), null, null, null, null);
+        //Pego a ultimo SMS recebido, no caso o TOP 1
+        cursor.moveToFirst();
+
+        //Tratar o SMS recebido, pegando as variaveis
+        Toast.makeText(getApplicationContext(), cursor.getString(12), Toast.LENGTH_LONG).show();
+
+
+        java.util.Date dt = new java.util.Date();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss");
+        java.text.SimpleDateFormat sdfData = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        String currentTime = sdf.format(dt);
+        String data = sdfData.format(dt);
+        String dataehora = data + " - " + currentTime;
+
+        String mensagem = cursor.getString(12);
+        String latitude = mensagem.substring(mensagem.indexOf("lat:") + 4, mensagem.indexOf("long:", mensagem.indexOf("lat:")));
+        String longitude = mensagem.substring(mensagem.indexOf("long:") + 5, mensagem.indexOf("speed:", mensagem.indexOf("long:")));
+        String velocidade = mensagem.substring(mensagem.indexOf("speed:") + 7, mensagem.indexOf("T:", mensagem.indexOf("speed:")));
+        String imei = mensagem.substring(mensagem.indexOf("IMEI:") + 5, mensagem.indexOf("http:", mensagem.indexOf("IMEI:")));
+        Toast.makeText(getApplicationContext(), "Latitude Teste: " + latitude + " longitude: " + longitude + " velocidade: " + velocidade + " Data: " + dataehora  + " IMEI: " + imei, Toast.LENGTH_LONG).show();
+
+
     }
 
       @SuppressWarnings("StatementWithEmptyBody")
@@ -204,10 +296,6 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap) {
         Log.d(TAG, "onMapReady: map is ready");
         mMap = googleMap;
-
-        // Deixa Tela Cheia
-        getSupportActionBar().hide();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         if (mLocationPermissionsGranted) {
             getDeviceLocation();

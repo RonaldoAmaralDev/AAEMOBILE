@@ -49,9 +49,8 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_principal_rastreador);
 
-        //  // toolbar fancy stuff
-              getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-              getSupportActionBar().setTitle("MEU CARTÃO");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("MEU CARTÃO");
 
         //Não abrir o teclado automatico
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);

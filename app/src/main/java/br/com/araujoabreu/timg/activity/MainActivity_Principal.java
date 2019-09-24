@@ -247,10 +247,9 @@ public class MainActivity_Principal extends AppCompatActivity
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
 
         mCamada = (ImageView) findViewById(R.id.ic_camada);
-        mPostos = (ImageView) findViewById(R.id.ic_gps);
+        mPostos = (ImageView) findViewById(R.id.ic_postos);
         mRestaurantes = (ImageView) findViewById(R.id.ic_restaurantes);
         mHoteis = (ImageView) findViewById(R.id.ic_hoteis);
-
 
         //Busca Locais
         String[] srr = myBDGeral.buscaLocaisMapa(autoCompleteTextView.getText().toString());

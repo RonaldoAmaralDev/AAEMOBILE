@@ -46,7 +46,7 @@
             android:src="@drawable/ic_camada" />
 
         <ImageView
-            android:id="@+id/ic_gps"
+            android:id="@+id/ic_postos"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
@@ -55,6 +55,28 @@
             android:layout_below="@id/ic_camada"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_postos" />
+
+        <ImageView
+            android:id="@+id/ic_restaurantes"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@id/ic_postos"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_restaurante" />
+
+        <ImageView
+            android:id="@+id/ic_hoteis"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@id/ic_restaurantes"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_hotel" />
 
         <ImageView
             android:id="@+id/imageView"
