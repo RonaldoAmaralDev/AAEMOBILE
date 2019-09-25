@@ -3,8 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorShop"
     android:layout_height="match_parent"
+
     tools:context=".rastreador.TelaMapaRastreador">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay" >
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:titleTextColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background= "@color/colorShop"
+            app.popupTheme="@style/AppTheme.PopupOverlay" />
+
+
+    </android.support.design.widget.AppBarLayout>
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -13,23 +31,23 @@
     <Spinner
         android:id="@+id/spinnerBuscarColaborador"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="5dp"
-        android:ems="10" />
+        android:layout_height="50dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="60dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:spinnerMode="dropdown" />
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="616dp"
+        android:layout_height="605dp"
         android:layout_below="@+id/spinnerBuscarColaborador"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        tools:context=".dev.localizacao.MostrarColaborador" />
+        android:layout_marginTop="0dp"
+        tools:context=".rastreador.TelaMapaRastreador" />
 
     <ImageView
         android:id="@+id/ic_gps"
@@ -37,8 +55,8 @@
         android:layout_height="40dp"
         android:layout_below="@id/spinnerBuscarColaborador"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="45dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginRight="11dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_gps" />
 
@@ -47,7 +65,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/ic_gps"
         android:layout_marginRight="10dp"
         android:scaleType="centerCrop"
@@ -57,8 +75,8 @@
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/nav_viewTelaRastreamento"
-        android:layout_width="406dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@color/colorShop"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"

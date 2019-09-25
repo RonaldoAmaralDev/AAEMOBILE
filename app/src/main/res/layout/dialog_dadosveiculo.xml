@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="16dp"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:src="@drawable/ic_carbig" />
+
+    <TextView
+        android:id="@+id/txtPlacaVeiculoDescricao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Placa Veiculo - Descrição"
+        android:textStyle="bold"
+        app:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/txtEnderecoVeiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Endereço da Ultima Posição"
+        android:textStyle="bold"
+        app:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/txtVelocidadeVeiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Velocidade (KM)"
+        android:textStyle="bold"
+        app:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/txtDataeHoraVeiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Data e Hora captura"
+        android:textStyle="bold"
+        app:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/txtMotoristaVeiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Motorista Veiculo"
+        android:textStyle="bold"
+        app:textAllCaps="true" />
+
+    <Button
+        android:id="@+id/btnProtecaoVeicular"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/penRoyalBlue"
+        android:text="Ativar Proteção Veicular" />
+
+    <Button
+        android:id="@+id/btnAcompanharRota"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/penRoyalBlue"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="Acompanhar Rota" />
+
+    <Button
+        android:id="@+id/btnHistoricoVeiculo"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/penRoyalBlue"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="Historico Veiculo" />
+
+    <Button
+        android:id="@+id/btnPowerVeiculo"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:background="@color/colorShop"
+        android:text="Ligar/Desligar Veiculo" />
+
+
+</LinearLayout>

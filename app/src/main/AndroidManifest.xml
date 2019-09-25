@@ -15,8 +15,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".rastreador.TelaMapaRastreador"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:label="Mapa Rastreamento"
+            android:screenOrientation="portrait"
+           android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".rastreador.TelaPrincipalRastreador"
             android:screenOrientation="portrait"/>
         <activity

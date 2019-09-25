@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -24,6 +25,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,11 +57,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,6 +76,10 @@ import br.com.araujoabreu.timg.activity.MainActivity_Principal;
 import br.com.araujoabreu.timg.banco.BancoGeral;
 import br.com.araujoabreu.timg.dev.localizacao.MostrarColaborador;
 import br.com.araujoabreu.timg.helper.PermissoesSMS;
+import br.com.araujoabreu.timg.rota.TrajetoLocal;
+import br.com.araujoabreu.timg.visitas.AbrirCorretiva;
+import br.com.araujoabreu.timg.visitas.Atividade_Antes;
+import br.com.araujoabreu.timg.visitas.VisitasLocal;
 
 public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener, BottomNavigationView.OnNavigationItemSelectedListener{
@@ -87,7 +97,8 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
     private String email, name, token,colaborador_id;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private GoogleApiClient mGoogleApiClient;
-    public static final String URL="http://helper.aplusweb.com.br/aplicativo/localizacaoVeiculo.php";
+    public static final String URL_BUSCA ="http://helper.aplusweb.com.br/aplicativo/localizacaoVeiculo.php";
+    public static final String URL_ENVIAR ="http://helper.aplusweb.com.br/aplicativo/gravarLocalizacaoVeiculos.php";
     public JsonArrayRequest request, requestAtividades ;
     public RequestQueue requestQueue, requestQueueAtividades;
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;
@@ -100,8 +111,9 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_mapa_rastreador);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("MAPA RASTREAMENTO");
 
         PermissoesSMS.validarPermissoes(permissoes, this, 1);
 
@@ -223,10 +235,6 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
         //Pego a ultimo SMS recebido, no caso o TOP 1
         cursor.moveToFirst();
 
-        //Tratar o SMS recebido, pegando as variaveis
-        Toast.makeText(getApplicationContext(), cursor.getString(12), Toast.LENGTH_LONG).show();
-
-
         java.util.Date dt = new java.util.Date();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss");
         java.text.SimpleDateFormat sdfData = new java.text.SimpleDateFormat("yyyy-MM-dd");
@@ -239,9 +247,53 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
         String longitude = mensagem.substring(mensagem.indexOf("long:") + 5, mensagem.indexOf("speed:", mensagem.indexOf("long:")));
         String velocidade = mensagem.substring(mensagem.indexOf("speed:") + 7, mensagem.indexOf("T:", mensagem.indexOf("speed:")));
         String imei = mensagem.substring(mensagem.indexOf("IMEI:") + 5, mensagem.indexOf("http:", mensagem.indexOf("IMEI:")));
-        Toast.makeText(getApplicationContext(), "Latitude Teste: " + latitude + " longitude: " + longitude + " velocidade: " + velocidade + " Data: " + dataehora  + " IMEI: " + imei, Toast.LENGTH_LONG).show();
 
+        Toast.makeText(getApplicationContext(), "Latitude: " + latitude + " longitude: " + longitude + " velocidade: " + velocidade + " Data: " + dataehora + " IMEI: " + imei, Toast.LENGTH_LONG).show();
 
+        //Busca qual os dados do veiculo de acordo com o IMEI e o colaborador do veiculo
+      //  gravarDadosPosicao(latitude, longitude, velocidade, dataehora);
+    }
+
+    public void gravarDadosPosicao(String latitude, String longitude, String velocidade, String dataehora) {
+        Ion.with(TelaMapaRastreador.this)
+                .load(URL_ENVIAR)
+                .setBodyParameter("veiculo_id", "1")
+                .setBodyParameter("colaborador_id", colaborador_id)
+                .setBodyParameter("latitude", latitude)
+                .setBodyParameter("longitude", longitude)
+                .setBodyParameter("valocidade", velocidade)
+                .setBodyParameter("created_at", dataehora)
+                .setBodyParameter("updated_at", dataehora)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        try {
+                            String RETORNO = result.get("LOCALIZACAO").getAsString();
+
+                            if (RETORNO.equals("ERRO")) {
+                                Toast.makeText(TelaMapaRastreador.this, "Ocorreu um erro !", Toast.LENGTH_LONG).show();
+
+                            } else if (RETORNO.equals("SUCESSO")) {
+                                // Caso tenha algum insert com Sucesso, ele irá atualizar o mapa
+                                Toast.makeText(getApplicationContext(), "Gravação com sucesso. ", Toast.LENGTH_LONG).show();
+                                TelaMapaRastreador.super.onRestart();
+                                Intent intent = new Intent(TelaMapaRastreador.this, TelaMapaRastreador.class);
+                                Bundle dados = new Bundle();
+                                dados.putString("name", name);
+                                dados.putString("email", email);
+                                dados.putString("id", colaborador_id);
+                                dados.putString("token", token);
+                                intent.putExtras(dados);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(TelaMapaRastreador.this, "Ocorreu um erro, aguarde alguns instantes !", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception erro) {
+                            Toast.makeText(TelaMapaRastreador.this, "Erro: " + erro, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
       @SuppressWarnings("StatementWithEmptyBody")
@@ -350,7 +402,7 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
                         if(task.isSuccessful()){
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
-                            requestAtividades = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+                            requestAtividades = new JsonArrayRequest(URL_BUSCA, new Response.Listener<JSONArray>() {
                                 @Override
                                 public void onResponse(JSONArray response) {
                                     JSONObject jsonObject = null;
@@ -374,14 +426,87 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
                                             //Fazer um arrayList pra armazenar as variaveis
                                             Polyline polyline = mMap.addPolyline(new PolylineOptions()
                                                     .add(new LatLng(Double.parseDouble(latitude) , Double.parseDouble(longitude)))
-                                                    .add(new LatLng(-19.916164, -43.975792))
-                                                    .width(9f)
-                                                    .color(Color.RED)
+                                                    .add(new LatLng(Double.parseDouble("-19.8607809"), Double.parseDouble("-43.9724687")))
+                                                    .width(6f)
+                                                    .color(Color.BLACK)
                                             );
+
+                                            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                                                @Override
+                                                public boolean onMarkerClick(Marker marker) {
+
+                                                    //Se ele clicar na posição dele não realizar nada
+                                                    if (marker.getTitle().equals("Colaborador")) {
+                                                        Toast.makeText(getApplicationContext(), "Colaborador: " + marker.getTitle(), Toast.LENGTH_LONG).show();
+                                                        return true;
+                                                    }
+                                                    //Se ele clicar em algum veiculo
+                                                    else {
+                                                        LayoutInflater inflater = LayoutInflater.from(TelaMapaRastreador.this);
+                                                        View view = inflater.inflate(R.layout.dialog_dadosveiculo, null);
+                                                        view.animate();
+
+                                                        TextView txtPlacaeDescricaoVeiculo = view.findViewById(R.id.txtPlacaVeiculoDescricao);
+                                                        TextView txtEnderecoAtualVeiculo = view.findViewById(R.id.txtEnderecoVeiculo);
+                                                        TextView txtVelocidadeVeiculo = view.findViewById(R.id.txtVelocidadeVeiculo);
+                                                        TextView txtDataeHoraVeiculo = view.findViewById(R.id.txtDataeHoraVeiculo);
+                                                        TextView txtMotoristaVeiculo = view.findViewById(R.id.txtMotoristaVeiculo);
+
+                                                        Button btnProtecaoVeicular = view.findViewById(R.id.btnProtecaoVeicular);
+                                                        Button btnAcompanharRota = view.findViewById(R.id.btnAcompanharRota);
+                                                        Button btnHistoricoVeiculo = view.findViewById(R.id.btnHistoricoVeiculo);
+                                                        Button btnPowerVeiculo = view.findViewById(R.id.btnPowerVeiculo);
+
+                                                        txtPlacaeDescricaoVeiculo.setText("PLACA: QOB-5726");
+                                                        txtEnderecoAtualVeiculo.setText("Ultima Localização: Av. Coronel José Dias Bicalho, 1205, São Luiz, BH, MG");
+                                                        txtVelocidadeVeiculo.setText("Velocidade: 60 Km");
+                                                        txtDataeHoraVeiculo.setText("Ultima Captura: 24/09/2019 - 16:20:00");
+                                                        txtMotoristaVeiculo.setText("Motorista: Ronaldo Gonçalves Amaral");
+
+
+                                                        btnProtecaoVeicular.setOnClickListener(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View view) {
+                                                                Toast.makeText(getApplicationContext(), "Em Desenvolvimento", Toast.LENGTH_LONG).show();
+                                                            }
+                                                        });
+
+                                                        btnAcompanharRota.setOnClickListener(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View view) {
+                                                                Toast.makeText(getApplicationContext(), "Em Desenvolvimento", Toast.LENGTH_LONG).show();
+                                                            }
+                                                        });
+
+                                                        btnHistoricoVeiculo.setOnClickListener(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View view) {
+                                                                Toast.makeText(getApplicationContext(), "Em Desenvolvimento", Toast.LENGTH_LONG).show();
+                                                            }
+                                                        });
+
+                                                        btnPowerVeiculo.setOnClickListener(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View view) {
+                                                                Toast.makeText(getApplicationContext(), "Em Desenvolvimento", Toast.LENGTH_LONG).show();
+                                                            }
+                                                        });
+
+                                                        AlertDialog alertDialog = new AlertDialog.Builder(TelaMapaRastreador.this)
+                                                                .setView(view)
+                                                                .create();
+
+                                                        alertDialog.show();
+                                                    }
+                                                    return true;
+                                                }
+                                            });
+
 
                                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                                     DEFAULT_ZOOM,
                                                     "Minha Localização");
+
                                         } catch (JSONException e) {
                                             e.printStackTrace();
 
@@ -415,7 +540,6 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
 
-
         if(!title.equals("Localização Atual")){
             MarkerOptions options = new MarkerOptions()
                     .position(latLng)
@@ -427,12 +551,14 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
         hideSoftKeyboard();
     }
 
-    private void initMap(){
+    private void initMap() {
         Log.d(TAG, "initMap: initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(TelaMapaRastreador.this);
-    }
+
+}
+
 
     private void getLocationPermission(){
         Log.d(TAG, "getLocationPermission: getting location permissions");
