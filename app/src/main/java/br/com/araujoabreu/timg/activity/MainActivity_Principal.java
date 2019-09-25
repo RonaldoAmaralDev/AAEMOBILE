@@ -848,15 +848,15 @@ public class MainActivity_Principal extends AppCompatActivity
 
         if (id == R.id.navigation_frota) {
 
-            Intent intent = new Intent(MainActivity_Principal.this, TelaPrincipalRastreador.class);
-            Bundle dados = new Bundle();
-            dados.putString("name", name);
-            dados.putString("email", email);
-            dados.putString("id", colaborador_id);
-            dados.putString("token", token);
-            intent.putExtras(dados);
-            startActivity(intent);
-         //  Toast.makeText(getApplicationContext(), "Em Desenvolvimento", Toast.LENGTH_LONG).show();
+           // Intent intent = new Intent(MainActivity_Principal.this, TelaPrincipalRastreador.class);
+         //   Bundle dados = new Bundle();
+          //  dados.putString("name", name);
+         //   dados.putString("email", email);
+         //   dados.putString("id", colaborador_id);
+        //    dados.putString("token", token);
+        //    intent.putExtras(dados);
+         //   startActivity(intent);
+           Toast.makeText(getApplicationContext(), "Em Desenvolvimento", Toast.LENGTH_LONG).show();
         }
 
         if (id == R.id.navigation_chat) {

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
@@ -51,6 +52,8 @@ public class Atividade_Depois extends AppCompatActivity {
     private String medicao2, dataplanejamento, tiposervico, local_id, id_centrolucro, latitude, longitude, equipamento_id, sigla, observacaoantes, situacao, atividade, medida1;
     private int index;
     public static final int REQ_CODE_SPEAK = 100;
+    private Uri currentURI;
+
 
 
     @Override
@@ -406,18 +409,21 @@ public class Atividade_Depois extends AppCompatActivity {
     public void CreateImage1() {
 
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, currentURI);
         startActivityForResult(intent, 1);
     }
 
     public void CreateImage2() {
 
         Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent2.putExtra(MediaStore.EXTRA_OUTPUT, currentURI);
         startActivityForResult(intent2, 2);
     }
 
     public void CreateImage3() {
 
         Intent intent3 = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        intent3.putExtra(MediaStore.EXTRA_OUTPUT, currentURI);
         startActivityForResult(intent3, 3);
     }
 
@@ -437,7 +443,7 @@ public class Atividade_Depois extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(data != null) {
+        if(data != null && resultCode == RESULT_OK) {
             switch (requestCode) {
                 case 1:
                     Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
