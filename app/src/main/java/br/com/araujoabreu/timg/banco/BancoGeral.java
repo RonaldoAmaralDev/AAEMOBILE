@@ -1576,6 +1576,29 @@ public class BancoGeral extends SQLiteOpenHelper {
             return true;
     }
 
+    public boolean insertLocalizacao(String latitude, String longitude, String velocidade, String imei, String dataehora) {
+        SQLiteDatabase dbLocal = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_LATITUDE_LOCALIZACAO, latitude);
+        contentValues.put(COL_LONGITUDE_LOCALIZACAO, longitude);
+        contentValues.put(COL_VELOCIDADE_LOCALIZACAO, velocidade);
+        contentValues.put(COL_IMEI_LOCALIZACAO, imei);
+        contentValues.put(COL_DATAEHORA_LOCALIZACAO, dataehora);
+        long result = dbLocal.insert(TABELA_LOCALIZACAO,null ,contentValues);
+        if(result == -1)
+            return false;
+        else
+            return true;
+    }
+
+
+    public Cursor buscaHistorico(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABELA_LOCALIZACAO;
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
 
 
     /**
@@ -1699,8 +1722,6 @@ public class BancoGeral extends SQLiteOpenHelper {
         count = cursor.getCount();
         return count;
     }
-
-
 
     public int dbCoutsync(String idColaborador){
         int count = 0;

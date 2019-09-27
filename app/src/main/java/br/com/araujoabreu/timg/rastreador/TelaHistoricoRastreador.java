@@ -50,12 +50,6 @@ public class TelaHistoricoRastreador extends AppCompatActivity  implements Botto
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_historico_rastreador);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#8F152A")));
 
         bancoGeral = new BancoGeral(this);
 
@@ -84,54 +78,13 @@ public class TelaHistoricoRastreador extends AppCompatActivity  implements Botto
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
-        mAdapter = new HistoricoAdapter(this, bancoGeral.getHistorico());
+        mAdapter = new HistoricoAdapter(this, bancoGeral.buscaHistorico());
         recyclerView.setAdapter(mAdapter);
 
 
 
         // white background notification bar
         whiteNotificationBar(recyclerView);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_veiculo, menu);
-
-        // Associate searchable configuration with the SearchView
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(searchManager
-                .getSearchableInfo(getComponentName()));
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        if(id == android.R.id.home) {
-            Intent intent = new Intent(TelaHistoricoRastreador.this, MainActivity_Principal.class);
-            Bundle dados = new Bundle();
-            dados.putString("name", name);
-            dados.putString("email", email);
-            dados.putString("id", colaborador_id);
-            dados.putString("token", token);
-            intent.putExtras(dados);
-            startActivity(intent);
-            return true;
-        }
-        if(id == R.id.action_syncVeiculo) {
-
-            Toast.makeText(getApplicationContext(), "Desenvolvimento.", Toast.LENGTH_LONG).show();
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -161,7 +114,6 @@ public class TelaHistoricoRastreador extends AppCompatActivity  implements Botto
             intent.putExtras(dados);
             startActivity(intent);
 
-            //   Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
 
         }
 

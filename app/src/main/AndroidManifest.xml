@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".rastreador.TelaHistoricoRastreador"
-            android:label="Mapa Rastreamento"
+            android:label="Histórico"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

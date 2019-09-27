@@ -238,9 +238,12 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
         java.util.Date dt = new java.util.Date();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss");
         java.text.SimpleDateFormat sdfData = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        java.text.SimpleDateFormat sdfDataBrasil = new java.text.SimpleDateFormat("dd-MM-yyyy");
         String currentTime = sdf.format(dt);
         String data = sdfData.format(dt);
+        String dataBrasil = sdfDataBrasil.format(dt);
         String dataehora = data + " - " + currentTime;
+        String dataehoraBrasil = dataBrasil + " - " + currentTime;
 
         String mensagem = cursor.getString(12);
         String latitude = mensagem.substring(mensagem.indexOf("lat:") + 4, mensagem.indexOf("long:", mensagem.indexOf("lat:")));
@@ -251,10 +254,10 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
         Toast.makeText(getApplicationContext(), "Latitude: " + latitude + " longitude: " + longitude + " velocidade: " + velocidade + " Data: " + dataehora + " IMEI: " + imei, Toast.LENGTH_LONG).show();
 
         //Busca qual os dados do veiculo de acordo com o IMEI e o colaborador do veiculo
-      // gravarDadosPosicao(latitude, longitude, velocidade, dataehora);
+      // gravarDadosPosicao(latitude, longitude, velocidade, imei, dataehora, dataehoraBrasil);
     }
 
-    public void gravarDadosPosicao(String latitude, String longitude, String velocidade, String dataehora) {
+    public void gravarDadosPosicao(String latitude, String longitude, String velocidade, String imei, String dataehora, String dataehoraBrasil) {
         Ion.with(TelaMapaRastreador.this)
                 .load(URL_ENVIAR)
                 .setBodyParameter("veiculo_id", "1")
@@ -278,20 +281,30 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
 
 
                                 //Gravar no Banco os dados para depois mostrar no historico
+                                boolean isInserted =
+                                        myDBGeral.insertLocalizacao(
+                                        latitude,
+                                        longitude,
+                                        velocidade,
+                                        imei,
+                                        dataehoraBrasil);
 
+                                if (isInserted == true) {
 
-
-                                // Caso tenha algum insert com Sucesso, ele irá atualizar o mapa
-                                Toast.makeText(getApplicationContext(), "Gravação com sucesso. ", Toast.LENGTH_LONG).show();
-                                TelaMapaRastreador.super.onRestart();
-                                Intent intent = new Intent(TelaMapaRastreador.this, TelaMapaRastreador.class);
-                                Bundle dados = new Bundle();
-                                dados.putString("name", name);
-                                dados.putString("email", email);
-                                dados.putString("id", colaborador_id);
-                                dados.putString("token", token);
-                                intent.putExtras(dados);
-                                startActivity(intent);
+                                    // Caso tenha algum insert com Sucesso, ele irá atualizar o mapa
+                                    Toast.makeText(getApplicationContext(), "Gravação com sucesso. ", Toast.LENGTH_LONG).show();
+                                    TelaMapaRastreador.super.onRestart();
+                                    Intent intent = new Intent(TelaMapaRastreador.this, TelaMapaRastreador.class);
+                                    Bundle dados = new Bundle();
+                                    dados.putString("name", name);
+                                    dados.putString("email", email);
+                                    dados.putString("id", colaborador_id);
+                                    dados.putString("token", token);
+                                    intent.putExtras(dados);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Não foi possivel gravar no banco local os dados da localizacao", Toast.LENGTH_LONG).show();
+                                }
                             } else {
                                 Toast.makeText(TelaMapaRastreador.this, "Ocorreu um erro, aguarde alguns instantes !", Toast.LENGTH_LONG).show();
                             }
@@ -428,6 +441,13 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
                                             String longitude = jsonObject.getString("longitude");
                                             String velocidade = jsonObject.getString("velocidade");
                                             String dataehora = jsonObject.getString("dataehora");
+
+                                         //   myDBGeral.insertLocalizacao(
+                                          //          latitude,
+                                          //          longitude,
+                                          //          velocidade,
+                                          //          "35248945269",
+                                          //          dataehora);
 
                                             mMap.addMarker(new MarkerOptions()
                                                     .position(new LatLng(Double.parseDouble(latitude) , Double.parseDouble(longitude)))
