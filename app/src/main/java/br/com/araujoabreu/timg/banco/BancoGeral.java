@@ -23,11 +23,11 @@ public class BancoGeral extends SQLiteOpenHelper {
     public static final String TABELA_CL = "tabela_centrolucro";
     public static final String TABELA_EQUIPAMENTO = "tabela_equipamento";
     public static final String TABELA_ATIVIDADES = "tabela_atividades";
-    public static final String TABELA_LOCALIZACAO = "tabela_localizacao";
     public static final String TABELA_VEICULOS = "tabela_veiculos";
     public static final String TABELA_HH = "tabela_hh";
     public static final String TABELA_TIPOSOLICITACAO = "tabela_tiposolicitao";
     public static final String TABELA_TIPOSERVICO = "tabela_tiposervico";
+    public static final String TABELA_LOCALIZACAO = "tabela_localizacao";
 
     public static final String COL_ID_LOCAL = "id";
     public static final String COL_CODIGO_LOCAL = "codigolocal";
@@ -103,13 +103,6 @@ public class BancoGeral extends SQLiteOpenHelper {
     public static final String COL_DESCRICAO_ITEN = "itenDescricao";
     public static final String COL_STATUS_ITEN = "status";
 
-    public static final String COL_ID_LOCALIZACAO = "id";
-    public static final String COL_ID_OBJETO_LOCALIZACAO = "id_objeto";
-    public static final String COL_NOME_LOCALIZACAO = "nome_localizacao";
-    public static final String COL_LATITUDE_LOCALIZACAO = "latitude_localizacao";
-    public static final String COL_LONGITUDE_LOCALIZACAO = "longitude_localizacao";
-    public static final String COL_DATAHORA_LOCALIZACAO = "datahora_localizacao";
-
 
     public static final String COL_ID_VEICULO = "id";
     public static final String COL_CENTROLUCRO_VEICULO = "centrolucro";
@@ -138,9 +131,16 @@ public class BancoGeral extends SQLiteOpenHelper {
     public static final String COL_ID_TIPOSOLICITACAO = "id";
     public static final String COL_DESCRICAO_TIPOSOLICITACAO = "descricao";
 
+    public static final String COL_ID_LOCALIZACAO = "id";
+    public static final String COL_LATITUDE_LOCALIZACAO = "latitude";
+    public static final String COL_LONGITUDE_LOCALIZACAO = "longitude";
+    public static final String COL_VELOCIDADE_LOCALIZACAO = "velocidade";
+    public static final String COL_IMEI_LOCALIZACAO = "imei";
+    public static final String COL_DATAEHORA_LOCALIZACAO = "dataehora";
+
     private SQLiteDatabase databaseGeral;
     private SQLiteOpenHelper openHelper;
-    private static final int DATABASE_VERSION = 39;
+    private static final int DATABASE_VERSION = 41;
 
 
     public BancoGeral(Context context) {
@@ -239,15 +239,6 @@ public class BancoGeral extends SQLiteOpenHelper {
                 "status TEXT)");
 
         dbGeral.execSQL("create table " +
-                TABELA_LOCALIZACAO + "" +
-                "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "id_objeto INT, " +
-                "nome_localizacao TEXT, " +
-                "latitude_localizacao TEXT, " +
-                "longitude_localizacao TEXT, " +
-                "datahora_localizacao TEXT)");
-
-        dbGeral.execSQL("create table " +
                 TABELA_VEICULOS + "" +
                 "(id INTEGER PRIMARY KEY , " +
                 "centrolucro TEXT, " +
@@ -272,6 +263,15 @@ public class BancoGeral extends SQLiteOpenHelper {
                 "colaborador_id TEXT)");
 
         dbGeral.execSQL("create table " +
+                TABELA_LOCALIZACAO + "" +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "latitude TEXT, " +
+                "longitude TEXT, " +
+                "velocidade TEXT, " +
+                "imei TEXT, " +
+                "dataehora TEXT)");
+
+        dbGeral.execSQL("create table " +
                 TABELA_TIPOSERVICO + "" +
                 "(id INTEGER PRIMARY KEY , " +
                 "descricao TEXT) ");
@@ -292,11 +292,11 @@ public class BancoGeral extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABELA_CL);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA_EQUIPAMENTO);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA_ATIVIDADES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABELA_LOCALIZACAO);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA_VEICULOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA_HH);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA_TIPOSERVICO);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA_TIPOSOLICITACAO);
+        db.execSQL("DROP TABLE IF EXISTS " + TABELA_LOCALIZACAO);
         onCreate(db);
     }
 
@@ -349,19 +349,6 @@ public class BancoGeral extends SQLiteOpenHelper {
         database.execSQL(updateQuery);
     }
 
-
-    public boolean gravarLocalizacao(String idObjeto, String latitude, String longitude) {
-        SQLiteDatabase gravarLocalizacao = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_ID_OBJETO_LOCALIZACAO, idObjeto);
-        contentValues.put(COL_LATITUDE_LOCALIZACAO, latitude);
-        contentValues.put(COL_LONGITUDE_LOCALIZACAO, longitude);
-        long result = gravarLocalizacao.insert(TABELA_LOCALIZACAO, null, contentValues);
-        if (result == -1)
-            return false;
-        else
-            return true;
-    }
 
     public Cursor buscaTipoSolicitacao(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -568,18 +555,6 @@ public class BancoGeral extends SQLiteOpenHelper {
         return count;
     }
 
-
-    /**
-     * @param idObjeto;
-     * @param latitude;
-     * @param longitude;
-     */
-    public void updateLocalizacao(String idObjeto, String latitude, String longitude) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        String updateQuery = "Update " + TABELA_LOCALIZACAO + " set latitude_localizacao = '" + latitude + "', longitude = '" + longitude + "' where idObjeto =" + "'" + idObjeto + "'";
-        Log.d("query", updateQuery);
-        database.execSQL(updateQuery);
-    }
 
     public boolean gravarVeiculos(String id, String centrolucro, String colaborador, String fabricante, String cidade, String estado, String placa, String placa_anterior, String descricao, String modelo, String kminicial, String ativo) {
         SQLiteDatabase dbLocal = this.getWritableDatabase();
@@ -1922,8 +1897,10 @@ public class BancoGeral extends SQLiteOpenHelper {
         String sqlCL = "DELETE FROM " + TABELA_CL;
         String sqlEquipamento = "DELETE FROM " + TABELA_EQUIPAMENTO;
         String sqlAtividades = "DELETE FROM " + TABELA_ATIVIDADES;
-        String sqlLocalizacao = "DELETE FROM " + TABELA_LOCALIZACAO;
         String sqlVeiculos= "DELETE FROM " + TABELA_VEICULOS;
+        String sqlLocalizacao = "DELETE FROM " + TABELA_LOCALIZACAO;
+        String sqlTipoSolicitacao = "DELETE FROM " + TABELA_TIPOSOLICITACAO;
+        String sqlTipoServico = "DELETE FROM " + TABELA_TIPOSERVICO;
 
         db.execSQL(sqlLocal);
         db.execSQL(sqlOS);
@@ -1931,8 +1908,10 @@ public class BancoGeral extends SQLiteOpenHelper {
         db.execSQL(sqlCL);
         db.execSQL(sqlEquipamento);
         db.execSQL(sqlAtividades);
-        db.execSQL(sqlLocalizacao);
         db.execSQL(sqlVeiculos);
+        db.execSQL(sqlLocalizacao);
+        db.execSQL(sqlTipoSolicitacao);
+        db.execSQL(sqlTipoServico);
 
     }
 

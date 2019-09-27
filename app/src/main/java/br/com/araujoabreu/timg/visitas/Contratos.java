@@ -29,7 +29,6 @@ import br.com.araujoabreu.timg.activity.MainActivity_Principal;
 import java.util.List;
 
 public class Contratos extends AppCompatActivity  {
-    private static final String TAG = Contratos.class.getSimpleName();
 
     private List<CL> contactList;
     private CentroLucroAdapter mAdapter;

@@ -3,54 +3,62 @@ package br.com.araujoabreu.timg.rastreador;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.text.TextUtils;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.craftman.cardform.Card;
-import com.craftman.cardform.CardForm;
-import com.craftman.cardform.OnPayBtnClickListner;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 import br.com.araujoabreu.timg.R;
 import br.com.araujoabreu.timg.activity.MainActivity_Principal;
-import br.com.araujoabreu.timg.visitas.Contratos;
+import br.com.araujoabreu.timg.adapter.CentroLucroAdapter;
+import br.com.araujoabreu.timg.adapter.HistoricoAdapter;
+import br.com.araujoabreu.timg.banco.BancoGeral;
+import br.com.araujoabreu.timg.model.CL;
+import br.com.araujoabreu.timg.model.Historico;
+import br.com.araujoabreu.timg.model.MyDividerItemDecoration;
 
-public class TelaPrincipalRastreador extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class TelaHistoricoRastreador extends AppCompatActivity  implements BottomNavigationView.OnNavigationItemSelectedListener {
+
 
     private String name, token, colaborador_id, email;
-
-
+    private List<Historico> historicos;
+    private HistoricoAdapter mAdapter;
+    private SearchView searchView;
+    private RecyclerView recyclerView;
+    BancoGeral bancoGeral;
+    private ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_principal_rastreador);
+        setContentView(R.layout.activity_tela_historico_rastreador);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("MEU CARTÃO");
+
+        getSupportActionBar().setBackgroundDrawable(
+                new ColorDrawable(Color.parseColor("#8F152A")));
+
+        bancoGeral = new BancoGeral(this);
+
 
         //Não abrir o teclado automatico
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
@@ -62,53 +70,27 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
         colaborador_id = dados.getString("id");
         token = dados.getString("token");
 
-        CardForm cardForm = (CardForm) findViewById(R.id.card_form);
-
-        TextView txtValor = (TextView) findViewById(R.id.payment_amount);
-        TextView txtNome = (TextView) findViewById(R.id.card_name);
-        TextView txtCartão = (TextView) findViewById(R.id.card_number);
-        TextView txtVencimento = (TextView) findViewById(R.id.expiry_date);
-        TextView txtCodigo = (TextView) findViewById(R.id.cvc);
-        TextView descritivo = (TextView) findViewById(R.id.payment_amount_holder);
-        Button btnRecarregar = (Button) findViewById(R.id.btn_pay);
-
-        //Valor do Cartão
-        txtValor.setText("R$ 150,39");
-        descritivo.setText("Saldo Atual:");
-
-        //Nome no Cartão
-        txtNome.setText(name);
-        txtNome.setVisibility(View.INVISIBLE);
-
-        //Numero do Cartão
-        txtCartão.setText("4824 2530 3629 7205");
-        txtCartão.setVisibility(View.INVISIBLE);
-
-        txtVencimento.setText("08/25");
-        txtVencimento.setVisibility(View.INVISIBLE);
-
-        txtCodigo.setText("429");
-        txtCodigo.setVisibility(View.INVISIBLE);
-
-        btnRecarregar.setText("SOLICITAR RECARGA");
-        btnRecarregar.setTextColor(R.color.white);
-     //   btnRecarregar.setBackgroundColor(R.color.testcolorblue);
-
-
-        cardForm.setPayBtnClickListner(new OnPayBtnClickListner() {
-            @Override
-            public void onClick(Card card) {
-                //Your code here!! use card.getXXX() for get any card property
-                //for instance card.getName();
-            }
-        });
-
         //getting bottom navigation view and attaching the listener
         BottomNavigationView navigation = findViewById(R.id.nav_viewTelaRastreamento);
         navigation.setOnNavigationItemSelectedListener(this);
 
         //Aparecer todos os Icones e Titulos
         navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+
+
+        RecyclerView recyclerView = findViewById(R.id.recycler_viewhistorico);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
+        mAdapter = new HistoricoAdapter(this, bancoGeral.getHistorico());
+        recyclerView.setAdapter(mAdapter);
+
+
+
+        // white background notification bar
+        whiteNotificationBar(recyclerView);
     }
 
     @Override
@@ -116,9 +98,15 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
 
         getMenuInflater().inflate(R.menu.menu_veiculo, menu);
 
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -128,7 +116,7 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
         int id = item.getItemId();
 
         if(id == android.R.id.home) {
-            Intent intent = new Intent(TelaPrincipalRastreador.this, MainActivity_Principal.class);
+            Intent intent = new Intent(TelaHistoricoRastreador.this, MainActivity_Principal.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
@@ -152,8 +140,7 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.navigation_ticketlog) {
-            TelaPrincipalRastreador.super.onRestart();
-            Intent intent = new Intent(TelaPrincipalRastreador.this, TelaPrincipalRastreador.class);
+            Intent intent = new Intent(TelaHistoricoRastreador.this, TelaPrincipalRastreador.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
@@ -165,7 +152,7 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
         }
         if (id == R.id.navigation_mapa) {
 
-            Intent intent = new Intent(TelaPrincipalRastreador.this, TelaMapaRastreador.class);
+            Intent intent = new Intent(TelaHistoricoRastreador.this, TelaMapaRastreador.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
@@ -174,13 +161,14 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
             intent.putExtras(dados);
             startActivity(intent);
 
-         //   Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
+            //   Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
 
         }
 
         if (id == R.id.navigation_historico) {
 
-            Intent intent = new Intent(TelaPrincipalRastreador.this, TelaHistoricoRastreador.class);
+            TelaHistoricoRastreador.super.onRestart();
+            Intent intent = new Intent(TelaHistoricoRastreador.this, TelaHistoricoRastreador.class);
             Bundle dados = new Bundle();
             dados.putString("name", name);
             dados.putString("email", email);
@@ -198,5 +186,16 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
         return true;
     }
 
+    private void whiteNotificationBar(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            int flags = view.getSystemUiVisibility();
+            flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            view.setSystemUiVisibility(flags);
+            getWindow().setStatusBarColor(Color.WHITE);
+        }
+    }
+
+
 
 }
+

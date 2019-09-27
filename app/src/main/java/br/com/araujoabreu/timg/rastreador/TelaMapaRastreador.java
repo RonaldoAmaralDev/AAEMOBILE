@@ -251,7 +251,7 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
         Toast.makeText(getApplicationContext(), "Latitude: " + latitude + " longitude: " + longitude + " velocidade: " + velocidade + " Data: " + dataehora + " IMEI: " + imei, Toast.LENGTH_LONG).show();
 
         //Busca qual os dados do veiculo de acordo com o IMEI e o colaborador do veiculo
-      //  gravarDadosPosicao(latitude, longitude, velocidade, dataehora);
+      // gravarDadosPosicao(latitude, longitude, velocidade, dataehora);
     }
 
     public void gravarDadosPosicao(String latitude, String longitude, String velocidade, String dataehora) {
@@ -275,6 +275,12 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
                                 Toast.makeText(TelaMapaRastreador.this, "Ocorreu um erro !", Toast.LENGTH_LONG).show();
 
                             } else if (RETORNO.equals("SUCESSO")) {
+
+
+                                //Gravar no Banco os dados para depois mostrar no historico
+
+
+
                                 // Caso tenha algum insert com Sucesso, ele irá atualizar o mapa
                                 Toast.makeText(getApplicationContext(), "Gravação com sucesso. ", Toast.LENGTH_LONG).show();
                                 TelaMapaRastreador.super.onRestart();
@@ -327,7 +333,14 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
         }
         if (id == R.id.navigation_historico) {
 
-            Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(TelaMapaRastreador.this, TelaHistoricoRastreador.class);
+            Bundle dados = new Bundle();
+            dados.putString("name", name);
+            dados.putString("email", email);
+            dados.putString("id", colaborador_id);
+            dados.putString("token", token);
+            intent.putExtras(dados);
+            startActivity(intent);
 
         }
 

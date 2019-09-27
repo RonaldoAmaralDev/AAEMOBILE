@@ -31,25 +31,6 @@
         </menu>
     </item>
 
-    <item android:title="Frota"
-        android:textStyle="bold"
-        app:titleTextColor="@color/white">
-        <menu>
-            <item
-                android:id="@+id/nav_veiculos"
-                android:icon="@drawable/ic_car"
-                android:title="Frota" />
-            <item
-                android:id="@+id/nav_atualizarVeiculo"
-                android:icon="@drawable/ic_sync"
-                android:title="Atualizar Dados" />
-            <item
-                android:id="@+id/nav_veiculomanutencao"
-                android:icon="@drawable/ic_manutencao"
-                android:title="Auditoria" />
-        </menu>
-    </item>
-
     <item android:title="Equipamento"
         android:textStyle="bold">
         <menu>

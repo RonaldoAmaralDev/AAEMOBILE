@@ -57,8 +57,6 @@ import com.android.volley.toolbox.Volley;
 import br.com.araujoabreu.timg.R;
 import br.com.araujoabreu.timg.equipamento.CadastrarEquipamento;
 import br.com.araujoabreu.timg.equipamento.CentralEquipamento;
-import br.com.araujoabreu.timg.dev.frota.MainActivityVeiculos;
-import br.com.araujoabreu.timg.dev.frota.Veiculos;
 import br.com.araujoabreu.timg.model.Atividades;
 import br.com.araujoabreu.timg.banco.BancoGeral;
 import br.com.araujoabreu.timg.model.CL;
@@ -366,11 +364,8 @@ public class MainActivity_Principal extends AppCompatActivity
         Menu nav_Menu = navegationView2.getMenu();
 
         // Operação Manutenção
-            nav_Menu.findItem(R.id.nav_atualizarVeiculo).setVisible(false);
             nav_Menu.findItem(R.id.nav_relatorio_ordemservico).setVisible(false);
             nav_Menu.findItem(R.id.nav_localizacao).setVisible(false);
-            nav_Menu.findItem(R.id.nav_veiculomanutencao).setVisible(false);
-            nav_Menu.findItem(R.id.nav_veiculos).setVisible(false);
             nav_Menu.findItem(R.id.nav_reconhecimentofacial).setVisible(false);
             nav_Menu.findItem(R.id.nav_cadastrarequip).setVisible(false);
             nav_Menu.findItem(R.id.nav_relatorio_contrato).setVisible(false);
@@ -848,15 +843,15 @@ public class MainActivity_Principal extends AppCompatActivity
 
         if (id == R.id.navigation_frota) {
 
-           // Intent intent = new Intent(MainActivity_Principal.this, TelaPrincipalRastreador.class);
-         //   Bundle dados = new Bundle();
-          //  dados.putString("name", name);
-         //   dados.putString("email", email);
-         //   dados.putString("id", colaborador_id);
-        //    dados.putString("token", token);
-        //    intent.putExtras(dados);
-         //   startActivity(intent);
-           Toast.makeText(getApplicationContext(), "Em Desenvolvimento", Toast.LENGTH_LONG).show();
+           Intent intent = new Intent(MainActivity_Principal.this, TelaPrincipalRastreador.class);
+           Bundle dados = new Bundle();
+           dados.putString("name", name);
+           dados.putString("email", email);
+           dados.putString("id", colaborador_id);
+           dados.putString("token", token);
+           intent.putExtras(dados);
+           startActivity(intent);
+         //  Toast.makeText(getApplicationContext(), "Em Desenvolvimento", Toast.LENGTH_LONG).show();
         }
 
         if (id == R.id.navigation_chat) {
@@ -945,93 +940,6 @@ public class MainActivity_Principal extends AppCompatActivity
             dados.putString("token", token);
             intent.putExtras(dados);
             startActivity(intent);
-
-        } else if (id == R.id.nav_veiculos) {
-
-            Intent intent = new Intent(MainActivity_Principal.this, MainActivityVeiculos.class);
-            Bundle dados = new Bundle();
-            dados.putString("name", name);
-            dados.putString("email", email);
-            dados.putString("id", colaborador_id);
-            dados.putString("token", token);
-            intent.putExtras(dados);
-            startActivity(intent);
-
-        } else if (id == R.id.nav_atualizarVeiculo) {
-
-            String URL_VEICULOS = "http://helper.aplusweb.com.br/aplicativo/buscarVeiculo.php";
-            if(verificaConexao() == false ) {
-                Toast.makeText(getApplicationContext(), "Sem conexão com a Internet. ", Toast.LENGTH_LONG).show();
-            } else if(verificaConexao() == true) {
-
-                requestAtividades = new JsonArrayRequest(URL_VEICULOS, new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        ProgressBarStatus();
-                        JSONObject jsonObject = null;
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                jsonObject = response.getJSONObject(i);
-                                Veiculos veiculos = new Veiculos();
-                                veiculos.setId(jsonObject.getString("id"));
-                                veiculos.setCentrocusto(jsonObject.getString("centrolucro"));
-                                veiculos.setColaborador(jsonObject.getString("colaborador"));
-                                veiculos.setFabricante(jsonObject.getString("fabricante"));
-                                veiculos.setCidade(jsonObject.getString("cidade"));
-                                veiculos.setEstado(jsonObject.getString("estado"));
-                                veiculos.setPlaca(jsonObject.getString("placa"));
-                                veiculos.setPlaca_anterior(jsonObject.getString("placa_anterior"));
-                                veiculos.setDescricao(jsonObject.getString("descricao"));
-                                veiculos.setModelo(jsonObject.getString("modelo"));
-                                veiculos.setKminicial(jsonObject.getString("kminicial"));
-                                veiculos.setAtivo(jsonObject.getString("ativo"));
-                                Cursor dataItem = myBDGeral.verificaVeiculo(jsonObject.getString("id"));
-                                if (dataItem.moveToNext()) {
-                                    myBDGeral.updateVeiculo(
-                                            veiculos.getId(),
-                                            veiculos.getCentrocusto(),
-                                            veiculos.getColaborador(),
-                                            veiculos.getFabricante(),
-                                            veiculos.getCidade(),
-                                            veiculos.getEstado(),
-                                            veiculos.getPlaca(),
-                                            veiculos.getPlaca_anterior(),
-                                            veiculos.getDescricao(),
-                                            veiculos.getModelo(),
-                                            veiculos.getKminicial(),
-                                            veiculos.getAtivo());
-                                } else {
-                                    myBDGeral.gravarVeiculos(
-                                            veiculos.getId(),
-                                            veiculos.getCentrocusto(),
-                                            veiculos.getColaborador(),
-                                            veiculos.getFabricante(),
-                                            veiculos.getCidade(),
-                                            veiculos.getEstado(),
-                                            veiculos.getPlaca(),
-                                            veiculos.getPlaca_anterior(),
-                                            veiculos.getDescricao(),
-                                            veiculos.getModelo(),
-                                            veiculos.getKminicial(),
-                                            veiculos.getAtivo());
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-
-                            }
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
-                });
-                requestQueueAtividades = Volley.newRequestQueue(MainActivity_Principal.this);
-                int socketTimeout2 = 20000;
-                RetryPolicy policy3 = new DefaultRetryPolicy(socketTimeout2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-                requestAtividades.setRetryPolicy(policy3);
-                requestQueueAtividades.add(requestAtividades);
-            }
 
         } else if (id == R.id.nav_cadastrarequip) {
 
