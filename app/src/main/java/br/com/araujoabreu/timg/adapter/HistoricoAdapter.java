@@ -96,13 +96,13 @@ public class HistoricoAdapter extends RecyclerView.Adapter<HistoricoAdapter.Groc
         }
 
         //Calendario Icon
-        holder.imageView.setImageResource(R.drawable.logo_historico);
+        holder.imageView.setImageResource(R.drawable.ic_history_calendar);
         //Data e Hora
         holder.dataehora.setText(dataehora);
         //Status Ignição
         holder.status.setText("Veiculo Ligado");
         //Velocidade
-        holder.velocidade.setText(velocidade + " Km/h");
+        holder.velocidade.setText(velocidade + "Km/h");
 
         holder.itemView.setOnClickListener(v -> { // Linguagem Java 8
 

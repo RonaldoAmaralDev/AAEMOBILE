@@ -1309,7 +1309,7 @@ public class MainActivity_Principal extends AppCompatActivity
                     progressBarStatus = doSomeTasksVisitas();
                     // your computer is too fast, sleep 1 second
                     try {
-                        Thread.sleep(20000);
+                        Thread.sleep(60000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -1322,7 +1322,7 @@ public class MainActivity_Principal extends AppCompatActivity
                 }
                 if (progressBarStatus >= 100) {
                     try {
-                        Thread.sleep(20000);
+                        Thread.sleep(60000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -1344,15 +1344,15 @@ public class MainActivity_Principal extends AppCompatActivity
     }
 
     public int doSomeTasksVisitas() {
-        while (progress <= 2000000) {
+        while (progress <= 6000000) {
             progress++;
-            if (progress == 100000) {
+            if (progress == 60000) {
                 return 10;
-            } else if (progress == 400000) {
-                return 20;
             } else if (progress == 1400000) {
+                return 20;
+            } else if (progress == 3000000) {
                 return 50;
-            } else if (progress == 1700000) {
+            } else if (progress == 5000000) {
                 return 80;
             }
         }

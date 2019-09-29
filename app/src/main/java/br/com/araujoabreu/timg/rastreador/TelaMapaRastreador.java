@@ -254,14 +254,14 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
         Toast.makeText(getApplicationContext(), "Latitude: " + latitude + " longitude: " + longitude + " velocidade: " + velocidade + " Data: " + dataehora + " IMEI: " + imei, Toast.LENGTH_LONG).show();
 
         //Busca qual os dados do veiculo de acordo com o IMEI e o colaborador do veiculo
-      // gravarDadosPosicao(latitude, longitude, velocidade, imei, dataehora, dataehoraBrasil);
+        gravarDadosPosicao(latitude, longitude, velocidade, imei, dataehora, dataehoraBrasil);
     }
 
     public void gravarDadosPosicao(String latitude, String longitude, String velocidade, String imei, String dataehora, String dataehoraBrasil) {
         Ion.with(TelaMapaRastreador.this)
                 .load(URL_ENVIAR)
                 .setBodyParameter("veiculo_id", "1")
-                .setBodyParameter("colaborador_id", colaborador_id)
+                .setBodyParameter("colaborador_id", "23")
                 .setBodyParameter("latitude", latitude)
                 .setBodyParameter("longitude", longitude)
                 .setBodyParameter("valocidade", velocidade)
@@ -442,12 +442,12 @@ public class TelaMapaRastreador extends AppCompatActivity implements OnMapReadyC
                                             String velocidade = jsonObject.getString("velocidade");
                                             String dataehora = jsonObject.getString("dataehora");
 
-                                         //   myDBGeral.insertLocalizacao(
-                                          //          latitude,
-                                          //          longitude,
-                                          //          velocidade,
-                                          //          "35248945269",
-                                          //          dataehora);
+                                          //  myDBGeral.insertLocalizacao(
+                                           //         latitude,
+                                            //        longitude,
+                                            //       velocidade,
+                                            //        "35248945269",
+                                           //         dataehora);
 
                                             mMap.addMarker(new MarkerOptions()
                                                     .position(new LatLng(Double.parseDouble(latitude) , Double.parseDouble(longitude)))

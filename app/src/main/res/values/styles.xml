@@ -51,7 +51,11 @@
         <item name="android:actionMenuTextColor">@color/white</item>
     </style>
 
-
+    <style name="horizontal_line_nav">
+        <item name="android:background">#000000</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
 
 
 </resources>
