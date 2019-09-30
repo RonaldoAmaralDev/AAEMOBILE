@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:orientation="vertical" android:id="@+id/ll_empty" android:background="@color/white" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@+id/empty_parent_layout" android:background="?android:attr/selectableItemBackground" android:layout_width="match_parent" android:layout_height="match_parent">
+        <ImageView android:layout_gravity="center" android:id="@+id/empty_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/placeholder_no_content"/>
+        <TextView android:textSize="14sp" android:textStyle="bold" android:textColor="#8094a5" android:gravity="center" android:id="@+id/empty_descritption" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/padding_margin_default" android:text="Campo Vazio"/>
+        <TextView android:textSize="12sp" android:textStyle="bold" android:textColor="#d6e0e8" android:gravity="center" android:id="@+id/empty_descritption2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/padding_margin_default" android:text="Campo vazio"/>
+    </LinearLayout>
+</LinearLayout>

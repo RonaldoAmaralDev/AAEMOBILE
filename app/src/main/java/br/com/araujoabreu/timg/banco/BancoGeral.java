@@ -1438,9 +1438,10 @@ public class BancoGeral extends SQLiteOpenHelper {
         return data;
     }
 
-    public Cursor buscarColaboradores(){
+
+    public Cursor buscaAtividadeID(String atividade, String checklist_id){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABELA_LOCAL + " WHERE " + COL_CONTATONOME_LOCAL;
+        String query = "SELECT * FROM " + TABELA_ATIVIDADES + " WHERE " + COL_DESCRICAO_ITEN + " = '" + atividade + "'" + " AND " + COL_CHECKLIST_ITEN + " = '" + checklist_id +  "'";
         Cursor data = db.rawQuery(query, null);
         return data;
     }
@@ -1501,6 +1502,28 @@ public class BancoGeral extends SQLiteOpenHelper {
                 " INNER JOIN  " + TABELA_OS +  " ON " + COL_LOCAL_OS + " = " + COL_ID_LOCAL + " WHERE " + COL_CENTROCUSTO_LOCAL + " = '" + centrocusto_idLocal + "'" + " AND " + COL_EQUIPE1_OS + " = '" + id +  "'";
         Cursor data = db.rawQuery(query, null);
         return data;
+    }
+
+    public List<String> buscaAtividadesSpinner(String checklist_id){
+        List<String> list = new ArrayList<String>();
+
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABELA_ATIVIDADES + " WHERE " + COL_CHECKLIST_ITEN + " = '" + checklist_id + "'";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);//selectQuery,selectedArguments
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                list.add(cursor.getString(2));//adding 2nd column data
+            } while (cursor.moveToNext());
+        }
+        // closing connection
+        cursor.close();
+        db.close();
+        // returning lables
+        return list;
     }
 
     public Cursor verificaLocal(String id){

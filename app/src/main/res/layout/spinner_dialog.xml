@@ -10,5 +10,7 @@
         android:layout_width="368dp"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="8dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         tools:layout_editor_absoluteY="16dp" />
 </android.support.constraint.ConstraintLayout>

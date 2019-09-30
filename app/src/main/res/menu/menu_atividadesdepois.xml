@@ -12,7 +12,7 @@
 
     <item
         android:id="@+id/action_confirmar"
-        android:icon="@drawable/success"
+        android:icon="@drawable/ic_check"
         android:orderInCategory="100"
         android:title="Finalizar"
         app:showAsAction="always" />

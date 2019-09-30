@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -166,6 +167,33 @@ public class MainActivityAtividades extends AppCompatActivity implements BottomN
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
+            return true;
+        }
+
+        //Adicionar Atividade
+
+        if (id == R.id.action_addAtividade) {
+
+
+            Intent intent = new Intent(MainActivityAtividades.this, AdicionarAtividade.class);
+            Bundle dadosVisita = new Bundle();
+            dadosVisita.putString("os_id", os_id);
+            dadosVisita.putString("equipamento_id", equipamento_id);
+            dadosVisita.putString("local_id", local_id);
+            dadosVisita.putString("frequencia_id", frequencia_id);
+            dadosVisita.putString("checklist", checklist_id);
+            dadosVisita.putString("tiposervico", tiposervico);
+            dadosVisita.putString("dataplanejamento", dataplanejamento);
+            dadosVisita.putString("id_centrolucro", centrocusto_id);
+            dadosVisita.putString("name", name);
+            dadosVisita.putString("email", email);
+            dadosVisita.putString("idColaborador", colaborador_id);
+            dadosVisita.putString("token", token);
+            intent.putExtras(dadosVisita);
+            startActivity(intent);
+
+
+
             return true;
         }
 

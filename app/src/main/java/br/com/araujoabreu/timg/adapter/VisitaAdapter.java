@@ -214,7 +214,7 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.GroceryVie
                     dados.putString("equipamento_id", equipamento_id);
                     dados.putString("local_id", local_id);
                     dados.putString("checklist_id", checklist_id);
-                    dados.putString("tiposervico", tiposervico);
+                    dados.putString("tiposervico", tiposolicitacao_os);
                     dados.putString("dataplanejamento", dataplanejamento);
                     dados.putString("id_centrolucro", id_centrolucro);
                     dados.putString("frequencia_id", frequencia_id);

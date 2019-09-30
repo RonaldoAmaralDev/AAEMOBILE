@@ -113,6 +113,8 @@ public class Atividade_Depois extends AppCompatActivity {
         txtLatitude.setText(latitude);
         txtLongitude.setText(longitude);
 
+
+
         File imgFile = new File("/sdcard/PicturesHELPER/" + os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "1D" + ".jpg");
         File imgFile2 = new File("/sdcard/PicturesHELPER/" + os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "2D" + ".jpg");
         File imgFile3 = new File("/sdcard/PicturesHELPER/" + os_id + "_" + checklist_id + "_" + id_Atividade + "_" + "3D" + ".jpg");

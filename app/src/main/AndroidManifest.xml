@@ -13,6 +13,7 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".visitas.AdicionarAtividade"></activity>
         <activity
             android:name=".rastreador.TelaHodometroRastreador"
             android:label="Controle KM"

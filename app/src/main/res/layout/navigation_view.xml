@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.NavigationView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:layout_gravity="start" android:id="@+id/nav_view" android:background="@drawable/gradient_background" android:fitsSystemWindows="true" android:layout_width="280dp" android:layout_height="match_parent">
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout android:orientation="vertical" android:background="@drawable/menu_bg_header" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <ImageView android:id="@+id/guardiao_logo" android:background="?attr/selectableItemBackground" android:paddingLeft="@dimen/padding_margin_default" android:paddingTop="@dimen/padding_margin_triple" android:paddingRight="@dimen/padding_margin_default" android:paddingBottom="@dimen/activity_vertical_margin" android:clickable="true" android:layout_width="match_parent" android:layout_height="wrap_content" android:src="@drawable/app_logo"/>
+            <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="14sp" android:layout_marginBottom="14sp">
+                <ImageView android:id="@+id/avatar" android:paddingLeft="@dimen/padding_margin_default" android:layout_width="match_parent" android:layout_height="match_parent" android:src="@drawable/icon_avatar"/>
+                <TextView android:textStyle="bold" android:textColor="@color/colorPrimaryLight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Olá, " android:paddingStart="4dp"/>
+                <TextView android:textColor="@color/white" android:id="@+id/nav_name" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+        <ListView android:id="@+id/listview_menu_itens" android:background="@drawable/menu_bg" android:focusable="true" android:focusableInTouchMode="true" android:fitsSystemWindows="true" android:clickable="true" android:layout_width="match_parent" android:layout_height="match_parent" android:divider="@color/colorDivider" android:dividerHeight="1dp"/>
+    </LinearLayout>
+    <View android:alpha="0.1" style="@style/horizontal_line_nav"/>
+</android.support.design.widget.NavigationView>

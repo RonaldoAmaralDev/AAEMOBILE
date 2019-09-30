@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:orientation="vertical" android:id="@+id/ll_odometer_active" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent">
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+            <ImageView android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/padding_margin_half" android:src="@drawable/odometer_active"/>
+            <TextView android:textColor="@color/colorPrimaryRastreamento" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/odometer_active_mesasge" android:layout_marginStart="22dp" android:layout_marginEnd="22dp"/>
+            <Button android:textColor="@color/white" android:id="@+id/btn_layout_odometer_active1" android:background="@drawable/bg_button_odometer" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/layout_active_button1" android:layout_marginStart="22dp" android:layout_marginEnd="22dp"/>
+            <TextView android:textSize="12sp" android:textColor="@color/colorPrimaryRastreamento" android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/odometer_active_mesasge2" android:layout_marginStart="22dp" android:layout_marginEnd="22dp"/>
+            <Button android:textColor="@color/white" android:id="@+id/btn_layout_odometer_active2" android:background="@drawable/bg_button_odometer" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/layout_active_button2" android:layout_marginStart="22dp" android:layout_marginEnd="22dp"/>
+            <TextView android:textSize="12sp" android:textColor="@color/colorPrimaryRastreamento" android:gravity="center" android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/odometer_active_mesasge3" android:layout_marginStart="22dp" android:layout_marginEnd="22dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
