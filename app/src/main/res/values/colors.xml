@@ -107,6 +107,8 @@
     <color name="colorIcons">#fdd835</color>
     <color name="colorIconsHistory">#e2a60b</color>
     <color name="colorPositions">#009cdc</color>
+    <color name="colorPrimaryRastreamento">#004074</color>
+    <color name="colorPrimaryDarkRastreamento">#002f55</color>
     <color name="colorPrimaryLight">#9acfff</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryText">#1e65b0</color>

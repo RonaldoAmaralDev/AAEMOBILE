@@ -13,7 +13,7 @@
         <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
             <RelativeLayout android:id="@+id/tool" android:layout_width="match_parent" android:layout_height="wrap_content">
                 <include android:layout_width="match_parent" android:layout_height="wrap_content" layout="@layout/toolbar"/>
-                <ImageView android:id="@+id/btn_toolbar_back" android:background="@color/colorPrimary" android:padding="5dp" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_keyboard_backspace_white" android:layout_centerVertical="true" android:layout_marginStart="16dp"/>
+                <ImageView android:id="@+id/btn_toolbar_back" android:background="@color/colorPrimaryRastreamento" android:padding="5dp" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_keyboard_backspace_white" android:layout_centerVertical="true" android:layout_marginStart="16dp"/>
             </RelativeLayout>
             <include android:id="@+id/filter2" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/tool" layout="@layout/filter_2"/>
         </RelativeLayout>

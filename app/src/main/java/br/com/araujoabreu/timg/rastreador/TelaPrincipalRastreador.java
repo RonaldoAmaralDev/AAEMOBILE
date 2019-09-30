@@ -192,8 +192,14 @@ public class TelaPrincipalRastreador extends AppCompatActivity implements Bottom
 
         if (id == R.id.navigation_hidrometro) {
 
-            Toast.makeText(getApplicationContext(), "Em Desenvolvimento.", Toast.LENGTH_LONG).show();
-
+            Intent intent = new Intent(TelaPrincipalRastreador.this, TelaHodometroRastreador.class);
+            Bundle dados = new Bundle();
+            dados.putString("name", name);
+            dados.putString("email", email);
+            dados.putString("id", colaborador_id);
+            dados.putString("token", token);
+            intent.putExtras(dados);
+            startActivity(intent);
         }
         return true;
     }

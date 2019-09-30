@@ -14,6 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".rastreador.TelaHodometroRastreador"
+            android:label="Controle KM"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".rastreador.TelaHistoricoRastreador"
             android:label="Histórico"
             android:screenOrientation="portrait"
